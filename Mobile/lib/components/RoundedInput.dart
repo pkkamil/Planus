@@ -38,7 +38,7 @@ class RoundedInput extends StatelessWidget {
           color: iconColor,
         ),
         hintText: placeholder,
-        border: InputBorder.none,
+        border: InputBorder.none
        ),
       )
     );

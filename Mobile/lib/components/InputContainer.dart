@@ -20,6 +20,10 @@ class InputContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(29),
+        border: Border.all(
+          color: Colors.orange,
+          width: 1,
+        ),
       ),
       child: child,
     );
