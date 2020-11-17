@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/body.dart';
-import 'package:planus/components/goBackButton.dart';
+import 'package:flutter/services.dart';
 
 class Welcome extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+    ]);
     //Zoptymalizować czas ładowania tła
     Size size = MediaQuery.of(context).size;
 
@@ -19,6 +23,7 @@ class Welcome extends StatelessWidget{
               width: size.width,
               child: Stack(
                 children: [
+                  /*
                   Positioned(
                       top: 0,
                       right: 0,
@@ -45,6 +50,7 @@ class Welcome extends StatelessWidget{
                       )
                     ) 
                   ),
+                  */
                   Center(
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

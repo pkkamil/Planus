@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 
 class GoBackButton extends StatelessWidget {
 
-  final isLeft;
   const GoBackButton({
-    Key key,
-    this.isLeft = true
+    Key key
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Positioned(
         top: 0,
-        left: isLeft ? 0 : size.width,
+        left: 0,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 15,vertical: 30),
           child: ClipRRect(
@@ -23,7 +20,7 @@ class GoBackButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18.0),
               ),
               onPressed:  () {
-                Navigator.pushReplacementNamed(context, '/welcome');
+                Navigator.popAndPushNamed(context, '/welcome');
               },
               color: Colors.orange,
               child: Text(

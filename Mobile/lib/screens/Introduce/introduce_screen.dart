@@ -4,15 +4,13 @@ import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
 
-class Login extends StatelessWidget {
+class Introduce extends StatelessWidget {
 
   final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   void dispose(){
     usernameController.dispose();
-    passwordController.dispose();
   }
   
   @override
@@ -36,9 +34,9 @@ class Login extends StatelessWidget {
                         children: [
                           SizedBox(height: size.height*0.1),
                           Image.asset("assets/user.png"),
-                          SizedBox(height: size.height*0.03),
+                          SizedBox(height:size.height*0.03),
                           Text(
-                            "Witaj z powrotem",
+                            "Przedstaw się",
                             style: TextStyle(
                               color: Colors.grey[900],
                               fontSize: 24
@@ -48,46 +46,42 @@ class Login extends StatelessWidget {
                           RoundedInput(
                             controller: usernameController,
                             width: size.width*0.7,
-                            placeholder: "E-mail",
+                            placeholder: "Imie",
                             color: Colors.white,
                             textColor: Colors.black,
                             iconColor: Colors.black,
-                          ),
-                          RoundedInput(
-                            controller: passwordController,
-                            width: size.width*0.7,
-                            placeholder: "Hasło",
-                            password: true,
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            iconColor: Colors.black,
-                            icon: Icons.lock,
                           ),
                           SizedBox(height: size.height*0.05),
                           RoundedButton(
-                            text: "Zaloguj się",
+                            text: "Zapisz",
                             color: Colors.orange.withOpacity(0.95),
                             textColor: Colors.white,
                             onPress: (){
                               print(usernameController.text);
-                              print(passwordController.text);
-                              //Jezeli nie ma imienia popandpushnamed do introduce
+                              Navigator.popAndPushNamed(context, '/flats');
                             },
                             width: size.width*0.7
                           ),
-                          SizedBox(height: size.height*0.03),
+                          /*
+                          SizedBox(height: size.height*0.04),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacementNamed(context, '/remind');
+                              Navigator.pushReplacementNamed(context, '/login');
                             },
-                            child: Text(
-                                "Zapomniałeś hasła?",
-                                style: TextStyle(
-                                  color: Colors.grey[800],
-                                  fontSize: 20
+                            child: BorderedText(
+                              strokeWidth: 2,
+                              strokeColor: Colors.black,
+                              child: Text(
+                                  "Zaloguj się",
+                                  style: TextStyle(
+                                    color: Colors.orange,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20
+                                ),
                               ),
                             ),
                           )
+                          */
                     
                         ],
                     ),

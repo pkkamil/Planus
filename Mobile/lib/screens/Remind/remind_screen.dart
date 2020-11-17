@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
+import 'package:flutter/services.dart';
 
 class Remind extends StatelessWidget {
 
   final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   void dispose(){
     usernameController.dispose();
-    passwordController.dispose();
   }
   
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+    ]);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -43,6 +46,7 @@ class Remind extends StatelessWidget {
                           RoundedInput(
                             controller: usernameController,
                             width: size.width*0.7,
+                            icon: Icons.email,
                             placeholder: "E-mail",
                             color: Colors.white,
                             textColor: Colors.black,
@@ -55,7 +59,6 @@ class Remind extends StatelessWidget {
                             textColor: Colors.white,
                             onPress: (){
                               print(usernameController.text);
-                              print(passwordController.text);
                             },
                             width: size.width*0.7
                           ),

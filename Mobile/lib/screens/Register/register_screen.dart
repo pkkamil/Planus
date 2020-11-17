@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
+import 'package:flutter/services.dart';
 
 class Register extends StatelessWidget {
 
@@ -17,6 +18,10 @@ class Register extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+    ]);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -65,13 +70,14 @@ class Register extends StatelessWidget {
                           ),
                           SizedBox(height: size.height*0.05),
                           RoundedButton(
-                            text: "Zaloguj się",
+                            text: "Zarejestruj się",
                             textColor: Colors.white,
                             color: Colors.orange.withOpacity(0.95),
                             onPress: (){
                               print(usernameController.text);
                               print(passwordController.text);
                               print(repeatPasswordController.text);
+                              Navigator.popAndPushNamed(context, '/introduce');
                             },
                             width: size.width*0.7
                           ),
