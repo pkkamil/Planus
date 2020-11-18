@@ -18,7 +18,7 @@ class Background extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         image: DecorationImage(
-          colorFilter: new ColorFilter.mode(Colors.orange.withOpacity(0.5), BlendMode.softLight),
+          //colorFilter: new ColorFilter.mode(Colors.orange.withOpacity(0.5), BlendMode.softLight),
           image: image,
           fit: BoxFit.cover
         )

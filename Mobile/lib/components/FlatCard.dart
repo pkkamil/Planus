@@ -23,9 +23,19 @@ class FlatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(marginL, marginT, marginR, marginB),
+      decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+        color: Colors.grey.withOpacity(0.4),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: Offset(0, 3),
+      ),
+      ]
+      ),
       child: InkWell(
         onTap: () {
-          print(flat_name);
+          Navigator.pushNamed(context, '/home');
         },
           child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -41,8 +51,7 @@ class FlatCard extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              //flat_name.toUpperCase(),
-              flat_name.toString(),
+              flat_name.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: fontSize,

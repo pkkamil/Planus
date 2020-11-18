@@ -11,6 +11,7 @@ class RoundedButton extends StatelessWidget {
   final radius;
   final marginV;
   final marginH;
+  final bool isShadow;
 
   const RoundedButton({
     this.text,
@@ -24,6 +25,7 @@ class RoundedButton extends StatelessWidget {
     this.radius = 30.0,
     this.marginV = 10.0,
     this.marginH = 0.0,
+    this.isShadow = true,
     Key key,
   }) : super(key: key);
 
@@ -32,21 +34,34 @@ class RoundedButton extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: marginV, horizontal: marginH),
       width: width,
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(radius),
-            child: FlatButton(
-            padding: EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
-            onPressed: onPress,
-            color: color,
-            child: Text(
-              text.toUpperCase(),
-              style: TextStyle(
-                color: textColor,
-                fontSize: fontsize,
-              ),
-            )
+      decoration: BoxDecoration(
+        border: Border.all(
+        color: Colors.orange,
+        width: 2.0,
         ),
+        borderRadius: BorderRadius.circular(radius),
+        color: color,
+        boxShadow: [
+          if(isShadow) BoxShadow(
+          color: color.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: Offset(0, 3),
+          ),
+        ],
+
       ),
+      child:FlatButton(
+          padding: EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
+          onPressed: onPress,
+          child: Text(
+            text.toUpperCase(),
+            style: TextStyle(
+              color: textColor,
+              fontSize: fontsize,
+            ),
+          )
+        ),
     );
   }
 }

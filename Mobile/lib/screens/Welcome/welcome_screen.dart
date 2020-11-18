@@ -52,30 +52,36 @@ class Welcome extends StatelessWidget{
                   ),
                   */
                   Center(
-                    child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset("assets/Planus.png"),
-                      SizedBox(height: size.height*0.2),
-                      RoundedButton(
-                        width: size.width*0.7,
-                        text: "Zaloguj się",
-                        onPress: (){
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        color: Colors.orange.withOpacity(0.95),
+                    child: Container(
+                      width: size.width,
+                      height: size.height*0.6,
+                      decoration: BoxDecoration(
+                        color: Colors.white
                       ),
-                      RoundedButton(
-                        width: size.width*0.7,
-                        text: "Zarejestruj się",
-                        onPress: (){
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        color: Colors.orange.withOpacity(0.95),
-                      ),
-                      SizedBox(height: size.height*0.1)
-                ]
-          ),
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset("assets/Planus.png"),
+                        SizedBox(height: size.height*0.15),
+                        RoundedButton(
+                          width: size.width*0.7,
+                          text: "Zaloguj się",
+                          onPress: (){
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          color: Colors.orange.withOpacity(0.95),
+                        ),
+                        RoundedButton(
+                          width: size.width*0.7,
+                          text: "Zarejestruj się",
+                          onPress: (){
+                            Navigator.pushNamed(context, '/register');
+                          },
+                          color: Colors.orange.withOpacity(0.95),
+                        ),
+                      ]
+                  ),
+                    ),
                   ),
               ]),
             ),

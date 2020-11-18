@@ -77,6 +77,8 @@ class Flats extends StatelessWidget {
                         ),
                         if(flats_count>2)RoundedButton(
                           width: size.width*0.7,
+                          color: Colors.white,
+                          textColor: Colors.orange,
                           onPress: () {
                             Navigator.popAndPushNamed(context, '/listflats');
                           },
