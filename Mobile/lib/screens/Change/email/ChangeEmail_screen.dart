@@ -28,7 +28,9 @@ class ChangeEmail extends StatelessWidget {
             height: size.height,
               child: Stack(
                 children: [
-                  GoBackButton(),
+                  GoBackButton(
+                    pop: true,
+                  ),
                   Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +65,7 @@ class ChangeEmail extends StatelessWidget {
                             textColor: Colors.white,
                             onPress: (){
                               print(usernameController.text);
-                              Navigator.popAndPushNamed(context, '/flats');
+                              Navigator.pop(context);
                             },
                             width: size.width*0.7
                           ),             

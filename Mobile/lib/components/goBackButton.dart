@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class GoBackButton extends StatelessWidget {
 
+  final String location;
+  final bool pop;
+
   const GoBackButton({
-    Key key
+    Key key,
+    this.location = "/welcome",
+    this.pop = false
   }) : super(key: key);
 
   @override
@@ -20,7 +25,11 @@ class GoBackButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18.0),
               ),
               onPressed:  () {
-                Navigator.popAndPushNamed(context, '/welcome');
+                if(pop){
+                  Navigator.pop(context);
+                }else{
+                  Navigator.popAndPushNamed(context, location);
+                }
               },
               color: Colors.orange,
               child: Text(

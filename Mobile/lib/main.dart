@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:planus/screens/Change/Account/deleteAccount_screen.dart';
+import 'package:planus/screens/Change/Account/farawell.dart';
+import 'package:planus/screens/Change/Flat/Delete/deleteFlat_screen.dart';
 import 'package:planus/screens/Change/Introduce/ChangeName_screen.dart';
+import 'package:planus/screens/Change/Password/changePassword_screen.dart';
 import 'package:planus/screens/Change/email/ChangeEmail_screen.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
@@ -32,7 +35,10 @@ void main() {
       '/choice': (context) => Choice(),
       '/changeName': (context) => ChangeName(),
       '/changeEmail': (context) => ChangeEmail(),
-      '/deleteAccount': (context) => DeleteAccount()
+      '/deleteAccount': (context) => DeleteAccount(),
+      '/changePassword': (context) => ChangePassword(),
+      '/farawell': (context) => Farawell(),
+      '/deleteFlat':(context) => DeleteFlat()
     }
   ));
 }
