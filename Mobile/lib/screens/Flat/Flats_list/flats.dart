@@ -13,7 +13,7 @@ class Flats extends StatelessWidget {
 
   const Flats({
     this.name = "Radosław",
-    this.flats_count = 3,
+    this.flats_count = 2,
     this.image = "assets/mieszkanie.png",
     this.flat_name = "Osiedle franciszkańskie",
     Key key,
@@ -72,7 +72,9 @@ class Flats extends StatelessWidget {
                         ),
                         if(flats_count==2)RoundedButton(
                           width: size.width*0.7,
-                          onPress: () {},
+                          onPress: () {
+                            Navigator.pushNamed(context, '/choice');
+                          },
                           text: "Dodaj mieszkanie",
                         ),
                         if(flats_count>2)RoundedButton(

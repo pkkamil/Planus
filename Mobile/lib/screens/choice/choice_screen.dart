@@ -27,7 +27,9 @@ class Choice extends StatelessWidget {
               SizedBox(height: size.height*0.05),
               RoundedButton(
                 text:"Utwórz mieszkanie",
-                onPress: () {},
+                onPress: () {
+                  Navigator.pushNamed(context, '/addFlat');
+                },
                 fontsize: 17.0,
                 width: size.width*0.7,
               ),

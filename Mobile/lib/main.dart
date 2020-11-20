@@ -17,6 +17,8 @@ import 'package:planus/screens/Login/login_screen.dart';
 import 'package:planus/screens/Register/register_screen.dart';
 import 'package:planus/screens/Remind/remind_screen.dart';
 
+import 'screens/Flat/AddFlat/AddFlat_screen.dart';
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -38,7 +40,8 @@ void main() {
       '/deleteAccount': (context) => DeleteAccount(),
       '/changePassword': (context) => ChangePassword(),
       '/farawell': (context) => Farawell(),
-      '/deleteFlat':(context) => DeleteFlat()
+      '/deleteFlat':(context) => DeleteFlat(),
+      '/addFlat': (context) => AddFlat()
     }
   ));
 }
