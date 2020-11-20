@@ -36,6 +36,14 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             RoundedButton(
+              text: "Edytuj mieszkanie",
+              width: size.width*0.7,
+              vertical: 15.0,
+              onPress: () {
+                //Navigator.pushNamed(context, '/deleteFlat');
+              },
+            ),
+            RoundedButton(
               text: "Usuń mieszkanie",
               width: size.width*0.7,
               vertical: 15.0,
@@ -73,7 +81,8 @@ class SettingsScreen extends StatelessWidget {
                 fontSize: 18,
                 color: Colors.orange
               ),
-            )
+            ),
+            SizedBox(height: size.height*0.1)
           ],
         ),
       ),

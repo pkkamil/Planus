@@ -37,7 +37,9 @@ class Choice extends StatelessWidget {
               RoundedButton(
                 text:"Dołącz do mieszkania",
                 fontsize: 17.0,
-                onPress: () {},
+                onPress: () {
+                  Navigator.pushNamed(context, '/joinFlat');
+                },
                 width: size.width*0.7,
               ),
             ],

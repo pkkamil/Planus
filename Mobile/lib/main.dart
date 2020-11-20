@@ -5,6 +5,7 @@ import 'package:planus/screens/Change/Flat/Delete/deleteFlat_screen.dart';
 import 'package:planus/screens/Change/Introduce/ChangeName_screen.dart';
 import 'package:planus/screens/Change/Password/changePassword_screen.dart';
 import 'package:planus/screens/Change/email/ChangeEmail_screen.dart';
+import 'package:planus/screens/Flat/AddingResident/JoinFlat_screen.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
 import 'package:planus/screens/Flat/Panel/home_screen.dart';
@@ -41,7 +42,8 @@ void main() {
       '/changePassword': (context) => ChangePassword(),
       '/farawell': (context) => Farawell(),
       '/deleteFlat':(context) => DeleteFlat(),
-      '/addFlat': (context) => AddFlat()
+      '/addFlat': (context) => AddFlat(),
+      '/joinFlat': (context) => JoinFlat()
     }
   ));
 }
