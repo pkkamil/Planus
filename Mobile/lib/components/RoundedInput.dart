@@ -10,6 +10,7 @@ class RoundedInput extends StatelessWidget {
   final bool password;
   final TextEditingController controller;
   final width;
+  final onChanged;
 
   const RoundedInput({
     Key key,
@@ -20,7 +21,8 @@ class RoundedInput extends StatelessWidget {
     this.iconColor,
     this.password = false,
     this.width,
-    this.controller
+    this.controller,
+    this.onChanged
   }) : super(key: key);
 
   @override
@@ -38,8 +40,9 @@ class RoundedInput extends StatelessWidget {
           color: iconColor,
         ),
         hintText: placeholder,
-        border: InputBorder.none
+        border: InputBorder.none,
        ),
+       onChanged: onChanged,
       )
     );
   }

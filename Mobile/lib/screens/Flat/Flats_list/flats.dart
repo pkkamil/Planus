@@ -72,12 +72,14 @@ class Flats extends StatelessWidget {
                         ),
                         if(flats_count==2)RoundedButton(
                           width: size.width*0.7,
+                          horizontal: 0.0,
                           onPress: () {
                             Navigator.pushNamed(context, '/choice');
                           },
                           text: "Dodaj mieszkanie",
                         ),
                         if(flats_count>2)RoundedButton(
+                          horizontal: 0.0,
                           width: size.width*0.7,
                           color: Colors.white,
                           textColor: Colors.orange,

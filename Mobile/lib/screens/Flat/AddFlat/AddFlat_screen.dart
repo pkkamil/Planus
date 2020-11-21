@@ -110,7 +110,7 @@ class AddFlat extends StatelessWidget {
                         RoundedInput(
                           controller: areaController,
                           width: size.width*0.7,
-                          placeholder: "Powierzchnia [m2]",
+                          placeholder: "Powierzchnia [m\u00B2]",
                           color: Colors.white,
                           textColor: Colors.black,
                           iconColor: Colors.black,
@@ -165,7 +165,7 @@ class AddFlat extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
+                margin: EdgeInsets.symmetric(horizontal: 25),
                 child: Center(
                   child: Column(
                     children: [
@@ -179,7 +179,7 @@ class AddFlat extends StatelessWidget {
                                   RoundedInput(
                                     controller: coldWaterPriceController,
                                     width: size.width*0.7,
-                                    placeholder: "Cena za 1m3 wody zimnej",
+                                    placeholder: "Cena za 1m\u00B3 wody zimnej",
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
@@ -188,7 +188,7 @@ class AddFlat extends StatelessWidget {
                                   RoundedInput(
                                     controller: hotWaterPriceController,
                                     width: size.width*0.7,
-                                    placeholder: "Cena za 1m3 wody ciepłej",
+                                    placeholder: "Cena za 1m\u00B3 wody ciepłej",
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,

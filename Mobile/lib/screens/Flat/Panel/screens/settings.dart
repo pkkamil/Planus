@@ -36,6 +36,7 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             RoundedButton(
+              horizontal: 0.0,
               text: "Edytuj mieszkanie",
               width: size.width*0.7,
               vertical: 15.0,
@@ -44,6 +45,7 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             RoundedButton(
+              horizontal: 0.0,
               text: "Usuń mieszkanie",
               width: size.width*0.7,
               vertical: 15.0,

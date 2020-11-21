@@ -10,7 +10,7 @@ class FlatScreen extends StatelessWidget {
     this.city = "Katowice",
     this.province = "Śląskie",
     this.billing_period = 24,
-    this.days = 10,
+    this.days = 1,
   }) : super(key: key);
 
   final String image;
@@ -115,14 +115,18 @@ class FlatScreen extends StatelessWidget {
             ),
             SizedBox(height: size.height*0.03),
             if(days!=0)RoundedButton(
+              horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
               },
               isShadow: false,
             ),
             if(days==0)RoundedButton(
+              horizontal: 40.0,
               text: "Wprowadź liczniki",
-              onPress: () {},
+              onPress: () {
+                Navigator.pushNamed(context, "/insertCounters");
+              },
               isShadow: false,
               textColor: Colors.orange,
               color: Colors.white,

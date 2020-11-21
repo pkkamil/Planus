@@ -22,31 +22,49 @@ class _HomeState extends State<Home> {
   Widget _body;
   int _currentIndex = 0;
 
-  void selectScreen(int x){
-    switch(x){
-      case 0:
-        _body = FlatScreen();
-        break;
-      case 1:
-        _body = ResidentsScreen();
-        break;
-      case 2:
-        _body = PaymentsScreen();
-        break;
-      case 3:
-        _body = GraphsScreen();
-        break;
-      case 4:
-        _body = SettingsScreen();
-        break;
+  void selectScreen(int x, bool owner){
+    if(owner){
+      switch(x){
+        case 0:
+          _body = FlatScreen();
+          break;
+        case 1:
+          _body = ResidentsScreen();
+          break;
+        case 2:
+          _body = PaymentsScreen();
+          break;
+        case 3:
+          _body = GraphsScreen();
+          break;
+        case 4:
+          _body = SettingsScreen();
+          break;
+      }
+    }else{
+      switch(x){
+        case 0:
+          _body = FlatScreen();
+          break;
+        case 1:
+          _body = PaymentsScreen();
+          break;
+        case 2:
+          _body = GraphsScreen();
+          break;
+        case 3:
+          _body = SettingsScreen();
+          break;
+      }
     }
+
   }
 
 
   @override
   void initState() {
     super.initState();
-    selectScreen(_currentIndex);
+    selectScreen(_currentIndex,widget.owner);
   }
 
   @override
@@ -93,9 +111,9 @@ class _HomeState extends State<Home> {
             setState(() {
               _currentIndex = index;
               if(_currentIndex==0){
-                Navigator.popAndPushNamed(context, '/flats');
+                Navigator.pop(context);
               }
-              selectScreen(_currentIndex);
+              selectScreen(_currentIndex,widget.owner);
             });
           },
         ),

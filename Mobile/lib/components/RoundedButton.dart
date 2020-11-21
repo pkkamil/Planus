@@ -21,7 +21,7 @@ class RoundedButton extends StatelessWidget {
     this.width,
     this.fontsize = 20.0,
     this.vertical = 20.0,
-    this.horizontal = 40.0,
+    this.horizontal = 0.0,
     this.radius = 30.0,
     this.marginV = 10.0,
     this.marginH = 0.0,

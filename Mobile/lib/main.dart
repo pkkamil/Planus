@@ -9,6 +9,7 @@ import 'package:planus/screens/Flat/AddingResident/JoinFlat_screen.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
 import 'package:planus/screens/Flat/Panel/home_screen.dart';
+import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
 import 'package:planus/screens/Introduce/introduce_screen.dart';
 import 'package:planus/screens/Verificate/verification_screen.dart';
 import 'package:planus/screens/choice/choice_screen.dart';
@@ -43,7 +44,8 @@ void main() {
       '/farawell': (context) => Farawell(),
       '/deleteFlat':(context) => DeleteFlat(),
       '/addFlat': (context) => AddFlat(),
-      '/joinFlat': (context) => JoinFlat()
+      '/joinFlat': (context) => JoinFlat(),
+      '/insertCounters': (context) => InsertCounters()
     }
   ));
 }
