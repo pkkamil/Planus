@@ -1,4 +1,4 @@
-<nav class="main-navbar">
+<nav>
     <input type='checkbox' id="nav" class="hidden">
     <label for="nav" class="nav-btn">
         <i></i>

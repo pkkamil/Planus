@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'ApartmentController@index');
 
 Route::get('/apartment/rent', 'ApartmentController@rent')->name('rentApartment');
 Route::get('/apartment/add', 'ApartmentController@add')->name('addApartment');
