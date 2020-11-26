@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Verificate/verification_screen.dart';
 import 'package:planus/services/adresses.dart';
 
 String name;
@@ -35,10 +36,7 @@ class _IntroduceState extends State<Introduce> {
       var response = await api.register(data);
       
       if(response['message']=='OK'){
-        Navigator.popAndPushNamed(context, '/verificate', arguments: {
-          'email':registerData['email']
-          }
-        );
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Verificate(registerData['email'],registerData['password'])));
       }else{
         _scaffoldKey.currentState.showSnackBar(
           SnackBar(

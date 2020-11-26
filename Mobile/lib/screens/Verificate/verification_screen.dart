@@ -10,7 +10,8 @@ import 'package:planus/services/adresses.dart';
 class Verificate extends StatefulWidget {
 
   final String email;
-  Verificate(this.email);
+  final String password;
+  Verificate(this.email, this.password);
 
   @override
   _VerificateState createState() => _VerificateState();
@@ -40,6 +41,19 @@ class _VerificateState extends State<Verificate> {
       print("Wystąpił błąd");
     }
   }
+
+
+  sendData(data) async{
+      var api = new Api();
+      var response = await api.login(data);
+      
+      if(response['email'].toLowerCase()==data['email'].toLowerCase()){
+        Navigator.popAndPushNamed(context, '/flats');
+        //zapisać w pamięci do autologowania
+      }else{
+        print(response['message']);
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +93,16 @@ class _VerificateState extends State<Verificate> {
                 onChanged: (val) {
                   if(val==code.toString()){
                     //dodanie do bazy danych
-                    Navigator.pushReplacementNamed(context, '/flats');
-                  }
-                },
+
+                    //zalogowanie
+                    Map data = {
+                      'email': widget.email,
+                      'password': widget.password
+                    };
+                    //print(data);
+
+                    sendData(data);
+                }}
               )
             ],
           ),

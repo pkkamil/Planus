@@ -27,7 +27,7 @@ class Login extends StatelessWidget {
       
       if(response['email'].toLowerCase()==data['email'].toLowerCase()){
         Navigator.popAndPushNamed(context, '/flats');
-        //zapisać w pamięci do autlogowania
+        //zapisać w pamięci do autologowania
       }else{
         print(response['message']);
       }
