@@ -7,7 +7,7 @@ document.querySelector('.nav-btn').addEventListener('click', () => {
 })
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth >= 864) {
+    if (window.innerWidth >= 976) {
         document.querySelector('.nav-wrapper').style.display = 'block'
     } else {
         document.querySelector('.nav-wrapper').style.display = 'none'
@@ -15,7 +15,7 @@ window.addEventListener('resize', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth <= 864) {
+    if (window.innerWidth <= 976) {
         document.querySelector('.nav-wrapper').style.display = 'none'
     }
 })

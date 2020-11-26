@@ -1,0 +1,298 @@
+@media screen and (max-width: 1600px)
+    .apartment
+        & .left-part
+            & h2
+                font-size: 2.3em
+            & h4
+                font-size: 1.3em
+            & h3
+                font-size: 1.6em
+            & .down-part
+                & h3
+                    font-size: 2.1em
+                & h6
+                    font-size: .9em
+                & button
+
+        & .right-part
+            width: 50%
+            margin-left: 50px
+            & img
+                width: 100%
+
+
+@media screen and (max-width: 1040px)
+    .login-section
+        & section.image
+            display: none
+        & section.form
+            width: 100%
+
+@media screen and (max-width: 976px)
+    .logo
+        padding: 0
+        margin-top: -8px
+    .nav-wrapper
+        position: fixed
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        z-index: 1
+        background: #fff
+        opacity: 0
+        transition: all 0.2s ease
+        & ul
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            width: 100%
+            & li
+                display: block
+                float: none
+                width: 100%
+                text-align: right
+                margin-bottom: 10px
+                &:nth-child(1) a
+                    transition: 0.2s
+                &:nth-child(2) a
+                    transition: 0.3s
+                &:nth-child(3) a
+                    transition: 0.4s
+                &:nth-child(4) a
+                    transition: 0.5s
+                &:not(first-child)
+                    margin-left: 0
+                & a
+                    padding: 10px 24px
+                    opacity: 0
+                    color: #000
+                    font-weight: 600
+                    letter-spacing: 1.2px
+                    transform: translateX(-20px)
+                    transition: all 0.2s ease
+    .nav-btn
+        position: fixed
+        background-color: $primary
+        right: 20px
+        top: 15px
+        font-size: 1.5em
+        display: block
+        width: 48px
+        height: 48px
+        cursor: pointer
+        z-index: 9999
+        border-radius: 50%
+        & i
+            display: block
+            width: 20px
+            height: 2px
+            background: #FFF
+            border-radius: 2px
+            margin-left: 14px
+            transform: translateY(1px)
+            &:nth-child(1)
+                margin-top: 16px
+            &:nth-child(2)
+                margin-top: 4px
+                opacity: 1
+            &:nth-child(3)
+                margin-top: 4px
+
+@media screen and (max-width: 920px)
+    button
+        padding: 16px 37px
+
+    .welcome
+        & h1
+            font-size: 7em
+        & h4
+            font-size: 1.2em
+    .apartments
+        & .list-apartments
+            padding: 50px 30px 50px 10px
+    .our-app
+        & .mockups
+            & img:not(.download)
+                display: none
+    footer
+        & article
+            & .first-part
+                & h1
+                    & a
+                        font-size: 2.4em
+                & h4
+                    transform: translate(150px, -20px)
+                    font-size: 1.1em
+
+@media screen and (max-width: 711px)
+    button
+        padding: 16px 27px
+        font-size: 1em
+
+    .welcome
+        & h1
+            text-align: center
+            font-size: 5em
+        & h4
+            transform: translateY(-120px)
+            font-size: 1.1em
+    .apartments
+        padding: 0
+        & .list-apartments
+            padding: 50px 30px
+            & .single-apartment
+                margin-left: 0
+                width: 100%
+                & img
+                    width: 100%
+                    height: 335px
+                & .layer
+                    & h3
+                        font-size: 3em
+                    & h4
+                        font-size: 1.6em
+                    & h5
+                        font-size: 1.4em
+    footer
+        & article
+            & .first-part
+                & h1
+                    & a
+                        text-align: center
+                        font-size: 2.4em
+                & h4
+                    transform: translateY(-20px)
+                    font-size: 1em
+            & .second-part
+                & h5
+                    font-size: .9em
+                    padding: 0 10px
+
+@media screen and (max-width: 550px)
+    .login-section
+        & section.form
+            padding: 150px 50px
+
+@media screen and (max-width: 500px)
+    .welcome
+        & h1
+            display: none
+        & h4
+            display: none
+        & button
+            display: none
+    .apartments
+        & .list-apartments
+            padding: 50px 20px
+            & .single-apartment
+                & .layer
+                    & h3
+                        font-size: 2.4em
+                    & h4
+                        font-size: 1.3em
+                    & h5
+                        font-size: 1.1em
+    footer
+        & article
+            & .first-part
+                & h4
+                    display: none
+            & .second-part
+                flex-direction: column
+                & h5
+                    font-size: .9em
+                    padding: 5px 0
+
+@media screen and (max-width: 450px)
+    .login-section
+        & section.form
+            padding: 150px 30px
+            & img
+                width: 250px
+                height: 211px
+            & form
+                & span.email, span.password, span.name
+                    width: 100%
+                    & i
+                        float: left
+                    input
+                        width: calc(100% - 37px)
+
+
+@media screen and (max-width: 420px)
+    .article-title
+        font-size: 2.3em
+    .apartments
+        & .list-apartments
+            & .single-apartment
+                & .layer
+                    & h3
+                        font-size: 2.4em
+                    & h4
+                        font-size: 1.2em
+                    & h5
+                        font-size: 1em
+    .our-app
+        padding: 0px 40px 0px 40px
+        & .mockups
+            & img.download
+                height: 531px
+                margin: 0px 20px
+    .login-section
+        & section.form
+            padding: 100px 30px 50px 30px
+            & img
+                width: 250px
+                height: 161px
+            & form
+                & span.email, span.password, span.name
+                    & input
+                        font-size: .8em
+        & section.decision
+            & p
+                font-size: 1.2em
+            & a
+                font-size: .9em
+
+@media screen and (max-width: 350px)
+    .article-title
+        font-size: 2em
+    .apartments
+        & .list-apartments
+            & .single-apartment
+                & .layer
+                    & h3
+                        text-align: center
+                        font-size: 2em
+                    & h4
+                        text-align: center
+                        font-size: 1em
+                    & h5
+                        text-align: center
+                        font-size: .9em
+
+    .our-app
+        padding: 0px 20px
+        & .mockups
+            & img.download
+                height: 431px
+                margin: 0px 20px
+            & .download-app
+                & button
+                    font-size: .6em
+                    padding: 10px 21px
+
+@media screen and (max-width: 300px)
+    .login-section
+        & section.form
+            & img
+                width: 230px
+                height: 131px
+
+@media screen and (orientation: portrait)
+    .apartments
+        & .list-apartments
+            & .single-apartment
+                & .layer
+                    opacity: 1

@@ -17,6 +17,6 @@ return [
     'sent' => 'Wysłaliśmy prośbę zmiany hasła na twój adres email!',
     'throttled' => 'Proszę poczekaj, zanim spróbujesz ponownie.',
     'token' => 'Kod uwierzytelniający zmianę hasła jest niepoprawny',
-    'user' => "Nie możemy znaleźć twój adres email w bazie.",
+    'user' => "Nie możemy znaleźć twojego adresu email w bazie.",
 
 ];

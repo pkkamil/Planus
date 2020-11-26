@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', 'ApartmentController@index');
-
-Route::get('/apartment/rent', 'ApartmentController@rent')->name('rentApartment');
-Route::get('/apartment/add', 'ApartmentController@add')->name('addApartment');
-
+Route::get('/mieszkanie/{id}', 'ApartmentController@show');
+// Auth
 Auth::routes();
+Route::get('/przedstaw-sie', function() {
+    if (Auth::id()) {
+        if (Auth::user() -> name == Null)
+            return view('auth.setName');
+        else
+            return redirect('/');
+    }
+    else
+        return redirect('/login');
+});
+Route::post('/przedstaw-sie/sukces', 'UserController@setName')->name('introduce');
 
-Route::get('/panel', 'DashboardController@index')->name('dashboard');
+Route::get('/decyzja', function() {
+    if (Auth::user()) {
+    if (count(Auth::user() -> residents) == 0 or count(Auth::user() -> apartments) == 0)
+        return view('decision');
+    else
+        return redirect('/panel');
+    } else
+        return redirect('/login');
+});
+
+Route::post('/mieszkanie/zapytaj', 'ApartmentController@inform')->middleware('auth')->name('informOwner');
+
+Route::middleware(['introduced', 'auth', 'decided'])->group(function () {
+    Route::get('/panel', 'DashboardController@index')->name('dashboard');
+    Route::get('/mieszkanie/wynajmij', 'ApartmentController@rent')->name('rentApartment');
+    Route::get('/mieszkanie/dodaj', 'ApartmentController@add')->name('addApartment');
+});
+

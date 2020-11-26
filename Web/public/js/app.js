@@ -1912,9 +1912,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      apartments: [],
+      apartment: {
+        id: '',
+        image: '',
+        price: '',
+        name: '',
+        localization: ''
+      },
+      apartment_id: '',
+      nextPage: 1,
+      moreExists: false
+    };
+  },
+  created: function created() {
+    this.fetchApartments(10);
+  },
+  methods: {
+    fetchApartments: function fetchApartments(items) {
+      var _this = this;
+
+      fetch('api/apartments/paginate/10').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.apartments = res.data;
+        if (res.meta.current_page < res.meta.last_page) _this.moreExists = true;
+        _this.nextPage = res.meta.current_page + 1;
+      });
+    },
+    loadMore: function loadMore(nextPage) {
+      var _this2 = this;
+
+      fetch('api/apartments/paginate/10?page=' + this.nextPage).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        if (res.meta.current_page < res.meta.last_page) {
+          _this2.moreExists = true;
+          _this2.nextPage = res.meta.current_page + 1;
+        } else {
+          _this2.moreExists = false;
+        }
+
+        res.data.forEach(function (data) {
+          _this2.apartments.push(data);
+        });
+      });
+    }
   }
 });
 
@@ -37510,7 +37572,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "article",
+    { staticClass: "apartments", attrs: { id: "apartments" } },
+    [
+      _c("h2", { staticClass: "article-title" }, [_vm._v("Mieszkania")]),
+      _vm._v(" "),
+      _c("h4", { staticClass: "article-subtitle" }, [
+        _vm._v("Przejrzyj dostępne, przyjazne zakątki")
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "list-apartments" },
+        _vm._l(_vm.apartments, function(apartment) {
+          return _c(
+            "section",
+            { key: apartment.id, staticClass: "single-apartment" },
+            [
+              _c(
+                "a",
+                { attrs: { href: "/mieszkanie/" + apartment.id_apartment } },
+                [
+                  _c("img", { attrs: { src: apartment.image, alt: "" } }),
+                  _vm._v(" "),
+                  _c("section", { staticClass: "layer" }, [
+                    _c("h3", [_vm._v(_vm._s(apartment.price) + " zł")]),
+                    _vm._v(" "),
+                    _c("h4", [_vm._v(_vm._s(apartment.name))]),
+                    _vm._v(" "),
+                    _c("h5", [_vm._v(_vm._s(apartment.localization))])
+                  ])
+                ]
+              )
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.moreExists,
+              expression: "moreExists"
+            }
+          ],
+          on: { click: _vm.loadMore }
+        },
+        [_vm._v("Zobacz więcej")]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49851,8 +49968,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/kamilk/GitHub/Planus/Web/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/kamilk/GitHub/Planus/Web/resources/sass/app.sass */"./resources/sass/app.sass");
+__webpack_require__(/*! /var/www/html/Planus/Web/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/Planus/Web/resources/sass/app.sass */"./resources/sass/app.sass");
 
 
 /***/ })

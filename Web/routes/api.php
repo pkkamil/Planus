@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('register', 'api\AuthController@register');
+Route::post('setName', 'api\AuthController@setName');
+Route::post('login', 'api\AuthController@login');
+Route::get('apartments/{id?}', 'api\ApartmentApiController@index');
+Route::get('apartments/paginate/{items?}', 'api\ApartmentApiController@paginate');

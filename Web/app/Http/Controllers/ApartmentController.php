@@ -11,4 +11,9 @@ class ApartmentController extends Controller
         $apartments = Apartment::paginate(11);
         return view('home', compact('apartments'));
     }
+
+    public function show($id) {
+        $apartment = Apartment::find($id);
+        return view('singleApartment', compact('apartment'));
+    }
 }

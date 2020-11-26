@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   background-color: #FFF;
   font-size: 18px;
   font-family: "Roboto", sans-serif;
@@ -75,7 +76,7 @@ nav .logo a {
   font-size: 2.5em;
   letter-spacing: 3px;
   text-decoration: none;
-  -webkit-text-stroke: 1px black;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 nav ul {
@@ -141,7 +142,545 @@ nav.orange ul li a::after {
   background-color: #FFF;
 }
 
-@media screen and (max-width: 864px) {
+nav.orange-ww {
+  background-color: #ffa500;
+}
+
+#nav:checked + .nav-btn {
+  transform: rotate(45deg);
+}
+
+#nav:checked + .nav-btn i {
+  background: #FFF;
+  transition: transform 0.2s ease;
+}
+
+#nav:checked + .nav-btn i:nth-child(1) {
+  transform: translateY(6px) rotate(180deg);
+}
+
+#nav:checked + .nav-btn i:nth-child(2) {
+  opacity: 0;
+}
+
+#nav:checked + .nav-btn i:nth-child(3) {
+  transform: translateY(-6px) rotate(90deg);
+}
+
+#nav:checked ~ .nav-wrapper {
+  z-index: 9990;
+  opacity: 1;
+}
+
+#nav:checked ~ .nav-wrapper ul li a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hidden {
+  display: none;
+}
+
+footer svg {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(5px);
+  z-index: 9;
+}
+
+footer article {
+  z-index: 9;
+  position: relative;
+  height: 200px;
+  background-color: #ffa500;
+}
+
+footer article .first-part {
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+footer article .first-part h1 {
+  font-family: "Indie Flower", sans-serif;
+}
+
+footer article .first-part h1 a {
+  color: #ffa500;
+  font-weight: 600;
+  font-size: 2.8em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+footer article .first-part h4 {
+  transform: translate(200px, -20px);
+  font-size: 1.2em;
+  font-weight: 400;
+  font-family: "Indie Flower", sans-serif;
+}
+
+footer article .second-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+footer article .second-part h5 {
+  color: #FFF;
+  font-size: 1em;
+  padding: 0 50px;
+  font-weight: 400;
+  transform: translateY(20px);
+}
+
+footer article .second-part h5 a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+footer article .second-part h5 a:hover {
+  color: #ddd;
+}
+
+a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+button {
+  display: block;
+  color: #FFF;
+  text-transform: uppercase;
+  padding: 16px 57px;
+  background-color: #ffa500;
+  border: 1px solid #ff9500;
+  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  font-size: 1.1em;
+  outline: none;
+  margin: 0 auto;
+  transition: 0.6s box-shadow, 0.6s background-color;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #ff9500;
+  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.6);
+}
+
+.welcome {
+  width: 100%;
+  height: 100vh;
+  background-image: url(/images/home.jpg?245603e5c4e9ee6ec2fc5088afc1e2fb);
+  background-position: center;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.welcome h1 {
+  color: #ffa500;
+  font-family: "Indie Flower", sans-serif;
+  letter-spacing: 5px;
+  font-weight: 500;
+  font-size: 8em;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  transform: translateY(-80px);
+}
+
+.welcome h4 {
+  transform: translate(120px, -140px);
+  font-size: 1.4em;
+  font-weight: 400;
+  font-family: "Indie Flower", sans-serif;
+}
+
+.welcome .fa-arrow-circle-down {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  color: #ffa500;
+  transform: translateX(-50%);
+  font-size: 4em;
+  transition: 0.6s color;
+}
+
+.welcome .fa-arrow-circle-down:hover {
+  color: #ff9500;
+  cursor: pointer;
+}
+
+.welcome button {
+  transform: translateY(-100px);
+}
+
+.article-title {
+  text-align: center;
+  font-size: 2.5em;
+  color: #ffa500;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  padding-top: 50px;
+}
+
+.article-subtitle {
+  text-align: center;
+  color: #999;
+  font-weight: 400;
+}
+
+.apartments {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+.apartments .list-apartments {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 50px 50px 50px 30px;
+  flex-wrap: wrap;
+}
+
+.apartments .list-apartments .single-apartment {
+  position: relative;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.apartments .list-apartments .single-apartment img {
+  width: 311px;
+  height: 235px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.apartments .list-apartments .single-apartment .layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffa500cc;
+  opacity: 0;
+  transition: 0.6s opacity;
+}
+
+.apartments .list-apartments .single-apartment .layer h3 {
+  color: #FFF;
+  font-weight: 400;
+  font-size: 2em;
+}
+
+.apartments .list-apartments .single-apartment .layer h4 {
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1em;
+}
+
+.apartments .list-apartments .single-apartment .layer h5 {
+  color: #777;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+.apartments .list-apartments .single-apartment:hover .layer {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.apartments button {
+  margin-bottom: 50px;
+}
+
+.divider {
+  width: 100%;
+  height: 300px;
+  background-image: url(/images/divider.png?f02ffda1d40a9779a30524cccb3e2e53);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.our-app {
+  width: 100%;
+  min-height: calc(100vh - 160px);
+  padding: 0px 50px 0px 50px;
+}
+
+.our-app .mockups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.our-app .mockups img:not(.download) {
+  height: 531px;
+  transform: translateY(20px);
+}
+
+.our-app .mockups img.download {
+  height: 571px;
+  margin: 0px 30px;
+}
+
+.our-app .mockups .download-app {
+  position: relative;
+}
+
+.our-app .mockups .download-app button {
+  position: absolute;
+  font-size: 0.7em;
+  padding: 10px 31px;
+  top: 67.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+
+.login-section {
+  width: 100%;
+  min-height: 90%;
+  background-color: #FFF;
+}
+
+.login-section section.image {
+  position: relative;
+  float: left;
+  width: 40%;
+  min-height: 90vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.login-section section.image img {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.login-section section.decision p {
+  margin-top: 50px;
+  color: #555;
+  font-size: 1.3em;
+}
+
+.login-section section.decision a:first-of-type {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.login-section section.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  float: left;
+  padding: 150px 100px;
+  width: 60%;
+  min-height: 90vh;
+}
+
+.login-section section.form img {
+  width: 310px;
+  height: 261px;
+}
+
+.login-section section.form form span.email,
+.login-section section.form form span.password,
+.login-section section.form form span.name {
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px;
+  width: 330px;
+  border: 1px solid #ffa500;
+  border-radius: 38px;
+  padding: 17px 31px 17px 17px;
+}
+
+.login-section section.form form span.email:first-of-type,
+.login-section section.form form span.password:first-of-type,
+.login-section section.form form span.name:first-of-type {
+  margin-top: 40px;
+}
+
+.login-section section.form form span.email i,
+.login-section section.form form span.password i,
+.login-section section.form form span.name i {
+  color: #ffa500;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.login-section section.form form span.email input,
+.login-section section.form form span.password input,
+.login-section section.form form span.name input {
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  outline: none;
+  margin-left: 11px;
+  font-size: 1em;
+}
+
+.login-section section.form form .invalid-feedback p {
+  color: red;
+  margin-top: 10px;
+}
+
+.login-section section.form form span.remember {
+  display: block;
+  margin: 20px 0;
+}
+
+.login-section section.form form span.remember label {
+  color: #ffa500;
+}
+
+.login-section section.form form span.remember label:hover {
+  color: #ff9500;
+}
+
+.login-section section.form form a {
+  margin-top: 10px;
+  display: block;
+  color: #ffa500;
+  text-decoration: none;
+}
+
+.login-section section.form form a:first-of-type {
+  margin-top: 20px;
+}
+
+.login-section section.form form a:hover {
+  color: #ff9500;
+}
+
+.apartment {
+  width: 100%;
+  min-height: 90vh;
+  padding: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apartment .left-part {
+  width: 50%;
+}
+
+.apartment .left-part h2 {
+  text-transform: uppercase;
+  color: #ffa500;
+  font-size: 2.6em;
+  font-weight: 400;
+}
+
+.apartment .left-part h4 {
+  color: #999;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.apartment .left-part h3 {
+  color: #555;
+  font-size: 1.8em;
+  font-weight: 400;
+}
+
+.apartment .left-part h3:first-of-type {
+  margin-top: 50px;
+}
+
+.apartment .left-part .down-part {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.apartment .left-part .down-part h3 {
+  font-size: 2.3em;
+}
+
+.apartment .left-part .down-part h6 {
+  font-size: 0.9em;
+  color: #999;
+  font-weight: 400;
+}
+
+.apartment .left-part .down-part button {
+  margin-top: 30px;
+}
+
+.apartment .right-part {
+  width: 50%;
+  margin-left: 50px;
+}
+
+.apartment .right-part img {
+  width: 100%;
+}
+
+@media screen and (max-width: 1600px) {
+  .apartment .left-part h2 {
+    font-size: 2.3em;
+  }
+
+  .apartment .left-part h4 {
+    font-size: 1.3em;
+  }
+
+  .apartment .left-part h3 {
+    font-size: 1.6em;
+  }
+
+  .apartment .left-part .down-part h3 {
+    font-size: 2.1em;
+  }
+
+  .apartment .left-part .down-part h6 {
+    font-size: 0.9em;
+  }
+
+  .apartment .right-part {
+    width: 50%;
+    margin-left: 50px;
+  }
+
+  .apartment .right-part img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .login-section section.image {
+    display: none;
+  }
+
+  .login-section section.form {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 976px) {
   .logo {
     padding: 0;
     margin-top: -8px;
@@ -242,191 +781,272 @@ nav.orange ul li a::after {
   }
 }
 
-#nav:checked + .nav-btn {
-  transform: rotate(45deg);
+@media screen and (max-width: 920px) {
+  button {
+    padding: 16px 37px;
+  }
+
+  .welcome h1 {
+    font-size: 7em;
+  }
+
+  .welcome h4 {
+    font-size: 1.2em;
+  }
+
+  .apartments .list-apartments {
+    padding: 50px 30px 50px 10px;
+  }
+
+  .our-app .mockups img:not(.download) {
+    display: none;
+  }
+
+  footer article .first-part h1 a {
+    font-size: 2.4em;
+  }
+
+  footer article .first-part h4 {
+    transform: translate(150px, -20px);
+    font-size: 1.1em;
+  }
 }
 
-#nav:checked + .nav-btn i {
-  background: #FFF;
-  transition: transform 0.2s ease;
+@media screen and (max-width: 711px) {
+  button {
+    padding: 16px 27px;
+    font-size: 1em;
+  }
+
+  .welcome h1 {
+    text-align: center;
+    font-size: 5em;
+  }
+
+  .welcome h4 {
+    transform: translateY(-120px);
+    font-size: 1.1em;
+  }
+
+  .apartments {
+    padding: 0;
+  }
+
+  .apartments .list-apartments {
+    padding: 50px 30px;
+  }
+
+  .apartments .list-apartments .single-apartment {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .apartments .list-apartments .single-apartment img {
+    width: 100%;
+    height: 335px;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h3 {
+    font-size: 3em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h4 {
+    font-size: 1.6em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h5 {
+    font-size: 1.4em;
+  }
+
+  footer article .first-part h1 a {
+    text-align: center;
+    font-size: 2.4em;
+  }
+
+  footer article .first-part h4 {
+    transform: translateY(-20px);
+    font-size: 1em;
+  }
+
+  footer article .second-part h5 {
+    font-size: 0.9em;
+    padding: 0 10px;
+  }
 }
 
-#nav:checked + .nav-btn i:nth-child(1) {
-  transform: translateY(6px) rotate(180deg);
+@media screen and (max-width: 550px) {
+  .login-section section.form {
+    padding: 150px 50px;
+  }
 }
 
-#nav:checked + .nav-btn i:nth-child(2) {
-  opacity: 0;
+@media screen and (max-width: 500px) {
+  .welcome h1 {
+    display: none;
+  }
+
+  .welcome h4 {
+    display: none;
+  }
+
+  .welcome button {
+    display: none;
+  }
+
+  .apartments .list-apartments {
+    padding: 50px 20px;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h3 {
+    font-size: 2.4em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h4 {
+    font-size: 1.3em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h5 {
+    font-size: 1.1em;
+  }
+
+  footer article .first-part h4 {
+    display: none;
+  }
+
+  footer article .second-part {
+    flex-direction: column;
+  }
+
+  footer article .second-part h5 {
+    font-size: 0.9em;
+    padding: 5px 0;
+  }
 }
 
-#nav:checked + .nav-btn i:nth-child(3) {
-  transform: translateY(-6px) rotate(90deg);
+@media screen and (max-width: 450px) {
+  .login-section section.form {
+    padding: 150px 30px;
+  }
+
+  .login-section section.form img {
+    width: 250px;
+    height: 211px;
+  }
+
+  .login-section section.form form span.email,
+  .login-section section.form form span.password,
+  .login-section section.form form span.name {
+    width: 100%;
+  }
+
+  .login-section section.form form span.email i,
+  .login-section section.form form span.password i,
+  .login-section section.form form span.name i {
+    float: left;
+  }
+
+  .login-section section.form form span.email input,
+  .login-section section.form form span.password input,
+  .login-section section.form form span.name input {
+    width: calc(100% - 37px);
+  }
 }
 
-#nav:checked ~ .nav-wrapper {
-  z-index: 9990;
-  opacity: 1;
+@media screen and (max-width: 420px) {
+  .article-title {
+    font-size: 2.3em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h3 {
+    font-size: 2.4em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h4 {
+    font-size: 1.2em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h5 {
+    font-size: 1em;
+  }
+
+  .our-app {
+    padding: 0px 40px 0px 40px;
+  }
+
+  .our-app .mockups img.download {
+    height: 531px;
+    margin: 0px 20px;
+  }
+
+  .login-section section.form {
+    padding: 100px 30px 50px 30px;
+  }
+
+  .login-section section.form img {
+    width: 250px;
+    height: 161px;
+  }
+
+  .login-section section.form form span.email input,
+  .login-section section.form form span.password input,
+  .login-section section.form form span.name input {
+    font-size: 0.8em;
+  }
+
+  .login-section section.decision p {
+    font-size: 1.2em;
+  }
+
+  .login-section section.decision a {
+    font-size: 0.9em;
+  }
 }
 
-#nav:checked ~ .nav-wrapper ul li a {
-  opacity: 1;
-  transform: translateX(0);
+@media screen and (max-width: 350px) {
+  .article-title {
+    font-size: 2em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h3 {
+    text-align: center;
+    font-size: 2em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h4 {
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .apartments .list-apartments .single-apartment .layer h5 {
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .our-app {
+    padding: 0px 20px;
+  }
+
+  .our-app .mockups img.download {
+    height: 431px;
+    margin: 0px 20px;
+  }
+
+  .our-app .mockups .download-app button {
+    font-size: 0.6em;
+    padding: 10px 21px;
+  }
 }
 
-.hidden {
-  display: none;
+@media screen and (max-width: 300px) {
+  .login-section section.form img {
+    width: 230px;
+    height: 131px;
+  }
 }
 
-button {
-  display: block;
-  color: #FFF;
-  text-transform: uppercase;
-  padding: 16px 57px;
-  background-color: #ffa500;
-  border: 1px solid #ff9500;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
-  border-radius: 30px;
-  font-size: 1.1em;
-  outline: none;
-  margin: 0 auto;
-  transition: 0.6s box-shadow, 0.6s background-color;
-}
-
-button:hover {
-  cursor: pointer;
-  background-color: #ff9500;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.6);
-}
-
-.welcome {
-  width: 100%;
-  height: 100vh;
-  background-image: url(/images/home.jpg?245603e5c4e9ee6ec2fc5088afc1e2fb);
-  background-position: center;
-  background-size: cover;
-  background-attachment: scroll;
-  background-position: top;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.welcome h1 {
-  color: #ffa500;
-  font-family: "Indie Flower", sans-serif;
-  letter-spacing: 5px;
-  font-weight: 500;
-  font-size: 8em;
-  -webkit-text-stroke: 1px black;
-  transform: translateY(-80px);
-}
-
-.welcome h4 {
-  transform: translate(120px, -140px);
-  font-size: 1.4em;
-  font-weight: 400;
-  font-family: "Indie Flower", sans-serif;
-}
-
-.welcome .fa-arrow-circle-down {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  color: #ffa500;
-  transform: translateX(-50%);
-  font-size: 4em;
-  transition: 0.6s color;
-}
-
-.welcome .fa-arrow-circle-down:hover {
-  color: #ff9500;
-  cursor: pointer;
-}
-
-.welcome button {
-  transform: translateY(-100px);
-}
-
-.apartments {
-  width: 100%;
-  height: calc(100vh - 80px);
-}
-
-.apartments h2 {
-  text-align: center;
-  font-size: 2.5em;
-  color: #ffa500;
-  -webkit-text-stroke: 1px black;
-  padding-top: 50px;
-}
-
-.apartments h4 {
-  text-align: center;
-  color: #999;
-  font-weight: 400;
-}
-
-.apartments .list-apartments {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 30px 0px 50px 0px;
-  padding: 0px 100px;
-  flex-wrap: wrap;
-}
-
-.apartments .list-apartments .single-apartment {
-  position: relative;
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
-.apartments .list-apartments .single-apartment img {
-  width: 311px;
-  height: 235px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.apartments .list-apartments .single-apartment .layer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #ffa500cc;
-  opacity: 0;
-  transition: 0.6s opacity;
-}
-
-.apartments .list-apartments .single-apartment .layer h3 {
-  color: #FFF;
-  font-weight: 400;
-  font-size: 2em;
-}
-
-.apartments .list-apartments .single-apartment .layer h4 {
-  color: #555;
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 1em;
-}
-
-.apartments .list-apartments .single-apartment .layer h5 {
-  color: #777;
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 0.9em;
-}
-
-.apartments .list-apartments .single-apartment:hover .layer {
-  opacity: 1;
-  cursor: pointer;
+@media screen and (orientation: portrait) {
+  .apartments .list-apartments .single-apartment .layer {
+    opacity: 1;
+  }
 }
 

@@ -15,5 +15,4 @@ return [
 
     'failed' => 'Niepoprawne hasło.',
     'throttle' => 'Zbyt wiele prób zalogowania.',
-
 ];

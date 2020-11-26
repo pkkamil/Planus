@@ -18,6 +18,7 @@ html
     overflow-x: hidden
 
 body
+    overflow-x: hidden
     background-color: #FFF
     font-size: 18px
     font-family: 'Roboto', sans-serif
@@ -61,7 +62,7 @@ nav
             font-size: 2.5em
             letter-spacing: 3px
             text-decoration: none
-            -webkit-text-stroke: 1px black
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
     & ul
         float: right
         & li
@@ -101,78 +102,8 @@ nav
             color: #FFF
             &::after
                 background-color: #FFF
-
-
-@media screen and (max-width: 864px)
-    .logo
-        padding: 0
-        margin-top: -8px
-    .nav-wrapper
-        position: fixed
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        z-index: 1
-        background: #fff
-        opacity: 0
-        transition: all 0.2s ease
-        & ul
-            position: absolute
-            top: 50%
-            transform: translateY(-50%)
-            width: 100%
-            & li
-                display: block
-                float: none
-                width: 100%
-                text-align: right
-                margin-bottom: 10px
-                &:nth-child(1) a
-                    transition: 0.2s
-                &:nth-child(2) a
-                    transition: 0.3s
-                &:nth-child(3) a
-                    transition: 0.4s
-                &:nth-child(4) a
-                    transition: 0.5s
-                &:not(first-child)
-                    margin-left: 0
-                & a
-                    padding: 10px 24px
-                    opacity: 0
-                    color: #000
-                    font-weight: 600
-                    letter-spacing: 1.2px
-                    transform: translateX(-20px)
-                    transition: all 0.2s ease
-    .nav-btn
-        position: fixed
+    &.orange-ww
         background-color: $primary
-        right: 20px
-        top: 15px
-        font-size: 1.5em
-        display: block
-        width: 48px
-        height: 48px
-        cursor: pointer
-        z-index: 9999
-        border-radius: 50%
-        & i
-            display: block
-            width: 20px
-            height: 2px
-            background: #FFF
-            border-radius: 2px
-            margin-left: 14px
-            transform: translateY(1px)
-            &:nth-child(1)
-                margin-top: 16px
-            &:nth-child(2)
-                margin-top: 4px
-                opacity: 1
-            &:nth-child(3)
-                margin-top: 4px
 
 #nav:checked+.nav-btn
     transform: rotate(45deg)
@@ -196,6 +127,53 @@ nav
 .hidden
     display: none
 
+footer
+    svg
+        position: relative
+        overflow: hidden
+        transform: translateY(5px)
+        z-index: 9
+    & article
+        z-index: 9
+        position: relative
+        height: 200px
+        background-color: $primary
+        & .first-part
+            z-index: 9
+            @include flex-center
+            flex-direction: column
+            & h1
+                font-family: 'Indie Flower', sans-serif
+                & a
+                    color: $primary
+                    font-weight: 600
+                    font-size: 2.8em
+                    letter-spacing: 3px
+                    text-decoration: none
+                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+            & h4
+                transform: translate(200px, -20px)
+                font-size: 1.2em
+                font-weight: 400
+                font-family: 'Indie Flower', sans-serif
+        & .second-part
+            @include flex-center
+            flex-direction: row
+            & h5
+                color: #FFF
+                font-size: 1em
+                padding: 0 50px
+                font-weight: 400
+                transform: translateY(20px)
+                & a
+                    text-decoration: none
+                    color:#FFF
+                    &:hover
+                        color: #ddd
+
+a
+    text-decoration: none
+    color: #FFF
 
 button
     display: block
@@ -228,7 +206,7 @@ button
         letter-spacing: 5px
         font-weight: 500
         font-size: 8em
-        -webkit-text-stroke: 1px black
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
         transform: translateY(-80px)
     & h4
         transform: translate(120px, -140px)
@@ -249,24 +227,24 @@ button
     & button
         transform: translateY(-100px)
 
+.article-title
+    text-align: center
+    font-size: 2.5em
+    color: $primary
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+    padding-top: 50px
+.article-subtitle
+    text-align: center
+    color: #999
+    font-weight: 400
+
 .apartments
     width: 100%
-    height: calc(100vh - 80px)
-    & h2
-        text-align: center
-        font-size: 2.5em
-        color: $primary
-        -webkit-text-stroke: 1px black
-        padding-top: 50px
-    & h4
-        text-align: center
-        color: #999
-        font-weight: 400
+    min-height: calc(100vh - 80px)
     & .list-apartments
         @include flex-center
         width: 100%
-        margin: 30px 0px 50px 0px
-        padding: 0px 100px
+        padding: 50px 50px 50px 30px
         flex-wrap: wrap
         & .single-apartment
             position: relative
@@ -304,4 +282,159 @@ button
             &:hover .layer
                 opacity: 1
                 cursor: pointer
+    & button
+        margin-bottom: 50px
 
+.divider
+    width: 100%
+    height: 300px
+    @include background-cover('./img/divider.png')
+    background-attachment: fixed
+
+.our-app
+    width: 100%
+    min-height: calc(100vh - 160px)
+    padding: 0px 50px 0px 50px
+    & .mockups
+        @include flex-center
+        flex-direction: row
+        width: 100%
+        margin-top: 50px
+        & img:not(.download)
+            height: 531px
+            transform: translateY(20px)
+        & img.download
+            height: 571px
+            margin: 0px 30px
+        & .download-app
+            position: relative
+            & button
+                position: absolute
+                font-size: .7em
+                padding: 10px 31px
+                top: 67.2%
+                left: 50%
+                transform: translate(-50%, -50%)
+                z-index: 9
+
+.login-section
+    width: 100%
+    min-height: 90%
+    background-color: #FFF
+    & section.image
+        position: relative
+        float: left
+        width: 40%
+        min-height: 90vh
+        object-fit: cover
+        & img
+            position: absolute
+            width: 100%
+            height: 100vh
+            z-index: 1
+    & section.decision
+        & p
+            margin-top: 50px
+            color: #555
+            font-size: 1.3em
+        & a
+            &:first-of-type
+                margin-top: 40px
+                margin-bottom: 20px
+    & section.form
+        @include flex-center
+        flex-direction: column
+        text-align: center
+        float: left
+        padding: 150px 100px
+        width: 60%
+        min-height: 90vh
+        & img
+            width: 310px
+            height: 261px
+        & form
+            & span.email, span.password, span.name
+                margin: 0 auto
+                display: block
+                margin-top: 20px
+                width: 330px
+                border: 1px solid $primary
+                border-radius: 38px
+                padding: 17px 31px 17px 17px
+                &:first-of-type
+                    margin-top: 40px
+                & i
+                    color: $primary
+                    margin-left: 10px
+                    display: inline-block
+                & input
+                    display: inline-block
+                    background: transparent
+                    border: 0
+                    outline: none
+                    margin-left: 11px
+                    font-size: 1em
+            & .invalid-feedback p
+                color: red
+                margin-top: 10px
+            & span.remember
+                display: block
+                margin: 20px 0
+                & label
+                    color: $primary
+                    &:hover
+                        color: $primary-dark
+            & a
+                margin-top: 10px
+                display: block
+                color: $primary
+                text-decoration: none
+                &:first-of-type
+                    margin-top: 20px
+                &:hover
+                    color: $primary-dark
+
+.apartment
+    width: 100%
+    min-height: 90vh
+    padding: 100px
+    @include flex-center
+    & .left-part
+        width: 50%
+        & h2
+            text-transform: uppercase
+            color: $primary
+            font-size: 2.6em
+            // letter-spacing: -1px
+            font-weight: 400
+        & h4
+            color: #999
+            font-size: 1.5em
+            font-weight: 400
+        & h3
+            color: #555
+            font-size: 1.8em
+            font-weight: 400
+            &:first-of-type
+                margin-top: 50px
+        & .down-part
+            text-align: center
+            margin-top: 100px
+            & h3
+                font-size: 2.3em
+            & h6
+                font-size: .9em
+                color: #999
+                font-weight: 400
+            & button
+                margin-top: 30px
+
+    & .right-part
+        width: 50%
+        margin-left: 50px
+        & img
+            width: 100%
+
+// Media Queries
+
+@import 'queries'
