@@ -639,6 +639,51 @@ button:hover {
   width: 100%;
 }
 
+.dimmer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dimmer .modal {
+  width: 700px;
+  min-height: 300px;
+  padding: 50px 70px;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #FFF;
+}
+
+.dimmer .modal h2 {
+  color: #555;
+  font-size: 1.5em;
+}
+
+.dimmer .modal h4 {
+  color: #999;
+  font-weight: 400;
+  margin-top: 30px;
+  font-size: 1.1em;
+}
+
+.dimmer .modal button {
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.dimmer .modal button:first-of-type {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -676,6 +721,59 @@ button:hover {
   }
 
   .login-section section.form {
+    width: 100%;
+  }
+
+  .apartment {
+    flex-direction: column;
+    padding: 150px 80px 100px 80px;
+  }
+
+  .apartment .left-part {
+    width: 100%;
+  }
+
+  .apartment .left-part h2 {
+    font-size: 2.1em;
+  }
+
+  .apartment .left-part h4 {
+    font-size: 1.1em;
+  }
+
+  .apartment .left-part h3 {
+    font-size: 1.4em;
+  }
+
+  .apartment .left-part h3:first-of-type {
+    margin-top: 20px;
+  }
+
+  .apartment .left-part .down-part {
+    text-align: left;
+    margin-top: 40px;
+  }
+
+  .apartment .left-part .down-part h3 {
+    font-size: 1.9em;
+  }
+
+  .apartment .left-part .down-part h6 {
+    font-size: 0.9em;
+  }
+
+  .apartment .left-part .down-part button {
+    margin-left: 0;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+
+  .apartment .right-part {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .apartment .right-part img {
     width: 100%;
   }
 }
@@ -872,11 +970,77 @@ button:hover {
     font-size: 0.9em;
     padding: 0 10px;
   }
+
+  .apartment {
+    padding: 150px 60px 100px 60px;
+  }
+
+  .apartment .left-part h2 {
+    font-size: 1.8em;
+  }
+
+  .apartment .left-part h4 {
+    font-size: 1em;
+  }
+
+  .apartment .left-part h3 {
+    font-size: 1.2em;
+  }
+
+  .apartment .left-part .down-part h3 {
+    font-size: 1.5em;
+  }
 }
 
 @media screen and (max-width: 550px) {
   .login-section section.form {
     padding: 150px 50px;
+  }
+
+  .apartment {
+    padding: 130px 50px 100px 50px;
+  }
+
+  .apartment .left-part h2 {
+    font-size: 1.6em;
+  }
+
+  .apartment .left-part h4 {
+    font-size: 1em;
+  }
+
+  .apartment .left-part h3 {
+    font-size: 1.2em;
+  }
+
+  .apartment .left-part .down-part h3 {
+    font-size: 1.3em;
+  }
+
+  .dimmer {
+    padding: 30px;
+  }
+
+  .dimmer .modal {
+    padding: 40px 50px;
+  }
+
+  .dimmer .modal h2 {
+    font-size: 1.3em;
+  }
+
+  .dimmer .modal h4 {
+    margin-top: 20px;
+    font-size: 1em;
+  }
+
+  .dimmer .modal button {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .dimmer .modal button:first-of-type {
+    margin-right: 0px;
   }
 }
 
@@ -950,6 +1114,26 @@ button:hover {
   .login-section section.form form span.name input {
     width: calc(100% - 37px);
   }
+
+  .apartment {
+    padding: 120px 30px 100px 30px;
+  }
+
+  .apartment .left-part h2 {
+    font-size: 1.3em;
+  }
+
+  .apartment .left-part h4 {
+    font-size: 1em;
+  }
+
+  .apartment .left-part h3 {
+    font-size: 1.1em;
+  }
+
+  .apartment .left-part .down-part h3 {
+    font-size: 1.2em;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -999,6 +1183,22 @@ button:hover {
 
   .login-section section.decision a {
     font-size: 0.9em;
+  }
+
+  .dimmer {
+    padding: 20px;
+  }
+
+  .dimmer .modal {
+    padding: 40px 40px;
+  }
+
+  .dimmer .modal h2 {
+    font-size: 1.2em;
+  }
+
+  .dimmer .modal h4 {
+    font-size: 1em;
   }
 }
 

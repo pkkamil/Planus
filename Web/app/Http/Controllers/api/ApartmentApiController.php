@@ -16,7 +16,8 @@ class ApartmentApiController extends Controller
         }
         $owners = Apartment::where('user_id', $id)->get();
         $rented = User::find($id) -> residents;
-        return ApartmentResource::collection($owners, $rented);
+        $data = $owners->concat($rented);
+        return ApartmentResource::collection($data);
     }
 
     public function paginate($items = 10) {

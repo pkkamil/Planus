@@ -12,7 +12,6 @@
                     font-size: 2.1em
                 & h6
                     font-size: .9em
-                & button
 
         & .right-part
             width: 50%
@@ -27,6 +26,35 @@
             display: none
         & section.form
             width: 100%
+    .apartment
+        flex-direction: column
+        padding: 150px 80px 100px 80px
+        & .left-part
+            width: 100%
+            & h2
+                font-size: 2.1em
+            & h4
+                font-size: 1.1em
+            & h3
+                font-size: 1.4em
+                &:first-of-type
+                    margin-top: 20px
+            & .down-part
+                text-align: left
+                margin-top: 40px
+                & h3
+                    font-size: 1.9em
+                & h6
+                    font-size: .9em
+                & button
+                    margin-left: 0
+                    margin-top: 30px
+                    margin-bottom: 50px
+        & .right-part
+            width: 100%
+            margin-left: 0px
+            & img
+                width: 100%
 
 @media screen and (max-width: 976px)
     .logo
@@ -169,10 +197,50 @@
                     font-size: .9em
                     padding: 0 10px
 
+    .apartment
+        padding: 150px 60px 100px 60px
+        & .left-part
+            & h2
+                font-size: 1.8em
+            & h4
+                font-size: 1em
+            & h3
+                font-size: 1.2em
+            & .down-part
+                & h3
+                    font-size: 1.5em
+
 @media screen and (max-width: 550px)
     .login-section
         & section.form
             padding: 150px 50px
+    .apartment
+        padding: 130px 50px 100px 50px
+        & .left-part
+            & h2
+                font-size: 1.6em
+            & h4
+                font-size: 1em
+            & h3
+                font-size: 1.2em
+            & .down-part
+                & h3
+                    font-size: 1.3em
+    .dimmer
+        padding: 30px
+        & .modal
+            padding: 40px 50px
+            h2
+                font-size: 1.3em
+            h4
+                margin-top: 20px
+                font-size: 1em
+            button
+                margin: 0 auto
+                margin-top: 20px
+                &:first-of-type
+                    margin-right: 0px
+
 
 @media screen and (max-width: 500px)
     .welcome
@@ -219,6 +287,19 @@
                     input
                         width: calc(100% - 37px)
 
+    .apartment
+        padding: 120px 30px 100px 30px
+        & .left-part
+            & h2
+                font-size: 1.3em
+            & h4
+                font-size: 1em
+            & h3
+                font-size: 1.1em
+            & .down-part
+                & h3
+                    font-size: 1.2em
+
 
 @media screen and (max-width: 420px)
     .article-title
@@ -254,6 +335,14 @@
                 font-size: 1.2em
             & a
                 font-size: .9em
+    .dimmer
+        padding: 20px
+        & .modal
+            padding: 40px 40px
+            h2
+                font-size: 1.2em
+            h4
+                font-size: 1em
 
 @media screen and (max-width: 350px)
     .article-title

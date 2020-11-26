@@ -14,6 +14,9 @@ class ApartmentController extends Controller
 
     public function show($id) {
         $apartment = Apartment::find($id);
-        return view('singleApartment', compact('apartment'));
+        if ($apartment -> public == 1)
+            return view('singleApartment', compact('apartment'));
+        else
+            return redirect('/');
     }
 }
