@@ -21,6 +21,11 @@ import 'package:planus/screens/Remind/remind_screen.dart';
 
 import 'screens/Flat/AddFlat/AddFlat_screen.dart';
 
+Map data = {
+  'id':0,
+  'name':'Disconnected'
+};
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -32,7 +37,7 @@ void main() {
       '/register': (context) => Register(),
       '/remind': (context) => Remind(),
       '/introduce': (context) => Introduce(),
-      '/flats':(context) => Flats(),
+      '/flats':(context) => Flats(data),
       '/listflats':(context) => ListFlats(),
       '/home': (context) => Home(),
       '/verificate': (context) => Verificate('',''),

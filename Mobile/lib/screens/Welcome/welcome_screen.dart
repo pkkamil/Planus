@@ -67,7 +67,8 @@ class Welcome extends StatelessWidget{
                           width: size.width*0.7,
                           text: "Zaloguj się",
                           onPress: (){
-                            Navigator.pushNamed(context, '/login');
+                            //jakos to zmienic
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
                           color: Colors.orange.withOpacity(0.95),
                         ),
@@ -75,7 +76,8 @@ class Welcome extends StatelessWidget{
                           width: size.width*0.7,
                           text: "Zarejestruj się",
                           onPress: (){
-                            Navigator.pushNamed(context, '/register');
+                            //jakos to zmienic
+                            Navigator.pushReplacementNamed(context, '/register');
                           },
                           color: Colors.orange.withOpacity(0.95),
                         ),

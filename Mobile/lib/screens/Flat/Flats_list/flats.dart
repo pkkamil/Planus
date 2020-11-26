@@ -3,25 +3,41 @@ import 'package:flutter/services.dart';
 import 'package:planus/components/AddFlatCard.dart';
 import 'package:planus/components/FlatCard.dart';
 import 'package:planus/components/RoundedButton.dart';
+import 'package:planus/services/apiController.dart';
 
-class Flats extends StatelessWidget {
+class Flats extends StatefulWidget {
   
-  final String name;
-  final flats_count;
-  final String image;
-  final String flat_name;
+  final Map response;
 
-  const Flats({
-    this.name = "Radosław",
-    this.flats_count = 2,
-    this.image = "assets/mieszkanie.png",
-    this.flat_name = "Osiedle franciszkańskie",
-    Key key,
-  }) : super(key: key);
-
+  Flats(this.response);
 
   @override
+  _FlatsState createState() => _FlatsState();
+}
+
+int flats_count = 1;
+String image = "assets/mieszkanie.png";
+String flat_name = "Loading...";
+List flats;
+
+class _FlatsState extends State<Flats> {
+  
+  @override
   Widget build(BuildContext context) {
+
+    sendData(id) async{
+      var api = new Api();
+      var response = await api.listFlats(id);
+
+      setState(() {
+        flats = response['data'];
+        flats_count = flats.length;
+      });
+      if(flats_count==0){Navigator.popAndPushNamed(context, '/choice');}
+    }
+
+    sendData(widget.response['id']);
+
 
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -46,7 +62,7 @@ class Flats extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(text: "Witaj, "),
-                          TextSpan(text: name, style: TextStyle(color: Colors.orange)),
+                          TextSpan(text: widget.response['name'], style: TextStyle(color: Colors.orange)),
                           TextSpan(text: "!"),
                         ]
                       ),

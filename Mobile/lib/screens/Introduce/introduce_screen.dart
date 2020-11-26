@@ -4,7 +4,7 @@ import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:flutter/services.dart';
 import 'package:planus/screens/Verificate/verification_screen.dart';
-import 'package:planus/services/adresses.dart';
+import 'package:planus/services/apiController.dart';
 
 String name;
 Map registerData = {};

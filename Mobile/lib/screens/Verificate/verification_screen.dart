@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:http/http.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'dart:convert';
 
-import 'package:planus/services/adresses.dart';
+import 'package:planus/services/apiController.dart';
 
 
 class Verificate extends StatefulWidget {
@@ -48,7 +49,7 @@ class _VerificateState extends State<Verificate> {
       var response = await api.login(data);
       
       if(response['email'].toLowerCase()==data['email'].toLowerCase()){
-        Navigator.popAndPushNamed(context, '/flats');
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
         //zapisać w pamięci do autologowania
       }else{
         print(response['message']);

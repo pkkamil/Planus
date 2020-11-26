@@ -25,6 +25,12 @@ class Api{
     body: jsonEncode(data));
     return jsonDecode(response.body);
   }
+  listFlats(id) async{
+    String fullUrl = api + "api/apartments/$id";
+    var response = await get(fullUrl,
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
 
   _setHeaders() async {
     var headers = {
