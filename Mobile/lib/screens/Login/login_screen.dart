@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/services/adresses.dart';
 
 class Login extends StatelessWidget {
 
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
 
   @override
   void dispose(){
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
   }
   
   @override
   Widget build(BuildContext context) {
+    sendData(data) async{
+
+      var api = new Api();
+      var response = await api.login(data);
+      
+      if(response['email'].toLowerCase()==data['email'].toLowerCase()){
+        Navigator.popAndPushNamed(context, '/flats');
+        //zapisać w pamięci do autlogowania
+      }else{
+        print(response['message']);
+      }
+    }
+    
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
@@ -35,7 +51,11 @@ class Login extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(height: size.height*0.1),
-                          Image.asset("assets/user.png"),
+                          SvgPicture.asset(
+                            "assets/Login.svg",
+                            width: size.width*0.4,
+                            height: size.height*0.2,
+                          ),
                           SizedBox(height: size.height*0.03),
                           Text(
                             "Witaj z powrotem",
@@ -46,7 +66,7 @@ class Login extends StatelessWidget {
                           ),
                           SizedBox(height:size.height*0.05),
                           RoundedInput(
-                            controller: usernameController,
+                            controller: emailController,
                             width: size.width*0.7,
                             placeholder: "E-mail",
                             color: Colors.white,
@@ -69,9 +89,12 @@ class Login extends StatelessWidget {
                             color: Colors.orange.withOpacity(0.95),
                             textColor: Colors.white,
                             onPress: (){
-                              print(usernameController.text);
-                              print(passwordController.text);
-                              //Jezeli nie ma imienia popandpushnamed do introduce
+                              Map data = {
+                                'email': emailController.text,
+                                'password': passwordController.text
+                              };
+                              sendData(data);
+                              //Jezeli nie ma zweryfikowanego maila popandpushnamed do verificate
                             },
                             width: size.width*0.7
                           ),

@@ -9,7 +9,7 @@ class GoBackButton extends StatelessWidget {
   const GoBackButton({
     Key key,
     this.location = "/welcome",
-    this.pop = false,
+    this.pop = true,
     this.isLeft = true
   }) : super(key: key);
 

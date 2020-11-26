@@ -35,7 +35,7 @@ void main() {
       '/flats':(context) => Flats(),
       '/listflats':(context) => ListFlats(),
       '/home': (context) => Home(),
-      '/verificate': (context) => Verificate(),
+      '/verificate': (context) => Verificate('test@test.pl'),
       '/choice': (context) => Choice(),
       '/changeName': (context) => ChangeName(),
       '/changeEmail': (context) => ChangeEmail(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
@@ -33,7 +34,10 @@ class Remind extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(height: size.height*0.1),
-                          Image.asset("assets/user.png"),
+                          SvgPicture.asset(
+                            "assets/Remind.svg",
+                            width: size.width*0.6,
+                          ),
                           SizedBox(height:size.height*0.03),
                           Text(
                             "Odzyskaj hasło",
