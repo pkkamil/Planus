@@ -29,10 +29,6 @@ class Login extends StatelessWidget {
 
       var api = new Api();
       var response = await api.login(data);
-      
-
-
-      print(response);
 
       if(response['email']==null){
         _scaffoldKey.currentState.showSnackBar(
@@ -61,10 +57,7 @@ class Login extends StatelessWidget {
           
           //zapisać w pamięci do autologowania
 
-
-
         }else{
-          print(response['message']);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.orange,

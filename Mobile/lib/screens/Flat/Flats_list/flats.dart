@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:planus/components/AddFlatCard.dart';
 import 'package:planus/components/FlatCard.dart';
 import 'package:planus/components/RoundedButton.dart';
+import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
 import 'package:planus/services/apiController.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Flats extends StatefulWidget {
   
@@ -15,36 +17,70 @@ class Flats extends StatefulWidget {
   _FlatsState createState() => _FlatsState();
 }
 
-int flats_count = 1;
-String image = "assets/mieszkanie.png";
-String flat_name = "Loading...";
+int flats_count = 0;
 List flats;
+List<FlatInfo> flatCard;
+bool _isLoading = false;
 
 class _FlatsState extends State<Flats> {
-  
-  @override
-  Widget build(BuildContext context) {
 
-    sendData(id) async{
+  pushToChoice(context){
+      Navigator.popAndPushNamed(context, '/choice');
+  }
+
+  sendData(id) async{
       var api = new Api();
       var response = await api.listFlats(id);
-
+      
       setState(() {
-        flats = response['data'];
-        flats_count = flats.length;
+        _isLoading = true;
+        if(response['statusCode']==200){
+          flats = response['body']['data'];
+          flats_count = flats.length;
+          flatCard = [];
+          
+
+          if(flats_count!=0){
+            for(int i=0;i<flats_count;i++){
+              flatCard.add(FlatInfo(id_user: widget.response['id']));
+              flatCard[i].parseData(flats[i]);
+            }
+          }
+        }
+        _isLoading = false;
       });
-      if(flats_count==0){Navigator.popAndPushNamed(context, '/choice');}
     }
-
+  
+  @override
+  void initState() {
     sendData(widget.response['id']);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    if(flats_count==0){
+      Future.microtask(() => pushToChoice(context));
+    }
 
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
     ]);
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+
+    if(_isLoading){
+        return Scaffold(
+          backgroundColor: Colors.orange,
+          body: Center(
+            child: SpinKitPulse(
+              color: Colors.white,
+              size: 100.0,
+            ),
+          )
+        );
+    }else{
+      return Scaffold(
           body: SingleChildScrollView(
             child: Container(
               height: size.height,
@@ -74,15 +110,17 @@ class _FlatsState extends State<Flats> {
                       children: [
                         SizedBox(height: size.height*0.1),
                         FlatCard(
-                          flat_name: flat_name, 
+                          flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
                           size: size.width*0.5, 
-                          image: image
+                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[0].image
                         ),
+                        
                         if(flats_count>1) FlatCard(
-                          flat_name: flat_name, 
+                          flat_name: (flatCard==null) ? 'Loading...' : flatCard[1].name,
                           size: size.width*0.5, 
-                          image: image
+                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[1].image
                         ),
+                        
                         if(flats_count==1) AddFlatCard(
                           size: size.width*0.5
                         ),
@@ -100,7 +138,7 @@ class _FlatsState extends State<Flats> {
                           color: Colors.white,
                           textColor: Colors.orange,
                           onPress: () {
-                            Navigator.popAndPushNamed(context, '/listflats');
+                            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => ListFlats(flatCard)));
                           },
                           text: "Zobacz wszystkie",
                         )
@@ -112,5 +150,44 @@ class _FlatsState extends State<Flats> {
             ),
           ),
     );
+    }
+  }
+}
+
+class FlatInfo{
+
+  int id_user;
+  Map json;
+
+  FlatInfo({
+    this.id_user,
+  });
+
+  int id_owner;
+
+  String name;
+  int price;
+  String image;
+  int area;
+  int rooms;
+  String localization;
+
+  int settlement_day;
+  int billing_period;
+  double cold_water;
+  double hot_water;
+  double heating_year;
+  double gas;
+  double electricity;
+  double rubbish;
+  double internet;
+  double tv;
+  double phone;
+
+  void parseData(Map response){
+    id_owner = response['user_id'];
+
+    name = response['name'];
+    image = response['image'];
   }
 }

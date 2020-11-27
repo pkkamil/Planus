@@ -46,7 +46,8 @@ class FlatCard extends StatelessWidget {
             image:DecorationImage(
               fit: BoxFit.cover,
               colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
-              image: AssetImage(image)
+              //image: AssetImage(image)
+              image: (image == null) ? AssetImage('assets/mieszkanie.png') : NetworkImage(image)
             )
           ),
           child: Center(

@@ -93,14 +93,11 @@ class _VerificateState extends State<Verificate> {
                 iconColor: Colors.grey[900],
                 onChanged: (val) {
                   if(val==code.toString()){
-                    //dodanie do bazy danych
-
-                    //zalogowanie
+                    
                     Map data = {
                       'email': widget.email,
                       'password': widget.password
                     };
-                    //print(data);
 
                     sendData(data);
                 }}

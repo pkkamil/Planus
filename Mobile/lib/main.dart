@@ -25,6 +25,7 @@ Map data = {
   'id':0,
   'name':'Disconnected'
 };
+List example;
 
 void main() {
   runApp(MaterialApp(
@@ -38,7 +39,7 @@ void main() {
       '/remind': (context) => Remind(),
       '/introduce': (context) => Introduce(),
       '/flats':(context) => Flats(data),
-      '/listflats':(context) => ListFlats(),
+      '/listflats':(context) => ListFlats(example),
       '/home': (context) => Home(),
       '/verificate': (context) => Verificate('',''),
       '/choice': (context) => Choice(),

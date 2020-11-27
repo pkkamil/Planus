@@ -29,7 +29,8 @@ class Api{
     String fullUrl = api + "api/apartments/$id";
     var response = await get(fullUrl,
     headers:  await _setHeaders());
-    return jsonDecode(response.body);
+    Map body = jsonDecode(response.body);
+    return {'statusCode':response.statusCode, 'body':body};
   }
 
   _setHeaders() async {
