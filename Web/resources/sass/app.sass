@@ -23,6 +23,9 @@ body
     font-size: 18px
     font-family: 'Roboto', sans-serif
 
+.orange-text
+    color: $primary
+
 ::-webkit-scrollbar-track
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
     background-color: #F5F5F5
@@ -53,7 +56,7 @@ nav
     transition: 1s color, 1s background-color
     & .logo
         float: left
-        padding: 4px 8px
+        padding: 0px 8px
         margin-left: 16px
         font-family: 'Indie Flower', sans-serif
         & a
@@ -270,7 +273,7 @@ button
                     font-weight: 400
                     font-size: 2em
                 & h4
-                    color: #555
+                    color: $secondary
                     text-transform: uppercase
                     font-weight: 400
                     font-size: 1em
@@ -335,7 +338,7 @@ button
     & section.decision
         & p
             margin-top: 50px
-            color: #555
+            color: $secondary
             font-size: 1.3em
         & a
             &:first-of-type
@@ -412,7 +415,7 @@ button
             font-size: 1.5em
             font-weight: 400
         & h3
-            color: #555
+            color: $secondary
             font-size: 1.8em
             font-weight: 400
             &:first-of-type
@@ -454,7 +457,7 @@ button
         text-align: center
         background-color: #FFF
         h2
-            color: #555
+            color: $secondary
             font-size: 1.5em
         h4
             color: #999
@@ -466,6 +469,96 @@ button
             margin-top: 30px
             &:first-of-type
                 margin-right: 20px
+
+.add-apartment
+    width: 100%
+    min-height: 90vh
+    @include flex-center
+    padding: 100px 80px 50px 80px
+    & section
+        margin: 0 40px
+        width: 33%
+    & span:not(.orange-text)
+        position: relative
+        display: block
+        margin-top: 20px
+        width: 340px
+        border: 1px solid $primary
+        border-radius: 38px
+        padding: 17px 31px 17px 17px
+        &:first-of-type
+            margin-top: 40px
+        & i
+            color: $primary
+            margin-left: 10px
+            display: inline-block
+        & .checkbox
+            position: absolute
+            font-size: 2em
+            top: 50%
+            right: 0
+            transform: translate(50px, -50%)
+            cursor: pointer
+            transition: 1s color
+            &:hover
+                color: $primary-dark
+        & input
+            display: inline-block
+            background: transparent
+            width: calc(100% - 50px)
+            border: 0
+            outline: none
+            margin-left: 11px
+            font-size: 1em
+        & input[type="checkbox"]
+            display: none
+    & .left-part
+        & h2
+            color: $secondary
+            font-size: 2.3em
+            font-weight: 400
+        & .image
+            display: block
+            width: 128px
+            height: 128px
+            margin-top: 30px
+            margin-bottom: -15px
+            & label
+                display: block
+                width: 100%
+                height: 100%
+                background-color: $primary
+                border-radius: 100%
+                cursor: pointer
+                @include flex-center
+                & i
+                    font-size: 4em
+                    color: #FFF
+            & input
+                opacity: 0
+                position: absolute
+                z-index: -1
+                width: 1px
+    & .center-part
+        & h3
+            margin-top: 20px
+            color: $secondary
+            font-size: 2em
+            font-weight: 400
+
+    & .right-part
+        padding-left: 50px
+        img
+            width: 450px
+            height: 369px
+            margin: 0 auto
+            margin-bottom: 50px
+        & .errors ul
+            margin-top: 30px
+            list-style: none
+            & li
+                color: red
+
 
 // Media Queries
 

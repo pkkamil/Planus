@@ -43,9 +43,12 @@ Route::get('/decyzja', function() {
 
 Route::post('/mieszkanie/zapytaj', 'ApartmentController@inform')->middleware('auth')->name('informOwner');
 
-Route::middleware(['introduced', 'auth', 'decided'])->group(function () {
-    Route::get('/panel', 'DashboardController@index')->name('dashboard');
-    Route::get('/mieszkanie/wynajmij', 'ApartmentController@rent')->name('rentApartment');
-    Route::get('/mieszkanie/dodaj', 'ApartmentController@add')->name('addApartment');
+Route::middleware(['introduced', 'auth'])->group(function () {
+    Route::middleware(['decided'])->group(function () {
+        Route::get('/panel', 'DashboardController@index')->name('dashboard');
+    });
+    Route::view('/panel/wynajmij', 'rentApartment')->name('rentApartment');
+    Route::view('/panel/dodaj', 'addApartment')->name('addApartment');
+    Route::post('/panel/dodaj', 'ApartmentController@add')->name('add');
 });
 

@@ -16,6 +16,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.orange-text {
+  color: #ffa500;
+}
+
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #F5F5F5;
@@ -65,7 +69,7 @@ nav {
 
 nav .logo {
   float: left;
-  padding: 4px 8px;
+  padding: 0px 8px;
   margin-left: 16px;
   font-family: "Indie Flower", sans-serif;
 }
@@ -684,6 +688,133 @@ button:hover {
   margin-right: 20px;
 }
 
+.add-apartment {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 80px 50px 80px;
+}
+
+.add-apartment section {
+  margin: 0 40px;
+  width: 33%;
+}
+
+.add-apartment span:not(.orange-text) {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  width: 340px;
+  border: 1px solid #ffa500;
+  border-radius: 38px;
+  padding: 17px 31px 17px 17px;
+}
+
+.add-apartment span:not(.orange-text):first-of-type {
+  margin-top: 40px;
+}
+
+.add-apartment span:not(.orange-text) i {
+  color: #ffa500;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.add-apartment span:not(.orange-text) .checkbox {
+  position: absolute;
+  font-size: 2em;
+  top: 50%;
+  right: 0;
+  transform: translate(50px, -50%);
+  cursor: pointer;
+  transition: 1s color;
+}
+
+.add-apartment span:not(.orange-text) .checkbox:hover {
+  color: #ff9500;
+}
+
+.add-apartment span:not(.orange-text) input {
+  display: inline-block;
+  background: transparent;
+  width: calc(100% - 50px);
+  border: 0;
+  outline: none;
+  margin-left: 11px;
+  font-size: 1em;
+}
+
+.add-apartment span:not(.orange-text) input[type=checkbox] {
+  display: none;
+}
+
+.add-apartment .left-part h2 {
+  color: #555;
+  font-size: 2.3em;
+  font-weight: 400;
+}
+
+.add-apartment .left-part .image {
+  display: block;
+  width: 128px;
+  height: 128px;
+  margin-top: 30px;
+  margin-bottom: -15px;
+}
+
+.add-apartment .left-part .image label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #ffa500;
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-apartment .left-part .image label i {
+  font-size: 4em;
+  color: #FFF;
+}
+
+.add-apartment .left-part .image input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+}
+
+.add-apartment .center-part h3 {
+  margin-top: 20px;
+  color: #555;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+.add-apartment .right-part {
+  padding-left: 50px;
+}
+
+.add-apartment .right-part img {
+  width: 450px;
+  height: 369px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.add-apartment .right-part .errors ul {
+  margin-top: 30px;
+  list-style: none;
+}
+
+.add-apartment .right-part .errors ul li {
+  color: red;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -712,6 +843,97 @@ button:hover {
 
   .apartment .right-part img {
     width: 100%;
+  }
+
+  .add-apartment {
+    padding: 100px 60px 50px 60px;
+  }
+
+  .add-apartment section {
+    margin: 0 30px;
+  }
+
+  .add-apartment .left-part h2 {
+    font-size: 2.2em;
+  }
+
+  .add-apartment .left-part .image {
+    display: block;
+    width: 96px;
+    height: 96px;
+    margin-top: 30px;
+    margin-bottom: -15px;
+  }
+
+  .add-apartment .left-part .image label i {
+    font-size: 3em;
+  }
+
+  .add-apartment .center-part h3 {
+    margin-top: 30px;
+    font-size: 1.9em;
+  }
+
+  .add-apartment .right-part img {
+    width: 400px;
+    height: 319px;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .add-apartment {
+    padding: 100px 50px 50px 50px;
+  }
+
+  .add-apartment section {
+    margin: 0 20px;
+  }
+
+  .add-apartment .left-part h2 {
+    font-size: 2em;
+  }
+
+  .add-apartment .center-part h3 {
+    margin-top: 20px;
+    color: #555;
+    font-size: 1.8em;
+    font-weight: 400;
+  }
+
+  .add-apartment .right-part {
+    padding-left: 40px;
+  }
+
+  .add-apartment .right-part img {
+    width: 350px;
+    height: 269px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .add-apartment {
+    padding: 100px 100px 50px 100px;
+    flex-wrap: wrap;
+  }
+
+  .add-apartment section {
+    margin: 0;
+    width: 50%;
+  }
+
+  .add-apartment .left-part {
+    padding-right: 50px;
+  }
+
+  .add-apartment .right-part {
+    width: 100%;
+    text-align: center;
+    padding-left: 0;
+    margin-top: 50px;
+  }
+
+  .add-apartment .right-part img {
+    display: none;
   }
 }
 
@@ -781,7 +1003,6 @@ button:hover {
 @media screen and (max-width: 976px) {
   .logo {
     padding: 0;
-    margin-top: -8px;
   }
 
   .nav-wrapper {
@@ -877,6 +1098,10 @@ button:hover {
   .nav-btn i:nth-child(3) {
     margin-top: 4px;
   }
+
+  .add-apartment {
+    padding: 100px 50px 50px 50px;
+  }
 }
 
 @media screen and (max-width: 920px) {
@@ -907,6 +1132,31 @@ button:hover {
   footer article .first-part h4 {
     transform: translate(150px, -20px);
     font-size: 1.1em;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .add-apartment {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 100px 100px 40px 100px;
+  }
+
+  .add-apartment section {
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .add-apartment .left-part {
+    padding-right: 0;
+  }
+
+  .add-apartment .center-part h3 {
+    margin-top: 50px;
   }
 }
 
@@ -992,6 +1242,24 @@ button:hover {
   }
 }
 
+@media screen and (max-width: 650px) {
+  .add-apartment {
+    padding: 100px 50px 40px 50px;
+  }
+
+  .add-apartment .left-part h2 {
+    font-size: 1.7em;
+  }
+
+  .add-apartment .center-part span {
+    transform: translateX(-20px);
+  }
+
+  .add-apartment .center-part h3 {
+    font-size: 1.4em;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .login-section section.form {
     padding: 150px 50px;
@@ -1042,6 +1310,10 @@ button:hover {
   .dimmer .modal button:first-of-type {
     margin-right: 0px;
   }
+
+  .add-apartment {
+    padding: 100px 30px 40px 30px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -1084,6 +1356,26 @@ button:hover {
   footer article .second-part h5 {
     font-size: 0.9em;
     padding: 5px 0;
+  }
+
+  .add-apartment {
+    padding: 100px 20px 40px 20px;
+  }
+
+  .add-apartment section span:not(.orange-text) {
+    width: 270px;
+  }
+
+  .add-apartment section span:not(.orange-text) .checkbox {
+    font-size: 1.5em;
+  }
+
+  .add-apartment section span:not(.orange-text) input {
+    font-size: 0.9em;
+  }
+
+  .add-apartment .left-part span:not(.orange-text) {
+    width: 330px;
   }
 }
 
@@ -1199,6 +1491,23 @@ button:hover {
 
   .dimmer .modal h4 {
     font-size: 1em;
+  }
+
+  .add-apartment .left-part span:not(.orange-text) {
+    width: 90%;
+  }
+
+  .add-apartment .center-part span:not(.orange-text) {
+    width: 80%;
+  }
+
+  .add-apartment .center-part span:not(.orange-text) .checkbox {
+    font-size: 1.3em;
+    transform: translate(35px, -50%);
+  }
+
+  .add-apartment .center-part span:not(.orange-text) input {
+    font-size: 0.8em;
   }
 }
 

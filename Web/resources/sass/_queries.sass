@@ -12,13 +12,73 @@
                     font-size: 2.1em
                 & h6
                     font-size: .9em
-
         & .right-part
             width: 50%
             margin-left: 50px
             & img
                 width: 100%
+    .add-apartment
+        padding: 100px 60px 50px 60px
+        & section
+            margin: 0 30px
+        & .left-part
+            & h2
+                font-size: 2.2em
+            & .image
+                display: block
+                width: 96px
+                height: 96px
+                margin-top: 30px
+                margin-bottom: -15px
+                & label
+                    & i
+                        font-size: 3em
+        & .center-part
+            & h3
+                margin-top: 30px
+                font-size: 1.9em
+        & .right-part
+            img
+                width: 400px
+                height: 319px
 
+@media screen and (max-width: 1500px)
+    .add-apartment
+        padding: 100px 50px 50px 50px
+        & section
+            margin: 0 20px
+        & .left-part
+            & h2
+                font-size: 2em
+        & .center-part
+            & h3
+                margin-top: 20px
+                color: $secondary
+                font-size: 1.8em
+                font-weight: 400
+
+        & .right-part
+            padding-left: 40px
+            img
+                width: 350px
+                height: 269px
+
+@media screen and (max-width: 1300px)
+    .add-apartment
+        padding: 100px 100px 50px 100px
+        flex-wrap: wrap
+        & section
+            margin: 0
+            width: 50%
+        & .left-part
+            padding-right: 50px
+        & .right-part
+            width: 100%
+            text-align: center
+            padding-left: 0
+            margin-top: 50px
+            & img
+                display: none
 
 @media screen and (max-width: 1040px)
     .login-section
@@ -56,10 +116,11 @@
             & img
                 width: 100%
 
+
+
 @media screen and (max-width: 976px)
     .logo
         padding: 0
-        margin-top: -8px
     .nav-wrapper
         position: fixed
         top: 0
@@ -127,6 +188,9 @@
             &:nth-child(3)
                 margin-top: 4px
 
+    .add-apartment
+        padding: 100px 50px 50px 50px
+
 @media screen and (max-width: 920px)
     button
         padding: 16px 37px
@@ -152,6 +216,22 @@
                 & h4
                     transform: translate(150px, -20px)
                     font-size: 1.1em
+
+@media screen and (max-width: 850px)
+    .add-apartment
+        flex-wrap: nowrap
+        flex-direction: column
+        padding: 100px 100px 40px 100px
+        & section
+            display: flex
+            @include flex-center
+            flex-direction: column
+            width: 100%
+        & .left-part
+            padding-right: 0
+        & .center-part
+            & h3
+                margin-top: 50px
 
 @media screen and (max-width: 711px)
     button
@@ -210,6 +290,19 @@
                 & h3
                     font-size: 1.5em
 
+@media screen and (max-width: 650px)
+    .add-apartment
+        padding: 100px 50px 40px 50px
+        & .left-part
+            & h2
+                font-size: 1.7em
+        & .center-part
+            & span
+                transform: translateX(-20px)
+        & .center-part
+            & h3
+                font-size: 1.4em
+
 @media screen and (max-width: 550px)
     .login-section
         & section.form
@@ -240,6 +333,8 @@
                 margin-top: 20px
                 &:first-of-type
                     margin-right: 0px
+    .add-apartment
+        padding: 100px 30px 40px 30px
 
 
 @media screen and (max-width: 500px)
@@ -271,6 +366,19 @@
                 & h5
                     font-size: .9em
                     padding: 5px 0
+
+    .add-apartment
+        padding: 100px 20px 40px 20px
+        & section
+            & span:not(.orange-text)
+                width: 270px
+                & .checkbox
+                    font-size: 1.5em
+                & input
+                    font-size: .9em
+        & .left-part
+            & span:not(.orange-text)
+                width: 330px
 
 @media screen and (max-width: 450px)
     .login-section
@@ -343,6 +451,20 @@
                 font-size: 1.2em
             h4
                 font-size: 1em
+
+    .add-apartment
+        & .left-part
+            & span:not(.orange-text)
+                width: 90%
+        & .center-part
+            & span:not(.orange-text)
+                width: 80%
+                & .checkbox
+                    font-size: 1.3em
+                    transform: translate(35px, -50%)
+                & input
+                    font-size: .8em
+
 
 @media screen and (max-width: 350px)
     .article-title
