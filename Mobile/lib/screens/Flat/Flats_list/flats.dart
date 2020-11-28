@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:planus/components/AddFlatCard.dart';
@@ -23,10 +24,6 @@ List<FlatInfo> flatCard;
 bool _isLoading = false;
 
 class _FlatsState extends State<Flats> {
-
-  pushToChoice(context){
-      Navigator.popAndPushNamed(context, '/choice');
-  }
 
   sendData(id) async{
       var api = new Api();
@@ -55,13 +52,14 @@ class _FlatsState extends State<Flats> {
   void initState() {
     sendData(widget.response['id']);
     super.initState();
+
+    Timer.run(() {
+      Navigator.of(context).pushReplacementNamed("/choice");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if(flats_count==0){
-      Future.microtask(() => pushToChoice(context));
-    }
 
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -109,7 +107,7 @@ class _FlatsState extends State<Flats> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(height: size.height*0.1),
-                        FlatCard(
+                        if(flats_count==1)FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
                           size: size.width*0.5, 
                           image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[0].image
