@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Flat/Panel/screens/flat.dart';
 import 'package:planus/screens/Flat/Panel/screens/graphs.dart';
 import 'package:planus/screens/Flat/Panel/screens/payments.dart';
@@ -7,12 +8,12 @@ import 'package:planus/screens/Flat/Panel/screens/settings.dart';
 
 class Home extends StatefulWidget {
 
-  final bool owner;
+  final FlatInfo flatData;
 
-  const Home({
-    Key key,
-    this.owner = true,
-  }) : super(key: key);
+  Home(this.flatData);
+
+  //final bool owner = id_user == response['id_owner'];
+  final owner = true;
 
   @override
   _HomeState createState() => _HomeState();

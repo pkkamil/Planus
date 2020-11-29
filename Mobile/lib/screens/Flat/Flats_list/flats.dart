@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:planus/components/AddFlatCard.dart';
@@ -21,7 +20,7 @@ class Flats extends StatefulWidget {
 int flats_count = 0;
 List flats;
 List<FlatInfo> flatCard;
-bool _isLoading = false;
+bool _isLoading = true;
 
 class _FlatsState extends State<Flats> {
 
@@ -34,6 +33,7 @@ class _FlatsState extends State<Flats> {
         if(response['statusCode']==200){
           flats = response['body']['data'];
           flats_count = flats.length;
+          if(flats_count==null){flats_count=0;};
           flatCard = [];
           
 
@@ -44,18 +44,22 @@ class _FlatsState extends State<Flats> {
             }
           }
         }
-        _isLoading = false;
       });
+      //print(flatCard);
+      _isLoading = false;
     }
-  
+
+  void setupData() async{
+    await sendData(widget.response['id']);
+    if(flats_count==0 && _isLoading==false){
+      Navigator.pushReplacementNamed(context, '/choice');
+    }
+  }
+
   @override
   void initState() {
-    sendData(widget.response['id']);
+    setupData();
     super.initState();
-
-    Timer.run(() {
-      Navigator.of(context).pushReplacementNamed("/choice");
-    });
   }
 
   @override
@@ -66,6 +70,10 @@ class _FlatsState extends State<Flats> {
         DeviceOrientation.portraitDown,
     ]);
     Size size = MediaQuery.of(context).size;
+
+    //if(flats_count==0){
+      //Navigator.pushReplacementNamed(context, '/choice');
+    //}
 
     if(_isLoading){
         return Scaffold(
@@ -107,16 +115,18 @@ class _FlatsState extends State<Flats> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(height: size.height*0.1),
-                        if(flats_count==1)FlatCard(
+                        if(flats_count>=1)FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
                           size: size.width*0.5, 
-                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[0].image
+                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[0].image,
+                          flatData: (flatCard==null) ? 'Loading...' : flatCard[0],
                         ),
                         
                         if(flats_count>1) FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[1].name,
                           size: size.width*0.5, 
-                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[1].image
+                          image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[1].image,
+                          flatData: (flatCard==null) ? 'Loading...' : flatCard[1],
                         ),
                         
                         if(flats_count==1) AddFlatCard(
@@ -174,7 +184,7 @@ class FlatInfo{
   int billing_period;
   double cold_water;
   double hot_water;
-  double heating_year;
+  double heating;
   double gas;
   double electricity;
   double rubbish;
@@ -187,5 +197,25 @@ class FlatInfo{
 
     name = response['name'];
     image = response['image'];
+    price = response['price'];
+    area = response['area'];
+    rooms = response['rooms'];
+    localization = response['localization'];
+    
+    List responses = ['settlement_day', 'billing_period', 'cold_water', 'hot_water', 'heating', 'gas', 'electricity', 'rubbish', 'internet','tv', 'phone'];
+    for(int i=0; i<responses.length; i++){
+      (response[responses[i]]==null) ? response[responses[i]]='0' : response[responses[i]]=response[responses[i]].toString();
+    }
+    settlement_day = int.parse(response['settlement_day']);
+    billing_period = int.parse(response['billing_period']);
+    cold_water = double.parse(response['cold_water']);
+    hot_water = double.parse(response['hot_water']);
+    heating = double.parse(response['heating']);
+    gas = double.parse(response['gas']);
+    electricity = double.parse(response['electricity']);
+    rubbish = double.parse(response['rubbish']);
+    internet = double.parse(response['internet']);
+    tv = double.parse(response['tv']);
+    phone = double.parse(response['phone']);
   }
 }

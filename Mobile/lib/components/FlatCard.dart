@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planus/screens/Flat/Panel/home_screen.dart';
 
 class FlatCard extends StatelessWidget {
   const FlatCard({
@@ -6,6 +7,7 @@ class FlatCard extends StatelessWidget {
     this.flat_name,
     this.image,
     this.size,
+    @required this.flatData,
     this.fontSize = 18.0,
     this.marginL= 20.0,
     this.marginT= 20.0,
@@ -17,6 +19,7 @@ class FlatCard extends StatelessWidget {
   final size;
   final String image;
   final fontSize;
+  final flatData;
   final marginL,marginT,marginR,marginB;
 
   @override
@@ -35,7 +38,8 @@ class FlatCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/home');
+          //Navigator.pushNamed(context, '/home');
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Home(flatData)));
         },
           child: ClipRRect(
           borderRadius: BorderRadius.circular(10),

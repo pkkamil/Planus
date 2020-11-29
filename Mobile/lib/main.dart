@@ -26,6 +26,7 @@ Map data = {
   'name':'Disconnected'
 };
 List example;
+FlatInfo flatInfo;
 
 void main() {
   runApp(MaterialApp(
@@ -40,7 +41,7 @@ void main() {
       '/introduce': (context) => Introduce(),
       '/flats':(context) => Flats(data),
       '/listflats':(context) => ListFlats(example),
-      '/home': (context) => Home(),
+      '/home': (context) => Home(flatInfo),
       '/verificate': (context) => Verificate('',''),
       '/choice': (context) => Choice(),
       '/changeName': (context) => ChangeName(),
