@@ -48,6 +48,7 @@ Route::middleware(['introduced', 'auth'])->group(function () {
         Route::get('/panel', 'DashboardController@index')->name('dashboard');
     });
     Route::view('/panel/wynajmij', 'rentApartment')->name('rentApartment');
+    Route::post('/panel/wynajmij2', 'ApartmentController@rent')->name('joinToApartment');
     Route::view('/panel/dodaj', 'addApartment')->name('addApartment');
     Route::post('/panel/dodaj', 'ApartmentController@add')->name('add');
 });

@@ -815,6 +815,65 @@ button:hover {
   color: red;
 }
 
+.rent-apartment {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  padding: 150px 100px 50px 100px;
+}
+
+.rent-apartment section {
+  color: #555;
+}
+
+.rent-apartment section span:not(.orange-text) {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  width: 240px;
+  border: 1px solid #ffa500;
+  border-radius: 38px;
+  padding: 17px 31px 17px 17px;
+}
+
+.rent-apartment section span:not(.orange-text) i {
+  color: #ffa500;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.rent-apartment section span:not(.orange-text) input {
+  display: inline-block;
+  background: transparent;
+  width: calc(100% - 50px);
+  border: 0;
+  outline: none;
+  margin-left: 11px;
+  font-size: 1em;
+}
+
+.rent-apartment .left-part {
+  width: 35%;
+}
+
+.rent-apartment .left-part h2 {
+  color: #555;
+  font-size: 2.3em;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.rent-apartment .left-part button {
+  margin-left: 0;
+  margin-top: 20px;
+}
+
+.rent-apartment .right-part img {
+  width: 820px;
+  height: 705px;
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -908,6 +967,30 @@ button:hover {
     width: 350px;
     height: 269px;
   }
+
+  .rent-apartment {
+    padding: 150px 30px 50px 80px;
+  }
+
+  .rent-apartment .left-part {
+    width: 100%;
+  }
+
+  .rent-apartment .left-part h2 {
+    font-size: 2em;
+  }
+
+  .rent-apartment .right-part {
+    padding-left: 0px;
+  }
+
+  .rent-apartment .right-part img {
+    position: absolute;
+    bottom: 150px;
+    right: 50px;
+    width: 720px;
+    height: 605px;
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -934,6 +1017,19 @@ button:hover {
 
   .add-apartment .right-part img {
     display: none;
+  }
+
+  .rent-apartment {
+    padding: 150px 30px 30px 80px;
+  }
+
+  .rent-apartment .left-part h2 {
+    font-size: 1.9em;
+  }
+
+  .rent-apartment .right-part img {
+    width: 620px;
+    height: 505px;
   }
 }
 
@@ -1158,6 +1254,22 @@ button:hover {
   .add-apartment .center-part h3 {
     margin-top: 50px;
   }
+
+  .rent-apartment {
+    padding: 150px 50px 50px 50px;
+  }
+
+  .rent-apartment .left-part h2 {
+    font-size: 1.8em;
+  }
+
+  .rent-apartment .right-part img {
+    position: absolute;
+    bottom: 150px;
+    right: 50px;
+    width: 520px;
+    height: 405px;
+  }
 }
 
 @media screen and (max-width: 711px) {
@@ -1257,6 +1369,29 @@ button:hover {
 
   .add-apartment .center-part h3 {
     font-size: 1.4em;
+  }
+
+  .rent-apartment {
+    padding: 0 40px;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .rent-apartment .left-part h2 {
+    font-size: 1.6em;
+  }
+
+  .rent-apartment .right-part {
+    text-align: center;
+  }
+
+  .rent-apartment .right-part img {
+    position: static;
+    width: 420px;
+    height: 305px;
   }
 }
 
@@ -1376,6 +1511,40 @@ button:hover {
 
   .add-apartment .left-part span:not(.orange-text) {
     width: 330px;
+  }
+
+  .rent-apartment {
+    padding: 50px 40px 0px 40px;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .rent-apartment .left-part h2 {
+    margin-top: 50px;
+    font-size: 1.5em;
+  }
+
+  .rent-apartment .left-part p {
+    font-size: 0.9em;
+  }
+
+  .rent-apartment .left-part button {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .rent-apartment .left-part span:not(.orange-text) {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .rent-apartment .left-part br {
+    display: none;
+  }
+
+  .rent-apartment .right-part img {
+    width: 320px;
+    height: 205px;
   }
 }
 
@@ -1511,6 +1680,22 @@ button:hover {
   }
 }
 
+@media screen and (max-width: 400px) {
+  .rent-apartment {
+    padding: 100px 30px 0px 30px;
+  }
+
+  .rent-apartment .left-part h2 {
+    margin-top: 40px;
+    font-size: 1.4em;
+  }
+
+  .rent-apartment .right-part img {
+    width: 280px;
+    height: 165px;
+  }
+}
+
 @media screen and (max-width: 350px) {
   .article-title {
     font-size: 2em;
@@ -1550,6 +1735,16 @@ button:hover {
   .login-section section.form img {
     width: 230px;
     height: 131px;
+  }
+
+  .rent-apartment .left-part span:not(.orange-text) {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 220px;
+  }
+
+  .rent-apartment .left-part span:not(.orange-text) input {
+    font-size: 0.9em;
   }
 }
 

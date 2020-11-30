@@ -63,6 +63,21 @@
                 width: 350px
                 height: 269px
 
+    .rent-apartment
+        padding: 150px 30px 50px 80px
+        & .left-part
+            width: 100%
+            & h2
+                font-size: 2em
+        & .right-part
+            padding-left: 0px
+            img
+                position: absolute
+                bottom: 150px
+                right: 50px
+                width: 720px
+                height: 605px
+
 @media screen and (max-width: 1300px)
     .add-apartment
         padding: 100px 100px 50px 100px
@@ -79,6 +94,16 @@
             margin-top: 50px
             & img
                 display: none
+
+    .rent-apartment
+        padding: 150px 30px 30px 80px
+        & .left-part
+            & h2
+                font-size: 1.9em
+        & .right-part
+            img
+                width: 620px
+                height: 505px
 
 @media screen and (max-width: 1040px)
     .login-section
@@ -233,6 +258,19 @@
             & h3
                 margin-top: 50px
 
+    .rent-apartment
+        padding: 150px 50px 50px 50px
+        & .left-part
+            & h2
+                font-size: 1.8em
+        & .right-part
+            img
+                position: absolute
+                bottom: 150px
+                right: 50px
+                width: 520px
+                height: 405px
+
 @media screen and (max-width: 711px)
     button
         padding: 16px 27px
@@ -303,6 +341,22 @@
             & h3
                 font-size: 1.4em
 
+
+    .rent-apartment
+        padding: 0 40px
+        display: flex
+        @include flex-center
+        flex-direction: column
+        & .left-part
+            & h2
+                font-size: 1.6em
+        & .right-part
+            text-align: center
+            img
+                position: static
+                width: 420px
+                height: 305px
+
 @media screen and (max-width: 550px)
     .login-section
         & section.form
@@ -335,7 +389,6 @@
                     margin-right: 0px
     .add-apartment
         padding: 100px 30px 40px 30px
-
 
 @media screen and (max-width: 500px)
     .welcome
@@ -379,6 +432,29 @@
         & .left-part
             & span:not(.orange-text)
                 width: 330px
+
+    .rent-apartment
+        padding: 50px 40px 0px 40px
+        flex-direction: column-reverse
+        text-align: center
+        & .left-part
+            & h2
+                margin-top: 50px
+                font-size: 1.5em
+            & p
+                font-size: .9em
+            & button
+                margin: 0 auto
+                margin-top: 20px
+            & span:not(.orange-text)
+                margin: 0 auto
+                margin-top: 20px
+            br
+                display: none
+        & .right-part
+            img
+                width: 320px
+                height: 205px
 
 @media screen and (max-width: 450px)
     .login-section
@@ -465,6 +541,17 @@
                 & input
                     font-size: .8em
 
+@media screen and (max-width: 400px)
+    .rent-apartment
+        padding: 100px 30px 0px 30px
+        & .left-part
+            & h2
+                margin-top: 40px
+                font-size: 1.4em
+        & .right-part
+            img
+                width: 280px
+                height: 165px
 
 @media screen and (max-width: 350px)
     .article-title
@@ -500,6 +587,15 @@
             & img
                 width: 230px
                 height: 131px
+
+    .rent-apartment
+        & .left-part
+            & span:not(.orange-text)
+                margin: 0 auto
+                margin-top: 20px
+                width: 220px
+                & input
+                    font-size: .9em
 
 @media screen and (orientation: portrait)
     .apartments
