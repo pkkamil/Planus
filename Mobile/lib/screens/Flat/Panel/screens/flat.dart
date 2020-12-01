@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/circlePerson.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 
 class FlatScreen extends StatelessWidget {
-  const FlatScreen({
-    Key key,
-    this.image = "assets/mieszkanie.png",
-    this.flat_name = "Osiedle\nfranciszkańskie",
-    this.city = "Katowice",
-    this.province = "Śląskie",
-    this.billing_period = 24,
-    this.days = 1,
-  }) : super(key: key);
+  
+  final FlatInfo flatData;
 
-  final String image;
-  final String flat_name;
-  final String city;
-  final String province;
-  final int billing_period;
-  final int days;
+  FlatScreen(this.flatData);
+
+  //wyliczanie dni od aktualnej daty
+  int days = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +19,9 @@ class FlatScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: size.height*0.05),
+            SizedBox(height: size.height*0.07),
             Text(
-              flat_name.toUpperCase(),
+              flatData.name.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.orange,
@@ -37,7 +29,7 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             Text(
-              city+", "+province,
+              flatData.localization,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey[500],
@@ -50,7 +42,7 @@ class FlatScreen extends StatelessWidget {
               height: size.width*0.6,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(image),
+                  image: NetworkImage(flatData.image),
                   fit: BoxFit.cover
                 ),
                 boxShadow: [
@@ -72,7 +64,7 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             Text(
-              billing_period.toString()+" miesiące",
+              (flatData.billing_period==1) ? 'miesiąc' : flatData.billing_period.toString()+" miesiące",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.orange,

@@ -51,7 +51,8 @@ class GraphsScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.black
                         ),
-                      )
+                      ),
+                      Text("Tu będą wykresy")
                     ],
                   ),
                 )

@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String api_adress = "http://192.168.0.222:5000";
+//String api_adress = "http://192.168.0.222:5000";
+
+String api_adress = "http://172.104.152.134:5000";
+
 
 String api = "http://172.104.152.134/";
 

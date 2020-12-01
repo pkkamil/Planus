@@ -114,7 +114,7 @@ class _FlatsState extends State<Flats> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: size.height*0.1),
+                        SizedBox(height: size.height*0.15),
                         if(flats_count>=1)FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
                           size: size.width*0.5, 
@@ -174,7 +174,7 @@ class FlatInfo{
   int id_owner;
 
   String name;
-  int price;
+  double price;
   String image;
   int area;
   int rooms;
@@ -192,20 +192,25 @@ class FlatInfo{
   double tv;
   double phone;
 
+  double summary = 0.0;
+
   void parseData(Map response){
     id_owner = response['user_id'];
 
     name = response['name'];
+    if(response[image]==null){
+      response[image]=='https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png';
+    }
     image = response['image'];
-    price = response['price'];
     area = response['area'];
     rooms = response['rooms'];
     localization = response['localization'];
     
-    List responses = ['settlement_day', 'billing_period', 'cold_water', 'hot_water', 'heating', 'gas', 'electricity', 'rubbish', 'internet','tv', 'phone'];
+    List responses = ['price','settlement_day', 'billing_period', 'cold_water', 'hot_water', 'heating', 'gas', 'electricity', 'rubbish', 'internet','tv', 'phone'];
     for(int i=0; i<responses.length; i++){
       (response[responses[i]]==null) ? response[responses[i]]='0' : response[responses[i]]=response[responses[i]].toString();
     }
+    price = double.parse(response['price']);
     settlement_day = int.parse(response['settlement_day']);
     billing_period = int.parse(response['billing_period']);
     cold_water = double.parse(response['cold_water']);
@@ -217,5 +222,13 @@ class FlatInfo{
     internet = double.parse(response['internet']);
     tv = double.parse(response['tv']);
     phone = double.parse(response['phone']);
+
+
+    //mnozenie zuzycie licznika * cena
+
+    List itemsToSum = ['price', 'rubbish', 'internet', 'tv', 'phone'];
+    for(int i=0;i<itemsToSum.length;i++){
+      summary+=double.parse(response[itemsToSum[i]]);
+    }
   }
 }

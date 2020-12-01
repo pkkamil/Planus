@@ -58,8 +58,9 @@ class ListFlats extends StatelessWidget {
                                   marginB: 10.0,
                                   marginT: 10.0,
                                   fontSize: 15.0,
+                                  flatData: response[i],
                                 ),
-                                (i+1==response.length) ? AddFlatCard(size: size.width*0.4,marginL: 10.0,marginR: 10.0) : FlatCard(flat_name: response[i+1].name, size: size.width*0.4, image: response[i+1].image,marginL: 10.0, marginR: 10.0, fontSize: 15.0,marginB: 10.0, marginT: 10.0,)
+                                (i+1==response.length) ? AddFlatCard(size: size.width*0.4,marginL: 10.0,marginR: 10.0) : FlatCard(flat_name: response[i+1].name, size: size.width*0.4, image: response[i+1].image,marginL: 10.0, marginR: 10.0, fontSize: 15.0,marginB: 10.0, marginT: 10.0,flatData: response[i+1])
                               ],
                             ),
                           ],

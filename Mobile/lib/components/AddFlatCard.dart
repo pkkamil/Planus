@@ -20,6 +20,7 @@ class AddFlatCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         //Idz do dodawania mieszkania
+        Navigator.pushNamed(context, '/choice');
       },
         child: Container(
           width: size,

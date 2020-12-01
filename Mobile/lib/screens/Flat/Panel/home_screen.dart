@@ -12,12 +12,13 @@ class Home extends StatefulWidget {
 
   Home(this.flatData);
 
-  //final bool owner = id_user == response['id_owner'];
-  final owner = true;
+  //final owner = true;
+  bool owner = false;
 
   @override
   _HomeState createState() => _HomeState();
 }
+
 
 class _HomeState extends State<Home> {
   Widget _body;
@@ -27,13 +28,13 @@ class _HomeState extends State<Home> {
     if(owner){
       switch(x){
         case 0:
-          _body = FlatScreen();
+          _body = FlatScreen(widget.flatData);
           break;
         case 1:
           _body = ResidentsScreen();
           break;
         case 2:
-          _body = PaymentsScreen();
+          _body = PaymentsScreen(widget.flatData);
           break;
         case 3:
           _body = GraphsScreen();
@@ -45,10 +46,10 @@ class _HomeState extends State<Home> {
     }else{
       switch(x){
         case 0:
-          _body = FlatScreen();
+          _body = FlatScreen(widget.flatData);
           break;
         case 1:
-          _body = PaymentsScreen();
+          _body = PaymentsScreen(widget.flatData);
           break;
         case 2:
           _body = GraphsScreen();
@@ -65,6 +66,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      widget.owner = widget.flatData.id_owner == widget.flatData.id_user;
+    });
     selectScreen(_currentIndex,widget.owner);
   }
 
@@ -99,7 +103,7 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.pie_chart),
-              label: "Wykresy",
+              label: "Statystyki",
               backgroundColor: Colors.orange,
             ),
             BottomNavigationBarItem(
