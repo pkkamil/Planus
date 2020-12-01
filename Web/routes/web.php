@@ -48,8 +48,23 @@ Route::middleware(['introduced', 'auth'])->group(function () {
         Route::get('/panel', 'DashboardController@index')->name('dashboard');
     });
     Route::view('/panel/wynajmij', 'rentApartment')->name('rentApartment');
-    Route::post('/panel/wynajmij2', 'ApartmentController@rent')->name('joinToApartment');
+    Route::post('/panel/wynajmij', 'ApartmentController@rent')->name('joinToApartment');
     Route::view('/panel/dodaj', 'addApartment')->name('addApartment');
     Route::post('/panel/dodaj', 'ApartmentController@add')->name('add');
+
+    Route::get('/panel/mieszkanie/{id}', 'DashboardController@apartmentDetails');
+    Route::get('/panel/mieszkanie/{id}/edit', 'ApartmentController@editPage');
+    Route::post('/panel/mieszkanie/{id}/edit', 'ApartmentController@edit');
+
+    Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
+
+    Route::get('/panel/mieszkanie/{id}/liczniki', 'ApartmentController@edit');
+    Route::post('/panel/mieszkanie/{id}/liczniki', 'ApartmentController@edit');
+
+    Route::view('/panel/ustawienia', 'settings-account');
+    Route::post('/panel/ustawienia', 'UserController@edit');
 });
+
+Route::get('/test/{diagram}', 'DashboardController@test');
+Route::view('/chart', 'chart');
 

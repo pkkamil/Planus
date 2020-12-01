@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function residents() {
-        return $this->belongsToMany('App\Apartment');
+        return $this->belongsToMany('App\Apartment')->withPivot('user_id');
     }
 
     public function apartments() {

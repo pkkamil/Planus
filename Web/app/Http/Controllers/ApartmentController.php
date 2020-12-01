@@ -27,16 +27,6 @@ class ApartmentController extends Controller
     public function add(Request $req) {
         $req -> price = str_replace(',', '.', $req -> price);
         $req -> price = (float)$req -> price;
-
-        if ($req -> cold_water) {
-            if (stristr(strval((float)$req -> cold_water), '.0')) {
-                $req -> cold_water = (float)$req -> cold_water;
-                // dd($req);
-            }
-            $req -> cold_water = str_replace(',', '.', $req -> cold_water);
-            $req -> cold_water = (float)$req -> cold_water;
-        }
-        // dd(strval((float)$req -> cold_water));
         // dd($req);
         $req->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
@@ -99,6 +89,17 @@ class ApartmentController extends Controller
     }
 
     public function rent() {
+
+    }
+
+    public function editPage($id) {
+        $apartment = Apartment::find($id);
+        if ($apartment -> user_id == Auth::id())
+            return view('settings-apartment', compact('apartment'));
+        return redirect('/panel');
+    }
+
+    public function edit(Request $req, $id) {
 
     }
 }

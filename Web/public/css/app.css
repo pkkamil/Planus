@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap);* {
+@import url(https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap);@charset "UTF-8";
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -265,7 +267,7 @@ button {
   border: 1px solid #ff9500;
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  font-size: 1.1em;
+  font-size: 1em;
   outline: none;
   margin: 0 auto;
   transition: 0.6s box-shadow, 0.6s background-color;
@@ -872,6 +874,289 @@ button:hover {
   width: 820px;
   height: 705px;
   margin: 0 auto;
+}
+
+.activity-center {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 80px 50px 80px;
+}
+
+.activity-center section {
+  width: 50%;
+}
+
+.activity-center .list-apartments {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.activity-center .list-apartments .single-apartment {
+  position: relative;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 400px;
+  height: 250px;
+}
+
+.activity-center .list-apartments .single-apartment:first-of-type {
+  margin-left: 0;
+}
+
+.activity-center .list-apartments .single-apartment img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.activity-center .list-apartments .single-apartment h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #ffa500;
+  font-weight: 400;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.activity-center .list-apartments .single-apartment .layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffa500cc;
+  opacity: 0;
+  transition: 0.6s opacity;
+}
+
+.activity-center .list-apartments .single-apartment .layer h4 {
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.4em;
+}
+
+.activity-center .list-apartments .single-apartment:hover .layer {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.activity-center .list-apartments .single-apartment:hover h3 {
+  display: none;
+}
+
+.activity-center h2 {
+  color: #555;
+  font-size: 2.3em;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.activity-center h2 i {
+  color: #999;
+  transition: 0.6s color;
+}
+
+.activity-center h2 i:hover {
+  color: #bbb;
+  cursor: pointer;
+}
+
+.activity-center h4 {
+  color: #555;
+  font-size: 1.7em;
+  font-weight: 400;
+}
+
+.activity-center h4.events {
+  margin-top: 40px;
+}
+
+.activity-center .left-part button {
+  margin-top: 20px;
+}
+
+.activity-center .left-part ul {
+  margin-top: 10px;
+  margin-left: 20px;
+  list-style: none;
+}
+
+.activity-center .left-part ul li {
+  padding-top: 5px;
+}
+
+.activity-center .left-part ul li::before {
+  content: "\25A0";
+  color: #FFA500;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.activity-center .settings {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  top: 100px;
+  padding: 16px 45px;
+}
+
+.activity-center .settings i {
+  margin-right: 15px;
+}
+
+.apartment-details {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 80px 50px 80px;
+}
+
+.apartment-details .left-part .name {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #ffa500;
+  margin-bottom: 10px;
+}
+
+.apartment-details .left-part img {
+  width: 670px;
+  height: 420px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.apartment-details .left-part h3 {
+  color: #555;
+  font-size: 1.7em;
+  font-weight: 400;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.apartment-details .left-part .list-of-members {
+  display: flex;
+  align-items: start;
+}
+
+.apartment-details .left-part .list-of-members .single-member {
+  margin-left: 15px;
+}
+
+.apartment-details .left-part .list-of-members .single-member:first-of-type {
+  margin-left: 0;
+}
+
+.apartment-details .left-part .list-of-members .single-member .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #004900;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  transition: 0.6s box-shadow;
+}
+
+.apartment-details .left-part .list-of-members .single-member .circle:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px #ffa500;
+}
+
+.apartment-details .left-part .list-of-members .single-member .circle-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #ffa500;
+  color: #FFF;
+  font-size: 1.4em;
+  transition: 0.6s background-color;
+}
+
+.apartment-details .left-part .list-of-members .single-member .circle-add:hover {
+  cursor: pointer;
+  background-color: #ff9500;
+}
+
+.apartment-details .left-part .list-of-members .single-member p {
+  margin-top: 5px;
+  font-size: 0.8em;
+  text-align: center;
+  color: #555;
+}
+
+.apartment-details .left-part .bottom-part {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.apartment-details .left-part .bottom-part p {
+  color: #555;
+  text-align: center;
+  width: 50%;
+  padding: 0px 20px 0px 0px;
+}
+
+.apartment-details .right-part {
+  width: 50%;
+}
+
+.apartment-details .right-part h3 {
+  color: #555;
+  font-size: 1.7em;
+  font-weight: 400;
+}
+
+.apartment-details .back {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  top: 100px;
+  padding: 16px 45px;
+}
+
+.apartment-details .back i {
+  margin-right: 15px;
+}
+
+.apartment-details .bills {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  bottom: 200px;
+  padding: 16px 45px;
+}
+
+.apartment-details .bills i {
+  margin-right: 15px;
 }
 
 @media screen and (max-width: 1600px) {

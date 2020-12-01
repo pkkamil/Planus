@@ -18,4 +18,8 @@ class UserController extends Controller
         $user -> save();
         return redirect('/');
     }
+
+    public function edit(Request $req) {
+
+    }
 }

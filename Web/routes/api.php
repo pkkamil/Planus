@@ -23,3 +23,5 @@ Route::post('setName', 'api\AuthController@setName');
 Route::post('login', 'api\AuthController@login');
 Route::get('apartments/{id?}', 'api\ApartmentApiController@index');
 Route::get('apartments/paginate/{items?}', 'api\ApartmentApiController@paginate');
+Route::post('apartment/create', 'api\ApartmentController@create');
+Route::post('apartment/enter-counters', 'api\ApartmentController@enterCounters');
