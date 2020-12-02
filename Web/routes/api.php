@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('register', 'api\AuthController@register');
 Route::post('setName', 'api\AuthController@setName');
 Route::post('login', 'api\AuthController@login');
 Route::get('apartments/{id?}', 'api\ApartmentApiController@index');
 Route::get('apartments/paginate/{items?}', 'api\ApartmentApiController@paginate');
-Route::post('apartment/create', 'api\ApartmentController@create');
-Route::post('apartment/enter-counters', 'api\ApartmentController@enterCounters');
+Route::post('apartment/create', 'api\ApartmentApiController@create');
+Route::post('apartment/enter-counters', 'api\CounterApiController@store');

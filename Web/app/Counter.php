@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bill extends Model
+class Counter extends Model
 {
-    public function additional_fees() {
-        return $this->hasMany('App\Fee');
+    public function bill() {
+        return $this->belongsTo('App\Bill');
     }
 
     public function apartment() {

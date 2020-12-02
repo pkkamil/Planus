@@ -291,7 +291,7 @@ button
 .divider
     width: 100%
     height: 300px
-    @include background-cover('./img/divider.png')
+    @include background-cover('./img/divider.jpg')
     background-attachment: fixed
 
 .our-app
@@ -607,19 +607,18 @@ button
     min-height: 90vh
     @include flex-center
     padding: 100px 80px 50px 80px
-    & section
-        width: 50%
     & .list-apartments
         width: 100%
         display: flex
         flex-direction: row
+        padding-right: 50px
         & .single-apartment
             // box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4)
             position: relative
             margin-top: 20px
             margin-left: 20px
-            width: 400px
-            height: 250px
+            width: 470px
+            height: 300px
             &:first-of-type
                 margin-left: 0
             & img
@@ -635,7 +634,7 @@ button
                 height: 100%
                 color: $primary
                 font-weight: 400
-                font-size: 1.3em
+                font-size: 1.4em
                 text-transform: uppercase
                 background-color: rgba(0,0,0,.4)
             & .layer
@@ -679,6 +678,7 @@ button
         margin-top: 40px
 
     & .left-part
+        width: 60%
         & button
             margin-top: 20px
         & ul
@@ -696,13 +696,15 @@ button
                     margin-left: -1em
 
     & .right-part
-        //
+        width: 40%
+        & h4
+            margin-bottom: 30px
 
     .settings
         position: absolute
         font-size: 1em
         right: 50px
-        top: 100px
+        bottom: 150px
         padding: 16px 45px
         & i
             margin-right: 15px
@@ -731,7 +733,7 @@ button
             margin-bottom: 10px
         & .list-of-members
             display: flex
-            align-items: start
+            align-items: flex-start
             & .single-member
                 margin-left: 15px
                 &:first-of-type

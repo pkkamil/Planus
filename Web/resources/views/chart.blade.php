@@ -9,6 +9,7 @@
     <div id="chart" style="height: 300px;"></div>
     <div id="chart2" style="height: 280px;"></div>
     <div id="chart3" style="height: 280px;"></div>
+    {{-- <div id="chart4" style="height: 280px;"></div> --}}
 </article>
 <script>
     const chart = new Chartisan({
@@ -16,23 +17,23 @@
         url: 'http://planus.me/test/1',
         hooks: new ChartisanHooks()
             .legend({ position: 'bottom' })
-            .title('Miesięczne koszty')
             .datasets('doughnut')
             .pieColors(),
     })
 
     const chart2 = new Chartisan({
         el: '#chart2',
-        url: 'http://planus.me/test/2',
+        url: 'http://planus.me/test/2/all',
         hooks: new ChartisanHooks()
             .legend(false)
             .beginAtZero()
-            .colors(['#FFA500']),
+            .colors(['#45D8E1'])
+            // .datasets([{ type: 'line', fill: true }, 'bar'])
     })
 
     const chart3 = new Chartisan({
         el: '#chart3',
-        url: 'http://planus.me/test/3',
+        url: 'http://planus.me/test/4',
         hooks: new ChartisanHooks()
             .legend(false)
             .beginAtZero()

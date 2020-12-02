@@ -58,13 +58,15 @@ Route::middleware(['introduced', 'auth'])->group(function () {
 
     Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
 
-    Route::get('/panel/mieszkanie/{id}/liczniki', 'ApartmentController@edit');
-    Route::post('/panel/mieszkanie/{id}/liczniki', 'ApartmentController@edit');
+    Route::get('/panel/mieszkanie/{id}/liczniki', 'CounterController@create');
+    Route::post('/panel/mieszkanie/liczniki', 'CounterController@edit')->name('enterCounters');
 
     Route::view('/panel/ustawienia', 'settings-account');
     Route::post('/panel/ustawienia', 'UserController@edit');
 });
 
-Route::get('/test/{diagram}', 'DashboardController@test');
+Route::get('/test/{diagram}/{allFees?}', 'DashboardController@test');
 Route::view('/chart', 'chart');
 
+
+Route::get('/test2', 'ApartmentController@rent');

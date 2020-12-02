@@ -12,4 +12,9 @@ class Apartment extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function bills()
+    {
+        return $this->hasMany('App\Bill');
+    }
 }

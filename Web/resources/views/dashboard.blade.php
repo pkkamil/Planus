@@ -1,5 +1,6 @@
 <?php
     $active = 'dashboard';
+    $diagrams = True;
 ?>
 
 @extends('layouts.app')
@@ -55,7 +56,18 @@
         </section>
         <section class="right-part">
             <h4>Miesięczne <span class="orange-text">koszty</span></h4>
+            <div id="chart" style="height: 350px; width: 550px"></div>
         </section>
         <a href="{{ url('/panel/ustawienia') }}"><button class="settings"><i class="fas fa-cog"></i> Ustawienia konta</button></a>
     </article>
+    <script>
+        const chart3 = new Chartisan({
+            el: '#chart',
+            url: 'http://planus.me/test/4',
+            hooks: new ChartisanHooks()
+                .legend(false)
+                .beginAtZero()
+                .colors(['#FFA500']),
+        })
+    </script>
 @endsection
