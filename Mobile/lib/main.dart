@@ -43,16 +43,16 @@ void main() {
       '/listflats':(context) => ListFlats(example),
       '/home': (context) => Home(flatInfo),
       '/verificate': (context) => Verificate('',''),
-      '/choice': (context) => Choice(),
+      '/choice': (context) => Choice(1),
       '/changeName': (context) => ChangeName(),
       '/changeEmail': (context) => ChangeEmail(),
       '/deleteAccount': (context) => DeleteAccount(),
       '/changePassword': (context) => ChangePassword(),
       '/farawell': (context) => Farawell(),
       '/deleteFlat':(context) => DeleteFlat(),
-      '/addFlat': (context) => AddFlat(),
+      '/addFlat': (context) => AddFlat(1),
       '/joinFlat': (context) => JoinFlat(),
-      '/insertCounters': (context) => InsertCounters()
+      '/insertCounters': (context) => InsertCounters(1)
     }
   ));
 }

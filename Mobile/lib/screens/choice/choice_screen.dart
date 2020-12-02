@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
+import 'package:planus/screens/Flat/AddFlat/AddFlat_screen.dart';
 
 class Choice extends StatelessWidget {
+  final int user_id;
+  Choice(this.user_id);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,7 +32,8 @@ class Choice extends StatelessWidget {
               RoundedButton(
                 text:"Utwórz mieszkanie",
                 onPress: () {
-                  Navigator.pushNamed(context, '/addFlat');
+                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => AddFlat(user_id)));
+                  //Navigator.pushNamed(context, '/addFlat');
                 },
                 fontsize: 17.0,
                 width: size.width*0.7,

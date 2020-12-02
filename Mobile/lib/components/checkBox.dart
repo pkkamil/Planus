@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FlatCheckBox extends StatefulWidget {
+
+  final Function onTap;
+
+  const FlatCheckBox({
+    Key key,
+    this.onTap
+  }) : super(key: key);
   @override
   _FlatCheckBoxState createState() => _FlatCheckBoxState();
 }
@@ -16,6 +23,7 @@ class _FlatCheckBoxState extends State<FlatCheckBox> {
         setState(() {
           _isSelected = !_isSelected;
         });
+        setState(widget.onTap);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 20),

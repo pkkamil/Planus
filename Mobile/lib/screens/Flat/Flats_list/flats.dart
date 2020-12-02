@@ -4,6 +4,7 @@ import 'package:planus/components/AddFlatCard.dart';
 import 'package:planus/components/FlatCard.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
+import 'package:planus/screens/choice/choice_screen.dart';
 import 'package:planus/services/apiController.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -52,7 +53,7 @@ class _FlatsState extends State<Flats> {
   void setupData() async{
     await sendData(widget.response['id']);
     if(flats_count==0 && _isLoading==false){
-      Navigator.pushReplacementNamed(context, '/choice');
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Choice(widget.response['id'])));
     }
   }
 
@@ -136,7 +137,7 @@ class _FlatsState extends State<Flats> {
                           width: size.width*0.7,
                           horizontal: 0.0,
                           onPress: () {
-                            Navigator.pushNamed(context, '/choice');
+                            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Choice(widget.response['id'])));
                           },
                           text: "Dodaj mieszkanie",
                         ),

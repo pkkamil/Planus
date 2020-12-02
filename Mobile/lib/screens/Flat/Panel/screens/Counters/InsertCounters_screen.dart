@@ -3,6 +3,8 @@ import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 
 class InsertCounters extends StatefulWidget {
+  final int apartment_id;
+  InsertCounters(this.apartment_id);
 
   @override
   _InsertCountersState createState() => _InsertCountersState();

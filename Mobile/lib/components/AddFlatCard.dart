@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planus/screens/choice/choice_screen.dart';
 
 class AddFlatCard extends StatelessWidget {
   const AddFlatCard({
@@ -8,10 +9,12 @@ class AddFlatCard extends StatelessWidget {
     this.marginL= 20.0,
     this.marginT= 20.0,
     this.marginR= 20.0,
-    this.marginB= 20.0
+    this.marginB= 20.0,
+    this.user_id,
   }) : super(key: key);
 
   final size;
+  final user_id;
   final fontSize;
   final marginL,marginT,marginR,marginB;
 
@@ -20,7 +23,7 @@ class AddFlatCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         //Idz do dodawania mieszkania
-        Navigator.pushNamed(context, '/choice');
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Choice(user_id)));
       },
         child: Container(
           width: size,

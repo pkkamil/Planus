@@ -117,6 +117,7 @@ class FlatScreen extends StatelessWidget {
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
+                //Dodać id apartment
                 Navigator.pushNamed(context, "/insertCounters");
               },
               isShadow: false,

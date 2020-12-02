@@ -11,6 +11,8 @@ class RoundedInput extends StatelessWidget {
   final TextEditingController controller;
   final width;
   final onChanged;
+  final Function onCompleted;
+  final bool isEnabled;
 
   const RoundedInput({
     Key key,
@@ -22,7 +24,9 @@ class RoundedInput extends StatelessWidget {
     this.password = false,
     this.width,
     this.controller,
-    this.onChanged
+    this.onChanged,
+    this.isEnabled=true,
+    this.onCompleted
   }) : super(key: key);
 
   @override
@@ -31,6 +35,7 @@ class RoundedInput extends StatelessWidget {
       width: width,
       color: color,
       child: TextField(
+        enabled: isEnabled,
         controller: controller,
         obscureText: password,
         cursorColor: textColor,
@@ -43,6 +48,9 @@ class RoundedInput extends StatelessWidget {
         border: InputBorder.none,
        ),
        onChanged: onChanged,
+       //onSubmitted: onCompleted,
+       onEditingComplete: onCompleted,
+       
       )
     );
   }

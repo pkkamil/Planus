@@ -35,6 +35,13 @@ class Api{
     Map body = jsonDecode(response.body);
     return {'statusCode':response.statusCode, 'body':body};
   }
+  createFlat(data) async{
+    String fullUrl = api + "api/apartment/create";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
 
   _setHeaders() async {
     var headers = {
