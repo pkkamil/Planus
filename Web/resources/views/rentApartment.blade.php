@@ -10,16 +10,14 @@
             <p>Skorzystaj ze specjalnego <span class="orange-text">kodu zaproszenia</span>, <br>który <span class="orange-text">właściciel</span> mieszkania może ci udostępnić.</p>
             <form method="POST" action="{{ route('joinToApartment') }}">
                 @csrf
-                <span class="code">
+                <span class="code" @if($errors->any()) style="border-color: #F00" @endif>
                     <i class="fas fa-house-user"></i>
-                    <input id="code" type="text" @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" required placeholder="Kod zaproszenia" autocomplete="code" autofocus>
+                    <input id="code" type="text" name="code" value="{{ old('code') }}" required placeholder="Kod zaproszenia" autocomplete="code" autofocus>
                 </span>
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <p>{{ $message }}</p>
-                    </span>
-                @enderror
                 <button type="submit">Dołącz</button>
+                {{-- @if($errors->any())
+                    <p class="error-code">{{$errors->first()}}</p>
+                 @endif --}}
             </form>
         </section>
         <section class="right-part">

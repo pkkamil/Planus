@@ -73,6 +73,15 @@ class ApartmentApiController extends Controller
         Image::make($img)->save(public_path('storage/apartment/').$img_name."-bg.".$extension);
         $url = Storage::url('apartment/'.$img_name."-bg.".$extension);
         $apartment = new Apartment;
+        // invite code
+        $notUnique = true;
+        do {
+            $code = Str::random(8);
+            if (Apartment::where('invite_code', $code)->get())
+                $notUnique = false;
+        } while ($notUnique);
+        $apartment -> invite_code = $req -> invite_code;
+        //
         $apartment -> user_id = $req -> user_id;
         $apartment -> name = $req -> name;
         $apartment -> price = (int)$req -> price;

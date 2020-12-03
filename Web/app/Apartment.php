@@ -10,7 +10,7 @@ class Apartment extends Model
 
     public function roommates()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsToMany('App\User');
     }
 
     public function bills()

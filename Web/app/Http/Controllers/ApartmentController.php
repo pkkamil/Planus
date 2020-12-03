@@ -28,7 +28,6 @@ class ApartmentController extends Controller
     public function add(Request $req) {
         $req -> price = str_replace(',', '.', $req -> price);
         $req -> price = (float)$req -> price;
-        // dd($req);
         $req->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
             'name' => 'required|string|min:5',
@@ -59,9 +58,15 @@ class ApartmentController extends Controller
         $apartment -> name = $req -> name;
         $apartment -> price = (int)$req -> price;
         $apartment -> image = $url_bg;
-        // if ($req -> public) {
-        //     $apartment -> public = False;
-        // }
+        // invite code
+        $notUnique = true;
+        do {
+            $code = Str::random(8);
+            if (Apartment::where('invite_code', $code)->get())
+                $notUnique = false;
+        } while ($notUnique);
+        $apartment -> invite_code = $req -> invite_code;
+        //
         $apartment -> area = (int)$req -> area;
         $apartment -> rooms = (int)$req -> rooms;
         $apartment -> localization = $req -> localization;
@@ -90,10 +95,14 @@ class ApartmentController extends Controller
     }
 
     public function rent(Request $req) {
-        DB::table('apartment_user')->insert(
-            ['apartment_id_apartment' => $req -> id_apartment, 'user_id' => Auth::id()]
-        );
-        return redirect('/panel/mieszkanie/'.$req -> id_apartment);
+        $apartment = Apartment::where('invite_code', $req -> code)->get();
+        if (count($apartment) != 0) {
+            DB::table('apartment_user')->insert(
+                ['apartment_id_apartment' => $apartment -> first() -> id_apartment, 'user_id' => Auth::id()]
+            );
+            return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment);
+        }
+        return redirect()->back()->withErrors(['Podany kod zaproszenia nie pasuje do żadnego mieszkania.']);
     }
 
     public function editPage($id) {
@@ -103,7 +112,7 @@ class ApartmentController extends Controller
         return redirect('/panel');
     }
 
-    public function edit(Request $req, $id) {
+    public function edit(Request $req) {
         $req -> price = str_replace(',', '.', $req -> price);
         $req -> price = (float)$req -> price;
         $req->validate([
@@ -164,5 +173,16 @@ class ApartmentController extends Controller
             $apartment -> phone = (float)$req -> phone;
         $apartment -> save();
         return redirect('/mieszkanie/'.$apartment -> id_apartment);
+    }
+
+    public function code() {
+        // invite code
+        $notUnique = true;
+        do {
+            $code = Str::random(8);
+            if (Apartment::where('invite_code', $code)->get())
+                $notUnique = false;
+        } while ($notUnique);
+        return $code;
     }
 }

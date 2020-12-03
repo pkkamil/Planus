@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Apartment;
 use Illuminate\Http\Request;
 use App\Counter;
-use stdClass;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CounterController extends Controller
 {
@@ -14,105 +15,57 @@ class CounterController extends Controller
     }
 
     public function create($id) {
-        $counters = Counter::where('id_apartment', $id)->get();
         $apartment = Apartment::find($id);
-        $consumption = [];
-        $index = 0;
-        $last_item = (object)[];
-        foreach ($counters as $counter) {
-            if ($index != 0) {
-                array_push($consumption, ['cold_water' => $counter -> cold_water - $last_item -> cold_water,
-                                        'hot_water' => $counter -> hot_water - $last_item -> hot_water,
-                                        'gas' => $counter -> gas - $last_item -> gas,
-                                        'electricity' => $counter -> electricity - $last_item -> electricity]);
-            }
-            $last_item = $counter;
-            $index++;
+        $counters = Apartment::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->first();
+        $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->orderBy('created_at', 'desc')->first();
+        if (!$counters -> cold_water and !$counters -> hot_water and !$counters -> gas and !$counters -> electricity or Auth::id() != $apartment -> user_id) {
+            return redirect('/panel/mieszkanie/'.$id);
         }
-
-        $singleSumcw = [];
-        $singleSumhw = [];
-        $singleSumg = [];
-        $singleSume = [];
-        foreach($consumption as $item) {
-            foreach($item as $key => $value) {
-                switch ($key) {
-                    case 'cold_water':
-                        array_push($singleSumcw, $value);
-                    break;
-                    case 'hot_water':
-                        array_push($singleSumhw, $value);
-                    break;
-                    case 'gas':
-                        array_push($singleSumg, $value);
-                    break;
-                    case 'electricity':
-                        array_push($singleSume, $value);
-                    break;
-                }
-            }
-        }
-
-        $srednia = [];
-        $sumC = 0;
-        $sumH = 0;
-        $sumG = 0;
-        $sumE = 0;
-        foreach($singleSumcw as $item) {
-            $sumC += $item;
-        }
-        foreach($singleSumhw as $item) {
-            $sumH += $item;
-        }
-        foreach($singleSumg as $item) {
-            $sumG += $item;
-        }
-        foreach($singleSume as $item) {
-            $sumE += $item;
-        }
-
-        // cold water (Najmniejsza wartość, średnia, obecna, Największa)
-        $minC = min($singleSumcw);
-        $averageC = round($sumC/count($singleSumcw), 2);
-        $currentC = 0;
-        $maxC = max($singleSumcw);
-
-        // hot water (Najmniejsza wartość, średnia, obecna, Największa)
-        $minH = min($singleSumhw);
-        $averageH = round($sumH/count($singleSumhw), 2);
-        $currentH = 0;
-        $maxH = max($singleSumhw);
-
-        // gas (Najmniejsza wartość, średnia, obecna, Największa)
-        $minG = min($singleSumg);
-        $averageG = round($sumG/count($singleSumg), 2);
-        $currentG = 0;
-        $maxG = max($singleSumg);
-
-        // electricity (Najmniejsza wartość, średnia, obecna, Największa)
-        $minE = min($singleSume);
-        $averageE = round($sumE/count($singleSume), 2);
-        $currentE = 0;
-        $maxE = max($singleSume);
-        $obj = new stdClass();
-        $obj -> min_cold_water = $minC;
-        $obj -> min_hot_water = $minH;
-        $obj -> min_gas = $minG;
-        $obj -> min_electricity = $minE;
-        $obj -> average_cold_water = $averageC;
-        $obj -> average_hot_water = $averageH;
-        $obj -> average_gas = $averageG;
-        $obj -> average_electricity = $averageE;
-        $obj -> max_cold_water = $maxC;
-        $obj -> max_hot_water = $maxH;
-        $obj -> max_gas = $maxG;
-        $obj -> max_electricity = $maxE;
-
-        // dd($apartment -> hot_water);
-        return view('counters', compact('obj', 'apartment'));
+        return view('counters', compact('apartment', 'lastCounter'));
     }
 
     public function store(Request $req) {
+        $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $req -> id_apartment)->orderBy('created_at', 'desc')->first();
+        $req->validate([
+            'cold_water' => [ Rule::requiredIf($req->cold_water), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            'hot_water' => [Rule::requiredIf($req->hot_water), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            'gas' => [Rule::requiredIf($req->gas), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            'electricity' => [Rule::requiredIf($req->electricity), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+        ]);
+        $req -> cold_water = str_replace(',', '.', $req -> cold_water);
+        $req -> cold_water = (float)$req -> cold_water;
+        $req -> hot_water = str_replace(',', '.', $req -> hot_water);
+        $req -> hot_water = (float)$req -> hot_water;
+        $req -> gas = str_replace(',', '.', $req -> gas);
+        $req -> gas = (float)$req -> gas;
+        $req -> electricity = str_replace(',', '.', $req -> electricity);
+        $req -> electricity = (float)$req -> electricity;
+        if ($lastCounter) {
+            if ($req -> cold_water and $req -> cold_water <= (float)$lastCounter -> cold_water) {
+                return redirect()->back();
+            }
+            if ($req -> hot_water and $req -> hot_water <= (float)$lastCounter -> hot_water) {
+                return redirect()->back();
+            }
+            if ($req -> gas and $req -> gas <= (float)$lastCounter -> gas) {
+                return redirect()->back();
+            }
+            if ($req -> electricity and $req -> electricity <= (float)$lastCounter -> electricity) {
+                return redirect()->back();
+            }
+        }
 
+        $counter = new Counter;
+        if ($req -> cold_water)
+            $counter -> cold_water = $req -> cold_water;
+        if ($req -> hot_water)
+            $counter -> hot_water = $req -> hot_water;
+        if ($req -> gas)
+            $counter -> gas = $req -> gas;
+        if ($req -> electricity)
+            $counter -> electricity = $req -> electricity;
+        $counter -> id_apartment = $req -> id_apartment;
+        $counter -> save();
+        return redirect('/panel/mieszkanie/'.$req -> id_apartment);
     }
 }

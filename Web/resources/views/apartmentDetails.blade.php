@@ -11,10 +11,12 @@
                 <img src="{{ $apartment -> image }}" alt="">
                 <h3>Mieszkańcy</h3>
                 <section class="list-of-members">
+                    @foreach ($apartment -> roommates as $member)
                     <div class="single-member">
-                        <div class="circle">{{ Auth::user() -> name[0] }}</div>
-                        <p>{{ Auth::user() -> name }}</p>
+                        <div class="circle">{{ $member -> name[0] }}</div>
+                        <p>{{ $member -> name }}</p>
                     </div>
+                    @endforeach
                     <div class="single-member">
                         <div class="circle-add"><i class="fas fa-plus"></i></div>
                     </div>
@@ -36,18 +38,13 @@
                 <img src="{{ $apartment -> image }}" alt="">
                 <h3>Mieszkańcy</h3>
                 <section class="list-of-members">
+                    @foreach ($apartment -> roommates as $member)
                     <div class="single-member">
-                        <div class="circle">{{ Auth::user() -> name[0] }}</div>
-                        <p>{{ Auth::user() -> name }}</p>
+                        <div class="circle">{{ $member -> name[0] }}</div>
+                        <p>{{ $member -> name }}</p>
                     </div>
-                    <div class="single-member">
-                        <div class="circle">{{ 'J' }}</div>
-                        <p>{{ 'Josh' }}</p>
-                    </div>
-                    <div class="single-member">
-                        <div class="circle">{{ 'R' }}</div>
-                        <p>{{ 'Radosław' }}</p>
-                    </div>
+                    @endforeach
+
                 </section>
 
                 <section class="bottom-part">
