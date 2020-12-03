@@ -173,6 +173,7 @@ class FlatInfo{
   });
 
   int id_owner;
+  int id_apartment;
 
   String name;
   double price;
@@ -193,10 +194,14 @@ class FlatInfo{
   double tv;
   double phone;
 
+  DateTime created_at;
+
   double summary = 0.0;
 
   void parseData(Map response){
+    created_at = DateTime.parse(response['created_at']);
     id_owner = response['user_id'];
+    id_apartment = response['id_apartment'];
 
     name = response['name'];
     if(response[image]==null){

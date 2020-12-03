@@ -38,7 +38,6 @@ class FlatCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          //Navigator.pushNamed(context, '/home');
           Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Home(flatData)));
         },
           child: ClipRRect(

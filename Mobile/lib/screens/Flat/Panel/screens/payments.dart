@@ -163,6 +163,12 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    var month = new DateTime.now().month;
+    var now = new DateTime.now();
+
+    if(now.day<widget.flatData.settlement_day)
+      month-=1;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: SingleChildScrollView(
@@ -188,7 +194,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                       ),
                     ),
                     Text(
-                      "Termin rozliczeniowy: $settlement_day.12",
+                      "Termin rozliczeniowy: $settlement_day.$month",
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 18

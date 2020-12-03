@@ -1,36 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/services/apiController.dart';
 
 class InsertCounters extends StatefulWidget {
-  final int apartment_id;
-  InsertCounters(this.apartment_id);
+  
+  final FlatInfo flatData;
+  InsertCounters(this.flatData);
 
   @override
   _InsertCountersState createState() => _InsertCountersState();
 }
 
+final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _InsertCountersState extends State<InsertCounters> {
 
-  final coldWaterPriceController = TextEditingController();
-  final hotWaterPriceController = TextEditingController();
-  final heatingPriceController = TextEditingController();
-  final gasPriceController = TextEditingController();
+  double coldWaterCountController = 0.0;
+  double hotWaterCountController = 0.0;
+  double electricityCountController = 0.0;
+  double gasCountController = 0.0;
 
-  
+  double coldWaterCount;
+  double hotWaterCount;
+  double gasCount;
+  double electricityCount;
+
+  List counters;
+
+  @override
+  void initState() {
+    _checkCounters(widget.flatData.id_apartment);
+    super.initState();
+  }
+
+  void _checkCounters(id_apartment) async{
+    var api = new Api();
+    var response = await api.getCounters(id_apartment);
+    //print(response);
+    if(response != {}){
+      List items = ['cold_water','hot_water','gas','electricity'];
+      counters = [coldWaterCount, hotWaterCount, gasCount, electricityCount];
+      for(int i=0;i<items.length;i++){
+        if(response[items[i]]==null){
+          counters[i]=null;
+        }else{
+          counters[i] = double.parse(response[items[i]]);
+        }
+      }
+    }
+    coldWaterCount = counters[0];
+    hotWaterCount = counters[1];
+    gasCount = counters[2];
+    electricityCount = counters[3];
+  }
 
   @override
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Column(
             children:[ 
             Container(
             child: Stack(
               children: [
-                Positioned(
+                if(widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0)Positioned(
                   top: 50,
                   left: 30,
                   child: RichText(
@@ -50,36 +88,60 @@ class _InsertCountersState extends State<InsertCounters> {
                   child: Column(
                     children: [
                       SizedBox(height: size.height*0.15),
-                      RoundedInput(
+                      if(widget.flatData.cold_water>0) RoundedInput(
+                        isNumber: true,
                         width: size.width*0.8,
-                        placeholder: "Ilość zużytej wody zimnej [1m\u00B3]",
+                        placeholder: "Stan licznika wody zimnej [1m\u00B3]",
                         color: Colors.white,
                         textColor: Colors.black,
                         iconColor: Colors.grey[900],
-                        icon: Icons.opacity //inna
+                        icon: Icons.opacity, //inna
+                        onChanged: (val) {
+                          setState(() {
+                            coldWaterCountController = double.parse(val);
+                          });
+                        },
                       ),
-                      RoundedInput(
+                      if(widget.flatData.hot_water>0) RoundedInput(
+                        isNumber: true,
                         width: size.width*0.8,
-                        placeholder: "Ilość zużytej wody ciepłej [1m\u00B3]",
+                        placeholder: "Stan licznika wody ciepłej [1m\u00B3]",
                         color: Colors.white,
                         textColor: Colors.black,
                         iconColor: Colors.grey[900],
                         icon: Icons.waves,
+                        onChanged: (val) {
+                          setState(() {
+                            hotWaterCountController = double.parse(val);
+                          });
+                        },
                       ),
-                      RoundedInput(
+                      if(widget.flatData.gas>0) RoundedInput(
+                        isNumber: true,
                         width: size.width*0.8,
-                        placeholder: "Ilość zużytego gazu [kWh]",
+                        placeholder: "Stan licznika gazu [kWh]",
                         color: Colors.white,
                         textColor: Colors.black,
                         iconColor: Colors.grey[900],
+                        onChanged: (val) {
+                          setState(() {
+                            gasCountController = double.parse(val);
+                          });
+                        },
                       ),
-                      RoundedInput(
+                      if(widget.flatData.electricity>0) RoundedInput(
+                        isNumber: true,
                         width: size.width*0.8,
-                        placeholder: "Ilość zużytego prądu [kWh]",
+                        placeholder: "Stan licznika prądu [kWh]",
                         color: Colors.white,
                         textColor: Colors.black,
                         iconColor: Colors.grey[900],
                         icon: Icons.flash_on,
+                        onChanged: (val) {
+                          setState(() {
+                            electricityCountController = double.parse(val);
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -88,7 +150,7 @@ class _InsertCountersState extends State<InsertCounters> {
             ),
           ),
           SizedBox(height: size.height*0.03),
-          Container(
+          if((widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0) && (coldWaterCount!= null || hotWaterCount!=null || gasCount!=null || electricityCount!=null))Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.symmetric(horizontal: 30,vertical: 5),
             child: RichText(
@@ -104,17 +166,46 @@ class _InsertCountersState extends State<InsertCounters> {
               ),
             ),
           ),
-          MediaPrice(size: size, media: " m3 wody zimnej", price: 1.3, actual_counter: 0, old_counter: 0),
-          MediaPrice(size: size, media: " m3 wody ciepłej", price: 1.3, actual_counter: 0, old_counter: 0),
-          MediaPrice(size: size, media: " kWh gazu", price: 1.3, actual_counter: 0, old_counter: 0),
-          MediaPrice(size: size, media: " kWh prądu", price: 1.3, actual_counter: 0, old_counter: 0),
+          
+          if(widget.flatData.cold_water>0 && coldWaterCount!=null) MediaPrice(size: size, media: " m3 wody zimnej", price: widget.flatData.cold_water, actual_counter: coldWaterCountController, old_counter: coldWaterCount), 
+          if(widget.flatData.hot_water>0 && hotWaterCount!=null) MediaPrice(size: size, media: " m3 wody ciepłej", price: widget.flatData.hot_water, actual_counter: hotWaterCountController, old_counter: hotWaterCount),
+          if(widget.flatData.gas>0 && gasCount!=null) MediaPrice(size: size, media: " kWh gazu", price: widget.flatData.gas, actual_counter: gasCountController, old_counter: gasCount),
+          if(widget.flatData.electricity>0 && electricityCount!=null) MediaPrice(size: size, media: " kWh prądu", price: widget.flatData.electricity, actual_counter: electricityCountController, old_counter: electricityCount),
           
           SizedBox(height: size.height*0.05),
-          RoundedButton(
+          if(widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0)RoundedButton(
             text: "Zapisz liczniki",
             width: size.width*0.7,
             color: Colors.white,
             textColor: Colors.orange,
+            onPress: () async {
+              var api = new Api();
+              Map data = {
+                'id_apartment':widget.flatData.id_apartment,
+                'cold_water': coldWaterCountController,
+                'hot_water': hotWaterCountController,
+                'gas': gasCountController,
+                'electricity': electricityCountController,
+              };
+              var response = await api.insertCounters(data);
+
+              if(response['message']=='OK'){
+                Navigator.pop(context);
+              }else{
+                _scaffoldKey.currentState.showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.orange,
+                      content: Text(
+                        response['message'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18
+                        ),
+                      )
+                  )
+                );
+              }
+            },
           ),
           SizedBox(height: size.height*0.05)
           ]
@@ -181,7 +272,7 @@ class CorrectMediaCount extends StatelessWidget {
             ),
             children: [
               TextSpan(text: "Zużyto "),
-              TextSpan(text: counter.toString(), style: TextStyle(color: Colors.orange)),
+              TextSpan(text: counter.toStringAsFixed(2), style: TextStyle(color: Colors.orange)),
               TextSpan(text: media),
             ]
           ),
@@ -194,7 +285,7 @@ class CorrectMediaCount extends StatelessWidget {
             ),
             children: [
               TextSpan(text: "Koszt "),
-              TextSpan(text: media_price.toString(), style: TextStyle(color: Colors.orange)),
+              TextSpan(text: media_price.toStringAsFixed(2), style: TextStyle(color: Colors.orange)),
               TextSpan(text: " zł"),
             ]
           ),

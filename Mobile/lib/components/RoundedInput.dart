@@ -13,6 +13,7 @@ class RoundedInput extends StatelessWidget {
   final onChanged;
   final Function onCompleted;
   final bool isEnabled;
+  final bool isNumber;
 
   const RoundedInput({
     Key key,
@@ -26,7 +27,8 @@ class RoundedInput extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.isEnabled=true,
-    this.onCompleted
+    this.onCompleted,
+    this.isNumber = false
   }) : super(key: key);
 
   @override
@@ -50,7 +52,7 @@ class RoundedInput extends StatelessWidget {
        onChanged: onChanged,
        //onSubmitted: onCompleted,
        onEditingComplete: onCompleted,
-       
+       keyboardType: isNumber ? TextInputType.number : TextInputType.text
       )
     );
   }

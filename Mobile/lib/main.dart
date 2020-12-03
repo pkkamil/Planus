@@ -52,7 +52,7 @@ void main() {
       '/deleteFlat':(context) => DeleteFlat(),
       '/addFlat': (context) => AddFlat(1),
       '/joinFlat': (context) => JoinFlat(),
-      '/insertCounters': (context) => InsertCounters(1)
+      '/insertCounters': (context) => InsertCounters(flatInfo)
     }
   ));
 }

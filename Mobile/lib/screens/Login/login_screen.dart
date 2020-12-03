@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
@@ -6,14 +8,13 @@ import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatelessWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  //static GlobalKey<FormFieldState<String>> emailKey = new GlobalKey<FormFieldState<String>>();
-  //static GlobalKey<FormFieldState<String>> passwordKey = new GlobalKey<FormFieldState<String>>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
@@ -47,15 +48,14 @@ class Login extends StatelessWidget {
 
       try{
         if(response['email'].toLowerCase()==data['email'].toLowerCase()){
-          //print(response);
-          //Navigator.popAndPushNamed(context, '/flats',arguments: {'response':response});
 
           //Jezeli nie ma zweryfikowanego maila popandpushnamed do verificate
-
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
-
+          SharedPreferences localStorage = await SharedPreferences.getInstance();
+          localStorage.setString('userData', jsonEncode(response));
           
-          //zapisać w pamięci do autologowania
+          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+
 
         }else{
           Scaffold.of(context).showSnackBar(

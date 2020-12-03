@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -65,7 +66,10 @@ class SettingsScreen extends StatelessWidget {
               text: "Wyloguj",
               width: size.width*0.7,
               vertical: 15.0,
-              onPress: () {
+              onPress: () async{
+                SharedPreferences localStorage = await SharedPreferences.getInstance();
+                localStorage.setString('userData', null);
+                Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
                 Navigator.pushNamed(context, '/welcome');
               },
             ),

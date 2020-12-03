@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/circlePerson.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
 
 class FlatScreen extends StatelessWidget {
   
@@ -9,23 +10,41 @@ class FlatScreen extends StatelessWidget {
 
   FlatScreen(this.flatData);
 
+  int days = 0;
+  int months = 0;
+
   //wyliczanie dni od aktualnej daty
-  int days = 5;
+  void getTime(){
+    var now = new DateTime.now();
+
+    DateTime onCreated = flatData.created_at;
+    
+    days = flatData.settlement_day-now.day;
+    if(days<0)
+      days = 30+days;
+
+    months = flatData.billing_period-now.difference(onCreated).inDays~/30;
+  }
 
   @override
   Widget build(BuildContext context) {
+    getTime();
+
     Size size = MediaQuery.of(context).size;
     return Center(
       child: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: size.height*0.07),
-            Text(
-              flatData.name.toUpperCase(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.orange,
-                fontSize: 26
+            Container(
+              width: size.width*0.7,
+              child: Text(
+                flatData.name.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: 26
+                ),
               ),
             ),
             Text(
@@ -64,7 +83,7 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             Text(
-              (flatData.billing_period==1) ? 'miesiąc' : flatData.billing_period.toString()+" miesiące",
+              (flatData.billing_period==1) ? 'miesiąc' : months.toString()+" miesiące",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.orange,
@@ -106,19 +125,20 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height*0.03),
-            if(days!=0)RoundedButton(
+            if(days!=0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0))RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
               },
               isShadow: false,
             ),
-            if(days==0)RoundedButton(
+            if(days==0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0))RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
                 //Dodać id apartment
-                Navigator.pushNamed(context, "/insertCounters");
+                //Navigator.pushNamed(context, "/insertCounters");
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(flatData)));
               },
               isShadow: false,
               textColor: Colors.orange,

@@ -61,9 +61,9 @@ class _AddFlatState extends State<AddFlat> {
     setState(() {
       owner_id = widget.user_id;
     });
-    print('#######');
-    print(owner_id);
-    print('#######');
+    //print('#######');
+    //print(owner_id);
+    //print('#######');
     super.initState();
   }
 
@@ -208,7 +208,7 @@ class _AddFlatState extends State<AddFlat> {
                           onLongPress: () {
                             getImage(true);
                           },
-                          child: Container(
+                          child: image==null ? Container(
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
@@ -216,11 +216,23 @@ class _AddFlatState extends State<AddFlat> {
                               borderRadius: BorderRadius.circular(100)
                             ),
                             child: Icon(
-                              Icons.insert_photo_outlined, //inna
+                              Icons.add_a_photo,
                               color: Colors.white,
                               size: 70,
                             ),
-                          ),
+                          ) :
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 1.0, color: Colors.orange),
+                              image: DecorationImage(
+                                image: FileImage(image)
+                              )
+                            ),
+                          ) 
                         ),
                         SizedBox(height:size.height*0.02),
                         RoundedInput(

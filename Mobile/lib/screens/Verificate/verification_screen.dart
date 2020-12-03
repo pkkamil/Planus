@@ -6,6 +6,7 @@ import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'dart:convert';
 
 import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Verificate extends StatefulWidget {
@@ -30,7 +31,7 @@ class _VerificateState extends State<Verificate> {
 
   _getCode(String email) async{
     try{
-      Response response = await post("$api_adress/verify", body: {'email':email});
+      Response response = await post("$secondApi/verify", body: {'email':email});
       Map data = jsonDecode(response.body);
 
       setState((){
@@ -49,8 +50,11 @@ class _VerificateState extends State<Verificate> {
       var response = await api.login(data);
       
       if(response['email'].toLowerCase()==data['email'].toLowerCase()){
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
-        //zapisać w pamięci do autologowania
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('userData', jsonEncode(response));
+
+        Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+        Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
       }else{
         print(response['message']);
       }
