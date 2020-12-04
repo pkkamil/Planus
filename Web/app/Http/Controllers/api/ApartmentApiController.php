@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Apartment;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
 class ApartmentApiController extends Controller
@@ -80,7 +81,7 @@ class ApartmentApiController extends Controller
             if (Apartment::where('invite_code', $code)->get())
                 $notUnique = false;
         } while ($notUnique);
-        $apartment -> invite_code = $req -> invite_code;
+        $apartment -> invite_code = $code;
         //
         $apartment -> user_id = $req -> user_id;
         $apartment -> name = $req -> name;
@@ -102,5 +103,19 @@ class ApartmentApiController extends Controller
         $apartment -> phone = (float)$req -> phone;
         $apartment -> save();
         return response()->json(['message' => 'OK', 'apartment_id' => $apartment -> id_apartment]);
+    }
+
+    public function rent(Request $req) {
+        $apartment = Apartment::where('invite_code', $req -> code)->get();
+        if (count($apartment) != 0) {
+            if(count(DB::table('apartment_user')->where('user_id', $req -> user_id)->where('apartment_id_apartment', $apartment -> first() -> id_apartment)->get()) > 0) {
+                return response()->json(['message' => 'You already belong to this apartment.', 'apartment_id' => $apartment -> first() -> id_apartment]);
+            }
+            DB::table('apartment_user')->insert(
+                ['apartment_id_apartment' => $apartment -> first() -> id_apartment, 'user_id' => $req -> user_id]
+            );
+            return response()->json(['message' => 'OK', 'apartment_id' => $apartment -> first() -> id_apartment]);
+        }
+        return response()->json(['message' => 'Incorrect invite code']);
     }
 }

@@ -55,19 +55,25 @@
                 @endif
         </section>
         <section class="right-part">
+            @if (count($apartments) == 1)
             <h4>Miesięczne <span class="orange-text">koszty</span></h4>
             <div id="chart" style="height: 350px; width: 550px"></div>
+            @else
+            <img src="{{ asset('resources/img/svg/dashboard.svg') }}" alt="">
+            @endif
         </section>
         <a href="{{ url('/panel/ustawienia') }}"><button class="settings"><i class="fas fa-cog"></i> Ustawienia konta</button></a>
     </article>
-    <script>
-        const chart3 = new Chartisan({
-            el: '#chart',
-            url: 'http://planus.me/test/4',
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .colors(['#FFA500']),
-        })
-    </script>
+    @if (count($apartments) == 1)
+        <script>
+            const chart3 = new Chartisan({
+                el: '#chart',
+                url: 'http://planus.me/test/4',
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .colors(['#FFA500']),
+            })
+        </script>
+    @endif
 @endsection

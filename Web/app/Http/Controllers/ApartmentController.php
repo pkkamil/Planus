@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Counter;
+use DateTime;
 
 
 class ApartmentController extends Controller
@@ -23,6 +25,83 @@ class ApartmentController extends Controller
             return view('singleApartment', compact('apartment'));
         else
             return redirect('/');
+    }
+
+    public function apartmentDetails($id) {
+        $apartment = Auth::user() -> apartments -> where('id_apartment', $id);
+        if (count($apartment) == 0) {
+            $apartment = Auth::user() -> residents -> where('id_apartment', $id);
+            if (count($apartment) == 0) {
+                return redirect('/panel');
+            }
+        }
+
+        if (count($apartment->first() -> counters) == 0) {
+            if ($apartment -> first() -> cold_water or $apartment -> first() -> hot_water or $apartment -> first() -> gas or $apartment -> first() -> electricity)
+                return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment.'/wstepne_liczniki');
+        } else {
+            $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->orderBy('created_at', 'asc')->first();
+            if (is_null($apartment -> first() -> cold_water) != is_null($lastCounter -> cold_water) or is_null($apartment -> first() -> hot_water) != is_null($lastCounter -> hot_water) or is_null($apartment -> first() -> gas) != is_null($lastCounter -> gas) or is_null($apartment -> first() -> electricity) != is_null($lastCounter -> electricity)) {
+                return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment.'/wstepne_liczniki');
+            }
+        }
+
+        // left to the settlement date
+        $updated_date_month = $apartment -> first() -> updated_at -> format('m');
+        $updated_date_year = $apartment -> first() -> updated_at -> format('Y');
+        $updated_date = $updated_date_year.'-'.$updated_date_month.'-'.$apartment -> first() -> settlement_day;
+        $remaining_billing_period = date('Y-m-d', strtotime('+'.strval($apartment -> first() -> billing_period).' months', strtotime($updated_date)));
+        $from_date = new DateTime();
+        $to_date = new DateTime($remaining_billing_period);
+        $interval_to_end = $from_date -> diff($to_date);
+        if ($interval_to_end -> y > 0) {
+            $interval_to_end = $interval_to_end -> y * 12 + $interval_to_end -> m;
+        } else {
+            $interval_to_end = $interval_to_end -> m;
+        }
+        $settlement_day = $apartment -> first() -> settlement_day;
+        $settlement_date = new DateTime(now());
+        $settlement_date = $settlement_day.'-'.$settlement_date -> format('m').'-'.$settlement_date -> format('Y');
+        $to_date = new DateTime($settlement_date);
+        if ($to_date -> format('d') === $from_date -> format('d')) {
+            $days = -1;
+        }
+        $from_date = new DateTime();
+        $interval = $from_date -> diff($to_date);
+        if ($interval -> invert == 1) {
+            $settlement_date = date('Y-m-d', strtotime('+1 month', strtotime($settlement_date)));
+            $to_date = new DateTime($settlement_date);
+            $interval = $from_date -> diff($to_date);
+        }
+        $days = $interval -> d;
+
+        // Overdue
+        $lastCounter = Counter::select('created_at')->where('id_apartment', $id)->orderBy('created_at', 'desc')->get();
+        if (count($lastCounter) != 0) {
+            $from_date = new DateTime();
+            $to_date = new DateTime($lastCounter->first() -> created_at);
+            $lastCounter = $from_date -> diff($to_date);
+            if ($lastCounter -> m > 0) {
+                $overdue = True;
+            } else {
+                $overdue = False;
+            }
+        } else {
+            $updated_at = $apartment -> first() -> updated_at;
+            $today = new DateTime();
+            $has_passed = $updated_at -> diff($today);
+            if ($has_passed -> m > 0) {
+                $overdue = True;
+            } else {
+                $overdue = False;
+            }
+        }
+        // Count counters
+        $counters = Counter::where('id_apartment', $id)->get();
+        $counters = count($counters);
+        $apartment = $apartment->first();
+
+        return view('apartmentDetails', compact('apartment', 'interval_to_end', 'days', 'counters', 'overdue'));
     }
 
     public function add(Request $req) {
@@ -54,7 +133,7 @@ class ApartmentController extends Controller
         $req -> image -> storeAs('/public', "apartment/".$img_name."-bg.".$extension);
         $url_bg = Storage::url("apartment/".$img_name."-bg.".$extension);
         $apartment = new Apartment;
-        $apartment -> user_id = Auth::user()->id;
+        $apartment -> user_id = Auth::id();
         $apartment -> name = $req -> name;
         $apartment -> price = (int)$req -> price;
         $apartment -> image = $url_bg;
@@ -65,7 +144,7 @@ class ApartmentController extends Controller
             if (Apartment::where('invite_code', $code)->get())
                 $notUnique = false;
         } while ($notUnique);
-        $apartment -> invite_code = $req -> invite_code;
+        $apartment -> invite_code = $code;
         //
         $apartment -> area = (int)$req -> area;
         $apartment -> rooms = (int)$req -> rooms;
@@ -97,6 +176,9 @@ class ApartmentController extends Controller
     public function rent(Request $req) {
         $apartment = Apartment::where('invite_code', $req -> code)->get();
         if (count($apartment) != 0) {
+            if(count(DB::table('apartment_user')->where('user_id', Auth::id())->where('apartment_id_apartment', $apartment -> first() -> id_apartment)->get()) > 0) {
+                return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment);
+            }
             DB::table('apartment_user')->insert(
                 ['apartment_id_apartment' => $apartment -> first() -> id_apartment, 'user_id' => Auth::id()]
             );
@@ -108,7 +190,7 @@ class ApartmentController extends Controller
     public function editPage($id) {
         $apartment = Apartment::find($id);
         if ($apartment -> user_id == Auth::id())
-            return view('settings-apartment', compact('apartment'));
+            return view('settingsApartment', compact('apartment'));
         return redirect('/panel');
     }
 
@@ -141,7 +223,7 @@ class ApartmentController extends Controller
         $req -> image -> storeAs('/public', "apartment/".$img_name."-bg.".$extension);
         $url_bg = Storage::url("apartment/".$img_name."-bg.".$extension);
         $apartment = Apartment::find($req -> id_apartment);
-        $apartment -> user_id = Auth::user()->id;
+        $apartment -> user_id = Auth::id();
         $apartment -> name = $req -> name;
         $apartment -> price = (int)$req -> price;
         $apartment -> image = $url_bg;

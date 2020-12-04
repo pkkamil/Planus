@@ -90,7 +90,7 @@
             </section>
             <button type="submit">Zapisz liczniki</button>
         </section>
-        <a href="{{ url('/panel') }}"><button type="button" class="back"><i class="fas fa-chevron-left"></i> Wróć do panelu</button></a>
+        <a href="{{ url()->previous() }}"><button type="button" class="back"><i class="fas fa-chevron-left"></i> Wróć</button></a>
     </form>
     <script>
         @if ($apartment -> cold_water)

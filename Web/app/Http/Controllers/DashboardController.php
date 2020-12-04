@@ -35,25 +35,6 @@ class DashboardController extends Controller
         return view('dashboard')->with('apartments', $apartments->reverse());
     }
 
-    public function apartmentDetails($id) {
-        $apartment = Auth::user() -> apartments -> where('id_apartment', $id);
-        if (count($apartment) == 0) {
-            $apartment = Auth::user() -> residents -> where('id_apartment', $id);
-            if (!count($apartment) == 0) {
-                if (Auth::id() == $apartment->first() -> pivot -> user_id) {
-                    return view('apartmentDetails')->with('apartment', $apartment->first());
-                }
-            }
-        } else {
-            $apartment = Apartment::find($id);
-            if ($apartment -> user_id == Auth::id()) {
-                return view('apartmentDetails')->with('apartment', $apartment);
-            }
-        }
-
-        return redirect('/panel');
-    }
-
     public function test($diagram, $allFees = False) {
         $bills = Bill::all()->sortBy('settlement_date')->reverse()->take(12)->reverse();
         $months = [];

@@ -24,5 +24,6 @@ Route::post('login', 'api\AuthController@login');
 Route::get('apartments/{id?}', 'api\ApartmentApiController@index');
 Route::get('apartments/paginate/{items?}', 'api\ApartmentApiController@paginate');
 Route::post('apartment/create', 'api\ApartmentApiController@create');
+Route::post('apartment/rent', 'api\ApartmentApiController@rent');
 Route::post('apartment/enter-counters', 'api\CounterApiController@store');
 Route::get('apartment/last-counter/{id}', 'api\CounterApiController@index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Apartment;
 
 class BillController extends Controller
 {
@@ -18,29 +19,31 @@ class BillController extends Controller
 
     }
 
-    public function enterCounters(Request $req) {
-        $req->validate([
-            'cold_water' => ['required', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'hot_water' => ['required', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'gas' => ['required', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'electricity' => ['required', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-        ]);
+    public function create($req, $id) {
+        $sum = 0;
+        $bill = new Bill;
+        $bill -> id_apartment = $req -> id_apartment;
+        $bill -> sum = $sum;
+        $bill -> rental_price = Apartment::find($id) -> price;
+        if ($req -> cold_water)
+            $bill -> cold_water = $req -> cold_water;
+        if ($req -> hot_water)
+            $bill -> hot_water = $req -> hot_water;
+        if ($req -> gas)
+            $bill -> gas = $req -> gas;
+        if ($req -> electricity)
+            $bill -> electricity = $req -> electricity;
+        $bill -> rubbish = (float)$req -> rubbish;
+        $bill -> internet = (float)$req -> internet;
+        $bill -> tv = (float)$req -> tv;
+        $bill -> phone = (float)$req -> phone;
+        $bill -> save();
+        dd($bill);
+        return redirect('/panel/mieszkanie/'.$bill -> id_apartment.'/rachunki/'.$bill -> id_bill);
+    }
 
-        $apartment = new Bill;
-        $apartment -> user_id = Auth::user()->id;
-        $apartment -> name = $req -> name;
-        if ($req -> cold_water and $req -> cold_water_active)
-            $apartment -> cold_water = (float)$req -> cold_water;
-        if ($req -> hot_water and $req -> hot_water_active)
-            $apartment -> hot_water = (float)$req -> hot_water;
-        if ($req -> heating and $req -> heating_active)
-            $apartment -> heating = (float)$req -> heating;
-        if ($req -> gas and $req -> gas_active)
-            $apartment -> gas = (float)$req -> gas;
-        if ($req -> electricity and $req -> electricity_active)
-            $apartment -> electricity = (float)$req -> electricity;
-        $apartment -> save();
-        return redirect('/mieszkanie/'.$apartment -> id_apartment);
+    public function addFee(Request $req) {
+
     }
 
     /**

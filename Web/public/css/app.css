@@ -1039,6 +1039,12 @@ button.disabled:hover {
   margin-bottom: 30px;
 }
 
+.activity-center .right-part img {
+  margin-bottom: 50px;
+  margin-left: 50px;
+  width: 80%;
+}
+
 .activity-center .settings {
   position: absolute;
   font-size: 1em;
@@ -1154,6 +1160,7 @@ button.disabled:hover {
 }
 
 .apartment-details .right-part {
+  padding-left: 50px;
   width: 50%;
 }
 
@@ -1161,6 +1168,25 @@ button.disabled:hover {
   color: #555;
   font-size: 1.7em;
   font-weight: 400;
+}
+
+.apartment-details .right-part .statistics h5 {
+  margin-top: 30px;
+  color: #555;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+.apartment-details .right-part .statistics h6 {
+  color: #999;
+  font-weight: 400;
+  font-size: 1em;
+  margin-bottom: 50px;
+}
+
+.apartment-details .right-part .statistics img {
+  width: 60%;
+  margin-left: 50px;
 }
 
 .apartment-details .back {
@@ -1173,6 +1199,12 @@ button.disabled:hover {
 
 .apartment-details .back i {
   margin-right: 15px;
+}
+
+.apartment-details .settings-apartment {
+  position: absolute;
+  bottom: 170px;
+  right: 50px;
 }
 
 .apartment-details .bills {
@@ -1252,6 +1284,12 @@ button.disabled:hover {
   margin-left: auto;
   margin-right: 50px;
   padding-left: 50px;
+}
+
+.enter-counters .right-part img {
+  width: 90%;
+  margin-top: 80px;
+  margin-right: 100px;
 }
 
 .enter-counters .right-part .diagrams {
