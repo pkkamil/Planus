@@ -131,7 +131,8 @@ class _FlatsState extends State<Flats> {
                         ),
                         
                         if(flats_count==1) AddFlatCard(
-                          size: size.width*0.5
+                          size: size.width*0.5,
+                          user_id: widget.response['id'],
                         ),
                         if(flats_count==2)RoundedButton(
                           width: size.width*0.7,
@@ -194,20 +195,28 @@ class FlatInfo{
   double tv;
   double phone;
 
+  String invite_code;
+
   DateTime created_at;
+  DateTime updated_at;
 
   double summary = 0.0;
 
   void parseData(Map response){
     created_at = DateTime.parse(response['created_at']);
+    updated_at = DateTime.parse(response['updated_at']);
+
     id_owner = response['user_id'];
     id_apartment = response['id_apartment'];
+
+    invite_code = response['invite_code'];
 
     name = response['name'];
     if(response[image]==null){
       response[image]=='https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png';
     }
     image = response['image'];
+    (image[0] == 'h') ? image : image='http://planus.me'+image;
     area = response['area'];
     rooms = response['rooms'];
     localization = response['localization'];
@@ -229,8 +238,6 @@ class FlatInfo{
     tv = double.parse(response['tv']);
     phone = double.parse(response['phone']);
 
-
-    //mnozenie zuzycie licznika * cena
 
     List itemsToSum = ['price', 'rubbish', 'internet', 'tv', 'phone'];
     for(int i=0;i<itemsToSum.length;i++){

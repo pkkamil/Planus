@@ -1,11 +1,27 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
-class JoinFlat extends StatelessWidget {
+class JoinFlat extends StatefulWidget {
+  final int user_id;
+  JoinFlat(this.user_id);
+
+  @override
+  _JoinFlatState createState() => _JoinFlatState();
+}
+
+class _JoinFlatState extends State<JoinFlat> {
+  String code;
+
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -39,11 +55,30 @@ class JoinFlat extends StatelessWidget {
                       icon: Icons.group,
                       placeholder: "Kod zaproszenia",
                       iconColor: Colors.grey[900],
+                      onChanged: (val) {
+                        code = val;
+                      },
                     ),
                     RoundedButton(
                       text: "Dołącz",
                       vertical: 15.0,
                       horizontal: 50.0,
+                      onPress: () async {
+                        var api = new Api();
+                        Map data = {
+                          'user_id': widget.user_id,
+                          'code': code
+                        };
+                        var response = await api.joinFlat(data);
+
+                        if(response['message']=='OK'){
+                          SharedPreferences localStorage = await SharedPreferences.getInstance();
+                          Map response = jsonDecode(localStorage.getString('userData'));
+
+                          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+                        }
+                      },
                     ),
                     SizedBox(height:size.height*0.03),
                     Text(
@@ -67,17 +102,39 @@ class JoinFlat extends StatelessWidget {
                       )
                     ),
                     SizedBox(height:size.height*0.03),
-                    Container(
-                      width: size.width*0.6,
-                      height: size.width*0.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        color: Colors.orange
-                      ),
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        size: 150,
-                        color: Colors.white,
+                    InkWell(
+                      onTap: () async {
+
+                        String codeScanner = await BarcodeScanner.scan();
+                        
+                        var api = new Api();
+                        Map data = {
+                          'user_id': widget.user_id,
+                          'code': codeScanner
+                        };
+                        var response = await api.joinFlat(data);
+
+                        if(response['message']=='OK'){
+                          SharedPreferences localStorage = await SharedPreferences.getInstance();
+                          Map response = jsonDecode(localStorage.getString('userData'));
+
+                          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+                        }
+                      },
+                      
+                      child: Container(
+                        width: size.width*0.6,
+                        height: size.width*0.5,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.orange
+                        ),
+                        child: Icon(
+                          Icons.camera_alt_outlined,
+                          size: 150,
+                          color: Colors.white,
+                        ),
                       ),
                     )
                   ],

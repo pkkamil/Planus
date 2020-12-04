@@ -17,7 +17,7 @@ class FlatScreen extends StatelessWidget {
   void getTime(){
     var now = new DateTime.now();
 
-    DateTime onCreated = flatData.created_at;
+    DateTime onCreated = flatData.updated_at;
     
     days = flatData.settlement_day-now.day;
     if(days<0)
@@ -29,7 +29,7 @@ class FlatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getTime();
-
+    //int days = 0;
     Size size = MediaQuery.of(context).size;
     return Center(
       child: SingleChildScrollView(
@@ -138,7 +138,7 @@ class FlatScreen extends StatelessWidget {
               onPress: () {
                 //Dodać id apartment
                 //Navigator.pushNamed(context, "/insertCounters");
-                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(flatData)));
+                Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(flatData.id_user, flatData.id_apartment)));
               },
               isShadow: false,
               textColor: Colors.orange,

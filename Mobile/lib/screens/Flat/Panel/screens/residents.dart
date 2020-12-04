@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/circlePerson.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ResidentsScreen extends StatelessWidget {
+
+  final FlatInfo flatData;
+
+  ResidentsScreen(this.flatData);
+  
   @override
   Widget build(BuildContext context) {
-
-    String kod = "xyz123qwe";
+    
 
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
@@ -62,7 +68,7 @@ class ResidentsScreen extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(text: "Kod zaproszenia: "),
-                          TextSpan(text: kod, style: TextStyle(color: Colors.orange)),
+                          TextSpan(text: flatData.invite_code, style: TextStyle(color: Colors.orange)),
                         ]
                         ),
                       ),
@@ -93,7 +99,10 @@ class ResidentsScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: size.height*0.03),
-                    Image.asset("assets/sampleQR.png"),
+                    QrImage(
+                      data: flatData.invite_code,
+                      size: 160.0,
+                    ),
                   ],
                 ),
               )
@@ -101,6 +110,7 @@ class ResidentsScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: size.height*0.03),
+        /*
         Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.symmetric(horizontal: 30),
@@ -132,7 +142,7 @@ class ResidentsScreen extends StatelessWidget {
               ]
             ),
           ),
-        ),
+        ),*/
         ]
       ),
     );

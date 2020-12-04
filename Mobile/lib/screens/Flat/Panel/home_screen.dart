@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           _body = FlatScreen(widget.flatData);
           break;
         case 1:
-          _body = ResidentsScreen();
+          _body = ResidentsScreen(widget.flatData);
           break;
         case 2:
           _body = PaymentsScreen(widget.flatData);

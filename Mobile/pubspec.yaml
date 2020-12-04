@@ -31,6 +31,8 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   hexcolor: ^1.0.6
   image_picker: ^0.6.7+14
+  qr_flutter: ^3.1.0
+  barcode_scan: any
 
 
   # The following adds the Cupertino Icons font to your application.

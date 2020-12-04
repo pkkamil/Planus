@@ -52,6 +52,13 @@ class Api{
     headers:  await _setHeaders());
     return jsonDecode(response.body);
   }
+  joinFlat(data) async{
+    String fullUrl = api + "api/apartment/rent";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
 
   _setHeaders() async {
     var headers = {

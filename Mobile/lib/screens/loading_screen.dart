@@ -32,9 +32,9 @@ class _LoadingState extends State<Loading> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var userData = localStorage.getString('userData');
 
-    print('######');
-    print(userData);
-    print('######');
+    //print('######');
+    //print(userData);
+    //print('######');
 
     if(userData==null){
       Navigator.pushReplacementNamed(context, '/welcome');

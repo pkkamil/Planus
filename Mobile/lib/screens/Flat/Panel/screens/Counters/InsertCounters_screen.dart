@@ -1,13 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+FlatInfo flatData;
+bool _isLoading;
 
 class InsertCounters extends StatefulWidget {
   
-  final FlatInfo flatData;
-  InsertCounters(this.flatData);
+  final int user_id;
+  final int apartment_id;
+  InsertCounters(this.user_id,this.apartment_id);
 
   @override
   _InsertCountersState createState() => _InsertCountersState();
@@ -28,17 +36,43 @@ class _InsertCountersState extends State<InsertCounters> {
   double electricityCount;
 
   List counters;
+  FlatInfo flatData;
+
+  void _getFlatData(apartment_id,user_id) async{
+    var api = new Api();
+    var response = await api.listFlats(user_id);
+    //print(response);
+    if(response['statusCode']==200){
+      List flats = response['body']['data'];
+      int flats_count = flats.length;
+
+      for(int i=0;i<flats_count;i++){
+        if(flats[i]['id_apartment']==apartment_id){
+          setState(() {
+            flatData = FlatInfo(id_user: user_id);
+            flatData.parseData(flats[i]);
+          });
+          //print(flats[i]);
+
+          _checkCounters(flatData.id_apartment);
+        }
+      }
+    }
+  }
 
   @override
   void initState() {
-    _checkCounters(widget.flatData.id_apartment);
+    _getFlatData(widget.apartment_id,widget.user_id);
+    setState(() {
+      _isLoading = true;
+    });
+    //_checkCounters(widget.flatData.id_apartment);
     super.initState();
   }
 
   void _checkCounters(id_apartment) async{
     var api = new Api();
     var response = await api.getCounters(id_apartment);
-    //print(response);
     if(response != {}){
       List items = ['cold_water','hot_water','gas','electricity'];
       counters = [coldWaterCount, hotWaterCount, gasCount, electricityCount];
@@ -54,12 +88,36 @@ class _InsertCountersState extends State<InsertCounters> {
     hotWaterCount = counters[1];
     gasCount = counters[2];
     electricityCount = counters[3];
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if(flatData.cold_water == 0.0 && flatData.hot_water==0.0 && flatData.gas==0.0 && flatData.electricity==0.0){
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      Map response = jsonDecode(localStorage.getString('userData'));
+
+      Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+      Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
+
+    if(_isLoading){
+        return Scaffold(
+          backgroundColor: Colors.orange,
+          body: Center(
+            child: SpinKitPulse(
+              color: Colors.white,
+              size: 100.0,
+            ),
+          )
+        );
+    }else{
     return Scaffold(
       key: _scaffoldKey,
       body: SingleChildScrollView(
@@ -68,7 +126,7 @@ class _InsertCountersState extends State<InsertCounters> {
             Container(
             child: Stack(
               children: [
-                if(widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0)Positioned(
+                if(flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0)Positioned(
                   top: 50,
                   left: 30,
                   child: RichText(
@@ -88,7 +146,7 @@ class _InsertCountersState extends State<InsertCounters> {
                   child: Column(
                     children: [
                       SizedBox(height: size.height*0.15),
-                      if(widget.flatData.cold_water>0) RoundedInput(
+                      if(flatData.cold_water>0) RoundedInput(
                         isNumber: true,
                         width: size.width*0.8,
                         placeholder: "Stan licznika wody zimnej [1m\u00B3]",
@@ -102,7 +160,7 @@ class _InsertCountersState extends State<InsertCounters> {
                           });
                         },
                       ),
-                      if(widget.flatData.hot_water>0) RoundedInput(
+                      if(flatData.hot_water>0) RoundedInput(
                         isNumber: true,
                         width: size.width*0.8,
                         placeholder: "Stan licznika wody ciepłej [1m\u00B3]",
@@ -116,7 +174,7 @@ class _InsertCountersState extends State<InsertCounters> {
                           });
                         },
                       ),
-                      if(widget.flatData.gas>0) RoundedInput(
+                      if(flatData.gas>0) RoundedInput(
                         isNumber: true,
                         width: size.width*0.8,
                         placeholder: "Stan licznika gazu [kWh]",
@@ -129,7 +187,7 @@ class _InsertCountersState extends State<InsertCounters> {
                           });
                         },
                       ),
-                      if(widget.flatData.electricity>0) RoundedInput(
+                      if(flatData.electricity>0) RoundedInput(
                         isNumber: true,
                         width: size.width*0.8,
                         placeholder: "Stan licznika prądu [kWh]",
@@ -150,7 +208,7 @@ class _InsertCountersState extends State<InsertCounters> {
             ),
           ),
           SizedBox(height: size.height*0.03),
-          if((widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0) && (coldWaterCount!= null || hotWaterCount!=null || gasCount!=null || electricityCount!=null))Container(
+          if((flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0) && (coldWaterCount!= null || hotWaterCount!=null || gasCount!=null || electricityCount!=null))Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.symmetric(horizontal: 30,vertical: 5),
             child: RichText(
@@ -167,13 +225,13 @@ class _InsertCountersState extends State<InsertCounters> {
             ),
           ),
           
-          if(widget.flatData.cold_water>0 && coldWaterCount!=null) MediaPrice(size: size, media: " m3 wody zimnej", price: widget.flatData.cold_water, actual_counter: coldWaterCountController, old_counter: coldWaterCount), 
-          if(widget.flatData.hot_water>0 && hotWaterCount!=null) MediaPrice(size: size, media: " m3 wody ciepłej", price: widget.flatData.hot_water, actual_counter: hotWaterCountController, old_counter: hotWaterCount),
-          if(widget.flatData.gas>0 && gasCount!=null) MediaPrice(size: size, media: " kWh gazu", price: widget.flatData.gas, actual_counter: gasCountController, old_counter: gasCount),
-          if(widget.flatData.electricity>0 && electricityCount!=null) MediaPrice(size: size, media: " kWh prądu", price: widget.flatData.electricity, actual_counter: electricityCountController, old_counter: electricityCount),
+          if(flatData.cold_water>0 && flatData.cold_water!=null && coldWaterCount!=null) MediaPrice(size: size, media: " m3 wody zimnej", price: flatData.cold_water, actual_counter: coldWaterCountController, old_counter: coldWaterCount), 
+          if(flatData.hot_water>0 && flatData.hot_water!=null && hotWaterCount!=null) MediaPrice(size: size, media: " m3 wody ciepłej", price: flatData.hot_water, actual_counter: hotWaterCountController, old_counter: hotWaterCount),
+          if(flatData.gas>0 && flatData.gas!=null && gasCount!=null) MediaPrice(size: size, media: " kWh gazu", price: flatData.gas, actual_counter: gasCountController, old_counter: gasCount),
+          if(flatData.electricity>0 && flatData.electricity!=null && electricityCount!=null) MediaPrice(size: size, media: " kWh prądu", price: flatData.electricity, actual_counter: electricityCountController, old_counter: electricityCount),
           
           SizedBox(height: size.height*0.05),
-          if(widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0)RoundedButton(
+          if(flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0)RoundedButton(
             text: "Zapisz liczniki",
             width: size.width*0.7,
             color: Colors.white,
@@ -181,7 +239,7 @@ class _InsertCountersState extends State<InsertCounters> {
             onPress: () async {
               var api = new Api();
               Map data = {
-                'id_apartment':widget.flatData.id_apartment,
+                'id_apartment':flatData.id_apartment,
                 'cold_water': coldWaterCountController,
                 'hot_water': hotWaterCountController,
                 'gas': gasCountController,
@@ -190,7 +248,11 @@ class _InsertCountersState extends State<InsertCounters> {
               var response = await api.insertCounters(data);
 
               if(response['message']=='OK'){
-                Navigator.pop(context);
+                SharedPreferences localStorage = await SharedPreferences.getInstance();
+                Map response = jsonDecode(localStorage.getString('userData'));
+
+                Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
               }else{
                 _scaffoldKey.currentState.showSnackBar(
                   SnackBar(
@@ -211,7 +273,7 @@ class _InsertCountersState extends State<InsertCounters> {
           ]
         ),
       ),
-    );
+    );}
   }
 }
 

@@ -211,7 +211,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                 ),
                 children: [
                   TextSpan(text: "Łączna suma rachunku ".toUpperCase(), style: TextStyle(color: Colors.orange)),
-                  TextSpan(text: widget.flatData.summary.toString()),
+                  TextSpan(text: widget.flatData.summary.toStringAsFixed(2)),
                   TextSpan(text: " ZŁ".toUpperCase(), style: TextStyle(color: Colors.grey[600])),
                   ]
                 ),

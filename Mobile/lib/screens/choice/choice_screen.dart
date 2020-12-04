@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/screens/Flat/AddFlat/AddFlat_screen.dart';
+import 'package:planus/screens/Flat/AddingResident/JoinFlat_screen.dart';
 
 class Choice extends StatelessWidget {
   final int user_id;
@@ -9,6 +10,7 @@ class Choice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -43,7 +45,7 @@ class Choice extends StatelessWidget {
                 text:"Dołącz do mieszkania",
                 fontsize: 17.0,
                 onPress: () {
-                  Navigator.pushNamed(context, '/joinFlat');
+                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => JoinFlat(user_id)));
                 },
                 width: size.width*0.7,
               ),

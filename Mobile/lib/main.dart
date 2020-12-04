@@ -51,8 +51,8 @@ void main() {
       '/farawell': (context) => Farawell(),
       '/deleteFlat':(context) => DeleteFlat(),
       '/addFlat': (context) => AddFlat(1),
-      '/joinFlat': (context) => JoinFlat(),
-      '/insertCounters': (context) => InsertCounters(flatInfo)
+      '/joinFlat': (context) => JoinFlat(1),
+      '/insertCounters': (context) => InsertCounters(1,1)
     }
   ));
 }

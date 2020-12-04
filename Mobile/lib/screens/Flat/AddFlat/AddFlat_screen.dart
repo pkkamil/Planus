@@ -113,7 +113,8 @@ class _AddFlatState extends State<AddFlat> {
         var response = await api.createFlat(data);
         if(response['message']=='OK'){
           isLoading=false;
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(response['apartment_id'])));
+          print('#1');
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
         }else{
           setState(() {
             isLoading=false;
@@ -287,6 +288,7 @@ class _AddFlatState extends State<AddFlat> {
                         ),
                         RoundedInput(
                           controller: priceController,
+                          isNumber: true,
                           width: size.width*0.7,
                           placeholder: "Cena wynajmu [zł]",
                           color: Colors.white,
@@ -312,6 +314,7 @@ class _AddFlatState extends State<AddFlat> {
                         ),
                         RoundedInput(
                           controller: areaController,
+                          isNumber: true,
                           width: size.width*0.7,
                           placeholder: "Powierzchnia [m\u00B2]",
                           color: Colors.white,
@@ -338,6 +341,7 @@ class _AddFlatState extends State<AddFlat> {
                         RoundedInput(
                           controller: numberOfRoomsController,
                           width: size.width*0.7,
+                          isNumber: true,
                           placeholder: "Liczba pokoi",
                           color: Colors.white,
                           textColor: Colors.black,
@@ -363,6 +367,7 @@ class _AddFlatState extends State<AddFlat> {
                         RoundedInput(
                           controller: settlementDayController,
                           width: size.width*0.7,
+                          isNumber: true,
                           placeholder: "Dzień rozliczenia",
                           color: Colors.white,
                           textColor: Colors.black,
@@ -388,6 +393,7 @@ class _AddFlatState extends State<AddFlat> {
                         RoundedInput(
                           controller: settlementPeriodController,
                           width: size.width*0.7,
+                          isNumber: true,
                           placeholder: "Okres rozliczenia [miesiące]",
                           color: Colors.white,
                           textColor: Colors.black,
@@ -444,6 +450,7 @@ class _AddFlatState extends State<AddFlat> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: coldWaterPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za 1m\u00B3 wody zimnej",
@@ -454,6 +461,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isColdWater,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: hotWaterPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za 1m\u00B3 wody ciepłej",
@@ -464,6 +472,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isHotWater,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: heatingPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za ogrzewanie [roczna]",
@@ -474,6 +483,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isHeating,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: gasPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za 1kWh gazu",
@@ -483,6 +493,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isGas,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: electricityPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za 1kWh prądu",
@@ -493,6 +504,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isElectricity,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: rubbishPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za śmieci/os",
@@ -503,6 +515,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isRubbish,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: internetPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za internet",
@@ -513,6 +526,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isInternet,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: tvPriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za telewizję",
@@ -523,6 +537,7 @@ class _AddFlatState extends State<AddFlat> {
                                     isEnabled: isTv,
                                   ),
                                   RoundedInput(
+                                    isNumber: true,
                                     controller: phonePriceController,
                                     width: size.width*0.7,
                                     placeholder: "Cena za telefon",
