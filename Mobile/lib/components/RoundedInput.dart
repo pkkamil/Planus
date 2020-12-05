@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/InputContainer.dart';
+import 'dart:io' show Platform;
 
 class RoundedInput extends StatelessWidget {
   final String placeholder;
@@ -52,7 +53,7 @@ class RoundedInput extends StatelessWidget {
        onChanged: onChanged,
        //onSubmitted: onCompleted,
        onEditingComplete: onCompleted,
-       keyboardType: isNumber ? TextInputType.number : TextInputType.text
+       keyboardType: (Platform.isAndroid==true) ? isNumber ? TextInputType.number : TextInputType.text : TextInputType.text
       )
     );
   }

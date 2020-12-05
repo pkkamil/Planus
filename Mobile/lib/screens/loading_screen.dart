@@ -23,6 +23,7 @@ class _LoadingState extends State<Loading> {
       }
     }
     catch(e){
+      //Dodać snackBar
       print("Wystąpił błąd");
     }
   }
@@ -47,6 +48,7 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
+    //setupWelcomeScreen();
     checkConnection();
   }
   @override
