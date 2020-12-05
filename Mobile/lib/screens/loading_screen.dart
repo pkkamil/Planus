@@ -12,18 +12,32 @@ class Loading extends StatefulWidget {
   _LoadingState createState() => _LoadingState();
 }
 
+final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _LoadingState extends State<Loading> {
 
   void checkConnection() async {
     try{
-      Response response = await get("$secondApi");
-      Map data = jsonDecode(response.body);
-      if(data['message']=='OK'){
+      Response response = await get("$api");
+      if(response.statusCode==200){
         setupWelcomeScreen();
       }
     }
     catch(e){
       //Dodać snackBar
+      _scaffoldKey.currentState.showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 5),
+            backgroundColor: Colors.orange,
+              content: Text(
+                'Brak połączenia z internetem',
+                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18
+                ),
+              )
+          )
+        );
       print("Wystąpił błąd");
     }
   }
@@ -58,6 +72,7 @@ class _LoadingState extends State<Loading> {
         DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.orange,
       body: Center(
         child: SpinKitPulse(

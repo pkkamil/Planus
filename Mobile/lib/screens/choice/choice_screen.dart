@@ -34,7 +34,7 @@ class Choice extends StatelessWidget {
               RoundedButton(
                 text:"Utwórz mieszkanie",
                 onPress: () {
-                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => AddFlat(user_id)));
+                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => AddFlat(user_id)));
                   //Navigator.pushNamed(context, '/addFlat');
                 },
                 fontsize: 17.0,
@@ -45,7 +45,7 @@ class Choice extends StatelessWidget {
                 text:"Dołącz do mieszkania",
                 fontsize: 17.0,
                 onPress: () {
-                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => JoinFlat(user_id)));
+                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => JoinFlat(user_id)));
                 },
                 width: size.width*0.7,
               ),

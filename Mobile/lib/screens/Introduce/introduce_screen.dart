@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Verificate/verification_screen.dart';
 import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String name;
 Map registerData = {};
@@ -36,7 +40,19 @@ class _IntroduceState extends State<Introduce> {
       var response = await api.register(data);
       
       if(response['message']=='OK'){
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Verificate(registerData['email'],registerData['password'])));
+        //Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Verificate(registerData['email'],registerData['password'])));
+        var api = new Api();
+        var response = await api.login(data);
+        
+        if(response['email'].toLowerCase()==data['email'].toLowerCase()){
+          SharedPreferences localStorage = await SharedPreferences.getInstance();
+          localStorage.setString('userData', jsonEncode(response));
+
+          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+        }else{
+          print(response['message']);
+        }
       }else{
         _scaffoldKey.currentState.showSnackBar(
           SnackBar(

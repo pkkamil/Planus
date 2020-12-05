@@ -116,7 +116,8 @@ class _AddFlatState extends State<AddFlat> {
         //print(response);
         if(response['message']=='OK'){
           isLoading=false;
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
+          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
         }else{
           setState(() {
             isLoading=false;
