@@ -65,15 +65,16 @@ class ApartmentController extends Controller
         $to_date = new DateTime($settlement_date);
         if ($to_date -> format('d') === $from_date -> format('d')) {
             $days = -1;
-        }
-        $from_date = new DateTime();
-        $interval = $from_date -> diff($to_date);
-        if ($interval -> invert == 1) {
-            $settlement_date = date('Y-m-d', strtotime('+1 month', strtotime($settlement_date)));
-            $to_date = new DateTime($settlement_date);
+        } else {
+            $from_date = new DateTime();
             $interval = $from_date -> diff($to_date);
+            if ($interval -> invert == 1) {
+                $settlement_date = date('Y-m-d', strtotime('+1 month', strtotime($settlement_date)));
+                $to_date = new DateTime($settlement_date);
+                $interval = $from_date -> diff($to_date);
+            }
+            $days = $interval -> d;
         }
-        $days = $interval -> d;
 
         // Overdue
         $lastCounter = Counter::select('created_at')->where('id_apartment', $id)->orderBy('created_at', 'desc')->get();
@@ -108,7 +109,7 @@ class ApartmentController extends Controller
         $req -> price = str_replace(',', '.', $req -> price);
         $req -> price = (float)$req -> price;
         $req->validate([
-            'image' => 'required|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,bmp|max:10240',
             'name' => 'required|string|min:5',
             'localization' => 'required|string|min:5',
             'price' => ['required', 'regex:/^([0-9][0-9]{0,5}[.|,][0-9]{1,2}|[0-9]{1,6})$/'],
@@ -266,5 +267,11 @@ class ApartmentController extends Controller
                 $notUnique = false;
         } while ($notUnique);
         return $code;
+    }
+
+    public function delete($id) {
+        if(Apartment::find($id) -> user_id == Auth::id())
+            Apartment::destroy($id);
+        return redirect('/panel');
     }
 }

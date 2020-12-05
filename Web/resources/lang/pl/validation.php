@@ -82,7 +82,7 @@ return [
         'string' => ':attribute nie może skłdać się z więcej niż :min znaków.',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => ':attribute musi mieć jeden z następujących formatów: :values.',
+    'mimes' => ':attribute musi mieć jeden z następujących rozszerzeń: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => ':attribute nie może być mniejszy niż :min.',

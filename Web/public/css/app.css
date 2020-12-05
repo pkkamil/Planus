@@ -1062,8 +1062,7 @@ button.disabled:hover {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 100px 80px 50px 80px;
+  padding: 100px 100px 50px 100px;
 }
 
 .apartment-details .left-part .name {
@@ -1160,8 +1159,7 @@ button.disabled:hover {
 }
 
 .apartment-details .right-part {
-  padding-left: 50px;
-  width: 50%;
+  padding-left: 100px;
 }
 
 .apartment-details .right-part h3 {
@@ -1189,6 +1187,59 @@ button.disabled:hover {
   margin-left: 50px;
 }
 
+.apartment-details .right-part .statistics .diagrams {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.apartment-details .right-part .statistics .diagrams section {
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.apartment-details .right-part .statistics .diagrams section h6 {
+  margin-top: 5px;
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.apartment-details .right-part .bottom-part {
+  display: flex;
+  float: right;
+  flex-direction: row;
+  margin-top: 40px;
+}
+
+.apartment-details .right-part .bottom-part a {
+  margin-left: 30px;
+}
+
+.apartment-details .right-part .bottom-part a:first-of-type {
+  margin-left: 0;
+}
+
+.apartment-details .right-part .bottom-part button {
+  width: 100%;
+}
+
+.apartment-details .right-part .bottom-part button.settings-apartment {
+  height: 55px;
+  font-size: 1.3em;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.apartment-details .right-part .bottom-part button.settings-apartment i {
+  margin-right: 0;
+}
+
 .apartment-details .back {
   position: absolute;
   font-size: 1em;
@@ -1201,22 +1252,8 @@ button.disabled:hover {
   margin-right: 15px;
 }
 
-.apartment-details .settings-apartment {
-  position: absolute;
-  bottom: 170px;
-  right: 50px;
-}
-
-.apartment-details .bills {
-  position: absolute;
-  font-size: 1em;
-  right: 50px;
-  bottom: 200px;
-  padding: 16px 45px;
-}
-
-.apartment-details .bills i {
-  margin-right: 15px;
+.apartment-details a button i {
+  margin-right: 10px;
 }
 
 .enter-counters {

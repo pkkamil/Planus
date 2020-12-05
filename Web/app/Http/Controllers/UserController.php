@@ -19,7 +19,24 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function edit(Request $req) {
+    public function changeName(Request $req) {
+        $user = User::find($req -> user_id);
+        $user -> name = $req -> name;
+        return redirect('/panel/ustawienia');
+    }
 
+    public function changeEmail(Request $req) {
+        $user = User::find($req -> user_id);
+        $user -> email = $req -> email;
+        return redirect('/panel/ustawienia');
+    }
+
+    public function changePassword(Request $req) {
+
+    }
+
+    public function delete() {
+        Auth::destroy(Auth::id());
+        return redirect('/');
     }
 }

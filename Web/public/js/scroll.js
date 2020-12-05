@@ -30,7 +30,9 @@ if (arrow != null) {
 }
 
 $(".smooth-scroller").click(function(e) {
-    e.preventDefault()
+    if (location.pathname == '/') {
+        e.preventDefault()
+    }
     if (window.innerWidth > 976) {
         window.scrollTo(0, document.querySelector($(this).data('scroll')).offsetTop - $('nav').height())
     } else {

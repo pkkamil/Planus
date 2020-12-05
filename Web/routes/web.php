@@ -1,7 +1,10 @@
 <?php
 
+use App\Mail\ActivationMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +56,9 @@ Route::middleware(['introduced', 'auth'])->group(function () {
     Route::post('/panel/dodaj', 'ApartmentController@add')->name('add');
 
     Route::get('/panel/mieszkanie/{id}', 'ApartmentController@apartmentDetails');
-    Route::get('/panel/mieszkanie/{id}/edit', 'ApartmentController@editPage');
-    Route::post('/panel/mieszkanie/{id}/edit', 'ApartmentController@edit');
+    Route::get('/panel/mieszkanie/{id}/edycja', 'ApartmentController@editPage');
+    Route::post('/panel/mieszkanie/edycja', 'ApartmentController@edit')->name('edit');
+    Route::get('/panel/mieszkanie/{id}/usun_mieszkanie', 'ApartmentController@delete');
 
     Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
 
@@ -62,7 +66,9 @@ Route::middleware(['introduced', 'auth'])->group(function () {
     Route::post('/panel/mieszkanie/liczniki', 'CounterController@store')->name('enterCounters');
 
     Route::view('/panel/ustawienia', 'settingsAccount');
-    Route::post('/panel/ustawienia', 'UserController@edit');
+    Route::post('/panel/ustawienia/zmiana_nazwy', 'UserController@changeName')->name('changeName');
+    Route::post('/panel/ustawienia/zmiana_adresu_email', 'UserController@changeEmail')->name('changeEmail');
+    Route::post('/panel/ustawienia/zmiana_hasla', 'UserController@changePassword')->name('changePassword');
 
     Route::get('/panel/mieszkanie/{id}/wstepne_liczniki', 'CounterController@firstInput');
     Route::post('/panel/mieszkanie/wstepne_liczniki', 'CounterController@initialCounters')->name('initialCounters');
@@ -70,12 +76,15 @@ Route::middleware(['introduced', 'auth'])->group(function () {
     Route::get('/panel/mieszkanie/{id}/stworz_rachunek', 'BillController@create');
 });
 
-Route::get('/test/{diagram}/{allFees?}', 'DashboardController@test');
+Route::get('/diagrams/{diagram}/{id}', 'ChartController@diagrams');
+Route::get('/diagrams/last-month/{id}', 'ChartController@lastMonth');
 Route::view('/chart', 'chart');
 
-
-Route::get('/test2', 'ApartmentController@rent');
-Route::get('/test3', 'ApartmentController@code');
-
+// Route::get('/test3', 'ApartmentController@code');
 
 Route::get('/chart/data/consumption/{id}/{type}', 'ChartController@consumptions');
+
+Route::get('/send-mail', function () {
+    Mail::to('kamiliked11@gmail.com')->send(new ActivationMail());
+    return 'A message has been sent!';
+});

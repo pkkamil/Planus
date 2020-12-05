@@ -49,5 +49,27 @@ class AuthController extends Controller
             'message' => 'Wylogowano'
         ]);
     }
+
+    public function changeName(Request $req) {
+        $user = User::find($req -> user_id);
+        $user -> name = $req -> name;
+        return response()->json(['Message' => 'OK', 'Name' => $req -> name]);
+    }
+
+    public function changeEmail(Request $req) {
+        $user = User::find($req -> user_id);
+        $user -> email = $req -> email;
+        return response()->json(['Message' => 'OK', 'Name' => $req -> email]);
+    }
+
+    public function changePassword(Request $req) {
+
+    }
+
+
+    public function delete(Request $req) {
+        Auth::destroy($req -> user_id);
+        return response()->json(['Message' => 'OK']);
+    }
 }
 

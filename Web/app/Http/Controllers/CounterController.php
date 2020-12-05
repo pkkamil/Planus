@@ -17,10 +17,14 @@ class CounterController extends Controller
     public function firstInput($id) {
         $apartment = Apartment::find($id);
         $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->orderBy('created_at', 'asc')->first();
-        if (is_null($apartment -> cold_water) != is_null($lastCounter -> cold_water) or is_null($apartment -> hot_water) != is_null($lastCounter -> hot_water) or is_null($apartment -> gas) != is_null($lastCounter -> gas) or is_null($apartment -> electricity) != is_null($lastCounter -> electricity))
+        if ($lastCounter) {
+            if (is_null($apartment -> cold_water) != is_null($lastCounter -> cold_water) or is_null($apartment -> hot_water) != is_null($lastCounter -> hot_water) or is_null($apartment -> gas) != is_null($lastCounter -> gas) or is_null($apartment -> electricity) != is_null($lastCounter -> electricity))
+                return view('initialCounters', compact('apartment'));
+            else
+                return redirect('/panel/mieszkanie/'.$id);
+        } else {
             return view('initialCounters', compact('apartment'));
-        else
-            return redirect('/panel/mieszkanie/'.$id);
+        }
     }
 
     public function initialCounters(Request $req) {
@@ -105,6 +109,7 @@ class CounterController extends Controller
             $counter -> electricity = $req -> electricity;
         $counter -> id_apartment = $req -> id_apartment;
         $counter -> save();
-        return redirect('/panel/mieszkanie/'.$req -> id_apartment.'/stworz_rachunek')->with('req', $req);
+        // przekazac $req
+        return redirect('/panel/mieszkanie/'.$req -> id_apartment.'/stworz_rachunek');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
 use Illuminate\Http\Request;
 use App\Counter;
 use stdClass;
@@ -134,6 +135,166 @@ class ChartController extends Controller
                 ->toJSON();
             break;
         }
+
+        return $chart;
+    }
+
+    public function diagrams($diagram, $id_apartment) {
+        $bills = Bill::where('id_apartment', $id_apartment)->orderBy('settlement_date', 'asc')->paginate(12);
+        $months = [];
+        $sums = [];
+        $cold_water = [];
+        $hot_water = [];
+        $gas = [];
+        $electricity = [];
+        $month = '';
+        foreach ($bills as $bill) {
+            $num = date("m", strtotime($bill -> settlement_date));
+            switch ($num) {
+                case 1:
+                    $month = 'Styczeń';
+                break;
+                case 2:
+                    $month = 'Luty';
+                break;
+                case 3:
+                    $month = 'Marzec';
+                break;
+                case 4:
+                    $month = 'Kwiecień';
+                break;
+                case 5:
+                    $month = 'Maj';
+                break;
+                case 6:
+                    $month = 'Czerwiec';
+                break;
+                case 7:
+                    $month = 'Lipiec';
+                break;
+                case 8:
+                    $month = 'Sierpień';
+                break;
+                case 9:
+                    $month = 'Wrzesień';
+                break;
+                case 10:
+                    $month = 'Październik';
+                break;
+                case 11:
+                    $month = 'Listopad';
+                break;
+                case 12:
+                    $month = 'Grudzień';
+                break;
+            }
+            array_push($sums, $bill -> sum);
+            array_push($months, $month);
+            if ($bill -> cold_water) {
+                array_push($cold_water, $bill -> cold_water);
+            }
+            if ($bill -> hot_water) {
+                array_push($hot_water, $bill -> hot_water);
+            }
+            if ($bill -> gas) {
+                array_push($gas, $bill -> gas);
+            }
+            if ($bill -> electricity) {
+                array_push($electricity, $bill -> electricity);
+            }
+        }
+
+        switch ($diagram) {
+            // Cost of single media
+            case 'cold_water':
+                $chart = Chartisan::build()
+                ->labels($months)
+                ->dataset('Woda zimna', $cold_water)
+                ->toJSON();
+            break;
+            case 'hot_water':
+                $chart = Chartisan::build()
+                ->labels($months)
+                ->dataset('Woda ciepła', $hot_water)
+                ->toJSON();
+            break;
+            case 'gas':
+                $chart = Chartisan::build()
+                ->labels($months)
+                ->dataset('Gaz', $gas)
+                ->toJSON();
+            break;
+            case 'electricity':
+                $chart = Chartisan::build()
+               ->labels($months)
+               ->dataset('Prąd', $electricity)
+               ->toJSON();
+            break;
+            // case 3:
+            //     $chart = Chartisan::build()
+            //     ->labels(['Listopad', 'Grudzień', 'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Październik', 'Listopad'])
+            //     ->dataset('', [3500, 3000, 2700, 2550, 2879, 2329, 2540, 2570, 2602, 2832, 2994, 3320])
+            //     ->toJSON();
+            // break;
+            // Single Apartment
+            case 'sum_bill':
+                $chart = Chartisan::build()
+                ->labels($months)
+                ->dataset('Suma rachunku', $sums)
+                ->toJSON();
+            break;
+        }
+
+        return $chart;
+    }
+
+    public function lastMonth($id_apartment) {
+        $bills = Bill::where('id_apartment', $id_apartment)->sortBy('settlement_date')->reverse()->take(12)->reverse();
+        $names = [];
+        $costs = [];
+
+       $lastBill = $bills->last();
+       if ($lastBill -> rental_price) {
+           array_push($names, 'Cena wynajmu');
+           array_push($costs, $lastBill -> rental_price);
+       }
+       if ($lastBill -> cold_water) {
+        array_push($names, 'Woda zimna');
+        array_push($costs, $lastBill -> cold_water);
+        }
+        if ($lastBill -> hot_water) {
+            array_push($names, 'Woda ciepła');
+            array_push($costs, $lastBill -> hot_water);
+        }
+        if ($lastBill -> gas) {
+            array_push($names, 'Gaz');
+            array_push($costs, $lastBill -> gas);
+        }
+        if ($lastBill -> electricity) {
+            array_push($names, 'Prąd');
+            array_push($costs, $lastBill -> electricity);
+        }
+        if ($lastBill -> rubbish) {
+            array_push($names, 'Śmieci');
+            array_push($costs, $lastBill -> rubbish);
+        }
+        if ($lastBill -> internet) {
+            array_push($names, 'Internet');
+            array_push($costs, $lastBill -> internet);
+        }
+        if ($lastBill -> tv) {
+            array_push($names, 'Telewizja');
+            array_push($costs, $lastBill -> tv);
+        }
+        if ($lastBill -> phone) {
+            array_push($names, 'Telefon');
+            array_push($costs, $lastBill -> phone);
+        }
+        // Circle Diagram
+        $chart = Chartisan::build()
+            ->labels($names)
+            ->dataset('', $costs)
+            ->toJSON();
 
         return $chart;
     }
