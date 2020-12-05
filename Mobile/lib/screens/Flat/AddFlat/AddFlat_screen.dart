@@ -97,23 +97,25 @@ class _AddFlatState extends State<AddFlat> {
           'settlement_day': settlementDayController.text,
           'billing_period': settlementPeriodController.text,
 
-          'cold_water': coldWaterPriceController.text,
-          'hot_water': hotWaterPriceController.text,
-          'heating':heatingPriceController.text,
-          'gas':gasPriceController.text,
-          'electricity': electricityPriceController.text,
-          'rubbish': rubbishPriceController.text,
-          'internet': internetPriceController.text,
-          'tv': tvPriceController.text,
-          'phone': phonePriceController.text,
+          'cold_water': coldWaterPriceController.text=='' ? null : coldWaterPriceController.text,
+          'hot_water': hotWaterPriceController.text=='' ? null : hotWaterPriceController.text,
+          'heating':heatingPriceController.text=='' ? null : heatingPriceController.text,
+          'gas':gasPriceController.text=='' ? null : gasPriceController.text,
+          'electricity': electricityPriceController.text=='' ? null : electricityPriceController.text,
+          'rubbish': rubbishPriceController.text=='' ?null: rubbishPriceController.text,
+          'internet': internetPriceController.text=='' ? null : internetPriceController.text,
+          'tv': tvPriceController.text=='' ? null : tvPriceController.text,
+          'phone': phonePriceController.text=='' ? null : phonePriceController.text,
           'user_id': owner_id,
           'image': convert.base64Encode(image.readAsBytesSync())
         };
+        //print(data);
         var api = new Api();
         var response = await api.createFlat(data);
+        //print('#####');
+        //print(response);
         if(response['message']=='OK'){
           isLoading=false;
-          print('#1');
           Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
         }else{
           setState(() {
