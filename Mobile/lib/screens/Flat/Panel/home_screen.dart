@@ -37,10 +37,10 @@ class _HomeState extends State<Home> {
           _body = PaymentsScreen(widget.flatData);
           break;
         case 3:
-          _body = GraphsScreen();
+          _body = GraphsScreen(widget.flatData);
           break;
         case 4:
-          _body = SettingsScreen();
+          _body = SettingsScreen(widget.flatData);
           break;
       }
     }else{
@@ -52,10 +52,10 @@ class _HomeState extends State<Home> {
           _body = PaymentsScreen(widget.flatData);
           break;
         case 2:
-          _body = GraphsScreen();
+          _body = GraphsScreen(widget.flatData);
           break;
         case 3:
-          _body = SettingsScreen();
+          _body = SettingsScreen(widget.flatData);
           break;
       }
     }

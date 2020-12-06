@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
+import 'package:planus/screens/Change/Account/deleteAccount_screen.dart';
+import 'package:planus/screens/Change/Flat/Delete/deleteFlat_screen.dart';
+import 'package:planus/screens/Change/Introduce/ChangeName_screen.dart';
+import 'package:planus/screens/Change/Password/changePassword_screen.dart';
+import 'package:planus/screens/Change/email/ChangeEmail_screen.dart';
+import 'package:planus/screens/Flat/EditFlat/EditFlat_screen.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatelessWidget {
+
+  final FlatInfo flatData;
+
+  SettingsScreen(this.flatData);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
               width: size.width*0.7,
               vertical: 15.0,
               onPress: () {
-                Navigator.pushNamed(context, '/changeName');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => ChangeName(flatData)));
               },
             ),
             RoundedButton(
@@ -24,34 +36,34 @@ class SettingsScreen extends StatelessWidget {
               width: size.width*0.7,
               vertical: 15.0,
               onPress: () {
-                Navigator.pushNamed(context, '/changePassword');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => ChangePassword(flatData)));
               },
             ),
             RoundedButton(
-              text: "Zmiana adresu e-mail",
+              text: "Zmiana e-mail",
               width: size.width*0.7,
               horizontal: 10.0,
               vertical: 15.0,
               onPress: () {
-                Navigator.pushNamed(context, '/changeEmail');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => ChangeEmail(flatData)));
               },
             ),
-            RoundedButton(
+            if(flatData.id_owner==flatData.id_user)RoundedButton(
               horizontal: 0.0,
               text: "Edytuj mieszkanie",
               width: size.width*0.7,
               vertical: 15.0,
               onPress: () {
-                //Navigator.pushNamed(context, '/deleteFlat');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => EditFlat(flatData)));
               },
             ),
-            RoundedButton(
+            if(flatData.id_owner==flatData.id_user)RoundedButton(
               horizontal: 0.0,
               text: "Usuń mieszkanie",
               width: size.width*0.7,
               vertical: 15.0,
               onPress: () {
-                Navigator.pushNamed(context, '/deleteFlat');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => DeleteFlat(flatData)));
               },
             ),
             RoundedButton(
@@ -59,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
               width: size.width*0.7,
               vertical: 15.0,
               onPress: () {
-                Navigator.pushNamed(context, '/deleteAccount');
+                Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => DeleteAccount(flatData)));
               },
             ),
             RoundedButton(

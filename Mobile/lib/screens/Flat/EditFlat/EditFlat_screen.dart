@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
@@ -6,22 +7,23 @@ import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/checkBox.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/payments.dart';
 import 'package:planus/services/apiController.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 File image;
-int owner_id;
 bool isLoading = false;
 
-class AddFlat extends StatefulWidget {
-  final int user_id;
-  AddFlat(this.user_id);
+class EditFlat extends StatefulWidget {
+  final FlatInfo flatData;
+  EditFlat(this.flatData);
 
   @override
-  _AddFlatState createState() => _AddFlatState();
+  _EditFlatState createState() => _EditFlatState();
 }
 
 final flatNameController = TextEditingController();
@@ -45,7 +47,7 @@ final phonePriceController = TextEditingController();
 
 final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-class _AddFlatState extends State<AddFlat> {
+class _EditFlatState extends State<EditFlat> {
   bool isColdWater = false;
   bool isHotWater = false;
   bool isHeating = false;
@@ -58,12 +60,25 @@ class _AddFlatState extends State<AddFlat> {
 
   @override
   void initState() {
-    setState(() {
-      owner_id = widget.user_id;
-    });
-    //print('#######');
-    //print(owner_id);
-    //print('#######');
+    flatNameController.text = widget.flatData.name;
+    priceController.text = widget.flatData.price.toStringAsFixed(2);
+    areaController.text = widget.flatData.area.toString();
+    numberOfRoomsController.text = widget.flatData.rooms.toString();
+    localisationController.text = widget.flatData.localization;
+    settlementDayController.text = widget.flatData.settlement_day.toString();
+    settlementPeriodController.text = widget.flatData.billing_period.toString();
+
+
+    coldWaterPriceController.text = widget.flatData.cold_water==0.0 ? null : widget.flatData.cold_water.toStringAsFixed(2);
+    hotWaterPriceController.text = widget.flatData.hot_water==0.0 ? null : widget.flatData.hot_water.toStringAsFixed(2);
+    heatingPriceController.text = widget.flatData.heating==0.0 ? null : widget.flatData.heating.toStringAsFixed(2);
+    gasPriceController.text = widget.flatData.gas==0.0 ? null : widget.flatData.gas.toStringAsFixed(2);
+    electricityPriceController.text = widget.flatData.electricity==0.0 ? null : widget.flatData.electricity.toStringAsFixed(2);
+    rubbishPriceController.text = widget.flatData.rubbish==0.0 ? null : widget.flatData.rubbish.toStringAsFixed(2);
+    internetPriceController.text = widget.flatData.internet==0.0 ? null : widget.flatData.internet.toStringAsFixed(2);
+    tvPriceController.text = widget.flatData.tv==0.0 ? null : widget.flatData.tv.toStringAsFixed(2);
+    phonePriceController.text = widget.flatData.phone==0.0 ? null : widget.flatData.phone.toStringAsFixed(2);
+
     super.initState();
   }
 
@@ -87,7 +102,6 @@ class _AddFlatState extends State<AddFlat> {
       setState(() {
         isLoading = true;
       });
-      try{
         Map data = {
           'name': flatNameController.text,
           'price': priceController.text,
@@ -102,22 +116,28 @@ class _AddFlatState extends State<AddFlat> {
           'heating':heatingPriceController.text=='' ? null : heatingPriceController.text,
           'gas':gasPriceController.text=='' ? null : gasPriceController.text,
           'electricity': electricityPriceController.text=='' ? null : electricityPriceController.text,
-          'rubbish': rubbishPriceController.text=='' ?null: rubbishPriceController.text,
+          'rubbish': rubbishPriceController.text=='' ? null: rubbishPriceController.text,
           'internet': internetPriceController.text=='' ? null : internetPriceController.text,
           'tv': tvPriceController.text=='' ? null : tvPriceController.text,
           'phone': phonePriceController.text=='' ? null : phonePriceController.text,
-          'user_id': owner_id,
-          'image': convert.base64Encode(image.readAsBytesSync())
+          'user_id': widget.flatData.id_owner,
+          'id_apartment': widget.flatData.id_apartment,
+          //'image': convert.base64Encode(image.readAsBytesSync())  DO ZMIANY
         };
+        
         //print(data);
         var api = new Api();
-        var response = await api.createFlat(data);
+        var response = await api.editFlat(data);
         //print('#####');
         //print(response);
+        isLoading=false;
         if(response['message']=='OK'){
           isLoading=false;
+          SharedPreferences localStorage = await SharedPreferences.getInstance();
+          Map userData = jsonDecode(localStorage.getString('userData'));
+
           Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(userData)));
         }else{
           setState(() {
             isLoading=false;
@@ -134,26 +154,9 @@ class _AddFlatState extends State<AddFlat> {
                 )
             )
           );
-        }
-      }catch(e){
-        print(e);
-        setState(() {
-            isLoading=false;
-        });
-        _scaffoldKey.currentState.showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orange,
-              content: Text(
-                'Musisz wypełnić poprawnie wszystkie pola związane z danymi mieszkania, zdjęcie również jest wymagane',
-                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18
-                ),
-              )
-          )
-        );
       }
     }
+    
 
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -194,7 +197,7 @@ class _AddFlatState extends State<AddFlat> {
                         fontSize: 24,
                       ),
                       children: [
-                        TextSpan(text: "Utwórz "),
+                        TextSpan(text: "Edytuj "),
                         TextSpan(text: "mieszkanie", style: TextStyle(color: Colors.orange))
                       ]
                     ),
@@ -635,7 +638,7 @@ class _AddFlatState extends State<AddFlat> {
                       ),
                       SizedBox(height: size.height*0.01),
                       RoundedButton(
-                            text: "Utwórz mieszkanie",
+                            text: "Edytuj mieszkanie",
                             textColor: Colors.white,
                             color: Colors.orange.withOpacity(0.95),
                             onPress: (){

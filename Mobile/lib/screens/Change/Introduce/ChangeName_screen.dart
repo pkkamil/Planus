@@ -1,13 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeName extends StatelessWidget {
 
+  final FlatInfo flatData;
+
+  ChangeName(this.flatData);
+
   final usernameController = TextEditingController();
+  Map data;
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void dispose(){
@@ -23,6 +35,7 @@ class ChangeName extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
           child: Container(
             height: size.height,
@@ -62,9 +75,54 @@ class ChangeName extends StatelessWidget {
                             text: "Zmień imie",
                             color: Colors.orange.withOpacity(0.95),
                             textColor: Colors.white,
-                            onPress: (){
-                              print(usernameController.text);
-                              Navigator.pop(context);
+                            onPress: () async{
+                              if(usernameController.text!=null && usernameController.text.length>0){
+                                data = {
+                                'user_id': flatData.id_user,
+                                'name': usernameController.text
+                                };
+                                
+                                var api = new Api();
+                                var response = await api.changeName(data);
+                                
+                                if(response['Message']=='OK'){
+                                  SharedPreferences localStorage = await SharedPreferences.getInstance();
+                                  Map userData = jsonDecode(localStorage.getString('userData'));
+                                  
+                                  userData['name'] = usernameController.text;
+                                  localStorage.setString('userData', jsonEncode(userData));
+                                  
+                                  Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(userData)));
+                                }else{
+                                  _scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                  backgroundColor: Colors.orange,
+                                  content: Text(
+                                    response,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 18
+                                    ),
+                                    )
+                                  )
+                                );
+                                }
+                                
+                              }else{
+                                _scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                  backgroundColor: Colors.orange,
+                                  content: Text(
+                                    'Musisz wypełnić pole Imie',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 18
+                                    ),
+                                    )
+                                  )
+                                );
+                              }
                             },
                             width: size.width*0.7
                           ),             

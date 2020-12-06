@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:planus/screens/Change/Flat/Delete/deleteFlat_screen.dart';
+import 'package:planus/screens/Change/Password/changePassword_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -54,6 +56,48 @@ class Api{
   }
   joinFlat(data) async{
     String fullUrl = api + "api/apartment/rent";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  changeName(data) async{
+    String fullUrl = api + "api/change-name";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  changePassword(data) async{
+    String fullUrl = api + "api/change-password";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  changeEmail(data) async{
+    String fullUrl = api + "api/change-email";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  deleteFlat(data) async{
+    String fullUrl = api + "api/apartment/delete";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  deleteAccount(id) async{
+    String fullUrl = api + "api/account/delete";
+    var response = await post(fullUrl,
+    body: jsonEncode({'user_id':id}),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  editFlat(data) async{
+    String fullUrl = api + "api/apartment/edit";
     var response = await post(fullUrl,
     body: jsonEncode(data),
     headers:  await _setHeaders());

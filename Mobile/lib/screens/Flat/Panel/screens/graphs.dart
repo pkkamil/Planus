@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
 
 class GraphsScreen extends StatelessWidget {
+
+  final FlatInfo flatData;
+
+  GraphsScreen(this.flatData);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

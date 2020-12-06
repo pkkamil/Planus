@@ -3,6 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
 class Farawell extends StatelessWidget {
+
+  pushToWelcome (context) async{
+    await Future.delayed(Duration(seconds: 5));
+    Navigator.pushReplacementNamed(context, '/welcome');
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class Farawell extends StatelessWidget {
         DeviceOrientation.portraitDown,
     ]);
     Size size = MediaQuery.of(context).size;
-
+    pushToWelcome(context);
     return Scaffold(
       body: SingleChildScrollView(
           child: Container(

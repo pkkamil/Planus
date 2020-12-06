@@ -1,19 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeleteFlat extends StatelessWidget {
 
-  final String flat_name;
-  final String image;
+  final FlatInfo flatData;
 
-  const DeleteFlat({
-    Key key,
-    this.image = "assets/mieszkanie.png",
-    this.flat_name = "Osiedle\nfranciszkańskie",
-  }) : super(key: key);
+  DeleteFlat(this.flatData);
+
 
 
   @override
@@ -39,7 +40,7 @@ class DeleteFlat extends StatelessWidget {
                         children: [
                           SizedBox(height: size.height*0.05),
                           Text(
-                            flat_name.toUpperCase(),
+                            flatData.name.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.orange,
@@ -52,7 +53,7 @@ class DeleteFlat extends StatelessWidget {
                             height: size.width*0.6,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(image),
+                                image: NetworkImage(flatData.image),
                                 fit: BoxFit.cover
                               ),
                               boxShadow: [
@@ -94,8 +95,22 @@ class DeleteFlat extends StatelessWidget {
                             text: "Tak, usuń mieszkanie",
                             color: Colors.orange.withOpacity(0.95),
                             textColor: Colors.white,
-                            onPress: (){
-                              Navigator.popAndPushNamed(context, '/flats');
+                            onPress: () async{
+                              Map data = {
+                                'user_id': flatData.id_user,
+                                'id_apartment': flatData.id_apartment
+                              };
+                              print(data);
+                              var api = new Api();
+                              var response = await api.deleteFlat(data);
+                              print(response);
+                              if(response['message']=='OK'){
+                                  SharedPreferences localStorage = await SharedPreferences.getInstance();
+                                  Map userData = jsonDecode(localStorage.getString('userData'));
+                                  
+                                  Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(userData)));
+                              }
                             },
                             width: size.width*0.7
                           ),             
