@@ -293,6 +293,16 @@ button.disabled:hover {
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
 }
 
+button.danger {
+  transition: 0.6s background-color, 0.6s border-color, 0.6s box-shadow;
+}
+
+button.danger:hover {
+  background-color: #FF2E00;
+  border-color: #FF0000;
+  box-shadow: 0px 5px 7px red;
+}
+
 .welcome {
   width: 100%;
   height: 100vh;
@@ -1368,6 +1378,150 @@ button.disabled:hover {
 }
 
 .enter-counters .back i {
+  margin-right: 15px;
+}
+
+.edit-apartment .left-part label {
+  background-position: center;
+  background-size: cover;
+}
+
+.edit-apartment .right-part .public-checkbox {
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.edit-apartment .right-part .public-checkbox label {
+  color: #999;
+  font-size: 1.4em;
+}
+
+.edit-apartment .right-part .public-checkbox i {
+  color: #ffa500;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.edit-apartment .right-part .public-checkbox .checkbox {
+  font-size: 1.8em;
+  cursor: pointer;
+  transform: translateY(3px);
+}
+
+.edit-apartment .right-part .public-checkbox input {
+  margin-left: 11px;
+  font-size: 1em;
+}
+
+.edit-apartment .right-part .public-checkbox input[type=checkbox] {
+  display: none;
+}
+
+.edit-apartment .right-part .delete_apartment {
+  margin-top: 30px;
+}
+
+.settings-account {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  padding: 100px 100px 50px 100px;
+  align-items: center;
+  color: #555;
+}
+
+.settings-account section {
+  width: 50%;
+}
+
+.settings-account .left-part h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+}
+
+.settings-account .left-part h1 input {
+  color: #ffa500;
+  border: 0;
+  outline: none;
+  font-size: 2.5rem;
+  width: 200px;
+  border-bottom: 1px solid #999;
+}
+
+.settings-account .left-part h3 {
+  margin-top: 10px;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.settings-account .left-part h2 {
+  margin-top: 40px;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+.settings-account .left-part label {
+  display: inline-block;
+  font-size: 1.5em;
+}
+
+.settings-account .left-part .single-input {
+  display: block;
+  margin-top: 5px;
+}
+
+.settings-account .left-part .single-input:first-of-type {
+  margin-top: 10px;
+}
+
+.settings-account .left-part .single-input:last-of-type {
+  margin-bottom: 20px;
+}
+
+.settings-account .left-part .single-input input[type=email],
+.settings-account .left-part .single-input input[type=password] {
+  color: #ffa500;
+  padding: 2px 10px;
+  margin-left: 5px;
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #999;
+  font-size: 1.5rem;
+}
+
+.settings-account .left-part button {
+  margin-left: 0;
+}
+
+.settings-account .left-part .errors ul {
+  margin-top: 30px;
+  list-style: none;
+}
+
+.settings-account .left-part .errors ul li {
+  color: red;
+}
+
+.settings-account .right-part img {
+  width: 100%;
+}
+
+.settings-account .right-part .delete_account {
+  margin-top: 30px;
+  float: right;
+}
+
+.settings-account .back {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  top: 100px;
+  padding: 16px 45px;
+}
+
+.settings-account .back i {
   margin-right: 15px;
 }
 

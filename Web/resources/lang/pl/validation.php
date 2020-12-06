@@ -165,6 +165,8 @@ return [
         'internet' => 'internetu',
         'tv' => 'telewizji',
         'phone' => 'telefonu',
+        'new_password ' => 'Nowe hasło',
+        'confirm_password' => 'Nowe hasło'
     ],
 
 ];

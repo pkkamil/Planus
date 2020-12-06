@@ -199,13 +199,13 @@ class ApartmentController extends Controller
         $req -> price = str_replace(',', '.', $req -> price);
         $req -> price = (float)$req -> price;
         $req->validate([
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,bmp|max:10240',
             'name' => 'nullable|string|min:5',
             'localization' => 'nullable|string|min:5',
             'price' => ['nullable', 'regex:/^([0-9][0-9]{0,5}[.|,][0-9]{1,2}|[0-9]{1,6})$/'],
             'area' => 'nullable|numeric',
             'rooms' => 'nullable|numeric',
-            'settlement_day' => 'nullable|numeric|min:1|max:27',
+            'settlement_day' => 'nullable|numeric|min:1|max:28',
             'billing_period' => 'nullable',
             'billing_period' => 'nullable',
             'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
@@ -219,23 +219,36 @@ class ApartmentController extends Controller
             'phone' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
         ]);
         // Image
-        $img_name = Str::random(30);
-        $extension = $req -> image -> extension();
-        $req -> image -> storeAs('/public', "apartment/".$img_name."-bg.".$extension);
-        $url_bg = Storage::url("apartment/".$img_name."-bg.".$extension);
-        $apartment = Apartment::find($req -> id_apartment);
-        $apartment -> user_id = Auth::id();
-        $apartment -> name = $req -> name;
-        $apartment -> price = (int)$req -> price;
-        $apartment -> image = $url_bg;
-        if ($req -> public) {
-            $apartment -> public = False;
+        if ($req -> image) {
+            $img_name = Str::random(30);
+            $extension = $req -> image -> extension();
+            $req -> image -> storeAs('/public', "apartment/".$img_name."-bg.".$extension);
+            $url_bg = Storage::url("apartment/".$img_name."-bg.".$extension);
         }
-        $apartment -> area = (int)$req -> area;
-        $apartment -> rooms = (int)$req -> rooms;
-        $apartment -> localization = $req -> localization;
-        $apartment -> settlement_day = (int)$req -> settlement_day;
-        $apartment -> billing_period = (int)$req -> billing_period;
+        //
+
+        $apartment = Apartment::find($req -> id_apartment);
+        if ($req -> public)
+            $apartment -> public = 1;
+        else
+            $apartment -> public = 0;
+
+        if ($req -> name)
+            $apartment -> name = $req -> name;
+        if ($req -> price)
+            $apartment -> price = (int)$req -> price;
+        if ($req -> image)
+            $apartment -> image = $url_bg;
+        if ($req -> area)
+            $apartment -> area = (int)$req -> area;
+        if ($req -> rooms)
+            $apartment -> rooms = (int)$req -> rooms;
+        if ($req -> localization)
+            $apartment -> localization = $req -> localization;
+        if ($req -> settlement_day)
+            $apartment -> settlement_day = (int)$req -> settlement_day;
+        if ($req -> billing_period)
+            $apartment -> billing_period = (int)$req -> billing_period;
         if ($req -> cold_water and $req -> cold_water_active)
             $apartment -> cold_water = (float)$req -> cold_water;
         if ($req -> hot_water and $req -> hot_water_active)
@@ -255,7 +268,7 @@ class ApartmentController extends Controller
         if ($req -> phone and $req -> phone_active)
             $apartment -> phone = (float)$req -> phone;
         $apartment -> save();
-        return redirect('/mieszkanie/'.$apartment -> id_apartment);
+        return redirect('/panel/mieszkanie/'.$apartment -> id_apartment);
     }
 
     public function code() {

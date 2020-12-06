@@ -6,10 +6,11 @@
 @section('content')
 <form class="add-apartment edit-apartment" action="{{ route('edit') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="id_apartment" value="{{ $apartment -> id_apartment }}">
     <section class="left-part">
         <h2>Edytuj <span class="orange-text">mieszkanie</span></h2>
             <div class="image">
-                <label for="image" style="background-image: url({{ $apartment -> image }})" @error('image') style="border: 1px solid #F00" @enderror></label>
+                <label for="image" style="background-image: url({{ $apartment -> image }})" @error('image') style="border: 1px solid #F00" @enderror><i class="fas fa-image" style="display: none"></i></label>
                 <input id="image" type="file" @error('image') is-invalid @enderror" name="image" onchange="changeImageStatus()">
             </div>
             <span class="name">
@@ -100,10 +101,12 @@
     </section>
     <section class="right-part">
         <img src="{{ asset('resources/img/svg/add.svg') }}" alt="">
-        <label for="public">Publiczne <span class="orange-text">mieszkanie</span>:</label>
-        <input type="checkbox" name="phone_active" @if ($apartment -> public) checked @endif>
-        <i class="far fa-check-circle checkbox"></i>
-        <button type="submit">Zedytuj mieszkanie</button>
+        <div class="public-checkbox">
+            <label for="public">Publiczne <span class="orange-text">mieszkanie</span>:</label>
+            <input type="checkbox" name="public" @if ($apartment -> public) checked @endif>
+            <i class="far fa-check-circle checkbox"></i>
+        </div>
+        <button type="submit">Zapisz zmiany</button>
         @if ($errors->any())
             <div class="errors">
                 <ul>
@@ -113,14 +116,15 @@
                 </ul>
             </div>
         @endif
-    </section>
     <a href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/usun_mieszkanie') }}"><button type="button" class="delete_apartment"><i class="fas fa-trash-alt"></i> Usuń mieszkanie</button></a>
+    </section>
 </form>
 
 <script>
 function changeImageStatus() {
     document.querySelector('.image label').style.background = 'transparent'
     document.querySelector('.image label').style.border = '4px solid #FFA500'
+    document.querySelector('.image label i').style.display = 'block'
     document.querySelector('.image label i').style.color = '#FFA500'
 }
 

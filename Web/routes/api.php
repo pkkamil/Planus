@@ -19,11 +19,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('register', 'api\AuthController@register');
-Route::post('setName', 'api\AuthController@setName');
+Route::post('set-name', 'api\AuthController@setName');
+Route::post('change-name', 'api\AuthController@changeName');
+Route::post('change-email', 'api\AuthController@changeEmail');
+Route::post('change-password', 'api\AuthController@changePassword');
 Route::post('login', 'api\AuthController@login');
 Route::get('apartments/{id?}', 'api\ApartmentApiController@index');
 Route::get('apartments/paginate/{items?}', 'api\ApartmentApiController@paginate');
 Route::post('apartment/create', 'api\ApartmentApiController@create');
+Route::post('apartment/edit', 'api\ApartmentApiController@edit');
+Route::post('apartment/delete', 'api\ApartmentApiController@delete');
 Route::post('apartment/rent', 'api\ApartmentApiController@rent');
 Route::post('apartment/enter-counters', 'api\CounterApiController@store');
 Route::get('apartment/last-counter/{id}', 'api\CounterApiController@index');
