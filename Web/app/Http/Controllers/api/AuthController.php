@@ -80,7 +80,7 @@ class AuthController extends Controller
     }
 
     public function delete(Request $req) {
-        Auth::destroy($req -> user_id);
+        User::destroy($req -> user_id);
         return response()->json(['Message' => 'OK']);
     }
 }

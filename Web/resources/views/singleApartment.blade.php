@@ -25,14 +25,13 @@
     </article>
     <article class="dimmer">
         <section class="modal">
+            <img style="width: 30%" src="{{ asset('resources/img/svg/modal-rent.svg') }}" alt="">
             <h2>Czy jesteś pewien?</h2>
             <h4>Właściciel mieszkania zostanie o tym poinformowany, po czym skontaktuje się z tobą.</h4>
             <a href="{{ route('informOwner') }}"><button>Wynajmij</button></a>
             <button onclick="hideModal()">Zrezygnuj</button>
         </section>
     </article>
-@endsection
-
 <script>
     function showModal() {
         document.querySelector('.dimmer').style.display = 'flex'
@@ -42,3 +41,4 @@
         document.querySelector('.dimmer').style.display = 'none'
     }
 </script>
+@endsection

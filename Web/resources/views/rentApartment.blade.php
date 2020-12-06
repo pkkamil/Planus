@@ -24,5 +24,15 @@
             <img src="{{ asset('resources/img/svg/rent.svg') }}" alt="">
         </section>
     </article>
+    <script>
+
+        function showModal() {
+            document.querySelector('.dimmer').style.display = 'flex'
+        }
+
+        function hideModal() {
+            document.querySelector('.dimmer').style.display = 'none'
+        }
+    </script>
 @endsection
 

@@ -56,6 +56,8 @@ Route::middleware(['introduced', 'auth'])->group(function () {
     Route::post('/panel/dodaj', 'ApartmentController@add')->name('add');
 
     Route::get('/panel/mieszkanie/{id}', 'ApartmentController@apartmentDetails');
+    Route::post('/panel/mieszkanie/{id}/nowy_mieszkaniec', 'ApartmentController@createMember');
+    Route::get('/panel/mieszkanie/{id}/usun_mieszkanca/{user_id}', 'ApartmentController@deleteMember');
     Route::get('/panel/mieszkanie/{id}/edycja', 'ApartmentController@editPage');
     Route::post('/panel/mieszkanie/edycja', 'ApartmentController@edit')->name('edit');
     Route::get('/panel/mieszkanie/{id}/usun_mieszkanie', 'ApartmentController@delete');

@@ -52,7 +52,7 @@ class UserController extends Controller
     }
 
     public function delete() {
-        Auth::destroy(Auth::id());
+        User::destroy(Auth::id());
         return redirect('/');
     }
 }

@@ -270,6 +270,11 @@
                 right: 50px
                 width: 520px
                 height: 405px
+    .dimmer
+        & .modal
+            & button:first-of-type
+                margin-right: auto
+
 
 @media screen and (max-width: 711px)
     button
@@ -385,8 +390,6 @@
             button
                 margin: 0 auto
                 margin-top: 20px
-                &:first-of-type
-                    margin-right: 0px
     .add-apartment
         padding: 100px 30px 40px 30px
 
@@ -525,8 +528,11 @@
             padding: 40px 40px
             h2
                 font-size: 1.2em
+                margin-top: 0
             h4
                 font-size: 1em
+            & img
+                display: none
 
     .add-apartment
         & .left-part
@@ -540,6 +546,8 @@
                     transform: translate(35px, -50%)
                 & input
                     font-size: .8em
+        & .back
+            display: none
 
 @media screen and (max-width: 400px)
     .rent-apartment

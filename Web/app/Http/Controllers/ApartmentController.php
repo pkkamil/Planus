@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Counter;
+use App\User;
 use DateTime;
 
 
@@ -286,5 +287,29 @@ class ApartmentController extends Controller
         if(Apartment::find($id) -> user_id == Auth::id())
             Apartment::destroy($id);
         return redirect('/panel');
+    }
+
+    public function createMember(Request $req, $id) {
+        if(Apartment::find($id) -> user_id == Auth::id()) {
+            $req->validate([
+                'name' => 'required|string|min:2|max:15',
+            ]);
+            $user = new User;
+            $user -> name = $req -> name;
+            $user -> save();
+            DB::table('apartment_user')->insert(
+                ['apartment_id_apartment' => $id, 'user_id' => $user -> id]
+            );
+        }
+        return redirect('/panel/mieszkanie/'.$id);
+    }
+
+    public function deleteMember($id, $user_id) {
+        if(Apartment::find($id) -> user_id == Auth::id()) {
+            DB::table('apartment_user')->where('user_id', $user_id)->where('apartment_id_apartment', $id)->delete();
+            if (User::find($user_id) -> email == null)
+                User::destroy($user_id);
+        }
+        return redirect('/panel/mieszkanie/'.$id);
     }
 }

@@ -116,8 +116,18 @@
                 </ul>
             </div>
         @endif
-    <a href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/usun_mieszkanie') }}"><button type="button" class="delete_apartment"><i class="fas fa-trash-alt"></i> Usuń mieszkanie</button></a>
+        <button type="button" class="delete_apartment" onclick="showModal()"><i class="fas fa-trash-alt"></i> Usuń mieszkanie</button>
     </section>
+    <a href="{{ url()->previous() }}"><button class="back"><i class="fas fa-chevron-left"></i></button></a>
+    <article class="dimmer">
+        <section class="modal">
+            <img src="{{ asset('resources/img/svg/delete.svg') }}" alt="">
+            <h2>Próbujesz usunąć swoje <span class="orange-text">mieszkanie</span>.</h2>
+            <h4>Czy jesteś pewny?</h4>
+            <a href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/usun_mieszkanie') }}"><button type="button" class="danger">Usuń</button></a>
+            <button type="button" onclick="hideModal()">Zrezygnuj</button>
+        </section>
+    </article>
 </form>
 
 <script>
@@ -156,5 +166,12 @@ checkboxes.forEach(checkbox => {
     checkbox.addEventListener('click', changeCheckboxStatus)
 })
 
+    function showModal() {
+        document.querySelector('.dimmer').style.display = 'flex'
+    }
+
+    function hideModal() {
+        document.querySelector('.dimmer').style.display = 'none'
+    }
 </script>
 @endsection

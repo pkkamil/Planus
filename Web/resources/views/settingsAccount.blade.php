@@ -58,8 +58,9 @@
     </article>
     <article class="dimmer">
         <section class="modal">
-            <h2>Czy jesteś pewien?</h2>
-            <h4 style="color: #F00">Tego działania nie można cofnąć!</h4>
+            <img src="{{ asset('resources/img/svg/delete.svg') }}" alt="">
+            <h2>Próbujesz usunąć swoje <span class="orange-text">konto</span>.</h2>
+            <h4>Czy jesteś pewny?</h4>
             <a href="{{ url('/panel/ustawienia/usun_konto') }}"><button class="danger">Usuń</button></a>
             <button onclick="hideModal()">Zrezygnuj</button>
         </section>

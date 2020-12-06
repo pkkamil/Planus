@@ -256,8 +256,39 @@ class ApartmentApiController extends Controller
     }
 
     public function delete(Request $req) {
-        if(Apartment::find($req -> id_apartment) -> user_id == $req -> user_id)
-            Apartment::destroy($req -> id_apartment);
+        $apartment = Apartment::find($req -> id_apartment);
+        if ($apartment) {
+            if ($apartment -> user_id == $req -> user_id) {
+                Apartment::destroy($req -> id_apartment);
+                return response()->json(['message' => 'OK']);
+            } else
+                return response()->json(['message' => 'User is not authorized.']);
+        }
+        else
+            return response()->json(['message' => 'Apartment does not exist.']);
+    }
+
+    public function createMember(Request $req) {
+        if(Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
+            $req->validate([
+                'name' => 'required|string|min:2|max:15',
+            ]);
+            $user = new User;
+            $user -> name = $req -> name;
+            $user -> save();
+            DB::table('apartment_user')->insert(
+                ['apartment_id_apartment' => $req -> id_apartment, 'user_id' => $user -> id]
+            );
+        }
+        return response()->json(['message' => 'OK']);
+    }
+
+    public function deleteMember(Request $req) {
+        if(Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
+            DB::table('apartment_user')->where('user_id', $req -> user_id)->where('apartment_id_apartment', $req -> id_apartment)->delete();
+            if (User::find($req -> member_id) -> email == null)
+                User::destroy($req -> member_id);
+        }
         return response()->json(['message' => 'OK']);
     }
 }

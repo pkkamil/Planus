@@ -13,13 +13,14 @@
             <section class="list-of-members">
                 @foreach ($apartment -> roommates as $member)
                 <div class="single-member">
-                    <div class="circle">{{ $member -> name[0] }}</div>
+                    <div class="circle" onclick="showDeleteCircle(this)">{{ $member -> name[0] }}</div>
+                    <div class="circle-delete" onclick="window.location = {{ $apartment -> id_apartment }}+'/usun_mieszkanca/'+{{ $member -> id }};"><i class="fas fa-times"></i></div>
                     <p>{{ $member -> name }}</p>
                 </div>
                 @endforeach
                 @if ($apartment -> user_id == Auth::id())
                 <div class="single-member">
-                    <div class="circle-add"><i class="fas fa-plus"></i></div>
+                    <div class="circle-add" onclick="showModal()"><i class="fas fa-plus"></i></div>
                 </div>
                 @endif
             </section>
@@ -84,52 +85,119 @@
             </section>
         </section>
         <a href="{{ url('/panel') }}"><button class="back"><i class="fas fa-chevron-left"></i> Wróć do panelu</button></a>
+        <article class="dimmer">
+            <section class="modal add-members">
+                <section class="top-part">
+                    <section class="lp">
+                        <h2>Dodaj <span class="orange-text">mieszkańców</span></h2>
+                        <p>Aby dodać nowych mieszkańców, udostępnij swój <span class="orange-text">kod zaproszenia</span>.</p>
+                        <p class="code">Kod zaproszenia: <span class="orange-text">{{ $apartment -> invite_code }}</span></p>
+                    </section>
+                    <section class="rp">
+                        <p>Udostępnij swój <span class="orange-text">kod QR</span></p>
+                        <img style="width:128px;height:128px" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="">
+                    </section>
+                </section>
+                <form class="bp" method="POST" action="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/nowy_mieszkaniec') }}">
+                    @csrf
+                    <h2>Utwórz osobę <span class="orange-text">zamieszkującą</span></h2>
+                    <span class="single-input">
+                        <label for="name">Imie: </label>
+                        <input type="text" name="name" id="name">
+                    </span>
+                    <button type="submit">Dodaj</button>
+                </form>
+                <button class="close" type="button" onclick="hideModal()">Wróć</button>
+            </section>
+        </article>
     </article>
     <script>
-        const chart = new Chartisan({
-            el: '#chart',
-            url: 'http://planus.me/diagrams/sum_bill/' + {{$apartment -> id_apartment}},
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .minimalist()
-                .colors(['#FFA500']),
+        @if ($counters > 3)
+            const chart = new Chartisan({
+                el: '#chart',
+                url: 'http://planus.me/diagrams/sum_bill/' + {{$apartment -> id_apartment}},
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .minimalist()
+                    .colors(['#FFA500']),
+            })
+            const chart2 = new Chartisan({
+                el: '#chart2',
+                url: 'http://planus.me/diagrams/cold_water/' + {{$apartment -> id_apartment}},
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .minimalist()
+                    .colors(['#45D8E1']),
+            })
+            const chart3 = new Chartisan({
+                el: '#chart3',
+                url: 'http://planus.me/diagrams/hot_water/' + {{$apartment -> id_apartment}},
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .minimalist()
+                    .colors(['#FF0000']),
+            })
+            const chart4 = new Chartisan({
+                el: '#chart4',
+                url: 'http://planus.me/diagrams/gas/' + {{$apartment -> id_apartment}},
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .minimalist()
+                    .colors(['#56CA53']),
+            })
+            const chart5 = new Chartisan({
+                el: '#chart5',
+                url: 'http://planus.me/diagrams/electricity/' + {{$apartment -> id_apartment}},
+                hooks: new ChartisanHooks()
+                    .legend(false)
+                    .beginAtZero()
+                    .minimalist()
+                    .colors(['#FFD600']),
+            })
+        @endif
+        function showModal() {
+            document.querySelector('.dimmer').style.display = 'flex'
+        }
+
+        function hideModal() {
+            document.querySelector('.dimmer').style.display = 'none'
+        }
+
+        let allCircles = document.querySelectorAll('.circle-delete')
+
+        allCircles.forEach(circle => {
+            circle.addEventListener('click', () => {
+
+            })
         })
-        const chart2 = new Chartisan({
-            el: '#chart2',
-            url: 'http://planus.me/diagrams/cold_water/' + {{$apartment -> id_apartment}},
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .minimalist()
-                .colors(['#45D8E1']),
-        })
-        const chart3 = new Chartisan({
-            el: '#chart3',
-            url: 'http://planus.me/diagrams/hot_water/' + {{$apartment -> id_apartment}},
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .minimalist()
-                .colors(['#FF0000']),
-        })
-        const chart4 = new Chartisan({
-            el: '#chart4',
-            url: 'http://planus.me/diagrams/gas/' + {{$apartment -> id_apartment}},
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .minimalist()
-                .colors(['#56CA53']),
-        })
-        const chart5 = new Chartisan({
-            el: '#chart5',
-            url: 'http://planus.me/diagrams/electricity/' + {{$apartment -> id_apartment}},
-            hooks: new ChartisanHooks()
-                .legend(false)
-                .beginAtZero()
-                .minimalist()
-                .colors(['#FFD600']),
-        })
+
+        function showDeleteCircle(e) {
+            if (e.nextElementSibling.style.display == 'flex') {
+                hideDeleteCircle(e.nextElementSibling)
+            } else {
+                allCircles.forEach(circle => {
+                    if (circle.style.display == 'flex')
+                        hideDeleteCircle(circle)
+                })
+                e.nextElementSibling.style.display = 'flex'
+                $(e.nextElementSibling).animate({
+                    top: -1/2*$(e.nextElementSibling).height()
+                }, 500)
+            }
+        }
+
+        function hideDeleteCircle(e) {
+            $(e).animate({
+                top: 0
+            }, 500)
+            setTimeout(() => {
+                e.style.display = 'none'
+            }, 500)
+        }
+
     </script>
 @endsection
