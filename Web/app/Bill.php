@@ -13,4 +13,6 @@ class Bill extends Model
     public function apartment() {
         return $this->belongsTo('App\Apartment');
     }
+
+    public $timestamps = false;
 }

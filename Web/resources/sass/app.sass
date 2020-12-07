@@ -661,6 +661,8 @@ button.danger
                 color: $primary
                 font-weight: 400
                 font-size: 1.4em
+                text-align: center
+                padding: 0 20px
                 text-transform: uppercase
                 background-color: rgba(0,0,0,.4)
             & .layer
@@ -679,6 +681,8 @@ button.danger
                     text-transform: uppercase
                     font-weight: 400
                     font-size: 1.4em
+                    text-align: center
+                    padding: 0 20px
             &:hover .layer
                 opacity: 1
                 cursor: pointer
@@ -738,6 +742,40 @@ button.danger
         padding: 16px 45px
         & i
             margin-right: 15px
+
+.show-all
+    display: block
+    padding: 150px 80px 50px 60px
+    & h4, h2
+        padding-left: 20px
+    & .list-apartments
+        width: 100%
+        display: flex
+        flex-wrap: wrap
+        padding-right: 0
+        & .single-apartment
+            position: relative
+            margin-top: 20px
+            margin-left: 20px
+            width: calc(25% - 20px)
+            height: 300px
+            &:first-of-type
+                margin-left: 20px
+            & h3
+                font-size: 1.3em
+    & .layer
+        & h4
+            font-size: 1.3em
+
+    & .back
+        position: absolute
+        font-size: 1em
+        right: 50px
+        top: 100px
+        padding: 16px 45px
+        & i
+            margin-right: 15px
+
 
 .apartment-details
     width: 100%

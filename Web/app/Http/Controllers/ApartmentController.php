@@ -41,7 +41,7 @@ class ApartmentController extends Controller
             if ($apartment -> first() -> cold_water or $apartment -> first() -> hot_water or $apartment -> first() -> gas or $apartment -> first() -> electricity)
                 return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment.'/wstepne_liczniki');
         } else {
-            $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->orderBy('created_at', 'asc')->first();
+            $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $id)->orderBy('created_at', 'desc')->first();
             if (is_null($apartment -> first() -> cold_water) != is_null($lastCounter -> cold_water) or is_null($apartment -> first() -> hot_water) != is_null($lastCounter -> hot_water) or is_null($apartment -> first() -> gas) != is_null($lastCounter -> gas) or is_null($apartment -> first() -> electricity) != is_null($lastCounter -> electricity)) {
                 return redirect('/panel/mieszkanie/'.$apartment -> first() -> id_apartment.'/wstepne_liczniki');
             }
@@ -234,40 +234,51 @@ class ApartmentController extends Controller
         else
             $apartment -> public = 0;
 
-        if ($req -> name)
-            $apartment -> name = $req -> name;
-        if ($req -> price)
-            $apartment -> price = (int)$req -> price;
+        $apartment -> name = $req -> name;
+        $apartment -> price = (int)$req -> price;
         if ($req -> image)
             $apartment -> image = $url_bg;
-        if ($req -> area)
-            $apartment -> area = (int)$req -> area;
-        if ($req -> rooms)
-            $apartment -> rooms = (int)$req -> rooms;
-        if ($req -> localization)
-            $apartment -> localization = $req -> localization;
-        if ($req -> settlement_day)
-            $apartment -> settlement_day = (int)$req -> settlement_day;
-        if ($req -> billing_period)
-            $apartment -> billing_period = (int)$req -> billing_period;
+        $apartment -> area = (int)$req -> area;
+        $apartment -> rooms = (int)$req -> rooms;
+        $apartment -> localization = $req -> localization;
+        $apartment -> settlement_day = (int)$req -> settlement_day;
+        $apartment -> billing_period = (int)$req -> billing_period;
         if ($req -> cold_water and $req -> cold_water_active)
             $apartment -> cold_water = (float)$req -> cold_water;
+        else
+            $apartment -> cold_water = NULL;
         if ($req -> hot_water and $req -> hot_water_active)
             $apartment -> hot_water = (float)$req -> hot_water;
+        else
+            $apartment -> hot_water = NULL;
         if ($req -> heating and $req -> heating_active)
             $apartment -> heating = (float)$req -> heating;
+        else
+            $apartment -> heating = NULL;
         if ($req -> gas and $req -> gas_active)
             $apartment -> gas = (float)$req -> gas;
+        else
+            $apartment -> gas = NULL;
         if ($req -> electricity and $req -> electricity_active)
             $apartment -> electricity = (float)$req -> electricity;
+        else
+            $apartment -> electricity = NULL;
         if ($req -> rubbish and $req -> rubbish_active)
             $apartment -> rubbish = (float)$req -> rubbish;
+        else
+            $apartment -> rubbish = NULL;
         if ($req -> internet and $req -> internet_active)
             $apartment -> internet = (float)$req -> internet;
+        else
+            $apartment -> internet = NULL;
         if ($req -> tv and $req -> tv_active)
             $apartment -> tv = (float)$req -> tv;
+        else
+            $apartment -> tv = NULL;
         if ($req -> phone and $req -> phone_active)
             $apartment -> phone = (float)$req -> phone;
+        else
+            $apartment -> phone = NULL;
         $apartment -> save();
         return redirect('/panel/mieszkanie/'.$apartment -> id_apartment);
     }

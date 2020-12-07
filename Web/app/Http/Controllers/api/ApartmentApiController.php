@@ -108,7 +108,8 @@ class ApartmentApiController extends Controller
         $apartment -> user_id = $req -> user_id;
         $apartment -> name = $req -> name;
         $apartment -> price = (int)$req -> price;
-        $apartment -> image = $url;
+        if ($img)
+            $apartment -> image = $url;
         $apartment -> area = (int)$req -> area;
         $apartment -> rooms = (int)$req -> rooms;
         $apartment -> localization = $req -> localization;
@@ -202,12 +203,16 @@ class ApartmentApiController extends Controller
             $url = Storage::url('apartment/'.$img_name."-bg.".$extension);
         }
         $apartment = Apartment::find($req -> id_apartment);
+        if ($req -> public)
+            $apartment -> public = 1;
+        else
+            $apartment -> public = 0;
 
         if ($req -> name)
             $apartment -> name = $req -> name;
         if ($req -> price)
             $apartment -> price = (int)$req -> price;
-        if ($req -> image)
+        if ($img)
             $apartment -> image = $url;
         if ($req -> area)
             $apartment -> area = (int)$req -> area;

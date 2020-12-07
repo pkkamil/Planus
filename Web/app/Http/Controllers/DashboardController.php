@@ -26,13 +26,18 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function index() {
         $owners = Auth::user() -> apartments;
-        // $owners = Apartment::where('user_id', Auth::id())->orderBy('created_at')->get();
         $rented = Auth::user() -> residents;
-        $apartments = $owners->concat($rented)->sortBy('created_at');
-        return view('dashboard')->with('apartments', $apartments->reverse());
+        $apartments = $owners->concat($rented)->sortBy('created_at')->reverse()->take(3);
+        return view('dashboard')->with('apartments', $apartments);
+    }
+
+    public function showAll() {
+        $owners = Auth::user() -> apartments;
+        $rented = Auth::user() -> residents;
+        $apartments = $owners->concat($rented)->sortBy('created_at')->reverse();
+        return view('showAll')->with('apartments', $apartments);
     }
 
 }

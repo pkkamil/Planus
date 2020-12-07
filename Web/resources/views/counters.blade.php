@@ -69,7 +69,7 @@
                         <h6>Zużycie <span style="color: #45D8E1">wody zimnej</span></h6>
                     </section>
                 @endif
-                @if (!$apartment -> hot_water)
+                @if ($apartment -> hot_water)
                     <section class="single-chart">
                         <div id="chart2" style="width: 300px; height: 300px"></div>
                         <h6>Zużycie <span style="color: #FF0000">wody ciepłej</span></h6>
@@ -105,7 +105,7 @@
                 .colors(['#45D8E1'])
             })
         @endif
-        @if (!$apartment -> hot_water)
+        @if ($apartment -> hot_water)
             let cH = parseFloat({!! $apartment -> hot_water !!})
             const chart2 = new Chartisan({
                 el: '#chart2',

@@ -13,8 +13,12 @@
             <section class="list-of-members">
                 @foreach ($apartment -> roommates as $member)
                 <div class="single-member">
-                    <div class="circle" onclick="showDeleteCircle(this)">{{ $member -> name[0] }}</div>
-                    <div class="circle-delete" onclick="window.location = {{ $apartment -> id_apartment }}+'/usun_mieszkanca/'+{{ $member -> id }};"><i class="fas fa-times"></i></div>
+                    @if (Auth::id() == $apartment -> user_id or $member -> id == Auth::id())
+                        <div class="circle" onclick="showDeleteCircle(this)">{{ $member -> name[0] }}</div>
+                        <div class="circle-delete" onclick="window.location = {{ $apartment -> id_apartment }}+'/usun_mieszkanca/'+{{ $member -> id }};"><i class="fas fa-times"></i></div>
+                    @else
+                        <div class="circle">{{ $member -> name[0] }}</div>
+                    @endif
                     <p>{{ $member -> name }}</p>
                 </div>
                 @endforeach
@@ -54,7 +58,7 @@
                                 <div id="chart2" style="width: 250px; height: 200px"></div>
                             </section>
                         @endif
-                        @if (!$apartment -> hot_water)
+                        @if ($apartment -> hot_water)
                             <section class="single-chart">
                                 <h6>Koszt <span style="color: #F00">wody ciepłej</span><br>w ciągu ostatnich miesięcy</h6>
                                 <div id="chart3" style="width: 250px; height: 200px"></div>
@@ -122,42 +126,50 @@
                     .minimalist()
                     .colors(['#FFA500']),
             })
-            const chart2 = new Chartisan({
-                el: '#chart2',
-                url: 'http://planus.me/diagrams/cold_water/' + {{$apartment -> id_apartment}},
-                hooks: new ChartisanHooks()
-                    .legend(false)
-                    .beginAtZero()
-                    .minimalist()
-                    .colors(['#45D8E1']),
-            })
-            const chart3 = new Chartisan({
-                el: '#chart3',
-                url: 'http://planus.me/diagrams/hot_water/' + {{$apartment -> id_apartment}},
-                hooks: new ChartisanHooks()
-                    .legend(false)
-                    .beginAtZero()
-                    .minimalist()
-                    .colors(['#FF0000']),
-            })
-            const chart4 = new Chartisan({
-                el: '#chart4',
-                url: 'http://planus.me/diagrams/gas/' + {{$apartment -> id_apartment}},
-                hooks: new ChartisanHooks()
-                    .legend(false)
-                    .beginAtZero()
-                    .minimalist()
-                    .colors(['#56CA53']),
-            })
-            const chart5 = new Chartisan({
-                el: '#chart5',
-                url: 'http://planus.me/diagrams/electricity/' + {{$apartment -> id_apartment}},
-                hooks: new ChartisanHooks()
-                    .legend(false)
-                    .beginAtZero()
-                    .minimalist()
-                    .colors(['#FFD600']),
-            })
+            @if ($apartment -> cold_water)
+                const chart2 = new Chartisan({
+                    el: '#chart2',
+                    url: 'http://planus.me/diagrams/cold_water/' + {{$apartment -> id_apartment}},
+                    hooks: new ChartisanHooks()
+                        .legend(false)
+                        .beginAtZero()
+                        .minimalist()
+                        .colors(['#45D8E1']),
+                })
+            @endif
+            @if ($apartment -> hot_water)
+                const chart3 = new Chartisan({
+                    el: '#chart3',
+                    url: 'http://planus.me/diagrams/hot_water/' + {{$apartment -> id_apartment}},
+                    hooks: new ChartisanHooks()
+                        .legend(false)
+                        .beginAtZero()
+                        .minimalist()
+                        .colors(['#FF0000']),
+                })
+            @endif
+            @if ($apartment -> gas)
+                const chart4 = new Chartisan({
+                    el: '#chart4',
+                    url: 'http://planus.me/diagrams/gas/' + {{$apartment -> id_apartment}},
+                    hooks: new ChartisanHooks()
+                        .legend(false)
+                        .beginAtZero()
+                        .minimalist()
+                        .colors(['#56CA53']),
+                })
+            @endif
+            @if ($apartment -> electricity)
+                const chart5 = new Chartisan({
+                    el: '#chart5',
+                    url: 'http://planus.me/diagrams/electricity/' + {{$apartment -> id_apartment}},
+                    hooks: new ChartisanHooks()
+                        .legend(false)
+                        .beginAtZero()
+                        .minimalist()
+                        .colors(['#FFD600']),
+                })
+            @endif
         @endif
         function showModal() {
             document.querySelector('.dimmer').style.display = 'flex'

@@ -37,7 +37,7 @@
                     @endif
                 </section>
                 @if (count($apartments) > 2)
-                    <button>Zobacz wszystkie</button>
+                    <a href="{{ route('showAll') }}"><button>Zobacz wszystkie</button></a>
                 @endif
                 @if (count($apartments) == 1)
                     <h3>Mieszkańcy</h3>
