@@ -18,7 +18,7 @@ class _LoadingState extends State<Loading> {
 
   void checkConnection() async {
     try{
-      Response response = await get("$api");
+      Response response = await get("$api"+'api/apartments');
       if(response.statusCode==200){
         setupWelcomeScreen();
       }
@@ -46,7 +46,7 @@ class _LoadingState extends State<Loading> {
     await Future.delayed(Duration(seconds: 1));
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var userData = localStorage.getString('userData');
-
+    //localStorage.setString('userData', null);
 
     //print('######');
     //print(userData);

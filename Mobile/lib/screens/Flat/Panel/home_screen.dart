@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.payments),
-              label: "Płatności",
+              label: "Podsumowanie",
               backgroundColor: Colors.orange,
             ),
             BottomNavigationBarItem(

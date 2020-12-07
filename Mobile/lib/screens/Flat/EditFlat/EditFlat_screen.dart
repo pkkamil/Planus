@@ -8,12 +8,14 @@ import 'package:planus/components/checkBox.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/screens/Flat/Panel/screens/Counters/InitialCounters_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/payments.dart';
 import 'package:planus/services/apiController.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart';
 
 File image;
 bool isLoading = false;
@@ -57,9 +59,13 @@ class _EditFlatState extends State<EditFlat> {
   bool isInternet = false;
   bool isTv = false;
   bool isPhone = false;
+  bool isPublic;
 
   @override
   void initState() {
+
+    isPublic = widget.flatData.isPublic;
+
     flatNameController.text = widget.flatData.name;
     priceController.text = widget.flatData.price.toStringAsFixed(2);
     areaController.text = widget.flatData.area.toString();
@@ -102,6 +108,10 @@ class _EditFlatState extends State<EditFlat> {
       setState(() {
         isLoading = true;
       });
+
+        var imageGet = await get(widget.flatData.image);
+        String networkImageBytes = convert.base64Encode(imageGet.bodyBytes);
+
         Map data = {
           'name': flatNameController.text,
           'price': priceController.text,
@@ -122,7 +132,8 @@ class _EditFlatState extends State<EditFlat> {
           'phone': phonePriceController.text=='' ? null : phonePriceController.text,
           'user_id': widget.flatData.id_owner,
           'id_apartment': widget.flatData.id_apartment,
-          //'image': convert.base64Encode(image.readAsBytesSync())  DO ZMIANY
+          'public': isPublic ? 1 : 0,
+          'image': (image!=null) ? convert.base64Encode(image.readAsBytesSync()) : networkImageBytes
         };
         
         //print(data);
@@ -131,13 +142,31 @@ class _EditFlatState extends State<EditFlat> {
         //print('#####');
         //print(response);
         isLoading=false;
+
+        List mediaControllers = [coldWaterPriceController, hotWaterPriceController, gasPriceController, electricityPriceController];
+
+        for(int i=0; i<mediaControllers.length;i++){
+          if(mediaControllers[i].text==''){
+            mediaControllers[i].text='0.0';
+          }else{
+            mediaControllers[i].text = mediaControllers[i].text.replaceAll(',','.');
+          }
+          //print(mediaControllers[i].text);
+        }
+
         if(response['message']=='OK'){
           isLoading=false;
-          SharedPreferences localStorage = await SharedPreferences.getInstance();
-          Map userData = jsonDecode(localStorage.getString('userData'));
+          if(widget.flatData.cold_water!=double.parse(coldWaterPriceController.text) || widget.flatData.hot_water!=double.parse(hotWaterPriceController.text) || widget.flatData.gas!=double.parse(gasPriceController.text) || widget.flatData.electricity!=double.parse(electricityPriceController.text)){
+            Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InitialCounters(widget.flatData.id_user,widget.flatData.id_apartment)));
+          }else{
+            SharedPreferences localStorage = await SharedPreferences.getInstance();
+            Map response = jsonDecode(localStorage.getString('userData'));
 
-          Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(userData)));
+            Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+          }
+          
         }else{
           setState(() {
             isLoading=false;
@@ -220,12 +249,11 @@ class _EditFlatState extends State<EditFlat> {
                             height: 100,
                             decoration: BoxDecoration(
                               color: Colors.orange,
-                              borderRadius: BorderRadius.circular(100)
-                            ),
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.white,
-                              size: 70,
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(width: 1.0, color: Colors.orange),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.flatData.image)
+                              )
                             ),
                           ) :
                           Container(
@@ -636,9 +664,38 @@ class _EditFlatState extends State<EditFlat> {
                           )
                         ],
                       ),
+                      Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.fromLTRB(30, 30, 15, 30),
+                            child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 18,
+                                ),
+                                children: [
+                                  TextSpan(text: "Publiczne "),
+                                  TextSpan(text: "mieszkanie", style: TextStyle(color: Colors.orange)),
+                                  TextSpan(text: ":")
+                                ]
+                              ),
+                            ),
+                          ),
+                          FlatCheckBox(
+                            isSelected: widget.flatData.isPublic,
+                            onTap: () {
+                              setState(() {
+                                isPublic = !isPublic;
+                              });
+                            }
+                          ),
+                        ],
+                      ),
                       SizedBox(height: size.height*0.01),
                       RoundedButton(
-                            text: "Edytuj mieszkanie",
+                            text: "Zapisz zmiany",
                             textColor: Colors.white,
                             color: Colors.orange.withOpacity(0.95),
                             onPress: (){

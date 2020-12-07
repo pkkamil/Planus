@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class FlatCheckBox extends StatefulWidget {
 
   final Function onTap;
+  final bool isSelected;
 
   const FlatCheckBox({
     Key key,
-    this.onTap
+    this.onTap,
+    this.isSelected=false
   }) : super(key: key);
   @override
   _FlatCheckBoxState createState() => _FlatCheckBoxState();
@@ -15,7 +17,11 @@ class FlatCheckBox extends StatefulWidget {
 class _FlatCheckBoxState extends State<FlatCheckBox> {
 
   bool _isSelected = false;
-
+  @override
+  void initState() {
+    _isSelected = widget.isSelected;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
