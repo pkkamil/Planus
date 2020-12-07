@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
+    protected $primaryKey = 'id_bill';
+
     public function additional_fees() {
         return $this->hasMany('App\Fee');
     }

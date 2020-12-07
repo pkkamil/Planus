@@ -56,15 +56,12 @@ Route::middleware(['introduced', 'auth'])->group(function () {
         Route::get('/panel', 'DashboardController@index')->name('dashboard');
         Route::get('/panel/wszystkie-mieszkania', 'DashboardController@showAll')->name('showAll');
 
-
         Route::get('/panel/mieszkanie/{id}', 'ApartmentController@apartmentDetails');
         Route::post('/panel/mieszkanie/{id}/nowy_mieszkaniec', 'ApartmentController@createMember');
         Route::get('/panel/mieszkanie/{id}/usun_mieszkanca/{user_id}', 'ApartmentController@deleteMember');
         Route::get('/panel/mieszkanie/{id}/edycja', 'ApartmentController@editPage');
         Route::post('/panel/mieszkanie/edycja', 'ApartmentController@edit')->name('edit');
         Route::get('/panel/mieszkanie/{id}/usun_mieszkanie', 'ApartmentController@delete');
-
-        Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
 
         Route::get('/panel/mieszkanie/{id}/liczniki', 'CounterController@create');
         Route::post('/panel/mieszkanie/liczniki', 'CounterController@store')->name('enterCounters');
@@ -76,6 +73,10 @@ Route::middleware(['introduced', 'auth'])->group(function () {
 
         Route::get('/panel/mieszkanie/{id}/wstepne_liczniki', 'CounterController@firstInput');
         Route::post('/panel/mieszkanie/wstepne_liczniki', 'CounterController@initialCounters')->name('initialCounters');
+
+        Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
+        Route::get('/panel/mieszkanie/{id}/rachunki/{id_bill}', 'BillController@show');
+        Route::post('/panel/mieszkanie/{id}/rachunki/{id_bill}dodaj_oplate', 'BillController@addFee');
     });
 });
 

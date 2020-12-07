@@ -78,6 +78,15 @@
                 width: 720px
                 height: 605px
 
+    .all-bills
+        & .list-of-bills
+            & .single-bill
+                height: 250px
+                & h3
+                    font-size: 1.6em
+                & h4
+                    font-size: 1.2em
+
 @media screen and (max-width: 1300px)
     .add-apartment
         padding: 100px 100px 50px 100px
@@ -110,6 +119,11 @@
         padding: 130px 60px 50px 50px
         & .list-apartments
             & .single-apartment
+                width: calc(33% - 20px)
+    .all-bills
+        padding: 130px 60px 50px 50px
+        & .list-of-bills
+            & .single-bill
                 width: calc(33% - 20px)
 
 @media screen and (max-width: 1040px)
@@ -152,7 +166,8 @@
         display: block
         padding: 120px 50px 50px 40px
 
-
+    .all-bills
+        padding: 120px 50px 50px 40px
 
 @media screen and (max-width: 976px)
     .logo
@@ -233,6 +248,13 @@
         & .list-apartments
             & .single-apartment
                 width: calc(50% - 20px)
+
+    .all-bills
+        padding: 120px 50px 50px 40px
+        & .list-of-bills
+            & .single-bill
+                width: calc(50% - 20px)
+
 
 @media screen and (max-width: 920px)
     button
@@ -373,6 +395,24 @@
         & .back
             position: static
             margin-bottom: 20px
+            width: 180px
+            text-align: center
+
+    .all-bills
+        padding: 100px 40px 50px 30px
+        & h2
+            text-align: center
+            padding-left: 0
+        & .list-of-bills
+            & .single-bill
+                margin-top: 15px
+                margin-left: 15px
+                width: calc(50% - 15px)
+        & .back
+            position: static
+            margin-bottom: 20px
+            width: 180px
+            text-align: center
 
 
 @media screen and (max-width: 650px)
@@ -414,6 +454,15 @@
                 height: 400px
                 &:first-of-type
                     margin-left: 0
+
+    .all-bills
+        padding: 90px 40px 50px 40px
+        & h2
+            font-size: 2em
+        & .list-of-bills
+            & .single-bill
+                margin-left: 0px
+                width: 100%
 
 
 @media screen and (max-width: 550px)
@@ -549,6 +598,11 @@
             & .single-apartment
                 height: 300px
 
+    .all-bills
+        padding: 90px 30px 50px 30px
+        & h2
+            font-size: 1.8em
+
 @media screen and (max-width: 420px)
     .article-title
         font-size: 2.3em
@@ -626,7 +680,6 @@
             & .single-apartment
                 height: 230px
 
-
 @media screen and (max-width: 350px)
     .article-title
         font-size: 2em
@@ -664,6 +717,9 @@
         & .list-apartments
             & .single-apartment
                 height: 300px
+
+    .all-bills
+        padding: 90px 20px 50px 20px
 
 @media screen and (max-width: 300px)
     .login-section

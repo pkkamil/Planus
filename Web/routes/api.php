@@ -36,3 +36,5 @@ Route::post('apartment/rent', 'api\ApartmentApiController@rent');
 Route::post('apartment/enter-counters', 'api\CounterApiController@store');
 Route::post('apartment/enter-initial-counters', 'api\CounterApiController@initialCounters');
 Route::get('apartment/last-counter/{id}', 'api\CounterApiController@index');
+Route::get('apartment/bill/{id}', 'api\BillApiController@index');
+Route::get('apartment/statistics/{id}', 'api\BillApiController@statistics');

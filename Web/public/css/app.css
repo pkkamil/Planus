@@ -138,6 +138,7 @@ nav ul li a:hover::after {
 
 nav.orange {
   background-color: #ffa500;
+  border-bottom: 1px solid #FFF;
 }
 
 nav.orange ul li a {
@@ -258,7 +259,8 @@ a {
   color: #FFF;
 }
 
-button {
+button,
+a.button {
   display: block;
   color: #FFF;
   text-transform: uppercase;
@@ -273,7 +275,8 @@ button {
   transition: 0.6s box-shadow, 0.6s background-color;
 }
 
-button:hover {
+button:hover,
+a.button:hover {
   cursor: pointer;
   background-color: #ff9500;
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.6);
@@ -1690,6 +1693,72 @@ button.danger:hover {
   margin-right: 15px;
 }
 
+.all-bills {
+  width: 100%;
+  min-height: 90vh;
+  padding: 150px 60px 50px 80px;
+}
+
+.all-bills h2 {
+  color: #555;
+  font-size: 2.3em;
+  font-weight: 400;
+  padding-left: 20px;
+}
+
+.all-bills .list-of-bills {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 0;
+}
+
+.all-bills .list-of-bills .single-bill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #ffa500;
+  position: relative;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: calc(25% - 20px);
+  height: 300px;
+  transition: 1s background;
+}
+
+.all-bills .list-of-bills .single-bill h3,
+.all-bills .list-of-bills .single-bill h4 {
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.all-bills .list-of-bills .single-bill h3 {
+  font-size: 1.8em;
+}
+
+.all-bills .list-of-bills .single-bill h4 {
+  font-size: 1.3em;
+}
+
+.all-bills .list-of-bills .single-bill:hover {
+  background: #ff9500;
+}
+
+.all-bills .back {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  top: 100px;
+  padding: 16px 45px;
+}
+
+.all-bills .back i {
+  margin-right: 15px;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -1807,6 +1876,18 @@ button.danger:hover {
     width: 720px;
     height: 605px;
   }
+
+  .all-bills .list-of-bills .single-bill {
+    height: 250px;
+  }
+
+  .all-bills .list-of-bills .single-bill h3 {
+    font-size: 1.6em;
+  }
+
+  .all-bills .list-of-bills .single-bill h4 {
+    font-size: 1.2em;
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -1854,6 +1935,14 @@ button.danger:hover {
   }
 
   .show-all .list-apartments .single-apartment {
+    width: calc(33% - 20px);
+  }
+
+  .all-bills {
+    padding: 130px 60px 50px 50px;
+  }
+
+  .all-bills .list-of-bills .single-bill {
     width: calc(33% - 20px);
   }
 }
@@ -1922,6 +2011,10 @@ button.danger:hover {
 
   .show-all {
     display: block;
+    padding: 120px 50px 50px 40px;
+  }
+
+  .all-bills {
     padding: 120px 50px 50px 40px;
   }
 }
@@ -2034,6 +2127,14 @@ button.danger:hover {
   }
 
   .show-all .list-apartments .single-apartment {
+    width: calc(50% - 20px);
+  }
+
+  .all-bills {
+    padding: 120px 50px 50px 40px;
+  }
+
+  .all-bills .list-of-bills .single-bill {
     width: calc(50% - 20px);
   }
 }
@@ -2230,6 +2331,30 @@ button.danger:hover {
   .show-all .back {
     position: static;
     margin-bottom: 20px;
+    width: 180px;
+    text-align: center;
+  }
+
+  .all-bills {
+    padding: 100px 40px 50px 30px;
+  }
+
+  .all-bills h2 {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .all-bills .list-of-bills .single-bill {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: calc(50% - 15px);
+  }
+
+  .all-bills .back {
+    position: static;
+    margin-bottom: 20px;
+    width: 180px;
+    text-align: center;
   }
 }
 
@@ -2289,6 +2414,19 @@ button.danger:hover {
 
   .show-all .list-apartments .single-apartment:first-of-type {
     margin-left: 0;
+  }
+
+  .all-bills {
+    padding: 90px 40px 50px 40px;
+  }
+
+  .all-bills h2 {
+    font-size: 2em;
+  }
+
+  .all-bills .list-of-bills .single-bill {
+    margin-left: 0px;
+    width: 100%;
   }
 }
 
@@ -2500,6 +2638,14 @@ button.danger:hover {
   .show-all .list-apartments .single-apartment {
     height: 300px;
   }
+
+  .all-bills {
+    padding: 90px 30px 50px 30px;
+  }
+
+  .all-bills h2 {
+    font-size: 1.8em;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -2662,6 +2808,10 @@ button.danger:hover {
 
   .show-all .list-apartments .single-apartment {
     height: 300px;
+  }
+
+  .all-bills {
+    padding: 90px 20px 50px 20px;
   }
 }
 

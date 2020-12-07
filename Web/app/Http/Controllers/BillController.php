@@ -6,6 +6,8 @@ use App\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
+use App\Counter;
+use stdClass;
 
 class BillController extends Controller
 {
@@ -14,8 +16,73 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index($id) {
+        $apartment = Apartment::find($id);
+        $bills = Bill::where('id_apartment', $id)->orderBy('settlement_date', 'desc')->select('id_bill', 'sum', 'settlement_date')->get();
+        $arrayOfBills = [];
+        foreach ($bills as $bill) {
+            $num = date("m", strtotime($bill -> settlement_date));
+            switch ($num) {
+                case 1:
+                    $month = 'Stycznia';
+                break;
+                case 2:
+                    $month = 'Lutego';
+                break;
+                case 3:
+                    $month = 'Marca';
+                break;
+                case 4:
+                    $month = 'Kwietnia';
+                break;
+                case 5:
+                    $month = 'Maja';
+                break;
+                case 6:
+                    $month = 'Czerwca';
+                break;
+                case 7:
+                    $month = 'Lipca';
+                break;
+                case 8:
+                    $month = 'Sierpnia';
+                break;
+                case 9:
+                    $month = 'Września';
+                break;
+                case 10:
+                    $month = 'Października';
+                break;
+                case 11:
+                    $month = 'Listopada';
+                break;
+                case 12:
+                    $month = 'Grudnia';
+                break;
+            }
+            if (date("d", strtotime($bill -> settlement_date))[0] == '0')
+                $date = str_replace(0, '', date("d", strtotime($bill -> settlement_date))).' '.$month.' '.date("Y", strtotime($bill -> settlement_date));
+            else
+                $date = date("d", strtotime($bill -> settlement_date)).' '.$month.' '.date("Y", strtotime($bill -> settlement_date));
 
+            $bills = new stdClass();
+            $bills -> id = $bill -> id_bill;
+            $bills -> sum = (int)$bill -> sum;
+            $bills -> date = $date;
+            array_push($arrayOfBills, $bills);
+        }
+
+        $bills = $arrayOfBills;
+
+        return view('allBills', compact('bills'));
+    }
+
+    public function show($id, $id_bill) {
+        $bill = Bill::find($id_bill);
+        $apartment = Apartment::find($id);
+        $counters = Counter::where('id_apartment', $id)->get();
+        $counters = count($counters);
+        return view('bill', compact('bill', 'apartment', 'counters'));
     }
 
 
@@ -23,48 +90,4 @@ class BillController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $req)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Bill  $bill
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bill $bill)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bill  $bill
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $req, Bill $bill)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Bill  $bill
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Bill $bill)
-    {
-        //
-    }
 }

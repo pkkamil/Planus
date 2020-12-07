@@ -214,34 +214,47 @@ class ApartmentApiController extends Controller
             $apartment -> price = (int)$req -> price;
         if ($img)
             $apartment -> image = $url;
-        if ($req -> area)
-            $apartment -> area = (int)$req -> area;
-        if ($req -> rooms)
-            $apartment -> rooms = (int)$req -> rooms;
-        if ($req -> localization)
-            $apartment -> localization = $req -> localization;
-        if ($req -> settlement_day)
-            $apartment -> settlement_day = (int)$req -> settlement_day;
-        if ($req -> billing_period)
-            $apartment -> billing_period = (int)$req -> billing_period;
+        $apartment -> area = (int)$req -> area;
+        $apartment -> rooms = (int)$req -> rooms;
+        $apartment -> localization = $req -> localization;
+        $apartment -> settlement_day = (int)$req -> settlement_day;
+        $apartment -> billing_period = (int)$req -> billing_period;
         if ($req -> cold_water)
             $apartment -> cold_water = (float)$req -> cold_water;
+        else
+            $apartment -> cold_water = NULL;
         if ($req -> hot_water)
             $apartment -> hot_water = (float)$req -> hot_water;
+        else
+            $apartment -> hot_water = NULL;
         if ($req -> heating)
             $apartment -> heating = (float)$req -> heating;
+        else
+            $apartment -> heating = NULL;
         if ($req -> gas)
             $apartment -> gas = (float)$req -> gas;
+        else
+            $apartment -> gas = NULL;
         if ($req -> electricity)
             $apartment -> electricity = (float)$req -> electricity;
+        else
+            $apartment -> electricity = NULL;
         if ($req -> rubbish)
             $apartment -> rubbish = (float)$req -> rubbish;
+        else
+            $apartment -> rubbish = NULL;
         if ($req -> internet)
             $apartment -> internet = (float)$req -> internet;
+        else
+            $apartment -> internet = NULL;
         if ($req -> tv)
             $apartment -> tv = (float)$req -> tv;
+        else
+            $apartment -> tv = NULL;
         if ($req -> phone)
             $apartment -> phone = (float)$req -> phone;
+        else
+            $apartment -> phone = NULL;
         $apartment -> save();
         return response()->json(['message' => 'OK', 'apartment_id' => $apartment -> id_apartment]);
     }

@@ -5,7 +5,7 @@
 @extends('layouts.app')
 @section('content')
     <article class="activity-center show-all">
-        <a href="{{ url('/panel') }}"><button class="back"><i class="fas fa-chevron-left"></i> Wróć</button></a>
+        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć</a>
         <h2>Witaj, <span class="orange-text">{{ Auth::user() -> name }}</span>! <i class="far fa-bell"></i></h2>
         <h4>Twoje <span class="orange-text">mieszkania</span></h4>
             <section class="list-apartments">

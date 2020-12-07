@@ -1,7 +1,5 @@
 <?php
-    $scrollTo = '';
     $active = 'add';
-    $headerClass = '';
 ?>
 
 @extends('layouts.app')

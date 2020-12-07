@@ -8,7 +8,6 @@ use App\Apartment;
 use Chartisan\PHP\Chartisan;
 use App\Bill;
 
-
 class DashboardController extends Controller
 {
     /**

@@ -1,6 +1,4 @@
 <?php
-    $scrollTo = '';
-    $active = '';
     $headerClass = 'apartment';
 ?>
 
