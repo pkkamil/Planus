@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:planus/components/RoundedButton.dart';
@@ -41,7 +42,7 @@ class _InitialCountersState extends State<InitialCounters> {
   void _getFlatData(apartment_id,user_id) async{
     var api = new Api();
     var response = await api.listFlats(user_id);
-    print(response);
+    //print(response);
     if(response['statusCode']==200){
       List flats = response['body']['data'];
       int flats_count = flats.length;
@@ -160,6 +161,7 @@ class _InitialCountersState extends State<InitialCounters> {
                         color: Colors.white,
                         textColor: Colors.black,
                         iconColor: Colors.grey[900],
+                        icon: CupertinoIcons.burst_fill,
                         onChanged: (val) {
                           setState(() {
                             gasCountController = double.parse(val);

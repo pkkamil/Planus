@@ -178,489 +178,79 @@ class _AddFlatState extends State<AddFlat> {
     else{
       return Scaffold(
       key: _scaffoldKey,
-      body: SingleChildScrollView(
-          child: Column(
-              children: [Stack(
-              children: [
-                GoBackButton(
-                  isLeft: false,
-                  pop: true,
-                ),
-                Positioned(
-                  top: 60,
-                  left: 30,
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        color: Colors.grey[900],
-                        fontSize: 24,
-                      ),
-                      children: [
-                        TextSpan(text: "Utwórz "),
-                        TextSpan(text: "mieszkanie", style: TextStyle(color: Colors.orange))
-                      ]
-                    ),
-                  )
-                ),
-                Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: size.height*0.17),
-                        GestureDetector(
-                          onTap: () {
-                            getImage(false);
-                          },
-                          onLongPress: () {
-                            getImage(true);
-                          },
-                          child: image==null ? Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.orange,
-                              borderRadius: BorderRadius.circular(100)
-                            ),
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.white,
-                              size: 70,
-                            ),
-                          ) :
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.orange,
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(width: 1.0, color: Colors.orange),
-                              image: DecorationImage(
-                                image: FileImage(image)
-                              )
-                            ),
-                          ) 
-                        ),
-                        SizedBox(height:size.height*0.02),
-                        RoundedInput(
-                          controller: flatNameController,
-                          width: size.width*0.7,
-                          placeholder: "Nazwa mieszkania",
-                          icon: Icons.home,
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          onCompleted: () {
-                            if(flatNameController.text.length<5){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "Nazwa powinna mieć minimum 5 znaków",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: localisationController,
-                          width: size.width*0.7,
-                          placeholder: "Lokalizacja",
-                          icon: Icons.gps_fixed,
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          onCompleted: () {
-                            if(localisationController.text.length<5){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "Lokalizacja powinna mieć minimum 5 znaków",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: priceController,
-                          isNumber: true,
-                          width: size.width*0.7,
-                          placeholder: "Cena wynajmu [zł]",
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          icon: Icons.monetization_on, //inna
-                          onChanged: (x) {
-                            if(priceController.text.length==0){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "To pole jest wymagane",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: areaController,
-                          isNumber: true,
-                          width: size.width*0.7,
-                          placeholder: "Powierzchnia [m\u00B2]",
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          icon: Icons.crop_square, //inna
-                          onChanged: (x) {
-                            if(areaController.text.length==0){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "To pole jest wymagane",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: numberOfRoomsController,
-                          width: size.width*0.7,
-                          isNumber: true,
-                          placeholder: "Liczba pokoi",
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          icon: Icons.airline_seat_individual_suite,
-                          onChanged: (x) {
-                            if(numberOfRoomsController.text.length==0){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "To pole jest wymagane",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: settlementDayController,
-                          width: size.width*0.7,
-                          isNumber: true,
-                          placeholder: "Dzień rozliczenia",
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          icon: Icons.event,
-                          onChanged: (x) {
-                            if(int.parse(settlementDayController.text)>28){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "Maksymalny dzień rozliczenia to 28",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                        RoundedInput(
-                          controller: settlementPeriodController,
-                          width: size.width*0.7,
-                          isNumber: true,
-                          placeholder: "Okres rozliczenia [miesiące]",
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          iconColor: Colors.black,
-                          icon: Icons.date_range,
-                          onChanged: (x) {
-                            if(settlementPeriodController.text.length==0){
-                              _scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.orange,
-                                  content: Text(
-                                    "To pole jest wymagane",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
-                                  )
-                              )
-                            );
-                            }
-                          },
-                        ),
-                    ]
+      body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+                children: [Stack(
+                children: [
+                  GoBackButton(
+                    isLeft: false,
+                    pop: true,
                   ),
-                ),
-              ]
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
-                child: RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontSize: 24,
-                    ),
-                    children: [
-                      TextSpan(text: "Opłaty za "),
-                      TextSpan(text: "media", style: TextStyle(color: Colors.orange))
-                    ]
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 25),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Column(
+                  Positioned(
+                    top: 60,
+                    left: 30,
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          color: Colors.grey[900],
+                          fontSize: 24,
+                        ),
                         children: [
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: coldWaterPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za 1m\u00B3 wody zimnej",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.opacity, //inna
-                                    isEnabled: isColdWater,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: hotWaterPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za 1m\u00B3 wody ciepłej",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.waves,
-                                    isEnabled: isHotWater,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: heatingPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za ogrzewanie [roczna]",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.local_fire_department,
-                                    isEnabled: isHeating,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: gasPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za 1kWh gazu",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: CupertinoIcons.burst,
-                                    isEnabled: isGas,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: electricityPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za 1kWh prądu",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.flash_on,
-                                    isEnabled: isElectricity,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: rubbishPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za śmieci/os",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.delete, //inna
-                                    isEnabled: isRubbish,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: internetPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za internet",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.router, //inna
-                                    isEnabled: isInternet,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: tvPriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za telewizję",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.live_tv,
-                                    isEnabled: isTv,
-                                  ),
-                                  RoundedInput(
-                                    isNumber: true,
-                                    controller: phonePriceController,
-                                    width: size.width*0.7,
-                                    placeholder: "Cena za telefon",
-                                    color: Colors.white,
-                                    textColor: Colors.black,
-                                    iconColor: Colors.black,
-                                    icon: Icons.phone,
-                                    isEnabled: isPhone,
-                                  ),
-                                
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isColdWater = !isColdWater;
-                                        coldWaterPriceController.text = '';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isHotWater = !isHotWater;
-                                        hotWaterPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isHeating = !isHeating;
-                                        heatingPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isGas = !isGas;
-                                        gasPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isElectricity = !isElectricity;
-                                        electricityPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isRubbish = !isRubbish;
-                                        rubbishPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isInternet = !isInternet;
-                                        internetPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isTv = !isTv;
-                                        tvPriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                  FlatCheckBox(
-                                    onTap: () {
-                                      setState(() {
-                                        isPhone = !isPhone;
-                                        phonePriceController.text='';
-                                      });
-                                    }
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
+                          TextSpan(text: "Utwórz "),
+                          TextSpan(text: "mieszkanie", style: TextStyle(color: Colors.orange))
+                        ]
                       ),
-                      SizedBox(height: size.height*0.01),
-                      RoundedButton(
-                            text: "Utwórz mieszkanie",
-                            textColor: Colors.white,
-                            color: Colors.orange.withOpacity(0.95),
-                            onPress: (){
-                              List inputs = [image,flatNameController,localisationController, priceController,areaController,numberOfRoomsController,settlement_day,settlementPeriodController];
-                              List labels = ['Zdjęcie','Nazwa mieszkania','Lokalizacja','Cena wynajmu','Powierzchnia','Liczba pokoi','Dzień rozliczenia','Okres rozliczenia'];
-                              for(int x=0;x<inputs.length;x++){
-                                if(x == ''||x==null){
-                                  var i = labels[x];
-                                  _scaffoldKey.currentState.showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors.orange,
-                                        content: Text(
-                                          "Pole $i jest wymagane.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 18
-                                          ),
-                                        )
-                                    )
-                                  );
-                                }
-                              }
+                    )
+                  ),
+                  Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: size.height*0.17),
+                          GestureDetector(
+                            onTap: () {
+                              getImage(false);
+                            },
+                            onLongPress: () {
+                              getImage(true);
+                            },
+                            child: image==null ? Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.white,
+                                size: 70,
+                              ),
+                            ) :
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(width: 1.0, color: Colors.orange),
+                                image: DecorationImage(
+                                  image: FileImage(image)
+                                )
+                              ),
+                            ) 
+                          ),
+                          SizedBox(height:size.height*0.02),
+                          RoundedInput(
+                            controller: flatNameController,
+                            width: size.width*0.7,
+                            placeholder: "Nazwa mieszkania",
+                            icon: Icons.home,
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            onCompleted: () {
                               if(flatNameController.text.length<5){
                                 _scaffoldKey.currentState.showSnackBar(
                                 SnackBar(
@@ -675,6 +265,17 @@ class _AddFlatState extends State<AddFlat> {
                                 )
                               );
                               }
+                            },
+                          ),
+                          RoundedInput(
+                            controller: localisationController,
+                            width: size.width*0.7,
+                            placeholder: "Lokalizacja",
+                            icon: Icons.gps_fixed,
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            onCompleted: () {
                               if(localisationController.text.length<5){
                                 _scaffoldKey.currentState.showSnackBar(
                                 SnackBar(
@@ -689,17 +290,422 @@ class _AddFlatState extends State<AddFlat> {
                                 )
                               );
                               }
-                              sendData();
                             },
-                            width: size.width*0.7
+                          ),
+                          RoundedInput(
+                            controller: priceController,
+                            isNumber: true,
+                            width: size.width*0.7,
+                            placeholder: "Cena wynajmu [zł]",
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            icon: Icons.monetization_on, //inna
+                            onChanged: (x) {
+                              if(priceController.text.length==0){
+                                _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orange,
+                                    content: Text(
+                                      "To pole jest wymagane",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    )
+                                )
+                              );
+                              }
+                            },
+                          ),
+                          RoundedInput(
+                            controller: areaController,
+                            isNumber: true,
+                            width: size.width*0.7,
+                            placeholder: "Powierzchnia [m\u00B2]",
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            icon: Icons.crop_square, //inna
+                            onChanged: (x) {
+                              if(areaController.text.length==0){
+                                _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orange,
+                                    content: Text(
+                                      "To pole jest wymagane",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    )
+                                )
+                              );
+                              }
+                            },
+                          ),
+                          RoundedInput(
+                            controller: numberOfRoomsController,
+                            width: size.width*0.7,
+                            isNumber: true,
+                            placeholder: "Liczba pokoi",
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            icon: Icons.airline_seat_individual_suite,
+                            onChanged: (x) {
+                              if(numberOfRoomsController.text.length==0){
+                                _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orange,
+                                    content: Text(
+                                      "To pole jest wymagane",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    )
+                                )
+                              );
+                              }
+                            },
+                          ),
+                          RoundedInput(
+                            controller: settlementDayController,
+                            width: size.width*0.7,
+                            isNumber: true,
+                            placeholder: "Dzień rozliczenia",
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            icon: Icons.event,
+                            onChanged: (x) {
+                              if(int.parse(settlementDayController.text)>28){
+                                _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orange,
+                                    content: Text(
+                                      "Maksymalny dzień rozliczenia to 28",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    )
+                                )
+                              );
+                              }
+                            },
+                          ),
+                          RoundedInput(
+                            controller: settlementPeriodController,
+                            width: size.width*0.7,
+                            isNumber: true,
+                            placeholder: "Okres rozliczenia [miesiące]",
+                            color: Colors.white,
+                            textColor: Colors.black,
+                            iconColor: Colors.black,
+                            icon: Icons.date_range,
+                            onChanged: (x) {
+                              if(settlementPeriodController.text.length==0){
+                                _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orange,
+                                    content: Text(
+                                      "To pole jest wymagane",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    )
+                                )
+                              );
+                              }
+                            },
+                          ),
+                      ]
+                    ),
+                  ),
+                ]
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.grey[900],
+                        fontSize: 24,
                       ),
-                      SizedBox(height: size.height*0.05),
-                    ],
+                      children: [
+                        TextSpan(text: "Opłaty za "),
+                        TextSpan(text: "media", style: TextStyle(color: Colors.orange))
+                      ]
+                    ),
                   ),
                 ),
-              )
-            ]
-          ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: coldWaterPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za 1m\u00B3 wody zimnej",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.opacity, //inna
+                                      isEnabled: isColdWater,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: hotWaterPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za 1m\u00B3 wody ciepłej",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.waves,
+                                      isEnabled: isHotWater,
+                                    ),
+                                    /*
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: heatingPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za ogrzewanie [roczna]",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.local_fire_department,
+                                      isEnabled: isHeating,
+                                    ),
+                                    */
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: gasPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za 1kWh gazu",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: CupertinoIcons.burst,
+                                      isEnabled: isGas,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: electricityPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za 1kWh prądu",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.flash_on,
+                                      isEnabled: isElectricity,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: rubbishPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za śmieci/os",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.delete, //inna
+                                      isEnabled: isRubbish,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: internetPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za internet",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.router, //inna
+                                      isEnabled: isInternet,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: tvPriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za telewizję",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.live_tv,
+                                      isEnabled: isTv,
+                                    ),
+                                    RoundedInput(
+                                      isNumber: true,
+                                      controller: phonePriceController,
+                                      width: size.width*0.7,
+                                      placeholder: "Cena za telefon",
+                                      color: Colors.white,
+                                      textColor: Colors.black,
+                                      iconColor: Colors.black,
+                                      icon: Icons.phone,
+                                      isEnabled: isPhone,
+                                    ),
+                                  
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isColdWater = !isColdWater;
+                                          coldWaterPriceController.text = '';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isHotWater = !isHotWater;
+                                          hotWaterPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    /*
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isHeating = !isHeating;
+                                          heatingPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    */
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isGas = !isGas;
+                                          gasPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isElectricity = !isElectricity;
+                                          electricityPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isRubbish = !isRubbish;
+                                          rubbishPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isInternet = !isInternet;
+                                          internetPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isTv = !isTv;
+                                          tvPriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                    FlatCheckBox(
+                                      onTap: () {
+                                        setState(() {
+                                          isPhone = !isPhone;
+                                          phonePriceController.text='';
+                                        });
+                                      }
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(height: size.height*0.01),
+                        RoundedButton(
+                              text: "Utwórz mieszkanie",
+                              textColor: Colors.white,
+                              color: Colors.orange.withOpacity(0.95),
+                              onPress: (){
+                                List inputs = [image,flatNameController,localisationController, priceController,areaController,numberOfRoomsController,settlement_day,settlementPeriodController];
+                                List labels = ['Zdjęcie','Nazwa mieszkania','Lokalizacja','Cena wynajmu','Powierzchnia','Liczba pokoi','Dzień rozliczenia','Okres rozliczenia'];
+                                for(int x=0;x<inputs.length;x++){
+                                  if(x == ''||x==null){
+                                    var i = labels[x];
+                                    _scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.orange,
+                                          content: Text(
+                                            "Pole $i jest wymagane.",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 18
+                                            ),
+                                          )
+                                      )
+                                    );
+                                  }
+                                }
+                                if(flatNameController.text.length<5){
+                                  _scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.orange,
+                                      content: Text(
+                                        "Nazwa powinna mieć minimum 5 znaków",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18
+                                        ),
+                                      )
+                                  )
+                                );
+                                }
+                                if(localisationController.text.length<5){
+                                  _scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.orange,
+                                      content: Text(
+                                        "Lokalizacja powinna mieć minimum 5 znaków",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18
+                                        ),
+                                      )
+                                  )
+                                );
+                                }
+                                sendData();
+                              },
+                              width: size.width*0.7
+                        ),
+                        SizedBox(height: size.height*0.05),
+                      ],
+                    ),
+                  ),
+                )
+              ]
+            ),
+        ),
       ),
     );}
   }

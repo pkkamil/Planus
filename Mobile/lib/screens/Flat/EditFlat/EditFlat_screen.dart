@@ -506,6 +506,7 @@ class _EditFlatState extends State<EditFlat> {
                                     icon: Icons.waves,
                                     isEnabled: isHotWater,
                                   ),
+                                  /*
                                   RoundedInput(
                                     isNumber: true,
                                     controller: heatingPriceController,
@@ -517,6 +518,7 @@ class _EditFlatState extends State<EditFlat> {
                                     icon: Icons.local_fire_department,
                                     isEnabled: isHeating,
                                   ),
+                                  */
                                   RoundedInput(
                                     isNumber: true,
                                     controller: gasPriceController,
@@ -604,6 +606,7 @@ class _EditFlatState extends State<EditFlat> {
                                       });
                                     }
                                   ),
+                                  /*
                                   FlatCheckBox(
                                     onTap: () {
                                       setState(() {
@@ -612,6 +615,7 @@ class _EditFlatState extends State<EditFlat> {
                                       });
                                     }
                                   ),
+                                  */
                                   FlatCheckBox(
                                     onTap: () {
                                       setState(() {

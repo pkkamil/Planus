@@ -77,7 +77,9 @@ class _HomeState extends State<Home> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: _body,
+      body: SafeArea(
+        child: _body,
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: Colors.orange[600], width: 2.0))),

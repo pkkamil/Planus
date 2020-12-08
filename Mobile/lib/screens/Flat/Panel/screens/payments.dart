@@ -394,7 +394,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
 
                             var api = new Api();
                             var response = await api.addToBill(data);
-                            
+                            //print(response);
                             if(response['message']=='OK'){
                               SharedPreferences localStorage = await SharedPreferences.getInstance();
                               Map response = jsonDecode(localStorage.getString('userData'));
@@ -480,7 +480,10 @@ class ItemCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: size.height*0.11,
+            //height: size.height*0.11,
+            constraints: BoxConstraints(
+              minHeight: size.height*0.11
+            ),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -502,7 +505,10 @@ class ItemCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  //width: size.width*0.45,
+                  //width: size.width*0.3, //zobaczyc na ip7
+                  constraints: BoxConstraints(
+                    maxWidth: 127
+                  ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   alignment: Alignment.center,
                   child: Column(

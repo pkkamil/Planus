@@ -82,71 +82,73 @@ class _IntroduceState extends State<Introduce> {
     return Scaffold(
       body: Builder(
         builder: (context) { return SingleChildScrollView(
-            child: Container(
-              height: size.height,
-                child: Stack(
-                  children: [
-                    Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(height: size.height*0.1),
-                            SvgPicture.asset(
-                              "assets/Name.svg",
-                              width: size.width*0.6,
-                            ),
-                            SizedBox(height:size.height*0.03),
-                            Text(
-                              "Przedstaw się",
-                              style: TextStyle(
-                                color: Colors.grey[900],
-                                fontSize: 24
+            child: SafeArea(
+              child: Container(
+                height: size.height,
+                  child: Stack(
+                    children: [
+                      Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(height: size.height*0.1),
+                              SvgPicture.asset(
+                                "assets/Name.svg",
+                                width: size.width*0.6,
                               ),
-                            ),
-                            SizedBox(height:size.height*0.05),
-                            RoundedInput(
-                              key: nameKey,
-                              controller: usernameController,
-                              width: size.width*0.7,
-                              placeholder: "Imie",
-                              color: Colors.white,
-                              textColor: Colors.black,
-                              iconColor: Colors.black,
-                            ),
-                            SizedBox(height: size.height*0.05),
-                            RoundedButton(
-                              text: "Zapisz",
-                              color: Colors.orange.withOpacity(0.95),
-                              textColor: Colors.white,
-                              onPress: (){
-                                if(usernameController.text.length==0){
-                                 Scaffold.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors.orange,
-                                      content: Text(
-                                        "Musisz wypełnić to pole",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 18
-                                      ),
+                              SizedBox(height:size.height*0.03),
+                              Text(
+                                "Przedstaw się",
+                                style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 24
+                                ),
+                              ),
+                              SizedBox(height:size.height*0.05),
+                              RoundedInput(
+                                key: nameKey,
+                                controller: usernameController,
+                                width: size.width*0.7,
+                                placeholder: "Imie",
+                                color: Colors.white,
+                                textColor: Colors.black,
+                                iconColor: Colors.black,
+                              ),
+                              SizedBox(height: size.height*0.05),
+                              RoundedButton(
+                                text: "Zapisz",
+                                color: Colors.orange.withOpacity(0.95),
+                                textColor: Colors.white,
+                                onPress: (){
+                                  if(usernameController.text.length==0){
+                                   Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.orange,
+                                        content: Text(
+                                          "Musisz wypełnić to pole",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18
+                                        ),
+                                        )
                                       )
-                                    )
-                                  );
-                                }else{
-                                Map data = {
-                                  "name":usernameController.text,
-                                  "email":registerData['email'],
-                                  "password": registerData['password'],
-                                  "password_confirmation": registerData['password_confirmation']
-                                };
-                                sendData(data); 
-                                }
-                              },
-                              width: size.width*0.7
-                            ),                  
-                          ],
-                      ),
-                  )]
+                                    );
+                                  }else{
+                                  Map data = {
+                                    "name":usernameController.text,
+                                    "email":registerData['email'],
+                                    "password": registerData['password'],
+                                    "password_confirmation": registerData['password_confirmation']
+                                  };
+                                  sendData(data); 
+                                  }
+                                },
+                                width: size.width*0.7
+                              ),                  
+                            ],
+                        ),
+                    )]
+                ),
               ),
             ),
         );}

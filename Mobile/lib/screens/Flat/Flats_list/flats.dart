@@ -96,7 +96,7 @@ class _FlatsState extends State<Flats> {
         );
     }else{
       return Scaffold(
-          body: SingleChildScrollView(
+          body: SafeArea(
             child: Container(
               height: size.height,
               child: Stack(
