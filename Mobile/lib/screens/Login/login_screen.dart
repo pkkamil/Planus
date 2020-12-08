@@ -163,6 +163,7 @@ class Login extends StatelessWidget {
                               width: size.width*0.7
                             ),
                             SizedBox(height: size.height*0.03),
+                            /*
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushReplacementNamed(context, '/remind');
@@ -175,6 +176,7 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                             )
+                            */
                       
                           ],
                       ),

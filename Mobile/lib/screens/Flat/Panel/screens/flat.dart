@@ -2,33 +2,68 @@ import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/circlePerson.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/screens/Flat/Panel/home_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
+import 'package:planus/services/apiController.dart';
 
-class FlatScreen extends StatelessWidget {
+class FlatScreen extends StatefulWidget {
   
   final FlatInfo flatData;
 
   FlatScreen(this.flatData);
 
-  int days = 0;
-  int months = 0;
+  @override
+  _FlatScreenState createState() => _FlatScreenState();
+}
 
-  //wyliczanie dni od aktualnej daty
+class _FlatScreenState extends State<FlatScreen> {
+  int days = 0;
+
+  int months = 0;
+  String name;
+
+  List residents = [];
+
+  @override
+  void dispose() {
+    residents = null;
+    super.dispose();
+  }
+
   void getTime(){
     var now = new DateTime.now();
 
-    DateTime onCreated = flatData.updated_at;
+    DateTime onCreated = widget.flatData.updated_at;
     
-    days = flatData.settlement_day-now.day;
+    days = widget.flatData.settlement_day-now.day;
     if(days<0)
       days = 30+days;
 
-    months = flatData.billing_period-now.difference(onCreated).inDays~/30;
+    months = widget.flatData.billing_period-now.difference(onCreated).inDays~/30-1;
+  }
+
+  void getResidents() async{
+    var api = new Api();
+    var response = await api.getResidents(widget.flatData.id_apartment);
+
+    if(response['statusCode']==200){
+      if(this.mounted){
+        setState(() {
+          residents = response['body']['roommates'];
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    getTime();
+    getResidents();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    getTime();
     //int days = 0;
     Size size = MediaQuery.of(context).size;
     return Center(
@@ -39,7 +74,7 @@ class FlatScreen extends StatelessWidget {
             Container(
               width: size.width*0.7,
               child: Text(
-                flatData.name.toUpperCase(),
+                widget.flatData.name.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.orange,
@@ -48,7 +83,7 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             Text(
-              flatData.localization,
+              widget.flatData.localization,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey[500],
@@ -61,7 +96,7 @@ class FlatScreen extends StatelessWidget {
               height: size.width*0.6,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(flatData.image),
+                  image: NetworkImage(widget.flatData.image),
                   fit: BoxFit.cover
                 ),
                 boxShadow: [
@@ -83,7 +118,7 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             Text(
-              (flatData.billing_period==1) ? 'miesiąc' : months.toString()+" miesiące",
+              (widget.flatData.billing_period==1) ? 'miesiąc' : months.toString()+" miesiące",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.orange,
@@ -125,20 +160,18 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height*0.03),
-            if(days!=0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0) && flatData.id_user==flatData.id_owner)RoundedButton(
+            if(days!=0 && (widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0) && widget.flatData.id_user==widget.flatData.id_owner)RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
               },
               isShadow: false,
             ),
-            if(days==0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0) && flatData.id_user==flatData.id_owner)RoundedButton(
+            if(days==0 && (widget.flatData.hot_water>0 || widget.flatData.cold_water>0 || widget.flatData.electricity>0 || widget.flatData.gas>0) && widget.flatData.id_user==widget.flatData.id_owner)RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
-                //Dodać id apartment
-                //Navigator.pushNamed(context, "/insertCounters");
-                Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(flatData.id_user, flatData.id_apartment)));
+                Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.flatData.id_user, widget.flatData.id_apartment)));
               },
               isShadow: false,
               textColor: Colors.orange,
@@ -161,11 +194,105 @@ class FlatScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                   child: Row(
                   children: [
-                    PersonCircle(size: size, name: "User1"),
-                    PersonCircle(size: size, name: "User2"),
-                    PersonCircle(size: size, name: "User3"),
-                    PersonCircle(size: size, name: "User4"),
-                    AddPersonCircle(size: size,)
+                    if(residents!=null) for(int i=0;i<residents.length;i++) PersonCircle(
+                      size: size, 
+                      name: residents[i]['name'],
+                      onTap: () {
+                        if(widget.flatData.id_user==widget.flatData.id_owner){
+                          String resident = residents[i]['name'];
+                          return showDialog(context: context,builder: (context) {
+                            return AlertDialog(
+                              title: Text('Czy chcesz wyrzucić użytkownika $resident z mieszkania?'),
+                              actions: [
+                              MaterialButton(
+                                elevation: 5.0,
+                                child: Text('Anuluj'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              MaterialButton(
+                                elevation: 5.0,
+                                child: Text(
+                                  'Potwierdź',
+                                  style: TextStyle(color: Colors.orange),
+                                ),
+                                onPressed: () async{
+                                  if(widget.flatData.id_user==widget.flatData.id_owner){
+                                    Map data = {
+                                      'member_id': residents[i]['id'],
+                                      'user_id': widget.flatData.id_user,
+                                      'id_apartment': widget.flatData.id_apartment
+                                    };
+                                    //print(data);
+                                    var api = new Api();
+                                    var response = await api.kickMember(data);
+
+                                    //print(response);
+
+                                    if(response['message']=='OK'){
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Home(widget.flatData)));
+                                    }
+                                  }
+                                },
+                              ),
+                            ],
+                            );
+                          });
+                        }
+                      },
+                    ),
+                    if(widget.flatData.id_user==widget.flatData.id_owner)AddPersonCircle(
+                      size: size,
+                      onTap: () {
+                        return showDialog(context: context,builder: (context) {
+                          return AlertDialog(
+                            title: Text('Wprowadź imię użytkownika'),
+                            content: TextField(
+                              cursorColor: Colors.orange,
+                              onChanged: (val) {
+                                name = val;
+                              },
+                            ),
+                            actions: [
+                              MaterialButton(
+                                elevation: 5.0,
+                                child: Text('Anuluj'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              MaterialButton(
+                                elevation: 5.0,
+                                child: Text(
+                                  'Potwierdź',
+                                  style: TextStyle(color: Colors.orange),
+                                ),
+                                onPressed: () async{
+                                  if(name.length>0){
+                                    Map data = {
+                                      'name': name,
+                                      'user_id': widget.flatData.id_user,
+                                      'id_apartment': widget.flatData.id_apartment
+                                    };
+                                    var api = new Api();
+                                    var response = await api.addMember(data);
+
+                                    //print(response);
+
+                                    if(response['message']=='OK'){
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Home(widget.flatData)));
+                                    }
+                                  }
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                      },
+                    )
                   ]
                 ),
               ),

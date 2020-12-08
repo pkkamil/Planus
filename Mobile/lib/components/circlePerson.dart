@@ -5,12 +5,14 @@ class PersonCircle extends StatelessWidget {
     Key key,
     this.image = "assets/avatar.png",
     this.size,
-    this.name
+    this.name,
+    this.onTap
   }) : super(key: key);
 
   final String image;
   final Size size;
   final String name;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +29,22 @@ class PersonCircle extends StatelessWidget {
               width: 2.0,
             ),
           ),         
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover
-                )
+          child: GestureDetector(
+            onTap: onTap,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.orange
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  name[0].toUpperCase(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24
+                  ),
+                ),
               ),
             ),
           )
@@ -55,10 +65,12 @@ class PersonCircle extends StatelessWidget {
 class AddPersonCircle extends StatelessWidget {
   const AddPersonCircle({
     Key key,
+    this.onTap,
     this.size
   }) : super(key: key);
 
   final Size size;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -75,16 +87,19 @@ class AddPersonCircle extends StatelessWidget {
               width: 2.0,
             ),
           ),         
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.orange
-              ),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 30,
+          child: GestureDetector(
+            onTap: onTap,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.orange
+                ),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30,
+                ),
               ),
             ),
           ),

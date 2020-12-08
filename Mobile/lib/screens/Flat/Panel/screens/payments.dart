@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:planus/components/RoundedButton.dart';
+import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:planus/services/apiController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentsScreen extends StatefulWidget {
 
@@ -23,23 +26,40 @@ var settlement_day;
 List<CircularStackEntry> data;
 List itemData;
 Map billData;
+int id_bill;
 
 bool _isLoading = true;
 bool _areCounters = true;
+
+String name;
+String price;
 
 class _PaymentsScreenState extends State<PaymentsScreen> {
 
   getData() async{
     var api = new Api();
+
     var response = await api.getBill(widget.flatData.id_apartment);
+
     //print(response['body']['bill']);
     setState(() {
+      if(response['statusCode']==500){
+        _isLoading=false;
+        _areCounters=false;
+      }
       if(response['statusCode']==200){
         billData = response['body']['bill'];
         if(response['body']['bill']==null){
           _isLoading=false;
           _areCounters=false;
         }else{
+        id_bill=billData['id_bill'];
+
+        double fee_sum=0;
+        for(int i=0;i<billData['additional_fees'].length;i++){
+          fee_sum+=double.parse(billData['additional_fees'][i]['price']);
+        }
+
         //print(billData);
         data = <CircularStackEntry>[
         new CircularStackEntry(
@@ -64,8 +84,10 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             new CircularSegmentEntry(double.parse(billData['tv']), Colors.blue[200]),
             //abonament
             new CircularSegmentEntry(double.parse(billData['phone']), Colors.yellow[200]),
+            //koszty dodatkowe
+            new CircularSegmentEntry(fee_sum, Colors.orange),
           ],
-          rankKey: 'Quarterly Profits',
+          rankKey: 'Summary',
         ),
         ];
 
@@ -163,6 +185,18 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             'unit':''
           },
         ]; 
+
+        for(int i=0;i<billData['additional_fees'].length;i++){
+          itemData.add({
+            'color': Colors.orange,
+            'icon': Icons.add, 
+            'text': billData['additional_fees'][i]['name'],
+            'price': billData['additional_fees'][i]['price'],
+            'isCounter':false,
+            'count': '',
+            'unit':''
+          });
+        }
         _isLoading=false;
         }
       };
@@ -287,7 +321,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                     TextSpan(text: "rachunku ", style: TextStyle(color: Colors.orange)),
                     ]
                   ),
-                ),
+                  ),
                 ),
                 SizedBox(height: size.height*0.02),
                 for(int i=0;i<itemData.length;i++) if(double.parse(itemData[i]['price'])>0)ItemCard(
@@ -300,7 +334,81 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   count: itemData[i]['count'],
                   unit: itemData[i]['unit'],
                 ), 
-                SizedBox(height: size.height*0.03),            
+                SizedBox(height: size.height*0.03),   
+                if(widget.flatData.id_user==widget.flatData.id_owner) Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width*0.9,
+                        alignment: Alignment.centerLeft,
+                        child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                          color: Colors.grey[900],
+                          fontSize: 24,
+                        ),
+                        children: [
+                          TextSpan(text: "Dodaj "),
+                          TextSpan(text: "opłatę ", style: TextStyle(color: Colors.orange)),
+                          ]
+                        ),
+                        ),
+                      ),
+                      SizedBox(height: size.height*0.03),
+                      RoundedInput(
+                        width: size.width*0.7,
+                        placeholder: "Nazwa opłaty",
+                        color: Colors.white,
+                        textColor: Colors.black,
+                        iconColor: Colors.black,
+                        icon: Icons.assignment,
+                        onChanged: (val){
+                          name = val;
+                        }
+                      ),
+                      RoundedInput(
+                        width: size.width*0.7,
+                        placeholder: "Wysokość opłaty",
+                        color: Colors.white,
+                        textColor: Colors.black,
+                        iconColor: Colors.black,
+                        icon: Icons.monetization_on,
+                        isNumber: true,
+                        onChanged: (val){
+                          price = val;
+                        },
+                      ),    
+                      SizedBox(height: size.height*0.03),      
+                      RoundedButton(
+                        width: size.width*0.7,
+                        text: "Dodaj",
+                        textColor: Colors.white,
+                        color: Colors.orange.withOpacity(0.95),
+                        onPress: () async{
+                          if(name.length>0 && price.length>0){
+                            Map data = {
+                              'id_bill': id_bill,
+                              'name': name,
+                              'price': price
+                            };
+
+                            var api = new Api();
+                            var response = await api.addToBill(data);
+                            
+                            if(response['message']=='OK'){
+                              SharedPreferences localStorage = await SharedPreferences.getInstance();
+                              Map response = jsonDecode(localStorage.getString('userData'));
+
+                              Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                              Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+                            }
+                          }
+                        }             
+                      ),
+                      SizedBox(height: size.height*0.05),
+                    ],
+                  ),
+                ),    
               ],
             ),
           ),
@@ -422,7 +530,7 @@ class ItemCard extends StatelessWidget {
                   width: size.width*0.3,
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "$price\zł", //zmiana ceny
+                    "$price\zł",
                     style: TextStyle(
                       fontSize: 18
                     ),

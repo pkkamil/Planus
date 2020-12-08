@@ -120,6 +120,33 @@ class Api{
     headers:  await _setHeaders());
     return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
   }
+  getResidents(id) async{
+    String fullUrl = api + "api/apartment/roommates/$id";
+    var response = await get(fullUrl,
+    headers:  await _setHeaders());
+    return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
+  }
+  addToBill(data) async{
+    String fullUrl = api + "api/bill/add";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  addMember(data) async{
+    String fullUrl = api + "api/apartment/member/create";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  kickMember(data) async{
+    String fullUrl = api + "api/apartment/member/delete";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
 
   _setHeaders() async {
     var headers = {

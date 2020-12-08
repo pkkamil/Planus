@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/screens/Change/Account/deleteAccount_screen.dart';
@@ -7,6 +9,7 @@ import 'package:planus/screens/Change/Password/changePassword_screen.dart';
 import 'package:planus/screens/Change/email/ChangeEmail_screen.dart';
 import 'package:planus/screens/Flat/EditFlat/EditFlat_screen.dart';
 import 'package:planus/screens/Flat/Flats_list/flats.dart';
+import 'package:planus/services/apiController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -64,6 +67,32 @@ class SettingsScreen extends StatelessWidget {
               vertical: 15.0,
               onPress: () {
                 Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => DeleteFlat(flatData)));
+              },
+            ),
+            if(flatData.id_owner!=flatData.id_user)RoundedButton(
+              horizontal: 0.0,
+              text: "Opuść mieszkanie",
+              width: size.width*0.7,
+              vertical: 15.0,
+              onPress: () async{
+                Map data = {
+                  'member_id': flatData.id_user,
+                  'user_id': flatData.id_owner,
+                  'id_apartment': flatData.id_apartment
+                };
+                print(data);
+                var api = new Api();
+                var response = await api.kickMember(data);
+
+                print(response);
+
+                if(response['message']=='OK'){
+                  SharedPreferences localStorage = await SharedPreferences.getInstance();
+                  Map response = jsonDecode(localStorage.getString('userData'));
+
+                  Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => Flats(response)));
+                }
               },
             ),
             RoundedButton(

@@ -100,10 +100,10 @@ class DeleteFlat extends StatelessWidget {
                                 'user_id': flatData.id_user,
                                 'id_apartment': flatData.id_apartment
                               };
-                              print(data);
+                              //print(data);
                               var api = new Api();
                               var response = await api.deleteFlat(data);
-                              print(response);
+                              //print(response);
                               if(response['message']=='OK'){
                                   SharedPreferences localStorage = await SharedPreferences.getInstance();
                                   Map userData = jsonDecode(localStorage.getString('userData'));
