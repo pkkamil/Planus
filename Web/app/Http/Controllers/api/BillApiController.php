@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Bill;
+use App\Fee;
 
 class BillApiController extends Controller
 {
@@ -28,47 +29,12 @@ class BillApiController extends Controller
         $electricity = [];
         $month = '';
         foreach ($bills as $bill) {
-            $num = date("m", strtotime($bill -> settlement_date));
-            switch ($num) {
-                case 1:
-                    $month = 'Styczeń';
-                break;
-                case 2:
-                    $month = 'Luty';
-                break;
-                case 3:
-                    $month = 'Marzec';
-                break;
-                case 4:
-                    $month = 'Kwiecień';
-                break;
-                case 5:
-                    $month = 'Maj';
-                break;
-                case 6:
-                    $month = 'Czerwiec';
-                break;
-                case 7:
-                    $month = 'Lipiec';
-                break;
-                case 8:
-                    $month = 'Sierpień';
-                break;
-                case 9:
-                    $month = 'Wrzesień';
-                break;
-                case 10:
-                    $month = 'Październik';
-                break;
-                case 11:
-                    $month = 'Listopad';
-                break;
-                case 12:
-                    $month = 'Grudzień';
-                break;
-            }
+            if (date("d", strtotime($bill -> settlement_date))[0] == '0')
+                $num = str_replace(0, '', date("m", strtotime($bill -> settlement_date)));
+            else
+                $num = date("m", strtotime($bill -> settlement_date));
             array_push($sums, $bill -> sum);
-            array_push($months, $month);
+            array_push($months, $num);
             if ($bill -> cold_water) {
                 array_push($cold_water, $bill -> cold_water);
             }
@@ -83,5 +49,16 @@ class BillApiController extends Controller
             }
         }
         return response()->json(['price_sums' => $sums, 'cold_water' => $cold_water, 'hot_water' => $hot_water, 'gas' => $gas, 'electricity' => $electricity, 'months' => $months]);
+    }
+
+    public function addFee(Request $req) {
+        $bill = Bill::find($req -> id_bill);
+        $fee = new Fee();
+        $fee -> name = $req -> name;
+        $fee -> price = $req -> price;
+        $fee -> id_bill = $req -> id_bill;
+        $fee -> save();
+        $bill -> sum += $req -> price;
+        $bill -> save();
     }
 }

@@ -76,12 +76,13 @@ Route::middleware(['introduced', 'auth'])->group(function () {
 
         Route::get('/panel/mieszkanie/{id}/rachunki', 'BillController@index');
         Route::get('/panel/mieszkanie/{id}/rachunki/{id_bill}', 'BillController@show');
-        Route::post('/panel/mieszkanie/{id}/rachunki/{id_bill}dodaj_oplate', 'BillController@addFee');
+        Route::post('/panel/rachunki/dodaj_oplate', 'BillController@addFee');
     });
 });
 
 Route::get('/diagrams/{diagram}/{id}', 'ChartController@diagrams');
-Route::get('/diagrams/last-month/{id}', 'ChartController@lastMonth');
+Route::get('/charts/single-bill/{id}', 'ChartController@singleBill');
+Route::get('/charts/current-consumption/{id}/{type}/{id_bill}', 'ChartController@currentConsumptions');
 Route::view('/chart', 'chart');
 
 // Route::get('/test3', 'ApartmentController@code');

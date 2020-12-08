@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\Counter;
+use App\Fee;
 use stdClass;
 
 class BillController extends Controller
@@ -87,7 +88,15 @@ class BillController extends Controller
 
 
     public function addFee(Request $req) {
-
+        $bill = Bill::find($req -> id_bill);
+        $fee = new Fee();
+        $fee -> name = $req -> name;
+        $fee -> price = $req -> price;
+        $fee -> id_bill = $req -> id_bill;
+        $fee -> save();
+        $bill -> sum += $req -> price;
+        $bill -> save();
+        return redirect(url()->previous());
     }
 
 }

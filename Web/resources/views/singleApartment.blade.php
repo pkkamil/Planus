@@ -1,4 +1,5 @@
 <?php
+    $active = '';
     $headerClass = 'apartment';
 ?>
 

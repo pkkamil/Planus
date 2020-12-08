@@ -1216,5 +1216,88 @@ button.danger
         & i
             margin-right: 15px
 
+.bill
+    width: 100%
+    min-height: 90vh
+    display: flex
+    justify-content: center
+    padding: 150px 80px 50px 80px
+    color: $secondary
+    & .left-part
+        & .header
+            & h1
+                font-size: 2em
+                font-weight: 400
+            & h6
+                font-size: 1.2em
+                font-weight: 400
+                color: #999
+        & #chart
+            margin-top: 50px
+            width: 350px
+            height: 350px
+            font-size: 1em
+        & h4
+            margin-top: 30px
+            font-size: 1.4em
+            font-weight: 400
+    & .right-part
+        padding-left: 100px
+        & h3
+            font-size: 1.5em
+            font-weight: 400
+            margin-bottom: 0px
+        & .statistics
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            & div
+                width: 200px
+                height: 200px
+                margin-left: 15px
+                margin-top: 10px
+        & .bottom-part
+            & img
+                display: block
+                margin-top: 40px
+                margin-left: 40px
+                width: 50%
+            & h3
+                margin-top: 30px
+            & span:not(.orange-text)
+                position: relative
+                display: block
+                margin-top: 20px
+                width: 340px
+                border: 1px solid $primary
+                border-radius: 38px
+                padding: 17px 31px 17px 17px
+                &:first-of-type
+                    margin-top: 40px
+                & i
+                    color: $primary
+                    margin-left: 10px
+                    display: inline-block
+                & input
+                    display: inline-block
+                    background: transparent
+                    width: calc(100% - 50px)
+                    border: 0
+                    outline: none
+                    margin-left: 11px
+                    font-size: 1em
+            & button
+                margin-left: 0
+                margin-top: 20px
+
+    & .back
+        position: absolute
+        font-size: 1em
+        right: 50px
+        top: 100px
+        padding: 16px 45px
+        & i
+            margin-right: 15px
+
 // Media Queries
 @import 'queries'

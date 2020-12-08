@@ -1759,6 +1759,120 @@ button.danger:hover {
   margin-right: 15px;
 }
 
+.bill {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  padding: 150px 80px 50px 80px;
+  color: #555;
+}
+
+.bill .left-part .header h1 {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+.bill .left-part .header h6 {
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #999;
+}
+
+.bill .left-part #chart {
+  margin-top: 50px;
+  width: 350px;
+  height: 350px;
+  font-size: 1em;
+}
+
+.bill .left-part h4 {
+  margin-top: 30px;
+  font-size: 1.4em;
+  font-weight: 400;
+}
+
+.bill .right-part {
+  padding-left: 100px;
+}
+
+.bill .right-part h3 {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+.bill .right-part .statistics {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bill .right-part .statistics div {
+  width: 200px;
+  height: 200px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.bill .right-part .bottom-part img {
+  display: block;
+  margin-top: 40px;
+  margin-left: 40px;
+  width: 50%;
+}
+
+.bill .right-part .bottom-part h3 {
+  margin-top: 30px;
+}
+
+.bill .right-part .bottom-part span:not(.orange-text) {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  width: 340px;
+  border: 1px solid #ffa500;
+  border-radius: 38px;
+  padding: 17px 31px 17px 17px;
+}
+
+.bill .right-part .bottom-part span:not(.orange-text):first-of-type {
+  margin-top: 40px;
+}
+
+.bill .right-part .bottom-part span:not(.orange-text) i {
+  color: #ffa500;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.bill .right-part .bottom-part span:not(.orange-text) input {
+  display: inline-block;
+  background: transparent;
+  width: calc(100% - 50px);
+  border: 0;
+  outline: none;
+  margin-left: 11px;
+  font-size: 1em;
+}
+
+.bill .right-part .bottom-part button {
+  margin-left: 0;
+  margin-top: 20px;
+}
+
+.bill .back {
+  position: absolute;
+  font-size: 1em;
+  right: 50px;
+  top: 100px;
+  padding: 16px 45px;
+}
+
+.bill .back i {
+  margin-right: 15px;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -1821,6 +1935,33 @@ button.danger:hover {
   .add-apartment .right-part img {
     width: 400px;
     height: 319px;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.8em;
+  }
+
+  .bill .left-part #chart {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .bill .right-part {
+    padding-left: 50px;
+    padding-top: 50px;
+  }
+
+  .bill .right-part h3 {
+    font-size: 1.4em;
+  }
+
+  .bill .right-part .statistics div {
+    margin-left: 15px;
   }
 }
 
@@ -1888,6 +2029,30 @@ button.danger:hover {
   .all-bills .list-of-bills .single-bill h4 {
     font-size: 1.2em;
   }
+
+  .bill .left-part .header h1 {
+    font-size: 1.8em;
+  }
+
+  .bill .left-part #chart {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .bill .right-part {
+    padding-left: 50px;
+    padding-top: 50px;
+  }
+
+  .bill .right-part .statistics {
+    position: relative;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -1944,6 +2109,10 @@ button.danger:hover {
 
   .all-bills .list-of-bills .single-bill {
     width: calc(33% - 20px);
+  }
+
+  .bill .right-part .bottom-part img {
+    display: none;
   }
 }
 
@@ -2016,6 +2185,32 @@ button.danger:hover {
 
   .all-bills {
     padding: 120px 50px 50px 40px;
+  }
+
+  .bill {
+    padding: 150px 70px 50px 70px;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.6em;
+  }
+
+  .bill .left-part #chart {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .bill .right-part {
+    padding-left: 50px;
+  }
+
+  .bill .right-part h3 {
+    font-size: 1.3em;
   }
 }
 
@@ -2168,6 +2363,67 @@ button.danger:hover {
     transform: translate(150px, -20px);
     font-size: 1.1em;
   }
+
+  .bill {
+    padding: 180px 70px 50px 70px;
+    flex-direction: column;
+  }
+
+  .bill .left-part {
+    text-align: center;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.6em;
+  }
+
+  .bill .left-part #chart {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .bill .right-part {
+    text-align: center;
+    padding-left: 0px;
+  }
+
+  .bill .right-part .statistics {
+    justify-content: center;
+  }
+
+  .bill .right-part .statistics div {
+    width: calc(33% - 30px);
+    margin-left: 0;
+  }
+
+  .bill .right-part .bottom-part {
+    margin: 0 auto;
+  }
+
+  .bill .right-part .bottom-part h3 {
+    margin-top: 40px;
+  }
+
+  .bill .right-part .bottom-part span:not(.orange-text) {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .bill .right-part .bottom-part span:not(.orange-text):first-of-type {
+    margin-top: 20px;
+  }
+
+  .bill .right-part .bottom-part button {
+    margin: 0 auto;
+    margin-top: 30px;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -2212,6 +2468,24 @@ button.danger:hover {
 
   .dimmer .modal button:first-of-type {
     margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 756px) {
+  .bill {
+    padding: 180px 60px 50px 60px;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.2em;
+  }
+
+  .bill .right-part .statistics div {
+    width: calc(50%);
+  }
+
+  .bill .right-part .bottom-part {
+    margin: 0 auto;
   }
 }
 
@@ -2480,6 +2754,33 @@ button.danger:hover {
   .add-apartment {
     padding: 100px 30px 40px 30px;
   }
+
+  .bill {
+    padding: 100px 50px 50px 50px;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.5em;
+  }
+
+  .bill .left-part .header h6 {
+    font-size: 1.1em;
+  }
+
+  .bill .right-part .statistics div {
+    width: calc(100%);
+  }
+
+  .bill .right-part .bottom-part span:not(.orange-text) {
+    width: 270px;
+  }
+
+  .bill .back {
+    position: static;
+    margin-bottom: 20px;
+    width: 180px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -2646,6 +2947,22 @@ button.danger:hover {
   .all-bills h2 {
     font-size: 1.8em;
   }
+
+  .bill {
+    padding: 90px 30px 50px 30px;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.4em;
+  }
+
+  .bill .left-part .header h6 {
+    font-size: 1em;
+  }
+
+  .bill .right-part .bottom-part span:not(.orange-text) {
+    width: 260px;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -2757,6 +3074,31 @@ button.danger:hover {
 
   .show-all .list-apartments .single-apartment {
     height: 230px;
+  }
+
+  .bill {
+    padding: 90px 20px 50px 20px;
+  }
+
+  .bill .left-part #chart {
+    width: 250px;
+    height: 250px;
+  }
+
+  .bill .left-part .header h6 {
+    font-size: 1em;
+  }
+
+  .bill .left-part .header h1 {
+    font-size: 1.3em;
+  }
+
+  .bill .left-part h4 {
+    font-size: 1.1em;
+  }
+
+  .bill .right-part .statistics {
+    padding: 0 30px;
   }
 }
 

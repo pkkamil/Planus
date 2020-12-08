@@ -286,6 +286,11 @@ class ApartmentApiController extends Controller
             return response()->json(['message' => 'Apartment does not exist.']);
     }
 
+    public function showMembers($id) {
+        $roommates = Apartment::find($id) -> roommates;
+        return response()->json(['roommates' => $roommates]);
+    }
+
     public function createMember(Request $req) {
         if(Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
             $req->validate([

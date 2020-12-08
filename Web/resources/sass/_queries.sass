@@ -42,6 +42,26 @@
                 width: 400px
                 height: 319px
 
+    .bill
+        & .left-part
+            & .header
+                & h1
+                    font-size: 1.8em
+            & #chart
+                width: 300px
+                height: 300px
+            & h4
+                font-size: 1.3em
+                text-align: center
+        & .right-part
+            padding-left: 50px
+            padding-top: 50px
+            & h3
+                font-size: 1.4em
+            & .statistics
+                & div
+                    margin-left: 15px
+
 @media screen and (max-width: 1500px)
     .add-apartment
         padding: 100px 50px 50px 50px
@@ -87,6 +107,25 @@
                 & h4
                     font-size: 1.2em
 
+    .bill
+        & .left-part
+            & .header
+                & h1
+                    font-size: 1.8em
+            & #chart
+                width: 300px
+                height: 300px
+            & h4
+                font-size: 1.3em
+                text-align: center
+        & .right-part
+            padding-left: 50px
+            padding-top: 50px
+            & .statistics
+                position: relative
+                width: 100%
+
+
 @media screen and (max-width: 1300px)
     .add-apartment
         padding: 100px 100px 50px 100px
@@ -125,6 +164,12 @@
         & .list-of-bills
             & .single-bill
                 width: calc(33% - 20px)
+
+    .bill
+        & .right-part
+            & .bottom-part
+                & img
+                    display: none
 
 @media screen and (max-width: 1040px)
     .login-section
@@ -168,6 +213,24 @@
 
     .all-bills
         padding: 120px 50px 50px 40px
+
+    .bill
+        padding: 150px 70px 50px 70px
+        & .left-part
+            & .header
+                & h1
+                    font-size: 1.6em
+            & #chart
+                width: 300px
+                height: 300px
+            & h4
+                font-size: 1.3em
+                text-align: center
+        & .right-part
+            padding-left: 50px
+            & h3
+                font-size: 1.3em
+
 
 @media screen and (max-width: 976px)
     .logo
@@ -282,6 +345,43 @@
                     transform: translate(150px, -20px)
                     font-size: 1.1em
 
+    .bill
+        padding: 180px 70px 50px 70px
+        flex-direction: column
+        & .left-part
+            text-align: center
+            & .header
+                & h1
+                    font-size: 1.6em
+            & #chart
+                width: 300px
+                height: 300px
+                margin: 0 auto
+                margin-top: 40px
+            & h4
+                font-size: 1.3em
+                text-align: center
+        & .right-part
+            text-align: center
+            padding-left: 0px
+            & .statistics
+                justify-content: center
+                & div
+                    width: calc(33% - 30px)
+                    margin-left: 0
+            & .bottom-part
+                margin: 0 auto
+                & h3
+                    margin-top: 40px
+                & span:not(.orange-text)
+                    margin: 0 auto
+                    margin-top: 20px
+                    &:first-of-type
+                        margin-top: 20px
+                & button
+                    margin: 0 auto
+                    margin-top: 30px
+
 @media screen and (max-width: 850px)
     .add-apartment
         flex-wrap: nowrap
@@ -315,6 +415,18 @@
             & button:first-of-type
                 margin-right: auto
 
+@media screen and (max-width: 756px)
+    .bill
+        padding: 180px 60px 50px 60px
+        & .left-part
+            & h4
+                font-size: 1.2em
+        & .right-part
+            & .statistics
+                & div
+                    width: calc(50%)
+            & .bottom-part
+                margin: 0 auto
 
 @media screen and (max-width: 711px)
     button
@@ -496,6 +608,28 @@
     .add-apartment
         padding: 100px 30px 40px 30px
 
+    .bill
+        padding: 100px 50px 50px 50px
+        & .left-part
+            & .header
+                & h1
+                    font-size: 1.5em
+                & h6
+                    font-size: 1.1em
+        & .right-part
+            & .statistics
+                & div
+                    width: calc(100%)
+            & .bottom-part
+                & span:not(.orange-text)
+                    width: 270px
+        & .back
+            position: static
+            margin-bottom: 20px
+            width: 180px
+            text-align: center
+
+
 @media screen and (max-width: 500px)
     .welcome
         & h1
@@ -603,6 +737,19 @@
         & h2
             font-size: 1.8em
 
+    .bill
+        padding: 90px 30px 50px 30px
+        & .left-part
+            & .header
+                & h1
+                    font-size: 1.4em
+                & h6
+                    font-size: 1em
+        & .right-part
+            & .bottom-part
+                & span:not(.orange-text)
+                    width: 260px
+
 @media screen and (max-width: 420px)
     .article-title
         font-size: 2.3em
@@ -679,6 +826,24 @@
         & .list-apartments
             & .single-apartment
                 height: 230px
+
+
+    .bill
+        padding: 90px 20px 50px 20px
+        & .left-part
+            #chart
+                width: 250px
+                height: 250px
+            & .header
+                & h6
+                    font-size: 1em
+                & h1
+                    font-size: 1.3em
+            & h4
+                font-size: 1.1em
+        & .right-part
+            & .statistics
+                padding: 0 30px
 
 @media screen and (max-width: 350px)
     .article-title
