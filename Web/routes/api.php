@@ -39,4 +39,4 @@ Route::get('apartment/last-counter/{id}', 'api\CounterApiController@index');
 Route::get('apartment/roommates/{id}', 'api\ApartmentApiController@showMembers');
 Route::get('apartment/bill/{id}', 'api\BillApiController@index');
 Route::get('apartment/statistics/{id}', 'api\BillApiController@statistics');
-Route::get('/bill/add', 'BillApiController@addFee');
+Route::post('/bill/add', 'api\BillApiController@addFee');

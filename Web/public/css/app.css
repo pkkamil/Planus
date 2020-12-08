@@ -1873,6 +1873,59 @@ button.danger:hover {
   margin-right: 15px;
 }
 
+.not-found {
+  width: 100%;
+  min-height: 90vh;
+  padding: 60px 100px 50px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.not-found img {
+  width: 60%;
+}
+
+.not-found h2 {
+  margin-top: 30px;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #ffa500;
+}
+
+.soon {
+  width: 100%;
+  min-height: 90vh;
+  padding: 60px 100px 50px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.soon img {
+  width: 50%;
+}
+
+.soon h2 {
+  margin-top: 30px;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #ffa500;
+}
+
+.soon h4 {
+  margin-top: 0px;
+  font-size: 1.3em;
+  font-weight: 400;
+  color: #ff9500;
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -2469,6 +2522,26 @@ button.danger:hover {
   .dimmer .modal button:first-of-type {
     margin-right: auto;
   }
+
+  .soon img {
+    width: 80%;
+  }
+
+  .soon h2 {
+    font-size: 2.3em;
+  }
+
+  .soon h4 {
+    font-size: 1.1em;
+  }
+
+  .not-found img {
+    width: 80%;
+  }
+
+  .not-found h2 {
+    font-size: 1.8em;
+  }
 }
 
 @media screen and (max-width: 756px) {
@@ -2701,6 +2774,34 @@ button.danger:hover {
   .all-bills .list-of-bills .single-bill {
     margin-left: 0px;
     width: 100%;
+  }
+
+  .soon {
+    padding: 60px 50px 50px 50px;
+  }
+
+  .soon img {
+    width: 100%;
+  }
+
+  .soon h2 {
+    font-size: 2em;
+  }
+
+  .soon h4 {
+    font-size: 1em;
+  }
+
+  .not-found {
+    padding: 60px 50px 50px 50px;
+  }
+
+  .not-found img {
+    width: 100%;
+  }
+
+  .not-found h2 {
+    font-size: 1.6em;
   }
 }
 
@@ -3154,6 +3255,26 @@ button.danger:hover {
 
   .all-bills {
     padding: 90px 20px 50px 20px;
+  }
+
+  .soon {
+    padding: 60px 40px 50px 40px;
+  }
+
+  .soon h2 {
+    font-size: 1.8em;
+  }
+
+  .soon h4 {
+    font-size: 1em;
+  }
+
+  .not-found {
+    padding: 60px 40px 50px 40px;
+  }
+
+  .not-found h2 {
+    font-size: 1.5em;
   }
 }
 

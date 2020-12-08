@@ -89,6 +89,8 @@ class BillController extends Controller
 
     public function addFee(Request $req) {
         $bill = Bill::find($req -> id_bill);
+        if (Auth::id() != $bill -> apartment -> user_id)
+            return redirect('/panel/mieszkanie/'.$bill -> id_apartment);
         $fee = new Fee();
         $fee -> name = $req -> name;
         $fee -> price = $req -> price;

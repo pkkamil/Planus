@@ -49,8 +49,9 @@
                 @else
                     <h4 class="events">Nadchodzące <span class="orange-text">zdarzenia</span></h3>
                     <ul class="list-of-events">
-                        <li>Zbliża się termin rozliczenia mieszkania <span class="orange-text">Osiedle Franciszkańskie 1</span>,</li>
-                        <li>Zbliża się termin rozliczenia mieszkania <span class="orange-text">Osiedle Franciszkańskie 2</span>,</li>
+                        @foreach ($soon as $el)
+                            <li>{!! $el !!},</li>
+                        @endforeach
                     </ul>
                 @endif
         </section>

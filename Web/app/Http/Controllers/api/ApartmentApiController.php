@@ -307,10 +307,12 @@ class ApartmentApiController extends Controller
     }
 
     public function deleteMember(Request $req) {
-        if(Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
+        if (Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
             DB::table('apartment_user')->where('user_id', $req -> user_id)->where('apartment_id_apartment', $req -> id_apartment)->delete();
             if (User::find($req -> member_id) -> email == null)
                 User::destroy($req -> member_id);
+        } else {
+            return response()->json(['message' => 'User is not authorized', 'user_id']);
         }
         return response()->json(['message' => 'OK']);
     }

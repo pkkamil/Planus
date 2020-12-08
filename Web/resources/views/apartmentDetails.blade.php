@@ -29,8 +29,10 @@
                 @endif
             </section>
             <section class="bottom-part">
-                @if ($days > 0)
+                @if ($days > 1)
                     <p>Do terminu rozliczenia<br>pozostało <span class="orange-text">{{ $days }}</span> dni.</p>
+                @elseif ($days == 1)
+                    <p>Do terminu rozliczenia<br>pozostał <span class="orange-text">{{ $days }}</span> dzień.</p>
                 @elseif ($days == -1)
                     <p><br><span class="orange-text">Dzisiaj</span> wypada termin rozliczenia.</p>
                 @else

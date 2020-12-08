@@ -44,7 +44,7 @@ Route::get('/decyzja', function() {
         return redirect('/login');
 });
 
-Route::post('/mieszkanie/zapytaj', 'ApartmentController@inform')->middleware('auth')->name('informOwner');
+Route::get('/zapytaj/mieszkanie', 'ApartmentController@inform')->middleware('auth')->name('informOwner');
 
 Route::middleware(['introduced', 'auth'])->group(function () {
     Route::view('/panel/wynajmij', 'rentApartment')->name('rentApartment');

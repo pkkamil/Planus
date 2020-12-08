@@ -16,6 +16,7 @@ class BillApiController extends Controller
      */
     public function index($id) {
         $lastBill = Bill::where('id_apartment', $id)->orderBy('settlement_date', 'desc')->first();
+        $additional = $lastBill -> additional_fees;
         return response()->json(['bill' => $lastBill]);
     }
 
@@ -60,5 +61,6 @@ class BillApiController extends Controller
         $fee -> save();
         $bill -> sum += $req -> price;
         $bill -> save();
+        return response()->json(['message' => 'OK']);
     }
 }

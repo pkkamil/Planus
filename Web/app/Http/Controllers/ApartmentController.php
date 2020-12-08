@@ -20,6 +20,10 @@ class ApartmentController extends Controller
         return view('home', compact('apartments'));
     }
 
+    public function inform() {
+        return view('soon');
+    }
+
     public function show($id) {
         $apartment = Apartment::find($id);
         if ($apartment -> public == 1)
