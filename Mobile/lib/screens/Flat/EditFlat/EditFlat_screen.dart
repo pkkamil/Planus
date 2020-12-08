@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
@@ -525,6 +526,7 @@ class _EditFlatState extends State<EditFlat> {
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
                                     isEnabled: isGas,
+                                    icon: CupertinoIcons.burst_fill,
                                   ),
                                   RoundedInput(
                                     isNumber: true,
@@ -545,7 +547,7 @@ class _EditFlatState extends State<EditFlat> {
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
-                                    icon: Icons.delete, //inna
+                                    icon: Icons.delete,
                                     isEnabled: isRubbish,
                                   ),
                                   RoundedInput(
@@ -556,7 +558,7 @@ class _EditFlatState extends State<EditFlat> {
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
-                                    icon: Icons.router, //inna
+                                    icon: Icons.router,
                                     isEnabled: isInternet,
                                   ),
                                   RoundedInput(

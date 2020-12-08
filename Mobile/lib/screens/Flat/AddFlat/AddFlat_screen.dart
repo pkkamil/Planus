@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
@@ -494,6 +495,7 @@ class _AddFlatState extends State<AddFlat> {
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
+                                    icon: CupertinoIcons.burst,
                                     isEnabled: isGas,
                                   ),
                                   RoundedInput(

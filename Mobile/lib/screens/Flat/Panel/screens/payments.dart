@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -134,7 +135,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           },
           {
             'color': Colors.green,
-            'icon': Icons.games_sharp, //DO ZMIANY
+            'icon': CupertinoIcons.burst_fill, 
             'text': 'Gaz',
             'price':billData['gas'],
             'isCounter':false,

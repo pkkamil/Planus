@@ -114,6 +114,12 @@ class Api{
     headers:  await _setHeaders());
     return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
   }
+  getStats(id) async{
+    String fullUrl = api + "api/apartment/statistics/$id";
+    var response = await get(fullUrl,
+    headers:  await _setHeaders());
+    return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
+  }
 
   _setHeaders() async {
     var headers = {

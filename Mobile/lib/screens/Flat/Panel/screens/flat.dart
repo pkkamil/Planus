@@ -125,14 +125,14 @@ class FlatScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height*0.03),
-            if(days!=0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0))RoundedButton(
+            if(days!=0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0) && flatData.id_user==flatData.id_owner)RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
               },
               isShadow: false,
             ),
-            if(days==0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0))RoundedButton(
+            if(days==0 && (flatData.hot_water>0 || flatData.cold_water>0 || flatData.electricity>0 || flatData.gas>0) && flatData.id_user==flatData.id_owner)RoundedButton(
               horizontal: 40.0,
               text: "Wprowadź liczniki",
               onPress: () {
