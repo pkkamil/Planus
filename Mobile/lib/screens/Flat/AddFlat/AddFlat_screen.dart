@@ -1,11 +1,13 @@
 import 'dart:convert' as convert;
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planus/components/RoundedButton.dart';
 import 'package:planus/components/RoundedInput.dart';
 import 'package:planus/components/checkBox.dart';
 import 'package:planus/components/goBackButton.dart';
 import 'package:flutter/services.dart';
+import 'package:planus/screens/Flat/Panel/screens/Counters/InitialCounters_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/Counters/InsertCounters_screen.dart';
 import 'package:planus/screens/Flat/Panel/screens/payments.dart';
 import 'package:planus/services/apiController.dart';
@@ -113,11 +115,11 @@ class _AddFlatState extends State<AddFlat> {
         var api = new Api();
         var response = await api.createFlat(data);
         //print('#####');
-        //print(response);
+        print(response);
         if(response['message']=='OK'){
           isLoading=false;
           Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InsertCounters(widget.user_id,response['apartment_id'])));
+          Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => InitialCounters(widget.user_id,response['apartment_id'])));
         }else{
           setState(() {
             isLoading=false;
@@ -493,6 +495,7 @@ class _AddFlatState extends State<AddFlat> {
                                     color: Colors.white,
                                     textColor: Colors.black,
                                     iconColor: Colors.black,
+                                    icon: CupertinoIcons.burst,
                                     isEnabled: isGas,
                                   ),
                                   RoundedInput(

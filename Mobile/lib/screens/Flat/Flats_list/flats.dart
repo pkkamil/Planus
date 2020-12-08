@@ -7,6 +7,7 @@ import 'package:planus/screens/Flat/Flats_list/list_flats_screen.dart';
 import 'package:planus/screens/choice/choice_screen.dart';
 import 'package:planus/services/apiController.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Flats extends StatefulWidget {
   
@@ -28,7 +29,14 @@ class _FlatsState extends State<Flats> {
   sendData(id) async{
       var api = new Api();
       var response = await api.listFlats(id);
-      
+
+      if(response['statusCode']==500){
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('userData', null);
+        Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+        Navigator.pushNamed(context, '/welcome');
+      }
+
       setState(() {
         _isLoading = true;
         if(response['statusCode']==200){
@@ -175,6 +183,7 @@ class FlatInfo{
 
   int id_owner;
   int id_apartment;
+  bool isPublic;
 
   String name;
   double price;
@@ -208,6 +217,8 @@ class FlatInfo{
 
     id_owner = response['user_id'];
     id_apartment = response['id_apartment'];
+
+    isPublic = response['public']==1;
 
     invite_code = response['invite_code'];
 

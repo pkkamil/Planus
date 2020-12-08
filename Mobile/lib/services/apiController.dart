@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:planus/screens/Change/Flat/Delete/deleteFlat_screen.dart';
-import 'package:planus/screens/Change/Password/changePassword_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 String api = "http://172.104.152.134/";
@@ -49,6 +47,13 @@ class Api{
   }
   insertCounters(data) async{
     String fullUrl = api + "api/apartment/enter-counters";
+    var response = await post(fullUrl,
+    body: jsonEncode(data),
+    headers:  await _setHeaders());
+    return jsonDecode(response.body);
+  }
+  initialCounters(data) async{
+    String fullUrl = api + "api/apartment/enter-initial-counters";
     var response = await post(fullUrl,
     body: jsonEncode(data),
     headers:  await _setHeaders());
@@ -102,6 +107,18 @@ class Api{
     body: jsonEncode(data),
     headers:  await _setHeaders());
     return jsonDecode(response.body);
+  }
+  getBill(id) async{
+    String fullUrl = api + "api/apartment/bill/$id";
+    var response = await get(fullUrl,
+    headers:  await _setHeaders());
+    return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
+  }
+  getStats(id) async{
+    String fullUrl = api + "api/apartment/statistics/$id";
+    var response = await get(fullUrl,
+    headers:  await _setHeaders());
+    return {'statusCode':response.statusCode, 'body':jsonDecode(response.body)};
   }
 
   _setHeaders() async {
