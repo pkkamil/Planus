@@ -20,45 +20,41 @@ class _GraphsScreenState extends State<GraphsScreen> {
   bool _isLoading = true;
   bool _areStats = true;
 
-  List<BarChartModel> data = [
-    BarChartModel(
-      label: "Styczeń",
-      value: 200
-    ),
-    BarChartModel(
-      label: "Luty",
-      value: 250
-    ),
-    BarChartModel(
-      label: "Marzec",
-      value: 300
-    ),
-  ];
   List<BarChartModel> price_sums = [];
 
   List<BarChartModel> cold_water_data = [];
   List<BarChartModel> hot_water_data = [];
   List<BarChartModel> gas_data = [];
   List<BarChartModel> electricity_data = [];
+
+  Map data;
   
   getData() async{
     var api = new Api();
     var response = await api.getStats(widget.flatData.id_apartment);
 
     if (response['statusCode']==200){
-      Map data = response['body'];
+      data = response['body'];
       int length = data['months'].length;
-      if(length==0){
+      if(length<3){
         setState(() {
           _isLoading=false;
           _areStats = false;
         });
       }else{
-        for(int i=0; i<length;i++){
+        for(int i=0; i<data['price_sums'].length;i++){
           price_sums.add(BarChartModel(label: data['months'][i], value: double.parse(data['price_sums'][i])));
+        }
+        for(int i=0; i<data['cold_water'].length;i++){
           cold_water_data.add(BarChartModel(label: data['months'][i], value: double.parse(data['cold_water'][i])));
+        }
+        for(int i=0; i<data['hot_water'].length;i++){
           hot_water_data.add(BarChartModel(label: data['months'][i], value: double.parse(data['hot_water'][i])));
+        }
+        for(int i=0; i<data['gas'].length;i++){
           gas_data.add(BarChartModel(label: data['months'][i], value: double.parse(data['gas'][i])));
+        }
+        for(int i=0; i<data['electricity'].length;i++){
           electricity_data.add(BarChartModel(label: data['months'][i], value: double.parse(data['electricity'][i])));
         }
       }
@@ -146,7 +142,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         ],
                       ),
                     ),
-                    Container(
+                    if(data['cold_water'].length>0)Container(
                       width: size.width*0.7,
                       alignment: Alignment.center,
                       child: Column(
@@ -177,7 +173,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         ],
                       ),
                     ),
-                    Container(
+                    if(data['hot_water'].length>0)Container(
                       width: size.width*0.7,
                       alignment: Alignment.center,
                       child: Column(
@@ -208,7 +204,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         ],
                       ),
                     ),
-                    Container(
+                    if(data['gas'].length>0)Container(
                       width: size.width*0.7,
                       alignment: Alignment.center,
                       child: Column(
@@ -239,7 +235,7 @@ class _GraphsScreenState extends State<GraphsScreen> {
                         ],
                       ),
                     ),
-                    Container(
+                    if(data['electricity'].length>0)Container(
                       width: size.width*0.7,
                       alignment: Alignment.center,
                       child: Column(

@@ -56,13 +56,14 @@ class _FlatsState extends State<Flats> {
       });
       //print(flatCard);
       _isLoading = false;
+
+      if(flats_count==0 && _isLoading==false && response['statusCode']==200){
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Choice(widget.response['id'])));
+      }
     }
 
   void setupData() async{
     await sendData(widget.response['id']);
-    if(flats_count==0 && _isLoading==false){
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) => Choice(widget.response['id'])));
-    }
   }
 
   @override
@@ -103,7 +104,7 @@ class _FlatsState extends State<Flats> {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                    top: 50,
+                    top: 30,
                     left: 30,
                     child: RichText(
                       text: TextSpan(
@@ -123,7 +124,7 @@ class _FlatsState extends State<Flats> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: size.height*0.15),
+                        SizedBox(height: size.height*0.1),
                         if(flats_count>=1)FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
                           size: size.width*0.5, 
@@ -159,7 +160,8 @@ class _FlatsState extends State<Flats> {
                             Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => ListFlats(flatCard)));
                           },
                           text: "Zobacz wszystkie",
-                        )
+                        ),
+                        //SizedBox(height: size.height*0.05),
                       ],
                     ),
                   )

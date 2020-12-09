@@ -41,163 +41,150 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
 
     var response = await api.getBill(widget.flatData.id_apartment);
 
-    //print(response['body']['bill']);
+    //print(response['statusCode']);
     setState(() {
+      billData = response['body']['bill'];
       if(response['statusCode']==500){
         _isLoading=false;
         _areCounters=false;
       }
       if(response['statusCode']==200){
-        billData = response['body']['bill'];
         if(response['body']['bill']==null){
           _isLoading=false;
           _areCounters=false;
         }else{
-        id_bill=billData['id_bill'];
+          id_bill=billData['id_bill'];
 
-        double fee_sum=0;
-        for(int i=0;i<billData['additional_fees'].length;i++){
-          fee_sum+=double.parse(billData['additional_fees'][i]['price']);
-        }
+          double fee_sum=0;
+          for(int i=0;i<billData['additional_fees'].length;i++){
+            fee_sum+=double.parse(billData['additional_fees'][i]['price']);
+          }
 
-        //print(billData);
-        data = <CircularStackEntry>[
-        new CircularStackEntry(
-          <CircularSegmentEntry>[        
-            //prąd
-            new CircularSegmentEntry(double.parse(billData['electricity']), Colors.yellow),
-            //woda_zimna
-            new CircularSegmentEntry(double.parse(billData['cold_water']), Colors.blue),
-            //woda_ciepla
-            new CircularSegmentEntry(double.parse(billData['hot_water']), Colors.red[200]),
-            //gaz
-            new CircularSegmentEntry(double.parse(billData['gas']), Colors.green),
-            //smieci*mieszkancy
-            new CircularSegmentEntry(double.parse(billData['rubbish']), Colors.brown),
-            //ogrzewanie
-            //new CircularSegmentEntry(widget.flatData.heating, Colors.red),
-            //wynajem
-            new CircularSegmentEntry(double.parse(billData['rental_price']), HexColor('#646DBC')),
-            //internet
-            new CircularSegmentEntry(double.parse(billData['internet']), Colors.green[200]),
-            //telewizja
-            new CircularSegmentEntry(double.parse(billData['tv']), Colors.blue[200]),
-            //abonament
-            new CircularSegmentEntry(double.parse(billData['phone']), Colors.yellow[200]),
-            //koszty dodatkowe
-            new CircularSegmentEntry(fee_sum, Colors.orange),
-          ],
-          rankKey: 'Summary',
-        ),
-        ];
+          //print(billData);
+          data = <CircularStackEntry>[
+          new CircularStackEntry(
+            <CircularSegmentEntry>[        
+              //prąd
+              new CircularSegmentEntry(billData['electricity']!=null ? double.parse(billData['electricity']) : 0.0, Colors.yellow),
+              //woda_zimna
+              new CircularSegmentEntry(billData['cold_water']!=null ? double.parse(billData['cold_water']) : 0.0, Colors.blue),
+              //woda_ciepla
+              new CircularSegmentEntry(billData['hot_water']!=null ? double.parse(billData['hot_water']) : 0.0, Colors.red[200]),
+              //gaz
+              new CircularSegmentEntry(billData['gas']!=null ? double.parse(billData['gas']) : 0.0, Colors.green),
+              //smieci*mieszkancy
+              new CircularSegmentEntry(billData['rubbish']!=null ? double.parse(billData['rubbish']) : 0.0, Colors.brown),
+              //wynajem
+              new CircularSegmentEntry(billData['rental_price']!=null ? double.parse(billData['rental_price']) : 0.0, HexColor('#646DBC')),
+              //internet
+              new CircularSegmentEntry(billData['internet']!=null ? double.parse(billData['internet']) : 0.0, Colors.green[200]),
+              //telewizja
+              new CircularSegmentEntry(billData['tv']!=null ? double.parse(billData['tv']) : 0.0, Colors.blue[200]),
+              //abonament
+              new CircularSegmentEntry(billData['phone']!=null ? double.parse(billData['phone']) : 0.0, Colors.pink),
+              //koszty dodatkowe
+              new CircularSegmentEntry(fee_sum, Colors.orange),
+            ],
+            rankKey: 'Summary',
+          ),
+          ];
 
-        itemData = [
-          {
-            'color': HexColor('#646DBC'),
-            'icon': Icons.house,
-            'text': 'Czynsz',
-            'price':billData['rental_price'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-          {
-            'color': Colors.green[200],
-            'icon': Icons.router,
-            'text': 'Internet',
-            'price': billData['internet'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-          {
-            'color': Colors.blue[200],
-            'icon': Icons.live_tv,
-            'text': 'Telewizja',
-            'price': billData['tv'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-          {
-            'color': Colors.yellow[200],
-            'icon': Icons.phone,
-            'text': 'Telefon',
-            'price': billData['phone'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-          {
-            'color': Colors.blue,
-            'icon': Icons.opacity,
-            'text': 'Zimna woda',
-            'price': billData['cold_water'],
-            'isCounter':false,
-            'count': '3.1',
-            'unit':'m\u00B3'
-          },
-          {
-            'color': Colors.red[200],
-            'icon': Icons.waves,
-            'text': 'Ciepła woda',
-            'price':billData['hot_water'],
-            'isCounter':false,
-            'count': '3.1', 
-            'unit':'m\u00B3'
-          },
-          {
-            'color': Colors.yellow,
-            'icon': Icons.flash_on,
-            'text': 'Prąd',
-            'price':billData['electricity'],
-            'isCounter':false,
-            'count': '3.1', 
-            'unit':'kWh'
-          },
-          {
-            'color': Colors.green,
-            'icon': CupertinoIcons.burst_fill, 
-            'text': 'Gaz',
-            'price':billData['gas'],
-            'isCounter':false,
-            'count': '3.1', 
-            'unit':'kWh'
-          },
-          /*
-          {
-            'color': Colors.red,
-            'icon': Icons.local_fire_department,
-            'text': 'Ogrzewanie',
-            'price':(widget.flatData.heating).toStringAsFixed(2),
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-          */
-          {
-            'color': Colors.brown,
-            'icon': Icons.delete, 
-            'text': 'Śmieci',
-            'price':billData['rubbish'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          },
-        ]; 
+          itemData = [
+            {
+              'color': HexColor('#646DBC'),
+              'icon': Icons.house,
+              'text': 'Czynsz',
+              'price':billData['rental_price']!=null ? billData['rental_price'] : '0.0',
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            },
+            {
+              'color': Colors.green[200],
+              'icon': Icons.router,
+              'text': 'Internet',
+              'price': billData['internet']!=null ? billData['internet'] : '0.0',
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            },
+            {
+              'color': Colors.blue[200],
+              'icon': Icons.live_tv,
+              'text': 'Telewizja',
+              'price': billData['tv']!=null ? billData['tv'] : '0.0',
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            },
+            {
+              'color': Colors.pink,
+              'icon': Icons.phone,
+              'text': 'Telefon',
+              'price': billData['phone']!=null ? billData['phone'] : '0.0',
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            },
+            {
+              'color': Colors.blue,
+              'icon': Icons.opacity,
+              'text': 'Zimna woda',
+              'price': billData['cold_water']!=null ? billData['cold_water'] : '0.0',
+              'isCounter':false,
+              'count': '3.1',
+              'unit':'m\u00B3'
+            },
+            {
+              'color': Colors.red[200],
+              'icon': Icons.waves,
+              'text': 'Ciepła woda',
+              'price':billData['hot_water']!=null ? billData['hot_water'] : '0.0',
+              'isCounter':false,
+              'count': '3.1', 
+              'unit':'m\u00B3'
+            },
+            {
+              'color': Colors.yellow,
+              'icon': Icons.flash_on,
+              'text': 'Prąd',
+              'price':billData['electricity']!=null ? billData['electricity'] : '0.0',
+              'isCounter':false,
+              'count': '3.1', 
+              'unit':'kWh'
+            },
+            {
+              'color': Colors.green,
+              'icon': CupertinoIcons.burst_fill, 
+              'text': 'Gaz',
+              'price':billData['gas']!=null ? billData['gas'] : '0.0',
+              'isCounter':false,
+              'count': '3.1', 
+              'unit':'kWh'
+            },
+            {
+              'color': Colors.brown,
+              'icon': Icons.delete, 
+              'text': 'Śmieci',
+              'price':billData['rubbish']!=null ? billData['rubbish'] : '0.0',
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            },
+          ]; 
 
-        for(int i=0;i<billData['additional_fees'].length;i++){
-          itemData.add({
-            'color': Colors.orange,
-            'icon': Icons.add, 
-            'text': billData['additional_fees'][i]['name'],
-            'price': billData['additional_fees'][i]['price'],
-            'isCounter':false,
-            'count': '',
-            'unit':''
-          });
-        }
-        _isLoading=false;
+          for(int i=0;i<billData['additional_fees'].length;i++){
+            itemData.add({
+              'color': Colors.orange,
+              'icon': Icons.add, 
+              'text': billData['additional_fees'][i]['name'],
+              'price': billData['additional_fees'][i]['price'],
+              'isCounter':false,
+              'count': '',
+              'unit':''
+            });
+          }
+          _isLoading=false;
         }
       };
     });
@@ -324,6 +311,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   ),
                 ),
                 SizedBox(height: size.height*0.02),
+                
                 for(int i=0;i<itemData.length;i++) if(double.parse(itemData[i]['price'])>0)ItemCard(
                   size: size,
                   color: itemData[i]['color'],
@@ -334,6 +322,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   count: itemData[i]['count'],
                   unit: itemData[i]['unit'],
                 ), 
+                
                 SizedBox(height: size.height*0.03),   
                 if(widget.flatData.id_user==widget.flatData.id_owner) Container(
                   child: Column(
