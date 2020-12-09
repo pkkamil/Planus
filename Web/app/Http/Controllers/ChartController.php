@@ -310,18 +310,22 @@ class ChartController extends Controller
             }
             array_push($sums, $bill -> sum);
             array_push($months, $month);
-            if ($bill -> cold_water) {
+            if ($bill -> cold_water)
                 array_push($cold_water, $bill -> cold_water);
-            }
-            if ($bill -> hot_water) {
+            else
+                array_push($cold_water, '0.00');
+            if ($bill -> hot_water)
                 array_push($hot_water, $bill -> hot_water);
-            }
-            if ($bill -> gas) {
+            else
+                array_push($hot_water, '0.00');
+            if ($bill -> gas)
                 array_push($gas, $bill -> gas);
-            }
-            if ($bill -> electricity) {
+            else
+                array_push($gas, '0.00');
+            if ($bill -> electricity)
                 array_push($electricity, $bill -> electricity);
-            }
+            else
+                array_push($electricity, '0.00');
         }
 
         switch ($diagram) {

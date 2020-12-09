@@ -16,7 +16,7 @@ class Decided
      */
     public function handle($request, Closure $next)
     {
-        if (count(Auth::user() -> residents) == 0 or count(Auth::user() -> apartments) == 0)
+        if (count(Auth::user() -> residents) == 0 and count(Auth::user() -> apartments) == 0)
             return redirect('/decyzja');
         else
             return $next($request);

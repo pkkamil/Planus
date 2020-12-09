@@ -65,9 +65,9 @@ class CounterApiController extends Controller
         $counter -> id_apartment = $req -> id_apartment;
         $counter -> save();
 
-        // Tworzenie rachunku
+        // Creating bill
 
-        // Liczenie sumy
+        // Calculate sum
         $apartment = Apartment::find($req -> id_apartment);
         $sum = $apartment -> price;
         if ($req -> cold_water) {
@@ -110,9 +110,12 @@ class CounterApiController extends Controller
         if ($req -> electricity)
             $bill -> electricity = $price_electricity;
         $bill -> rubbish = $garbage_sum;
-        $bill -> internet = (float)$apartment -> internet;
-        $bill -> tv = (float)$apartment -> tv;
-        $bill -> phone = (float)$apartment -> phone;
+        if ($bill -> internet != NULL)
+            $bill -> internet = (float)$apartment -> internet;
+        if ($bill -> tv != NULL)
+            $bill -> tv = (float)$apartment -> tv;
+        if ($bill -> phone != NULL)
+            $bill -> phone = (float)$apartment -> phone;
         $bill -> save();
         return response()->json(['message' => 'OK']);
     }

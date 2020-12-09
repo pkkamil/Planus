@@ -12,20 +12,20 @@
             <h3>Mieszkańcy</h3>
             <section class="list-of-members">
                 @foreach ($apartment -> roommates as $member)
-                <div class="single-member">
-                    @if (Auth::id() == $apartment -> user_id or $member -> id == Auth::id())
-                        <div class="circle" onclick="showDeleteCircle(this)">{{ $member -> name[0] }}</div>
-                        <div class="circle-delete" onclick="window.location = {{ $apartment -> id_apartment }}+'/usun_mieszkanca/'+{{ $member -> id }};"><i class="fas fa-times"></i></div>
-                    @else
-                        <div class="circle">{{ $member -> name[0] }}</div>
-                    @endif
-                    <p>{{ $member -> name }}</p>
-                </div>
+                        <div class="single-member">
+                            @if (Auth::id() == $apartment -> user_id or $member -> id == Auth::id())
+                                <div class="circle" onclick="showDeleteCircle(this)">{{ $member -> name[0] }}</div>
+                                <div class="circle-delete" onclick="window.location = {{ $apartment -> id_apartment }}+'/usun_mieszkanca/'+{{ $member -> id }};"><i class="fas fa-times"></i></div>
+                            @else
+                                <div class="circle">{{ $member -> name[0] }}</div>
+                            @endif
+                            <p>{{ $member -> name }}</p>
+                        </div>
                 @endforeach
                 @if ($apartment -> user_id == Auth::id())
-                <div class="single-member">
-                    <div class="circle-add" onclick="showModal()"><i class="fas fa-plus"></i></div>
-                </div>
+                    <div class="single-member">
+                        <div class="circle-add" onclick="showModal()"><i class="fas fa-plus"></i></div>
+                    </div>
                 @endif
             </section>
             <section class="bottom-part">
@@ -44,7 +44,7 @@
         <section class="right-part">
             <h3>Statystyki <span class="orange-text">mieszkania</span></h3>
             <section class="statistics">
-                @if ($counters < 3)
+                @if ($bills < 3)
                     <h5>Brak statystyk do wyświetlenia.</h5>
                     <h6>Po 3 terminach rozliczeń zostaną one tutaj wyświetlone.</h6>
                     <img src="{{ asset('resources/img/svg/charts.svg') }}" alt="">
@@ -81,16 +81,18 @@
                     </section>
                 @endif
             <section class="bottom-part">
-                <a class="bills" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/rachunki') }}"><button><i class="fas fa-money-bill-alt"></i> Rachunki</button></a>
-                @if ($apartment -> user_id == Auth::id() and $days < 2 or $apartment -> user_id == Auth::id() and $overdue)
-                    <a class="counters" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/liczniki') }}"><button><i class="far fa-chart-bar"></i> Wprowadź liczniki</button></a>
+                @if ($bills > 0)
+                    <a class="bills button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/rachunki') }}"><i class="fas fa-money-bill-alt"></i> Rachunki</a>
+                @endif
+                @if ($apartment -> user_id == Auth::id() and $days < 2 and !$recorded or $apartment -> user_id == Auth::id() and $overdue)
+                    <a class="counters button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/liczniki') }}"><i class="far fa-chart-bar"></i> Wprowadź liczniki</a>
                 @endif
                 @if ($apartment -> user_id == Auth::id())
-                    <a href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/edycja') }}"><button class="settings-apartment"><i class="fas fa-cog"></i></button></a>
+                    <a class="button settings-apartment" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/edycja') }}"><i class="fas fa-cog"></i></a>
                 @endif
             </section>
         </section>
-        <a href="{{ url('/panel') }}"><button class="back"><i class="fas fa-chevron-left"></i> Wróć do panelu</button></a>
+        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć do panelu</a>
         <article class="dimmer">
             <section class="modal add-members">
                 <section class="top-part">
@@ -118,7 +120,7 @@
         </article>
     </article>
     <script>
-        @if ($counters > 3)
+        @if ($bills >= 3)
             const chart = new Chartisan({
                 el: '#chart',
                 url: 'http://planus.me/diagrams/sum_bill/' + {{$apartment -> id_apartment}},

@@ -38,10 +38,10 @@ class ApartmentApiController extends Controller
             $req -> hot_water = str_replace(',', '.', $req -> hot_water);
             $req -> hot_water = (float)$req -> hot_water;
         }
-        if ($req -> heating) {
-            $req -> heating = str_replace(',', '.', $req -> heating);
-            $req -> heating = (float)$req -> heating;
-        }
+        // if ($req -> heating) {
+        //     $req -> heating = str_replace(',', '.', $req -> heating);
+        //     $req -> heating = (float)$req -> heating;
+        // }
         if ($req -> gas) {
             $req -> gas = str_replace(',', '.', $req -> gas);
             $req -> gas = (float)$req -> gas;
@@ -78,7 +78,7 @@ class ApartmentApiController extends Controller
             'billing_period' => 'required',
             'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'hot_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            // 'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'gas' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'electricity' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'rubbish' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
@@ -119,8 +119,8 @@ class ApartmentApiController extends Controller
             $apartment -> cold_water = (float)$req -> cold_water;
         if ($req -> hot_water)
             $apartment -> hot_water = (float)$req -> hot_water;
-        if ($req -> heating)
-            $apartment -> heating = (float)$req -> heating;
+        // if ($req -> heating)
+        //     $apartment -> heating = (float)$req -> heating;
         if ($req -> gas)
             $apartment -> gas = (float)$req -> gas;
         if ($req -> electricity)
@@ -146,10 +146,10 @@ class ApartmentApiController extends Controller
             $req -> hot_water = str_replace(',', '.', $req -> hot_water);
             $req -> hot_water = (float)$req -> hot_water;
         }
-        if ($req -> heating) {
-            $req -> heating = str_replace(',', '.', $req -> heating);
-            $req -> heating = (float)$req -> heating;
-        }
+        // if ($req -> heating) {
+        //     $req -> heating = str_replace(',', '.', $req -> heating);
+        //     $req -> heating = (float)$req -> heating;
+        // }
         if ($req -> gas) {
             $req -> gas = str_replace(',', '.', $req -> gas);
             $req -> gas = (float)$req -> gas;
@@ -186,7 +186,7 @@ class ApartmentApiController extends Controller
             'billing_period' => 'nullable',
             'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'hot_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            // 'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'gas' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'electricity' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'rubbish' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
@@ -227,10 +227,10 @@ class ApartmentApiController extends Controller
             $apartment -> hot_water = (float)$req -> hot_water;
         else
             $apartment -> hot_water = NULL;
-        if ($req -> heating)
-            $apartment -> heating = (float)$req -> heating;
-        else
-            $apartment -> heating = NULL;
+        // if ($req -> heating)
+        //     $apartment -> heating = (float)$req -> heating;
+        // else
+        //     $apartment -> heating = NULL;
         if ($req -> gas)
             $apartment -> gas = (float)$req -> gas;
         else
@@ -308,11 +308,11 @@ class ApartmentApiController extends Controller
 
     public function deleteMember(Request $req) {
         if (Apartment::find($req -> id_apartment) -> user_id == $req -> user_id) {
-            DB::table('apartment_user')->where('user_id', $req -> user_id)->where('apartment_id_apartment', $req -> id_apartment)->delete();
+            DB::table('apartment_user')->where('user_id', $req -> member_id)->where('apartment_id_apartment', $req -> id_apartment)->delete();
             if (User::find($req -> member_id) -> email == null)
                 User::destroy($req -> member_id);
         } else {
-            return response()->json(['message' => 'User is not authorized', 'user_id']);
+            return response()->json(['message' => 'User is not authorized']);
         }
         return response()->json(['message' => 'OK']);
     }

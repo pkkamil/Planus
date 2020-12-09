@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Counter;
 use App\User;
 use DateTime;
+use App\Bill;
 
 
 class ApartmentController extends Controller
@@ -86,8 +87,8 @@ class ApartmentController extends Controller
         if (count($lastCounter) != 0) {
             $from_date = new DateTime();
             $to_date = new DateTime($lastCounter->first() -> created_at);
-            $lastCounter = $from_date -> diff($to_date);
-            if ($lastCounter -> m > 0) {
+            $last = $from_date -> diff($to_date);
+            if ($last -> m > 0) {
                 $overdue = True;
             } else {
                 $overdue = False;
@@ -102,12 +103,20 @@ class ApartmentController extends Controller
                 $overdue = False;
             }
         }
-        // Count counters
-        $counters = Counter::where('id_apartment', $id)->get();
-        $counters = count($counters);
+
+        // recorded
+        $lastMonth = $lastCounter -> first() -> created_at -> format('m');
+        $today = new DateTime();
+        if ($today -> format('m') == $lastMonth)
+            $recorded = true;
+        else
+            $recorded = false;
+        // Count bills
+        $bills = Bill::where('id_apartment', $id)->get();
+        $bills = count($bills);
         $apartment = $apartment->first();
 
-        return view('apartmentDetails', compact('apartment', 'interval_to_end', 'days', 'counters', 'overdue'));
+        return view('apartmentDetails', compact('apartment', 'interval_to_end', 'days', 'bills', 'overdue', 'recorded'));
     }
 
     public function add(Request $req) {
@@ -125,7 +134,7 @@ class ApartmentController extends Controller
             'billing_period' => 'required',
             'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'hot_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            // 'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'gas' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'electricity' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'rubbish' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
@@ -161,8 +170,8 @@ class ApartmentController extends Controller
             $apartment -> cold_water = (float)$req -> cold_water;
         if ($req -> hot_water and $req -> hot_water_active)
             $apartment -> hot_water = (float)$req -> hot_water;
-        if ($req -> heating and $req -> heating_active)
-            $apartment -> heating = (float)$req -> heating;
+        // if ($req -> heating and $req -> heating_active)
+        //     $apartment -> heating = (float)$req -> heating;
         if ($req -> gas and $req -> gas_active)
             $apartment -> gas = (float)$req -> gas;
         if ($req -> electricity and $req -> electricity_active)
@@ -215,7 +224,7 @@ class ApartmentController extends Controller
             'billing_period' => 'nullable',
             'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'hot_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            // 'heating' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'gas' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'electricity' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
             'rubbish' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
@@ -255,10 +264,10 @@ class ApartmentController extends Controller
             $apartment -> hot_water = (float)$req -> hot_water;
         else
             $apartment -> hot_water = NULL;
-        if ($req -> heating and $req -> heating_active)
-            $apartment -> heating = (float)$req -> heating;
-        else
-            $apartment -> heating = NULL;
+        // if ($req -> heating and $req -> heating_active)
+        //     $apartment -> heating = (float)$req -> heating;
+        // else
+        //     $apartment -> heating = NULL;
         if ($req -> gas and $req -> gas_active)
             $apartment -> gas = (float)$req -> gas;
         else

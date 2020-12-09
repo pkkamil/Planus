@@ -38,7 +38,7 @@
             <img src="{{ asset('resources/img/svg/counters.svg') }}" alt="">
             <button type="submit">Zapisz liczniki</button>
         </section>
-        <a href="{{ url('/panel') }}"><button type="button" class="back"><i class="fas fa-chevron-left"></i> Wróć do panelu</button></a>
+        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć do panelu</a>
     </form>
     <script>
         let inputs = document.querySelectorAll('input')

@@ -16,37 +16,39 @@
             <h4>Łączna<span class="orange-text"> kwota rachunku</span>: {{ $bill -> sum }}<span style="color: #999">&nbsp;zł</span></h4>
         </section>
         <section class="right-part">
-            <h3>Statystyki <span class="orange-text">zużycia mediów</span></h3>
-            <section class="statistics">
-                @if ($bill -> cold_water)
-                    <div id="chart2"></div>
-                @endif
-                @if ($bill -> hot_water)
-                    <div id="chart3"></div>
-                @endif
-                @if ($bill -> gas)
-                    <div id="chart4"></div>
-                @endif
-                @if ($bill -> electricity)
-                    <div id="chart5"></div>
-                @endif
-            </section>
+            @if ($counters > 3)
+                <h3>Statystyki <span class="orange-text">zużycia mediów</span></h3>
+                <section class="statistics">
+                    @if ($bill -> cold_water)
+                        <div id="chart2"></div>
+                    @endif
+                    @if ($bill -> hot_water)
+                        <div id="chart3"></div>
+                    @endif
+                    @if ($bill -> gas)
+                        <div id="chart4"></div>
+                    @endif
+                    @if ($bill -> electricity)
+                        <div id="chart5"></div>
+                    @endif
+                </section>
+            @endif
             <section class="bottom-part">
                 @if (Auth::id() == $apartment -> user_id)
-                <h3>Dodaj <span class="orange-text">dodatkową opłatę</span></h3>
-                <form action="{{ url('/panel/rachunki/dodaj_oplate') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="id_bill" value="{{ $bill -> id_bill }}">
-                    <span class="name">
-                        <i class="fas fa-wallet"></i>
-                        <input id="name" type="text" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Nazwa opłaty" minlength="3">
-                    </span>
-                    <span class="price">
-                        <i class="fas fa-money-bill-alt"></i>
-                        <input id="price" type="text" @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required placeholder="Wysokość opłaty" min="0">
-                    </span>
-                    <button type="submit">Dodaj</button>
-                </form>
+                    <h3>Dodaj <span class="orange-text">dodatkową opłatę</span></h3>
+                    <form action="{{ url('/panel/rachunki/dodaj_oplate') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_bill" value="{{ $bill -> id_bill }}">
+                        <span class="name">
+                            <i class="fas fa-wallet"></i>
+                            <input id="name" type="text" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Nazwa opłaty" minlength="3">
+                        </span>
+                        <span class="price">
+                            <i class="fas fa-money-bill-alt"></i>
+                            <input id="price" type="text" @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required placeholder="Wysokość opłaty" min="0">
+                        </span>
+                        <button type="submit">Dodaj</button>
+                    </form>
                 @else
                     <img src="{{ asset('resources/img/svg/payment.svg') }}" alt="">
                 @endif

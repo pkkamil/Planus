@@ -30,24 +30,28 @@ class BillApiController extends Controller
         $electricity = [];
         $month = '';
         foreach ($bills as $bill) {
-            if (date("d", strtotime($bill -> settlement_date))[0] == '0')
+            if (date("m", strtotime($bill -> settlement_date))[0] == '0')
                 $num = str_replace(0, '', date("m", strtotime($bill -> settlement_date)));
             else
                 $num = date("m", strtotime($bill -> settlement_date));
             array_push($sums, $bill -> sum);
             array_push($months, $num);
-            if ($bill -> cold_water) {
+            if ($bill -> cold_water)
                 array_push($cold_water, $bill -> cold_water);
-            }
-            if ($bill -> hot_water) {
+            else
+                array_push($cold_water, '0.00');
+            if ($bill -> hot_water)
                 array_push($hot_water, $bill -> hot_water);
-            }
-            if ($bill -> gas) {
+            else
+                array_push($hot_water, '0.00');
+            if ($bill -> gas)
                 array_push($gas, $bill -> gas);
-            }
-            if ($bill -> electricity) {
+            else
+                array_push($gas, '0.00');
+            if ($bill -> electricity)
                 array_push($electricity, $bill -> electricity);
-            }
+            else
+                array_push($electricity, '0.00');
         }
         return response()->json(['price_sums' => $sums, 'cold_water' => $cold_water, 'hot_water' => $hot_water, 'gas' => $gas, 'electricity' => $electricity, 'months' => $months]);
     }

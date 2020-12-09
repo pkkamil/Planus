@@ -371,7 +371,7 @@ button.danger:hover {
 
 .apartments {
   width: 100%;
-  min-height: calc(100vh - 80px);
+  min-height: calc(70vh - 80px);
 }
 
 .apartments .list-apartments {
@@ -920,7 +920,7 @@ button.danger:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 80px 50px 80px;
+  padding: 100px 100px 50px 100px;
 }
 
 .activity-center .list-apartments {
@@ -934,8 +934,8 @@ button.danger:hover {
   position: relative;
   margin-top: 20px;
   margin-left: 20px;
-  width: 470px;
-  height: 300px;
+  width: 670px;
+  height: 420px;
 }
 
 .activity-center .list-apartments .single-apartment:first-of-type {
@@ -960,7 +960,7 @@ button.danger:hover {
   height: 100%;
   color: #ffa500;
   font-weight: 400;
-  font-size: 1.4em;
+  font-size: 1.7em;
   text-align: center;
   padding: 0 20px;
   text-transform: uppercase;
@@ -986,7 +986,7 @@ button.danger:hover {
   color: #FFF;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 1.4em;
+  font-size: 1.7em;
   text-align: center;
   padding: 0 20px;
 }
@@ -997,6 +997,76 @@ button.danger:hover {
 }
 
 .activity-center .list-apartments .single-apartment:hover h3 {
+  display: none;
+}
+
+.activity-center .list-apartments .smaller {
+  position: relative;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 470px;
+  height: 300px;
+}
+
+.activity-center .list-apartments .smaller:first-of-type {
+  margin-left: 0;
+}
+
+.activity-center .list-apartments .smaller img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.activity-center .list-apartments .smaller h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #ffa500;
+  font-weight: 400;
+  font-size: 1.4em;
+  text-align: center;
+  padding: 0 20px;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.activity-center .list-apartments .smaller .layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffa500cc;
+  opacity: 0;
+  transition: 0.6s opacity;
+}
+
+.activity-center .list-apartments .smaller .layer h4 {
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.4em;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.activity-center .list-apartments .smaller:hover .layer {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.activity-center .list-apartments .smaller:hover h3 {
   display: none;
 }
 
@@ -1027,10 +1097,6 @@ button.danger:hover {
   margin-top: 40px;
 }
 
-.activity-center .left-part {
-  width: 60%;
-}
-
 .activity-center .left-part button {
   margin-top: 20px;
 }
@@ -1054,8 +1120,92 @@ button.danger:hover {
   margin-left: -1em;
 }
 
-.activity-center .right-part {
-  width: 40%;
+.activity-center .left-part .members-header {
+  color: #555;
+  font-size: 1.7em;
+  font-weight: 400;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.activity-center .left-part .list-of-members {
+  display: flex;
+  align-items: flex-start;
+}
+
+.activity-center .left-part .list-of-members .single-member {
+  position: relative;
+  margin-left: 15px;
+}
+
+.activity-center .left-part .list-of-members .single-member:first-of-type {
+  margin-left: 0;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #ffa500;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  transition: 0.6s box-shadow;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px #ffa500;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle-delete {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #F00;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  transition: 0.6s box-shadow;
+  display: none;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle-delete:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px #F00;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #ffa500;
+  color: #FFF;
+  font-size: 1.4em;
+  transition: 0.6s background-color;
+}
+
+.activity-center .left-part .list-of-members .single-member .circle-add:hover {
+  cursor: pointer;
+  background-color: #ff9500;
+}
+
+.activity-center .left-part .list-of-members .single-member p {
+  margin-top: 5px;
+  font-size: 0.8em;
+  text-align: center;
+  color: #555;
 }
 
 .activity-center .right-part h4 {
@@ -1068,11 +1218,122 @@ button.danger:hover {
   width: 80%;
 }
 
+.activity-center .right-part .statistics h5 {
+  margin-top: 30px;
+  color: #555;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+.activity-center .right-part .statistics h6 {
+  color: #999;
+  font-weight: 400;
+  font-size: 1em;
+  margin-bottom: 50px;
+}
+
+.activity-center .right-part .bottom-part {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.activity-center .right-part .bottom-part p {
+  color: #555;
+  text-align: center;
+  width: 50%;
+  padding: 0px 20px 0px 0px;
+}
+
+.activity-center .right-part .buttons {
+  margin-top: 40px;
+  float: right;
+  display: block;
+}
+
+.activity-center .right-part .buttons .button {
+  display: inline-block;
+}
+
+.activity-center .right-part .buttons .button:last-of-type {
+  margin-left: 20px;
+}
+
+.activity-center .right-part .buttons .button:first-of-type {
+  margin-left: 0;
+}
+
+.activity-center .add-members {
+  color: #555;
+}
+
+.activity-center .add-members .top-part {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.activity-center .add-members .top-part section {
+  width: 50%;
+}
+
+.activity-center .add-members .top-part .lp .code {
+  margin-top: 10px;
+}
+
+.activity-center .add-members .top-part .rp {
+  transform: translateY(20px);
+}
+
+.activity-center .add-members h2 {
+  text-align: left;
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.activity-center .add-members p {
+  font-size: 1em;
+}
+
+.activity-center .add-members .close {
+  float: left;
+}
+
+.activity-center .add-members .bp h2 {
+  margin-top: 30px;
+}
+
+.activity-center .add-members .bp .single-input {
+  display: inline-block;
+  text-align: left;
+}
+
+.activity-center .add-members .bp .single-input label {
+  font-size: 1.4em;
+}
+
+.activity-center .add-members .bp .single-input input {
+  width: 200px;
+  border: 0;
+  outline: none;
+  padding: 2px 10px;
+  margin-left: 10px;
+  color: #ffa500;
+  font-size: 1.2em;
+  border-bottom: 1px solid #999;
+}
+
+.activity-center .add-members .bp button {
+  margin-left: 10px;
+  margin-top: 0;
+}
+
 .activity-center .settings {
   position: absolute;
   font-size: 1em;
   right: 50px;
-  bottom: 150px;
+  top: 100px;
   padding: 16px 45px;
 }
 
@@ -1321,7 +1582,7 @@ button.danger:hover {
   width: 100%;
 }
 
-.apartment-details .right-part .bottom-part button.settings-apartment {
+.apartment-details .right-part .bottom-part .settings-apartment {
   height: 55px;
   font-size: 1.3em;
   width: 55px;
@@ -1331,7 +1592,7 @@ button.danger:hover {
   padding: 10px;
 }
 
-.apartment-details .right-part .bottom-part button.settings-apartment i {
+.apartment-details .right-part .bottom-part .settings-apartment i {
   margin-right: 0;
 }
 
@@ -2106,6 +2367,39 @@ button.danger:hover {
     position: relative;
     width: 100%;
   }
+
+  .activity-center .right-part .bottom-part {
+    display: block;
+  }
+
+  .activity-center .right-part .bottom-part p {
+    width: 100%;
+  }
+
+  .activity-center .right-part .bottom-part p:last-of-type {
+    margin-top: 10px;
+  }
+
+  .activity-center .right-part .bottom-part br {
+    display: none;
+  }
+
+  .activity-center .right-part .buttons {
+    margin-top: 40px;
+    clear: both;
+    text-align: center;
+    display: block;
+  }
+
+  .activity-center .right-part .buttons .button {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .activity-center .right-part .buttons .button:last-of-type {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -2165,6 +2459,18 @@ button.danger:hover {
   }
 
   .bill .right-part .bottom-part img {
+    display: none;
+  }
+
+  .activity-center .left-part h2 {
+    font-size: 2.1em;
+  }
+
+  .activity-center .left-part .list-apartments {
+    padding-right: 0;
+  }
+
+  .activity-center .right-part {
     display: none;
   }
 }
@@ -2477,6 +2783,17 @@ button.danger:hover {
     margin: 0 auto;
     margin-top: 30px;
   }
+
+  .activity-center {
+    padding: 100px 50px 50px 50px;
+  }
+
+  .activity-center .settings {
+    position: static;
+    margin-top: 20px;
+    width: 320px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -2541,6 +2858,15 @@ button.danger:hover {
 
   .not-found h2 {
     font-size: 1.8em;
+  }
+
+  .activity-center .left-part h2 {
+    font-size: 2em;
+  }
+
+  .activity-center .left-part .list-apartments .single-apartment {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -2882,6 +3208,23 @@ button.danger:hover {
     width: 180px;
     text-align: center;
   }
+
+  .activity-center .left-part h2 {
+    margin-bottom: 10px;
+    font-size: 1.8em;
+  }
+
+  .activity-center .left-part .list-apartments .single-apartment h3 {
+    font-size: 1.4em;
+  }
+
+  .activity-center .left-part .list-apartments .single-apartment .layer h4 {
+    font-size: 1.4em;
+  }
+
+  .activity-center .left-part .members-header {
+    font-size: 1.5em;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -3201,6 +3544,10 @@ button.danger:hover {
   .bill .right-part .statistics {
     padding: 0 30px;
   }
+
+  .activity-center {
+    padding: 100px 30px 50px 30px;
+  }
 }
 
 @media screen and (max-width: 350px) {
@@ -3275,6 +3622,33 @@ button.danger:hover {
 
   .not-found h2 {
     font-size: 1.5em;
+  }
+
+  .activity-center {
+    padding: 80px 30px 50px 30px;
+  }
+
+  .activity-center .left-part h2 {
+    margin-bottom: 0px;
+    font-size: 1.6em;
+  }
+
+  .activity-center .left-part .list-apartments .single-apartment h3 {
+    font-size: 1.3em;
+  }
+
+  .activity-center .left-part .list-apartments .single-apartment .layer h4 {
+    font-size: 1.3em;
+  }
+
+  .activity-center .left-part .members-header {
+    font-size: 1.4em;
+  }
+
+  .activity-center .settings {
+    width: 250px;
+    font-size: 0.9em;
+    padding: 16px 25px;
   }
 }
 

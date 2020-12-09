@@ -125,6 +125,28 @@
                 position: relative
                 width: 100%
 
+    .activity-center
+        & .right-part
+            & .bottom-part
+                display: block
+                & p
+                    width: 100%
+                    &:last-of-type
+                        margin-top: 10px
+                & br
+                    display: none
+            & .buttons
+                margin-top: 40px
+                clear: both
+                text-align: center
+                display: block
+                & .button
+                    display: block
+                    margin-bottom: 20px
+                    &:last-of-type
+                        margin-left: 0
+                        margin-bottom: 0
+
 
 @media screen and (max-width: 1300px)
     .add-apartment
@@ -170,6 +192,17 @@
             & .bottom-part
                 & img
                     display: none
+
+    .activity-center
+        & .left-part
+            & h2
+                font-size: 2.1em
+            & .list-apartments
+                padding-right: 0
+        & .right-part
+            display: none
+
+
 
 @media screen and (max-width: 1040px)
     .login-section
@@ -382,6 +415,14 @@
                     margin: 0 auto
                     margin-top: 30px
 
+    .activity-center
+        padding: 100px 50px 50px 50px
+        & .settings
+            position: static
+            margin-top: 20px
+            width: 320px
+            text-align: center
+
 @media screen and (max-width: 850px)
     .add-apartment
         flex-wrap: nowrap
@@ -428,6 +469,15 @@
             width: 80%
         & h2
             font-size: 1.8em
+
+    .activity-center
+        & .left-part
+            & h2
+                font-size: 2em
+            & .list-apartments
+                & .single-apartment
+                    width: 100%
+                    height: 100%
 
 @media screen and (max-width: 756px)
     .bill
@@ -659,6 +709,20 @@
             width: 180px
             text-align: center
 
+    .activity-center
+        & .left-part
+            & h2
+                margin-bottom: 10px
+                font-size: 1.8em
+            & .list-apartments
+                & .single-apartment
+                    & h3
+                        font-size: 1.4em
+                    & .layer
+                        & h4
+                            font-size: 1.4em
+            & .members-header
+                font-size: 1.5em
 
 @media screen and (max-width: 500px)
     .welcome
@@ -875,6 +939,9 @@
             & .statistics
                 padding: 0 30px
 
+    .activity-center
+        padding: 100px 30px 50px 30px
+
 @media screen and (max-width: 350px)
     .article-title
         font-size: 2em
@@ -928,6 +995,25 @@
         & h2
             font-size: 1.5em
 
+    .activity-center
+        padding: 80px 30px 50px 30px
+        & .left-part
+            & h2
+                margin-bottom: 0px
+                font-size: 1.6em
+            & .list-apartments
+                & .single-apartment
+                    & h3
+                        font-size: 1.3em
+                    & .layer
+                        & h4
+                            font-size: 1.3em
+            & .members-header
+                font-size: 1.4em
+        & .settings
+            width: 250px
+            font-size: .9em
+            padding: 16px 25px
 
 @media screen and (max-width: 300px)
     .login-section

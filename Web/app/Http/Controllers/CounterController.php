@@ -65,7 +65,9 @@ class CounterController extends Controller
         if (!$counters -> cold_water and !$counters -> hot_water and !$counters -> gas and !$counters -> electricity or Auth::id() != $apartment -> user_id) {
             return redirect('/panel/mieszkanie/'.$id);
         }
-        return view('counters', compact('apartment', 'lastCounter'));
+        $bills = Bill::where('id_apartment', $apartment -> id_apartment)->get();
+        $bills = count($bills);
+        return view('counters', compact('apartment', 'lastCounter', 'bills'));
     }
 
     public function store(Request $req) {

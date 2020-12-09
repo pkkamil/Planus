@@ -263,7 +263,7 @@ button.danger
 
 .apartments
     width: 100%
-    min-height: calc(100vh - 80px)
+    min-height: calc(70vh - 80px)
     & .list-apartments
         @include flex-center
         width: 100%
@@ -633,13 +633,64 @@ button.danger
     width: 100%
     min-height: 90vh
     @include flex-center
-    padding: 100px 80px 50px 80px
+    padding: 100px 100px 50px 100px
     & .list-apartments
         width: 100%
         display: flex
         flex-direction: row
         padding-right: 50px
         & .single-apartment
+            // box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4)
+            position: relative
+            margin-top: 20px
+            margin-left: 20px
+            width: 670px
+            height: 420px
+            &:first-of-type
+                margin-left: 0
+            & img
+                width: 100%
+                height: 100%
+                object-fit: cover
+            & h3
+                @include flex-center
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                color: $primary
+                font-weight: 400
+                font-size: 1.7em
+                text-align: center
+                padding: 0 20px
+                text-transform: uppercase
+                background-color: rgba(0,0,0,.4)
+            & .layer
+                @include flex-center
+                flex-direction: column
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                background-color: #ffa500cc
+                opacity: 0
+                transition: .6s opacity
+                & h4
+                    color: #FFF
+                    text-transform: uppercase
+                    font-weight: 400
+                    font-size: 1.7em
+                    text-align: center
+                    padding: 0 20px
+            &:hover .layer
+                opacity: 1
+                cursor: pointer
+            &:hover h3
+                display: none
+
+        & .smaller
             // box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4)
             position: relative
             margin-top: 20px
@@ -709,7 +760,7 @@ button.danger
         margin-top: 40px
 
     & .left-part
-        width: 60%
+        // width: 50%
         & button
             margin-top: 20px
         & ul
@@ -725,21 +776,154 @@ button.danger
                     display: inline-block
                     width: 1em
                     margin-left: -1em
+        & .members-header
+            color: $secondary
+            font-size: 1.7em
+            font-weight: 400
+            margin-top: 30px
+            margin-bottom: 10px
+        & .list-of-members
+            display: flex
+            align-items: flex-start
+            & .single-member
+                position: relative
+                margin-left: 15px
+                &:first-of-type
+                    margin-left: 0
+                & .circle
+                    @include flex-center
+                    width: 60px
+                    height: 60px
+                    border-radius: 100%
+                    background-color: $primary
+                    color: #FFF
+                    text-transform: uppercase
+                    font-size: 1.4em
+                    transition: .6s box-shadow
+                    &:hover
+                        cursor: pointer
+                        box-shadow: 0 0 5px $primary
+                & .circle-delete
+                    position: absolute
+                    top: 0
+                    @include flex-center
+                    width: 60px
+                    height: 60px
+                    border-radius: 100%
+                    background-color: #F00
+                    color: #FFF
+                    text-transform: uppercase
+                    font-size: 1.4em
+                    transition: .6s box-shadow
+                    display: none
+                    &:hover
+                        cursor: pointer
+                        box-shadow: 0 0 5px #F00
+                & .circle-add
+                    @include flex-center
+                    width: 60px
+                    height: 60px
+                    border-radius: 100%
+                    background-color: $primary
+                    color: #FFF
+                    font-size: 1.4em
+                    transition: .6s background-color
+                    &:hover
+                        cursor: pointer
+                        background-color: $primary-dark
+                & p
+                    margin-top: 5px
+                    font-size: .8em
+                    text-align: center
+                    color: $secondary
 
     & .right-part
-        width: 40%
+        // width: 50%
         & h4
             margin-bottom: 30px
         & img
             margin-bottom: 50px
             margin-left: 50px
             width: 80%
+        & .statistics
+            & h5
+                margin-top: 30px
+                color: $secondary
+                font-weight: 400
+                font-size: 1.1em
+            & h6
+                color: #999
+                font-weight: 400
+                font-size: 1em
+                margin-bottom: 50px
+        & .bottom-part
+            margin-top: 40px
+            display: flex
+            justify-content: center
+            & p
+                color: $secondary
+                text-align: center
+                width: 50%
+                padding: 0px 20px 0px 0px
+        & .buttons
+            margin-top: 40px
+            float: right
+            display: block
+            & .button
+                display: inline-block
+                &:last-of-type
+                    margin-left: 20px
+                &:first-of-type
+                    margin-left: 0
+
+    & .add-members
+        color: $secondary
+        & .top-part
+            display: flex
+            align-items: center
+            flex-direction: row
+            & section
+                width: 50%
+            & .lp
+                & .code
+                    margin-top: 10px
+            & .rp
+                transform: translateY(20px)
+        & h2
+            text-align: left
+            font-size: 1.8em
+            margin-top: 0
+            margin-bottom: 20px
+        & p
+            font-size: 1em
+        & .close
+            float: left
+        & .bp
+            & h2
+                margin-top: 30px
+            & .single-input
+                display: inline-block
+                text-align: left
+                & label
+                    font-size: 1.4em
+                & input
+                    width: 200px
+                    border: 0
+                    outline: none
+                    padding: 2px 10px
+                    margin-left: 10px
+                    color: $primary
+                    font-size: 1.2em
+                    border-bottom: 1px solid #999
+            & button
+                margin-left: 10px
+                margin-top: 0
 
     .settings
         position: absolute
         font-size: 1em
         right: 50px
-        bottom: 150px
+        top: 100px
         padding: 16px 45px
         & i
             margin-right: 15px
@@ -910,14 +1094,14 @@ button.danger
                     margin-left: 0
             & button
                 width: 100%
-                &.settings-apartment
-                    height: 55px
-                    font-size: 1.3em
-                    width: 55px
-                    @include flex-center
-                    padding: 10px
-                    & i
-                        margin-right: 0
+            & .settings-apartment
+                height: 55px
+                font-size: 1.3em
+                width: 55px
+                @include flex-center
+                padding: 10px
+                & i
+                    margin-right: 0
     & .add-members
         color: $secondary
         & .top-part

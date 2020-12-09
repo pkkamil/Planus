@@ -1,5 +1,6 @@
 <?php
     $headerClass = 'decision';
+    $active = '';
 ?>
 @extends('layouts.app')
 @section('content')

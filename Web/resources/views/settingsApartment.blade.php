@@ -56,12 +56,6 @@
             <input type="checkbox" name="hot_water_active" @if ($apartment -> hot_water) checked @endif>
             <i class="far fa-check-circle checkbox"></i>
         </span>
-        <span class="heating">
-            <i class="fas fa-fire"></i>
-            <input id="heating" type="text" @error('heating') is-invalid @enderror" name="heating" value="{{ $apartment -> heating }}" placeholder="Cena za ogrzewanie (rocznie)">
-            <input type="checkbox" name="heating_active" @if ($apartment -> heating) checked @endif>
-            <i class="far fa-check-circle checkbox"></i>
-        </span>
         <span class="gas">
             <i class="fas fa-gas-pump"></i>
             <input id="gas" type="text" @error('gas') is-invalid @enderror" name="gas" value="{{ $apartment -> gas }}" placeholder="Cena za 1kWh gazu">
@@ -118,7 +112,7 @@
         @endif
         <button type="button" class="delete_apartment" onclick="showModal()"><i class="fas fa-trash-alt"></i> Usuń mieszkanie</button>
     </section>
-    <a href="{{ url()->previous() }}"><button class="back"><i class="fas fa-chevron-left"></i></button></a>
+    <a class="button back" href="{{ url()->previous() }}"><i class="fas fa-chevron-left"></i></a>
     <article class="dimmer">
         <section class="modal">
             <img src="{{ asset('resources/img/svg/delete.svg') }}" alt="">

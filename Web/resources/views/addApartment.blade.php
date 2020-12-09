@@ -55,12 +55,6 @@
                 <input type="checkbox" name="hot_water_active">
                 <i class="far fa-check-circle checkbox"></i>
             </span>
-            <span class="heating">
-                <i class="fas fa-fire"></i>
-                <input id="heating" type="text" @error('heating') is-invalid @enderror" name="heating" value="{{ old('heating') }}" placeholder="Cena za ogrzewanie (rocznie)">
-                <input type="checkbox" name="heating_active">
-                <i class="far fa-check-circle checkbox"></i>
-            </span>
             <span class="gas">
                 <i class="fas fa-gas-pump"></i>
                 <input id="gas" type="text" @error('gas') is-invalid @enderror" name="gas" value="{{ old('gas') }}" placeholder="Cena za 1kWh gazu">
