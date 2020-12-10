@@ -1615,7 +1615,11 @@ button.danger:hover {
 }
 
 .apartment-details .add-members .top-part .rp {
-  transform: translateY(20px);
+  transform: translateY(10px);
+}
+
+.apartment-details .add-members .top-part .rp p {
+  margin-bottom: 20px;
 }
 
 .apartment-details .add-members h2 {
