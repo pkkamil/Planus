@@ -1407,8 +1407,8 @@ button.danger:hover {
 }
 
 .apartment-details .left-part img {
-  width: 670px;
-  height: 420px;
+  max-width: 670px;
+  max-height: 420px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1553,6 +1553,11 @@ button.danger:hover {
 .apartment-details .right-part .statistics .diagrams section {
   padding-right: 20px;
   padding-top: 20px;
+}
+
+.apartment-details .right-part .statistics .diagrams section div {
+  width: 250px;
+  height: 200px;
 }
 
 .apartment-details .right-part .statistics .diagrams section h6 {
@@ -2191,6 +2196,31 @@ button.danger:hover {
   color: #ff9500;
 }
 
+@media screen and (max-width: 1800px) {
+  .apartment-details {
+    padding: 150px 50px 50px 50px;
+    flex-direction: column;
+  }
+
+  .apartment-details .left-part img {
+    max-width: 1270px;
+    max-height: 620px;
+  }
+
+  .apartment-details .left-part .bottom-part {
+    margin-bottom: 40px;
+  }
+
+  .apartment-details .left-part .bottom-part p br {
+    display: none;
+  }
+
+  .apartment-details .right-part {
+    width: 930px;
+    padding-left: 0;
+  }
+}
+
 @media screen and (max-width: 1600px) {
   .apartment .left-part h2 {
     font-size: 2.3em;
@@ -2280,6 +2310,10 @@ button.danger:hover {
 
   .bill .right-part .statistics div {
     margin-left: 15px;
+  }
+
+  .activity-center .right-part {
+    display: none;
   }
 }
 
@@ -2474,6 +2508,10 @@ button.danger:hover {
     padding-right: 0;
   }
 
+  .activity-center .left-part .list-apartments .smaller {
+    width: 50%;
+  }
+
   .activity-center .right-part {
     display: none;
   }
@@ -2575,6 +2613,23 @@ button.danger:hover {
   .bill .right-part h3 {
     font-size: 1.3em;
   }
+
+  .apartment-details {
+    padding: 150px 30px 50px 30px;
+  }
+
+  .apartment-details .left-part img {
+    max-width: 970px;
+    max-height: 520px;
+  }
+
+  .apartment-details .right-part {
+    width: 780px;
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart {
+    width: calc(33%);
+  }
 }
 
 @media screen and (max-width: 976px) {
@@ -2583,6 +2638,7 @@ button.danger:hover {
   }
 
   .nav-wrapper {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -2698,7 +2754,8 @@ button.danger:hover {
 }
 
 @media screen and (max-width: 920px) {
-  button {
+  button,
+  .button {
     padding: 16px 37px;
   }
 
@@ -2798,6 +2855,72 @@ button.danger:hover {
     width: 320px;
     text-align: center;
   }
+
+  .apartment-details {
+    padding: 90px 30px 50px 30px;
+  }
+
+  .apartment-details .left-part img {
+    max-width: 100%;
+  }
+
+  .apartment-details .left-part .list-of-members {
+    flex-wrap: wrap;
+  }
+
+  .apartment-details .left-part .list-of-members h3 {
+    margin-bottom: 0;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member {
+    margin-top: 10px;
+  }
+
+  .apartment-details .right-part {
+    width: 100%;
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart {
+    width: calc(50%);
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart div {
+    width: auto;
+  }
+
+  .apartment-details .right-part .statistics .bottom-part {
+    flex-wrap: wrap;
+    justify-content: center;
+    float: none;
+    margin-top: 20px;
+  }
+
+  .apartment-details .right-part .statistics .bottom-part a {
+    margin: 0;
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+
+  .apartment-details .dimmer .add-members h2 {
+    font-size: 1.6em;
+    text-align: center;
+  }
+
+  .apartment-details .dimmer .add-members .top-part {
+    flex-direction: column;
+  }
+
+  .apartment-details .dimmer .add-members .top-part .lp,
+  .apartment-details .dimmer .add-members .top-part .rp {
+    width: 100%;
+  }
+
+  .apartment-details .back {
+    position: static;
+    margin-bottom: 40px;
+    width: 320px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -2840,7 +2963,7 @@ button.danger:hover {
     height: 405px;
   }
 
-  .dimmer .modal button:first-of-type {
+  .rent-apartment .dimmer .modal button:first-of-type {
     margin-right: auto;
   }
 
@@ -2871,6 +2994,16 @@ button.danger:hover {
   .activity-center .left-part .list-apartments .single-apartment {
     width: 100%;
     height: 100%;
+  }
+
+  .activity-center .left-part .some {
+    flex-direction: column;
+  }
+
+  .activity-center .left-part .some .smaller {
+    width: 100%;
+    height: 400px;
+    margin-left: 0;
   }
 }
 
@@ -3133,6 +3266,36 @@ button.danger:hover {
   .not-found h2 {
     font-size: 1.6em;
   }
+
+  .apartment-details .dimmer .add-members {
+    padding: 40px 40px;
+  }
+
+  .apartment-details .dimmer .add-members h2 {
+    font-size: 1.4em;
+  }
+
+  .apartment-details .dimmer .add-members .bp .single-input label {
+    font-size: 1.2em;
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .apartment-details .dimmer .add-members .bp .single-input input {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .apartment-details .dimmer .add-members button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .apartment-details .dimmer .add-members .close {
+    float: none;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -3182,6 +3345,11 @@ button.danger:hover {
     margin-top: 20px;
   }
 
+  .dimmer .modal svg {
+    width: 64px;
+    height: 64px;
+  }
+
   .add-apartment {
     padding: 100px 30px 40px 30px;
   }
@@ -3226,8 +3394,82 @@ button.danger:hover {
     font-size: 1.4em;
   }
 
+  .activity-center .left-part .some .smaller {
+    height: 300px;
+  }
+
   .activity-center .left-part .members-header {
     font-size: 1.5em;
+  }
+
+  .activity-center .left-part .events {
+    font-size: 1.4em;
+  }
+
+  .apartment-details {
+    font-size: 16px;
+  }
+
+  .apartment-details .left-part .name {
+    font-size: 1.8em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle-delete {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle-add {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3em;
+  }
+
+  .apartment-details .left-part .bottom-part {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .apartment-details .left-part .bottom-part p {
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .apartment-details .left-part .bottom-part p:first-of-type {
+    margin-bottom: 10px;
+  }
+
+  .apartment-details .right-part {
+    width: 100%;
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart {
+    width: calc(100%);
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart div {
+    height: 200px;
+  }
+
+  .apartment-details .right-part .statistics .diagrams .single-chart br {
+    display: none;
+  }
+
+  .apartment-details .back {
+    position: static;
+    margin-bottom: 40px;
+    width: 320px;
+    text-align: center;
   }
 }
 
@@ -3411,6 +3653,29 @@ button.danger:hover {
   .bill .right-part .bottom-part span:not(.orange-text) {
     width: 260px;
   }
+
+  .apartment-details .left-part .name {
+    font-size: 1.6em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member p {
+    font-size: 0.7em;
+  }
+
+  .apartment-details .right-part .statistics .bottom-part {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .apartment-details .right-part .statistics .bottom-part a {
+    margin-left: 0;
+  }
+
+  .apartment-details .dimmer .modal {
+    overflow-y: scroll;
+    height: 400px;
+    border-radius: 0;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -3460,6 +3725,15 @@ button.danger:hover {
 
   .login-section section.decision a {
     font-size: 0.9em;
+  }
+
+  .activity-center .left-part .some .smaller {
+    height: 250px;
+  }
+
+  .activity-center .left-part .some .smaller h3,
+  .activity-center .left-part .some .smaller h4 {
+    font-size: 1.3em;
   }
 
   .dimmer {
@@ -3551,6 +3825,24 @@ button.danger:hover {
 
   .activity-center {
     padding: 100px 30px 50px 30px;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle-delete {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+
+  .apartment-details .left-part .list-of-members .single-member .circle-add {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
   }
 }
 
@@ -3653,6 +3945,37 @@ button.danger:hover {
     width: 250px;
     font-size: 0.9em;
     padding: 16px 25px;
+  }
+
+  .apartment-details {
+    padding: 90px 20px 50px 20px;
+  }
+
+  .apartment-details .left-part {
+    width: 100%;
+  }
+
+  .apartment-details .left-part .name {
+    font-size: 1.5em;
+  }
+
+  .apartment-details .right-part .statistics .bottom-part a {
+    padding: 16px 35px;
+  }
+
+  .apartment-details .back {
+    position: static;
+    margin-bottom: 20px;
+    width: 180px;
+    text-align: center;
+  }
+
+  .apartment-details .back .disapper {
+    display: none;
+  }
+
+  .apartment-details .back i {
+    margin-right: 10px;
   }
 }
 

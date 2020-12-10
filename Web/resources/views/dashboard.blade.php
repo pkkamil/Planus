@@ -8,7 +8,7 @@
     <article class="activity-center">
         <section class="left-part">
             <h2>Witaj, <span class="orange-text">{{ Auth::user() -> name }}</span>! <i class="far fa-bell"></i></h2>
-                <section class="list-apartments">
+                <section class="list-apartments some">
                     @if (count($apartments) == 1)
                         <section class="single-apartment">
                             <a href="{{ url("panel/mieszkanie/".$apartments -> first() -> id_apartment) }}">

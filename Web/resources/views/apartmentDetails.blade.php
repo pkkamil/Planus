@@ -7,6 +7,7 @@
 @section('content')
     <article class="apartment-details">
         <section class="left-part">
+            <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć<span class="disapper"> do panelu</span></a>
             <h1 class="name">{{ $apartment -> name }}</h1>
             <img src="{{ $apartment -> image }}" alt="">
             <h3>Mieszkańcy</h3>
@@ -30,9 +31,9 @@
             </section>
             <section class="bottom-part">
                 @if ($days > 1)
-                    <p>Do terminu rozliczenia<br>pozostało <span class="orange-text">{{ $days }}</span> dni.</p>
+                    <p>Do terminu rozliczenia <br>pozostało <span class="orange-text">{{ $days }}</span>&nbsp;dni.</p>
                 @elseif ($days == 1)
-                    <p>Do terminu rozliczenia<br>pozostał <span class="orange-text">{{ $days }}</span> dzień.</p>
+                    <p>Do terminu rozliczenia <br>pozostał <span class="orange-text">{{ $days }}</span>&nbsp;dzień.</p>
                 @elseif ($days == -1)
                     <p><br><span class="orange-text">Dzisiaj</span> wypada termin rozliczenia.</p>
                 @else
@@ -51,31 +52,31 @@
                 @else
                     <section class="diagrams">
                         <section class="single-chart">
-                            <h6><span class="orange-text">Wysokość rachunku</span> mieszkania<br>w ciągu ostatnich miesięcy</h6>
-                            <div id="chart" style="width: 250px; height: 200px"></div>
+                            <h6><span class="orange-text">Wysokość rachunku</span> mieszkania <br>w ciągu ostatnich miesięcy</h6>
+                            <div id="chart"></div>
                         </section>
                         @if ($apartment -> cold_water)
                             <section class="single-chart">
-                                <h6>Koszt <span style="color: #45D8E1">wody zimnej</span><br>w ciągu ostatnich miesięcy</h6>
-                                <div id="chart2" style="width: 250px; height: 200px"></div>
+                                <h6>Koszt <span style="color: #45D8E1">wody zimnej </span><br>w ciągu ostatnich miesięcy</h6>
+                                <div id="chart2"></div>
                             </section>
                         @endif
                         @if ($apartment -> hot_water)
                             <section class="single-chart">
-                                <h6>Koszt <span style="color: #F00">wody ciepłej</span><br>w ciągu ostatnich miesięcy</h6>
-                                <div id="chart3" style="width: 250px; height: 200px"></div>
+                                <h6>Koszt <span style="color: #F00">wody ciepłej </span><br>w ciągu ostatnich miesięcy</h6>
+                                <div id="chart3"></div>
                             </section>
                         @endif
                         @if ($apartment -> gas)
                             <section class="single-chart">
-                                <h6>Koszt <span style="color: #56CA53">gazu</span><br>w ciągu ostatnich miesięcy</h6>
-                                <div id="chart4" style="width: 250px; height: 200px"></div>
+                                <h6>Koszt <span style="color: #56CA53">gazu </span><br>w ciągu ostatnich miesięcy</h6>
+                                <div id="chart4"></div>
                             </section>
                         @endif
                         @if ($apartment -> electricity)
                             <section class="single-chart">
-                                <h6>Koszt <span style="color: #FFD600">prądu</span><br>w ciągu ostatnich miesięcy</h6>
-                                <div id="chart5" style="width: 250px; height: 200px"></div>
+                                <h6>Koszt <span style="color: #FFD600">prądu </span><br>w ciągu ostatnich miesięcy</h6>
+                                <div id="chart5"></div>
                             </section>
                         @endif
                     </section>
@@ -84,7 +85,7 @@
                 @if ($bills > 0)
                     <a class="bills button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/rachunki') }}"><i class="fas fa-money-bill-alt"></i> Rachunki</a>
                 @endif
-                @if ($apartment -> user_id == Auth::id() and $days < 2 and !$recorded or $apartment -> user_id == Auth::id() and $overdue)
+                @if ($apartment -> user_id == Auth::id() and $days < 2 and !$recorded or $apartment -> user_id == Auth::id() and !$overdue)
                     <a class="counters button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/liczniki') }}"><i class="far fa-chart-bar"></i> Wprowadź liczniki</a>
                 @endif
                 @if ($apartment -> user_id == Auth::id())
@@ -92,7 +93,6 @@
                 @endif
             </section>
         </section>
-        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć do panelu</a>
         <article class="dimmer">
             <section class="modal add-members">
                 <section class="top-part">
