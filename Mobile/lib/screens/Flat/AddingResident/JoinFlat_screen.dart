@@ -25,6 +25,7 @@ class _JoinFlatState extends State<JoinFlat> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Container(
           height: size.height,
             child: Stack(
@@ -49,7 +50,7 @@ class _JoinFlatState extends State<JoinFlat> {
                         ]
                       )
                     ),
-                    SizedBox(height:size.height*0.05),
+                    SizedBox(height:size.height*0.04),
                     RoundedInput(
                       width: size.width*0.7,
                       icon: Icons.group,
@@ -80,7 +81,7 @@ class _JoinFlatState extends State<JoinFlat> {
                         }
                       },
                     ),
-                    SizedBox(height:size.height*0.03),
+                    SizedBox(height:size.height*0.025),
                     Text(
                       "Lub".toUpperCase(),
                       style: TextStyle(
@@ -88,7 +89,7 @@ class _JoinFlatState extends State<JoinFlat> {
                         fontSize: 24
                       ),
                     ),
-                    SizedBox(height:size.height*0.03),
+                    SizedBox(height:size.height*0.025),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(
@@ -126,6 +127,7 @@ class _JoinFlatState extends State<JoinFlat> {
                       child: Container(
                         width: size.width*0.55,
                         height: size.width*0.45,
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
                           color: Colors.orange

@@ -43,6 +43,7 @@ class FlatCard extends StatelessWidget {
           child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8),
             width: size,
             height: size,
             decoration: BoxDecoration(

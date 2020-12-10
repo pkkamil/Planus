@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            SizedBox(height: size.height*0.07),
+            SizedBox(height: size.height*0.05),
             RoundedButton(
               text: "Zmiana imienia",
               width: size.width*0.7,

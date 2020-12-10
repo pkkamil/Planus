@@ -127,20 +127,20 @@ class _FlatsState extends State<Flats> {
                         SizedBox(height: size.height*0.1),
                         if(flats_count>=1)FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[0].name, 
-                          size: size.width*0.5, 
+                          size: size.width*0.51, 
                           image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[0].image,
                           flatData: (flatCard==null) ? 'Loading...' : flatCard[0],
                         ),
                         
                         if(flats_count>1) FlatCard(
                           flat_name: (flatCard==null) ? 'Loading...' : flatCard[1].name,
-                          size: size.width*0.5, 
+                          size: size.width*0.51, 
                           image: (flatCard==null) ? 'https://cdn.discordapp.com/attachments/635152661137850390/781908048045932544/mieszkanie.png' : flatCard[1].image,
                           flatData: (flatCard==null) ? 'Loading...' : flatCard[1],
                         ),
                         
                         if(flats_count==1) AddFlatCard(
-                          size: size.width*0.5,
+                          size: size.width*0.51,
                           user_id: widget.response['id'],
                         ),
                         if(flats_count==2)RoundedButton(
