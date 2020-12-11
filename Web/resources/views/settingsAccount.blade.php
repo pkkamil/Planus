@@ -6,12 +6,13 @@
 @section('content')
     <article class="settings-account">
         <section class="left-part">
+            <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć<span class="disapear"> do panelu</span></a>
             <form action="{{ route('changeName') }}" method="POST">
                 @csrf
                 <h1>Witaj, <input type="text" id="name" name="name" value="{{ Auth::user() -> name }}" onchange="submit()">!</h1>
             </form>
             <h3>Twój obecny adres email to <span class="orange-text">{{ Auth::user() -> email }}</span></h3>
-            <h2>Zmiana twojego <span class="orange-tex">adresu email</span></h2>
+            <h2>Zmiana twojego <span class="orange-text">adresu email</span></h2>
             <form action="{{ route('changeEmail') }}" method="POST">
                 @csrf
                 <span class="single-input">
@@ -20,20 +21,20 @@
                 </span>
                 <button type="submit">Zmień adres email</button>
             </form>
-            <h2>Zmiana twojego <span class="orange-tex">hasła</span></h2>
+            <h2>Zmiana twojego <span class="orange-text">hasła</span></h2>
             <form action="{{ route('changePassword') }}" method="POST">
                 @csrf
                 <span class="single-input">
                     <label for="current_password">Obecne hasło</label>
-                    <input type="password" name="current_password" id="current_password">
+                    <input type="password" name="current_password" id="current_password" autocomplete="current-password">
                 </span>
                 <span class="single-input">
-                    <label for="current_password">Nowe hasło</label>
-                    <input type="password" name="new_password" id="new_password">
+                    <label for="new_password">Nowe hasło</label>
+                    <input type="password" name="new_password" id="new_password" autocomplete="new-password">
                 </span>
                 <span class="single-input">
-                    <label for="current_password">Potwierdzenie hasła</label>
-                    <input type="password" name="confirm_password" id="confirm_password">
+                    <label for="confirm_password">Potwierdzenie hasła</label>
+                    <input type="password" name="confirm_password" id="confirm_password" autocomplete="confirm-password">
                 </span>
                 <button type="submit">Zmień hasło</button>
             </form>
@@ -54,7 +55,6 @@
             <img src="{{ asset('resources/img/svg/settings.svg') }}" alt="">
             <button class="delete_account danger" onclick="showModal()"><i class="fas fa-trash-alt"></i> Usuń konto</button>
         </section>
-        <a href="{{ url('/panel') }}"><button class="back"><i class="fas fa-chevron-left"></i> Wróć do panelu</button></a>
     </article>
     <article class="dimmer">
         <section class="modal">

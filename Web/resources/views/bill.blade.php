@@ -49,8 +49,6 @@
                         </span>
                         <button type="submit">Dodaj</button>
                     </form>
-                @else
-                    <img src="{{ asset('resources/img/svg/payment.svg') }}" alt="">
                 @endif
             </section>
         </section>

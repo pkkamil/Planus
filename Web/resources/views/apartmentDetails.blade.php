@@ -7,7 +7,7 @@
 @section('content')
     <article class="apartment-details">
         <section class="left-part">
-            <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć<span class="disapper"> do panelu</span></a>
+            <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć<span class="disapear"> do panelu</span></a>
             <h1 class="name">{{ $apartment -> name }}</h1>
             <img src="{{ $apartment -> image }}" alt="">
             <h3>Mieszkańcy</h3>
@@ -85,7 +85,7 @@
                 @if ($bills > 0)
                     <a class="bills button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/rachunki') }}"><i class="fas fa-money-bill-alt"></i> Rachunki</a>
                 @endif
-                @if ($apartment -> user_id == Auth::id() and $days < 2 and !$recorded or $apartment -> user_id == Auth::id() and !$overdue)
+                @if ($apartment -> user_id == Auth::id() and $days < 2 and !$recorded or $apartment -> user_id == Auth::id() and $overdue)
                     <a class="counters button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/liczniki') }}"><i class="far fa-chart-bar"></i> Wprowadź liczniki</a>
                 @endif
                 @if ($apartment -> user_id == Auth::id())

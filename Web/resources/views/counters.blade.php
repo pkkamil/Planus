@@ -7,6 +7,7 @@
 @section('content')
     <form class="enter-counters" action="{{ route('enterCounters') }}" method="POST" autocomplete="off">
         @csrf
+        <a class="button back" href="{{ url()->previous() }}"><i class="fas fa-chevron-left"></i> Wróć</a>
         <input type="hidden" name="id_apartment" value="{{ $apartment -> id_apartment }}">
         <section class="left-part">
             <h3>Wprowadź <span class="orange-text">liczniki</span></h3>
@@ -66,25 +67,25 @@
                 <section class="diagrams">
                     @if ($apartment -> cold_water)
                         <section class="single-chart">
-                            <div id="chart" style="width: 300px; height: 300px"></div>
+                            <div id="chart"></div>
                             <h6>Zużycie <span style="color: #45D8E1">wody zimnej</span></h6>
                         </section>
                     @endif
                     @if ($apartment -> hot_water)
                         <section class="single-chart">
-                            <div id="chart2" style="width: 300px; height: 300px"></div>
+                            <div id="chart2"></div>
                             <h6>Zużycie <span style="color: #FF0000">wody ciepłej</span></h6>
                         </section>
                     @endif
                     @if ($apartment -> gas)
                         <section class="single-chart">
-                            <div id="chart3" style="width: 300px; height: 300px"></div>
+                            <div id="chart3"></div>
                             <h6>Zużycie <span style="color: #56CA53">gazu</span></h6>
                         </section>
                     @endif
                     @if ($apartment -> electricity)
                         <section class="single-chart">
-                            <div id="chart4" style="width: 300px; height: 300px"></div>
+                            <div id="chart4"></div>
                             <h6>Zużycie <span style="color: #FFD600">prądu</span></h6>
                         </section>
                     @endif
@@ -94,7 +95,6 @@
             @endif
             <button type="submit">Zapisz liczniki</button>
         </section>
-        <a href="{{ url()->previous() }}"><button type="button" class="back"><i class="fas fa-chevron-left"></i> Wróć</button></a>
     </form>
     <script>
         @if ($bills > 2)

@@ -5,7 +5,7 @@
 
 @extends('layouts.app')
 @section('content')
-    <article class="activity-center">
+    <article class="activity-center @if (count($apartments) == 1) single @endif">
         <section class="left-part">
             <h2>Witaj, <span class="orange-text">{{ Auth::user() -> name }}</span>! <i class="far fa-bell"></i></h2>
                 <section class="list-apartments some">
@@ -63,17 +63,16 @@
                     <ul class="list-of-events">
                         @if (count($soon) > 0)
                             @foreach ($soon as $el)
-                                <li>{!! $el !!},</li>
+                                <li class="item-event">{!! $el !!},</li>
                             @endforeach
                         @else
-                            <li>Nie ma żadnych zbliżających się zdarzeń</li>
+                            <li class="item-event-empty">Nie masz żadnych zbliżających się zdarzeń</li>
                         @endif
                     </ul>
                 @endif
-            <a class="button settings" href="{{ url('/panel/ustawienia') }}"><i class="fas fa-cog"></i> Ustawienia konta</a>
         </section>
-        <section class="right-part">
-            @if (count($apartments) == 1)
+        @if (count($apartments) == 1)
+            <section class="right-part">
                 <h4>Miesięczne <span class="orange-text">koszty</span></h4>
                 @if ($bills < 3)
                     <section class="statistics">
@@ -82,20 +81,20 @@
                     </section>
                 @else
                 <section class="single-chart">
-                    <div id="chart" style="width: 250px; height: 200px"></div>
+                    <div id="chart"></div>
                 </section>
                 @endif
                 <section class="bottom-part">
                     @if ($days > 1)
-                        <p>Do terminu rozliczenia<br>pozostało <span class="orange-text">{{ $days }}</span> dni.</p>
+                        <p>Do terminu rozliczenia <br>pozostało <span class="orange-text">{{ $days }}</span>&nbsp;dni.</p>
                     @elseif ($days == 1)
-                        <p>Do terminu rozliczenia<br>pozostał <span class="orange-text">{{ $days }}</span> dzień.</p>
+                        <p>Do terminu rozliczenia <br>pozostał <span class="orange-text">{{ $days }}</span>&nbsp;dzień.</p>
                     @elseif ($days == -1)
                         <p><br><span class="orange-text">Dzisiaj</span> wypada termin rozliczenia.</p>
                     @else
                         <p><br><span class="orange-text">Jutro</span> wypada termin rozliczenia.</p>
                     @endif
-                    <p>@if ($interval_to_end > 0)Pozostały okres rozliczeniowy:<br>@endif<span class="orange-text">@if ($interval_to_end > 0) {{ $interval_to_end }} @endif @if ($interval_to_end > 1 and $interval_to_end < 4) miesiące @endif @if ($interval_to_end > 4) miesięcy @elseif ($interval_to_end == 1) miesiąc @elseif ($interval_to_end == 0)<span style="color: #555">Jest to <span class="orange-text">ostatni miesiąc</span> rozliczeniowy</span>@elseif ($interval_to_end < 0) <span style="color: #F00">Koniec okresu rozliczeniowego</span> @endif<span></p>
+                    <p>@if ($interval_to_end > 0)Pozostały okres rozliczeniowy:@endif<span class="orange-text">@if ($interval_to_end > 0) {{ $interval_to_end }} @endif @if ($interval_to_end > 1 and $interval_to_end < 4) miesiące @endif @if ($interval_to_end > 4) miesięcy @elseif ($interval_to_end == 1) miesiąc @elseif ($interval_to_end == 0)<span style="color: #555">Jest to <span class="orange-text">ostatni miesiąc</span> rozliczeniowy</span>@elseif ($interval_to_end < 0) <span style="color: #F00">Koniec okresu rozliczeniowego</span> @endif<span></p>
                 </section>
                  @if ($apartments -> first() -> user_id == Auth::id() and $days < 2 or $apartments -> first() -> user_id == Auth::id() and $overdue)
                     <section class="buttons">
@@ -105,42 +104,45 @@
                         <a class="counters button" href="{{ url('/panel/mieszkanie/'.$apartments -> first() -> id_apartment.'/liczniki') }}"><i class="far fa-chart-bar"></i> Wprowadź liczniki</a>
                     </section>
                 @endif
-            @else
+            </section>
+        @else
+            <section class="right-part svg">
                 <img src="{{ asset('resources/img/svg/dashboard.svg') }}" alt="">
-            @endif
-        </section>
+            </section>
+        @endif
+        <a class="button settings" href="{{ url('/panel/ustawienia') }}"><i class="fas fa-cog"></i> Ustawienia konta</a>
     </article>
     @if (count($apartments) == 1)
-    <article class="dimmer">
-        <section class="modal add-members">
-            <section class="top-part">
-                <section class="lp">
-                    <h2>Dodaj <span class="orange-text">mieszkańców</span></h2>
-                    <p>Aby dodać nowych mieszkańców, udostępnij swój <span class="orange-text">kod zaproszenia</span>.</p>
-                    <p class="code">Kod zaproszenia: <span class="orange-text">{{ $apartments -> first() -> invite_code }}</span></p>
+        <article class="dimmer">
+            <section class="modal add-members">
+                <section class="top-part">
+                    <section class="lp">
+                        <h2>Dodaj <span class="orange-text">mieszkańców</span></h2>
+                        <p>Aby dodać nowych mieszkańców, udostępnij swój <span class="orange-text">kod zaproszenia</span>.</p>
+                        <p class="code">Kod zaproszenia: <span class="orange-text">{{ $apartments -> first() -> invite_code }}</span></p>
+                    </section>
+                    <section class="rp">
+                        <p>Udostępnij swój <span class="orange-text">kod QR</span></p>
+                        <img style="width:128px;height:128px" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="">
+                    </section>
                 </section>
-                <section class="rp">
-                    <p>Udostępnij swój <span class="orange-text">kod QR</span></p>
-                    <img style="width:128px;height:128px" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="">
-                </section>
+                <form class="bp" method="POST" action="{{ url('/panel/mieszkanie/'.$apartments -> first() -> id_apartment.'/nowy_mieszkaniec') }}">
+                    @csrf
+                    <h2>Utwórz osobę <span class="orange-text">zamieszkującą</span></h2>
+                    <span class="single-input">
+                        <label for="name">Imie: </label>
+                        <input type="text" name="name" id="name">
+                    </span>
+                    <button type="submit">Dodaj</button>
+                </form>
+                <button class="close" type="button" onclick="hideModal()">Wróć</button>
             </section>
-            <form class="bp" method="POST" action="{{ url('/panel/mieszkanie/'.$apartments -> first() -> id_apartment.'/nowy_mieszkaniec') }}">
-                @csrf
-                <h2>Utwórz osobę <span class="orange-text">zamieszkującą</span></h2>
-                <span class="single-input">
-                    <label for="name">Imie: </label>
-                    <input type="text" name="name" id="name">
-                </span>
-                <button type="submit">Dodaj</button>
-            </form>
-            <button class="close" type="button" onclick="hideModal()">Wróć</button>
-        </section>
-    </article>
+        </article>
         <script>
             @if ($bills > 3)
                 const chart = new Chartisan({
                     el: '#chart',
-                    url: 'http://planus.me/diagrams/sum_bill/' + {{$apartment -> id_apartment}},
+                    url: 'http://planus.me/diagrams/sum_bill/' + {{$apartments -> first() -> id_apartment}},
                     hooks: new ChartisanHooks()
                         .legend(false)
                         .beginAtZero()

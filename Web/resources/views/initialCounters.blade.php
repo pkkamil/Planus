@@ -4,8 +4,9 @@
 
 @extends('layouts.app')
 @section('content')
-    <form class="enter-counters" action="{{ route('initialCounters') }}" method="POST" autocomplete="off">
+    <form class="enter-counters initial" action="{{ route('initialCounters') }}" method="POST" autocomplete="off">
         @csrf
+        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć<span class="disapear"> do panelu</span></a>
         <input type="hidden" name="id_apartment" value="{{ $apartment -> id_apartment }}">
         <section class="left-part">
             <h3>Wprowadź <span class="orange-text">liczniki</span></h3>
@@ -38,7 +39,6 @@
             <img src="{{ asset('resources/img/svg/counters.svg') }}" alt="">
             <button type="submit">Zapisz liczniki</button>
         </section>
-        <a class="button back" href="{{ url('/panel') }}"><i class="fas fa-chevron-left"></i> Wróć do panelu</a>
     </form>
     <script>
         let inputs = document.querySelectorAll('input')

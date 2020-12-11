@@ -97,10 +97,10 @@ class DashboardController extends Controller
                     $settlement_date = new DateTime();
                     $settlement_date = $settlement_day.'-'.$settlement_date -> format('m').'-'.$settlement_date -> format('Y');
                     $to_date = new DateTime($settlement_date);
-                    $days = $today -> diff($to_date)->d;
+                    $time = $today -> diff($to_date);
                     if ($to_date -> format('d') == $today -> format('d')) {
                         array_push($soon, 'Dzisiaj wypada termin rozliczenia mieszkania <span class="orange-text">'.$apartment -> name.'</span>');
-                    } else if ($days < 4 and $days >= 0) {
+                    } else if ($time -> d < 4 and $time -> d >= 0 and $time -> invert != 1) {
                         array_push($soon, 'Zbliża się termin rozliczenia mieszkania <span class="orange-text">'.$apartment -> name.'</span>');
                     }
                 }

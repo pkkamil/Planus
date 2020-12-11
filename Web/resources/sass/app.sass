@@ -745,7 +745,9 @@ button.danger
         color: $secondary
         font-size: 2.3em
         font-weight: 400
-        margin-bottom: 30px
+        //
+        margin-bottom: 0px
+        //
         & i
             color: #999
             transition: .6s color
@@ -758,6 +760,10 @@ button.danger
         font-weight: 400
     & h4.events
         margin-top: 40px
+    & .item-event
+        color: #555
+    & .item-event-empty
+        color: #999
 
     & .left-part
         // width: 50%
@@ -781,13 +787,15 @@ button.danger
             font-size: 1.7em
             font-weight: 400
             margin-top: 30px
-            margin-bottom: 10px
+            margin-bottom: -5px
         & .list-of-members
             display: flex
             align-items: flex-start
+            flex-wrap: wrap
             & .single-member
                 position: relative
                 margin-left: 15px
+                margin-top: 15px
                 &:first-of-type
                     margin-left: 0
                 & .circle
@@ -840,22 +848,26 @@ button.danger
     & .right-part
         // width: 50%
         & h4
-            margin-bottom: 30px
+            margin-bottom: 20px
         & img
             margin-bottom: 50px
             margin-left: 50px
             width: 80%
-        & .statistics
-            & h5
-                margin-top: 30px
-                color: $secondary
-                font-weight: 400
-                font-size: 1.1em
-            & h6
-                color: #999
-                font-weight: 400
-                font-size: 1em
-                margin-bottom: 50px
+        // & .statistics
+        //     & h5
+        //         margin-top: 30px
+        //         color: $secondary
+        //         font-weight: 400
+        //         font-size: 1.1em
+        //     & h6
+        //         color: #999
+        //         font-weight: 400
+        //         font-size: 1em
+        //         margin-bottom: 50px
+        & .single-chart
+            & div
+                width: 250px
+                height: 200px
         & .bottom-part
             margin-top: 40px
             display: flex
@@ -960,6 +972,9 @@ button.danger
         padding: 16px 45px
         & i
             margin-right: 15px
+
+.activity-center.single
+    padding: 150px 100px 50px 100px
 
 
 .apartment-details
@@ -1165,9 +1180,9 @@ button.danger
 .enter-counters
     width: 100%
     min-height: 90vh
-    padding: 100px 150px 50px 150px
+    padding: 150px 100px 50px 100px
     display: flex
-    align-items: center
+    justify-content: center
     & .left-part
         & span:not(.orange-text)
             position: relative
@@ -1207,8 +1222,6 @@ button.danger
             color: #999
             font-size: 1.1em
     & .right-part
-        margin-left: auto
-        margin-right: 50px
         padding-left: 50px
         & img
             width: 90%
@@ -1217,9 +1230,14 @@ button.danger
         & .diagrams
             display: flex
             flex-direction: row
+            flex-wrap: wrap
             width: 100%
             & section
+                margin-top: 20px
                 padding-right: 10px
+                & div
+                    width: 300px
+                    height: 300px
                 &:first-of-type
                     padding-right: 0
                 & h6
@@ -1233,7 +1251,7 @@ button.danger
 
         & h4
             margin-top: 0px
-            margin-bottom: 40px
+            margin-bottom: 20px
     & .back
         position: absolute
         font-size: 1em
@@ -1338,6 +1356,8 @@ button.danger
                 outline: 0
                 border-bottom: 1px solid #999
                 font-size: 1.5rem
+            & input[type="password"]
+                width: 250px!important
         & button
             margin-left: 0
         & .errors ul
@@ -1354,7 +1374,6 @@ button.danger
 
     & .back
         position: absolute
-        font-size: 1em
         right: 50px
         top: 100px
         padding: 16px 45px

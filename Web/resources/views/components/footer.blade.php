@@ -1,4 +1,7 @@
 <footer>
+    {{-- <svg style="transform: translate(calc(100% - 1px), 87px)" width="1920" height="78" viewBox="0 0 1920 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1920 78L0 78V0L140.8 49.5L394.24 0L680.96 49.5L903.68 0L1182.72 49.5L1433.6 0L1704.96 49.5L1920 0V78Z" fill="#FFA500"/>
+    </svg> --}}
     <svg width="1920" height="78" viewBox="0 0 1920 78" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1920 78L0 78V0L140.8 49.5L394.24 0L680.96 49.5L903.68 0L1182.72 49.5L1433.6 0L1704.96 49.5L1920 0V78Z" fill="#FFA500"/>
     </svg>

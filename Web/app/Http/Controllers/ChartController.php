@@ -26,6 +26,7 @@ class ChartController extends Controller
             $index++;
         }
 
+
         $singleSumcw = [];
         $singleSumhw = [];
         $singleSumg = [];
@@ -53,6 +54,10 @@ class ChartController extends Controller
         $sumH = 0;
         $sumG = 0;
         $sumE = 0;
+        $singleSumcw = array_filter($singleSumcw);
+        $singleSumhw = array_filter($singleSumhw);
+        $singleSumg = array_filter($singleSumg);
+        $singleSume = array_filter($singleSume);
         foreach($singleSumcw as $item) {
             $sumC += $item;
         }
@@ -174,6 +179,10 @@ class ChartController extends Controller
         $sumH = 0;
         $sumG = 0;
         $sumE = 0;
+        $singleSumcw = array_filter($singleSumcw);
+        $singleSumhw = array_filter($singleSumhw);
+        $singleSumg = array_filter($singleSumg);
+        $singleSume = array_filter($singleSume);
         foreach($singleSumcw as $item) {
             $sumC += $item;
         }
