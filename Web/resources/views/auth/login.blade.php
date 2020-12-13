@@ -2,6 +2,7 @@
     $scrollTo = '';
     $active = 'login';
     $headerClass = 'login';
+    $title = 'Logowanie | Planus';
 ?>
 @extends('layouts.app')
 @section('content')

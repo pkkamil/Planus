@@ -28,13 +28,13 @@
     <meta property="og:description" content="Witryna internetowa ułatwiająca wynajmowanie mieszkań, a także zarządzanie rachunkami, zużyciem oraz kosztem mediów. Stwórz mieszkanie, wynajmij je i w łatwy sposób zarządzaj nim!" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content={{ asset("../favicon.ico") }} />
-    <meta property="og:url" content="planus.me" />
+    <meta property="og:url" content="http://planus.me" />
     <meta property="og:site_name" content="Planus" />
 
-    <title>Planus - Wynajmuj i zarządzaj mieszkaniami</title>
+    <title>{{ $title ?? 'Planus - Wynajmuj i zarządzaj mieszkaniami'}}</title>
 
     <!-- Canonical link -->
-    <link rel="canonical" href="planus.me" />
+    <link rel="canonical" href="http://planus.me" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

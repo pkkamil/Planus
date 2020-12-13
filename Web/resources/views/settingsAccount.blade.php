@@ -1,5 +1,6 @@
 <?php
     $active = 'account-settings';
+    $title = 'Ustawienia konta | Planus';
 ?>
 
 @extends('layouts.app')

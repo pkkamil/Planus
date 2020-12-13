@@ -2,6 +2,7 @@
     $scrollTo = 'apartments';
     $active = '';
     $headerClass = 'home';
+    $title = 'Planus - Wynajmuj i zarządzaj mieszkaniami';
 ?>
 
 @extends('layouts.app')

@@ -1,6 +1,7 @@
 <?php
     $active = 'bill';
     $diagrams = True;
+    $title = 'Szczegóły rachunku | Planus';
 ?>
 
 @extends('layouts.app')

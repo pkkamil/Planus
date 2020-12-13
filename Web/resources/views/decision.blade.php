@@ -1,6 +1,7 @@
 <?php
     $headerClass = 'decision';
     $active = '';
+    $title = 'Wybór działania | Planus';
 ?>
 @extends('layouts.app')
 @section('content')

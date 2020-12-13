@@ -1,5 +1,6 @@
 <?php
     $active = 'apartment-settings';
+    $title = 'Ustawienia mieszkania | Planus';
 ?>
 
 @extends('layouts.app')

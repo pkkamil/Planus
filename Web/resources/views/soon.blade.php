@@ -1,5 +1,6 @@
 <?php
     $active = '';
+    $title = 'Wkrótce | Planus';
 ?>
 
 @extends('layouts.app')

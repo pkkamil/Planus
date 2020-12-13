@@ -1,5 +1,6 @@
 <?php
     $active = 'dashboard';
+    $title = 'Twoje mieszkania | Planus';
 ?>
 
 @extends('layouts.app')

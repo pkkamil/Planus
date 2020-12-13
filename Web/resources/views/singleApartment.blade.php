@@ -1,6 +1,7 @@
 <?php
     $active = '';
     $headerClass = 'apartment';
+    $title = 'Podgląd mieszkania | Planus';
 ?>
 
 @extends('layouts.app')

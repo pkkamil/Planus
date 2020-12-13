@@ -1,6 +1,7 @@
 <?php
     $active = 'details';
     $diagrams = True;
+    $title = 'Szczegóły mieszkania | Planus';
 ?>
 
 @extends('layouts.app')

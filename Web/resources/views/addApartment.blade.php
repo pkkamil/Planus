@@ -1,5 +1,6 @@
 <?php
     $active = 'add';
+    $title = 'Tworzenie mieszkanie | Planus';
 ?>
 
 @extends('layouts.app')

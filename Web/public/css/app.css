@@ -544,7 +544,7 @@ button.danger:hover {
   margin: 0 auto;
   display: block;
   margin-top: 20px;
-  width: 330px;
+  width: 100%;
   border: 1px solid #ffa500;
   border-radius: 38px;
   padding: 17px 31px 17px 17px;
@@ -1345,6 +1345,10 @@ button.danger:hover {
 .show-all {
   display: block;
   padding: 150px 80px 50px 60px;
+}
+
+.show-all h2 {
+  margin-bottom: 30px;
 }
 
 .show-all h4,

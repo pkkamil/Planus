@@ -1,6 +1,7 @@
 <?php
     $active = 'counters';
     $diagrams = True;
+    $title = 'Wprowadzanie liczników | Planus';
 ?>
 
 @extends('layouts.app')

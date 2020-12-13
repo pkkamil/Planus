@@ -2,6 +2,7 @@
     $scrollTo = '';
     $active = 'login';
     $headerClass = 'reset';
+    $title = 'Resetowanie hasła | Planus';
 ?>
 @extends('layouts.app')
 @section('content')

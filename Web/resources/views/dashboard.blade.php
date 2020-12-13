@@ -1,6 +1,7 @@
 <?php
     $active = 'dashboard';
     $diagrams = True;
+    $title = 'Panel | Planus';
 ?>
 
 @extends('layouts.app')

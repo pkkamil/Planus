@@ -1,5 +1,6 @@
 <?php
     $active = 'rent';
+    $title = 'Wynajmowanie mieszkania | Planus';
 ?>
 
 @extends('layouts.app')
