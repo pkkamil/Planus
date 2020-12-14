@@ -122,10 +122,10 @@ class CounterApiController extends Controller
 
     public function initialCounters(Request $req) {
         $req->validate([
-            'cold_water' => [ Rule::requiredIf($req->cold_water), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'hot_water' => [Rule::requiredIf($req->hot_water), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'gas' => [Rule::requiredIf($req->gas), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'electricity' => [Rule::requiredIf($req->electricity), 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            'cold_water' => [ 'nullable', 'numeric'],
+            'hot_water' => ['nullable', 'numeric'],
+            'gas' => ['nullable', 'numeric'],
+            'electricity' => ['nullable', 'numeric'],
         ]);
         $req -> cold_water = str_replace(',', '.', $req -> cold_water);
         $req -> cold_water = (float)$req -> cold_water;

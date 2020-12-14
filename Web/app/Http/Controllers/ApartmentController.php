@@ -83,16 +83,26 @@ class ApartmentController extends Controller
         }
 
         // Overdue
-        $lastCounter = Counter::select('created_at')->where('id_apartment', $id)->orderBy('created_at', 'desc')->get();
-        if (count($lastCounter) != 0) {
+
+        $lastBill = Bill::select('settlement_date')->where('id_apartment', $id)->orderBy('settlement_date', 'desc')->get();
+        if (count($lastBill) != 0) {
             $from_date = new DateTime();
-            $to_date = new DateTime($lastCounter->first() -> created_at);
+            $to_date = new DateTime($lastBill->first() -> settlement_date);
             $last = $from_date -> diff($to_date);
             if ($last -> m > 0) {
                 $overdue = True;
             } else {
                 $overdue = False;
             }
+            // recorded
+            $lastMonth = new DateTime($lastBill -> first() -> settlement_date);
+            $lastMonth = $lastMonth -> format('m');
+            $today = new DateTime();
+            if ($today -> format('m') == $lastMonth)
+                $recorded = true;
+            else
+                $recorded = false;
+        // Count bills
         } else {
             $updated_at = $apartment -> first() -> updated_at;
             $today = new DateTime();
@@ -102,16 +112,9 @@ class ApartmentController extends Controller
             } else {
                 $overdue = False;
             }
+            $recorded = true;
         }
 
-        // recorded
-        $lastMonth = $lastCounter -> first() -> created_at -> format('m');
-        $today = new DateTime();
-        if ($today -> format('m') == $lastMonth)
-            $recorded = true;
-        else
-            $recorded = false;
-        // Count bills
         $bills = Bill::where('id_apartment', $id)->get();
         $bills = count($bills);
         $apartment = $apartment->first();
