@@ -5,7 +5,7 @@
         <img src="{{ asset('resources/img/mockups/home.png') }}" alt="">
         <div class="download-app">
             <img class="download" src="{{ asset('resources/img/mockups/download-app.png') }}" alt="">
-            <button class="integrated" onclick="window.location='/../Planus.apk'">Pobierz aplikacje</button>
+            <button class="integrated" onclick="window.location='/pobierz'">Pobierz aplikacje</button>
         </div>
         <img src="{{ asset('resources/img/mockups/dashboard.png') }}" alt="">
     </section>

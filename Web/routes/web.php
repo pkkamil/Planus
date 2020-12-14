@@ -80,16 +80,15 @@ Route::middleware(['introduced', 'auth'])->group(function () {
     });
 });
 
+Route::get('/pobierz', 'UserController@download');
+
 Route::get('/diagrams/{diagram}/{id}', 'ChartController@diagrams');
 Route::get('/charts/single-bill/{id}', 'ChartController@singleBill');
 Route::get('/charts/current-consumption/{id}/{type}/{id_bill}', 'ChartController@currentConsumptions');
-Route::view('/chart', 'chart');
-
-// Route::get('/test3', 'ApartmentController@code');
 
 Route::get('/chart/data/consumption/{id}/{type}', 'ChartController@consumptions');
 
-Route::get('/send-mail', function () {
-    Mail::to('kamiliked11@gmail.com')->send(new ActivationMail());
-    return 'A message has been sent!';
-});
+// Route::get('/send-mail', function () {
+//     Mail::to('kamiliked11@gmail.com')->send(new ActivationMail());
+//     return 'A message has been sent!';
+// });

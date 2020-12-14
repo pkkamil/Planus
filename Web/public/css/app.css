@@ -482,7 +482,7 @@ button.danger:hover {
   position: absolute;
   font-size: 0.7em;
   padding: 10px 31px;
-  top: 67.2%;
+  top: 67%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9;
