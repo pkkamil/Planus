@@ -1,31 +1,33 @@
-# Planus
+<p align="center"><a href="http://planus.me" target="_blank"><img src="http://planus.me/Planus.png" width="300"></a></p>
 
-Planus is an application for servicing and settling the rent of apartments.
+## About Planus
+The project consists of two parts. The first part is a mobile application created in flutter and second is a web application created in laravel. The main assumption of the application is to facilitate both private individuals and entrepreneurs renting and managing apartments, premises and private houses.
 
-It consists of a mobile and web version.
-
-## Project
-
-The first thing we did was create a detailed design. The project was created using [figma](https://www.figma.com/).
-* If you want to see it, just look [here](https://www.figma.com/file/4geWumD8rubffHwhw6dPHy/PLANUS?node-id=0%3A1).
-## Web app installation
-
-Use the [composer](https://getcomposer.org/) to install the Planus web part.
-
-```bash
-composer install
-```
-
-## Web app usage
-
-```bash
-php artisan serve
-```
+## Features
+- Creating apartments and renting with a QR code or a special code invitations,
+- Displaying the created apartments on the main page,
+- Creating a new user, logging in,
+- Management of a flat invoice generated automatically every month,
+- Tracking monthly fees and utilities consumption,
+- Displaying statistics and comparisons based on created accounts,
+- Ability to add residents who do not have an account,
+- Informing about upcoming settlement dates,
+- Calculation of the time remaining until the settlement date and the end of the settlement period,
+- Editing the created flat and deleting it,
+- Editing the username, email address and password,
+- Ability to see previous bills from the beginning of the billing period
+## Development Opportunities
+The project has many development opportunities that are worth implementing. Some of them were included inapplication prototype.
+Among others:
+- Real-time notifications,
+- The ability to communicate between users via text messages,
+- Approval of residents by the owner of the apartment,
+- Registration and logging in using Google or other intermediaries such as Facebook or GitHub,
+- email address verification,
+- Reset password
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Thank you for considering contributing to the Planus! The contribution guide can be found in the documentation.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+The Planus is open-sourced software licensed under the [MIT licence](https://choosealicense.com/licenses/mit/).
