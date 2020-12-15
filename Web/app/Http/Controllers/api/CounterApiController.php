@@ -25,10 +25,10 @@ class CounterApiController extends Controller
     public function store(Request $req) {
         $lastCounter = Counter::select('cold_water', 'hot_water', 'gas', 'electricity')->where('id_apartment', $req -> id_apartment)->orderBy('created_at', 'desc')->first();
         $req->validate([
-            'cold_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'hot_water' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'gas' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
-            'electricity' => ['nullable', 'regex:/^([0-9][0-9]{0,2}[.|,][0-9]{1,2}|[0-9]{1,4})$/'],
+            'cold_water' => ['nullable', 'numeric'],
+            'hot_water' => ['nullable', 'numeric'],
+            'gas' => ['nullable', 'numeric'],
+            'electricity' => ['nullable', 'numeric'],
         ]);
         $req -> cold_water = str_replace(',', '.', $req -> cold_water);
         $req -> cold_water = (float)$req -> cold_water;

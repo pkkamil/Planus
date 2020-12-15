@@ -39,6 +39,9 @@
         <section class="right-part">
             <img src="{{ asset('resources/img/svg/counters.svg') }}" alt="">
             <button type="submit">Zapisz liczniki</button>
+                @if($errors->any())
+                    <p class="error-code">{{$errors->first()}}</p>
+                 @endif
         </section>
     </form>
     <script>

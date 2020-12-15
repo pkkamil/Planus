@@ -112,7 +112,7 @@ class ApartmentController extends Controller
             } else {
                 $overdue = False;
             }
-            $recorded = true;
+            $recorded = false;
         }
 
         $bills = Bill::where('id_apartment', $id)->get();
