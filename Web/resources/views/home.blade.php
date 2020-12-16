@@ -3,6 +3,7 @@
     $active = '';
     $headerClass = 'home';
     $title = 'Planus - Wynajmuj i zarządzaj mieszkaniami';
+    $lazy = True;
 ?>
 
 @extends('layouts.app')

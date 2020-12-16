@@ -5,7 +5,7 @@
             <section class="list-apartments">
                 <section class="single-apartment" v-for="apartment in apartments" :key="apartment.id">
                     <a :href="'/mieszkanie/' + apartment.id_apartment">
-                        <img :src="apartment.image" alt="">
+                        <img :src="apartment.image" :alt="apartment.name" class="lazy">
                         <section class="layer">
                             <h3>{{ apartment.price }} zł</h3>
                             <h4>{{ apartment.name }}</h4>

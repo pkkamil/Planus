@@ -2,6 +2,7 @@
     $active = 'details';
     $diagrams = True;
     $title = 'Szczegóły mieszkania | Planus';
+    $lazy = True;
 ?>
 
 @extends('layouts.app')
@@ -82,6 +83,7 @@
                         @endif
                     </section>
                 @endif
+            </section>
             <section class="bottom-part">
                 @if ($bills > 0)
                     <a class="bills button" href="{{ url('/panel/mieszkanie/'.$apartment -> id_apartment.'/rachunki') }}"><i class="fas fa-money-bill-alt"></i> Rachunki</a>

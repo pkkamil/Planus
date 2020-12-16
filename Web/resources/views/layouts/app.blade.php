@@ -54,15 +54,39 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @if ($diagrams ?? '' == True)
-    <!-- Charting library -->
-    <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <!-- Chartisan -->
-    <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+        <!-- Charting library -->
+        <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Chartisan -->
+        <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+        <!-- Lazy Loading -->
     @endif
+    {{-- <style>
+        .lazy {
+            background-color: #FFA500;
+        }
+    </style>
+    @if ($lazy ?? '' == True)
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js" integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ==" crossorigin="anonymous"></script>
+        <script defer>
+            $(document).ready(() => {
+                $('.lazy').lazyload()
+            })
+        </script>
+    @endif --}}
 </head>
 <body>
     @include('components.navbar')
     @yield('content')
     @include('components.footer')
+    @if ($lazy ?? '' == True)
+        <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+        <script>
+            $(window).on("load",function(){
+              $(".loader-wrapper").fadeOut('slow');
+            });
+        </script>
+    @endif
 </body>
 </html>

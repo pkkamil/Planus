@@ -2,6 +2,7 @@
     $active = 'dashboard';
     $diagrams = True;
     $title = 'Panel | Planus';
+    $lazy = True;
 ?>
 
 @extends('layouts.app')
@@ -13,7 +14,7 @@
                     @if (count($apartments) == 1)
                         <section class="single-apartment">
                             <a href="{{ url("panel/mieszkanie/".$apartments -> first() -> id_apartment) }}">
-                                <img src="{{ $apartments -> first() -> image }}" alt="">
+                                <img src="{{ $apartments -> first() -> image }}" alt="{{ $apartment -> name }}">
                                 <h3>{{ $apartments -> first() -> name }}</h3>
                                 <section class="layer">
                                     <h4>Więcej szczegółów</h4>
@@ -23,15 +24,15 @@
                     @else
                         @foreach($apartments as $apartment)
                             @if ($loop -> index < 2)
-                            <section class="single-apartment smaller">
-                                <a href="{{ url("panel/mieszkanie/".$apartment -> id_apartment) }}">
-                                    <img src="{{ $apartment -> image }}" alt="">
-                                    <h3>{{ $apartment -> name }}</h3>
-                                    <section class="layer">
-                                        <h4>Więcej szczegółów</h4>
-                                    </section>
-                                </a>
-                            </section>
+                                <section class="single-apartment smaller">
+                                    <a href="{{ url("panel/mieszkanie/".$apartment -> id_apartment) }}">
+                                        <img src="{{ $apartment -> image }}" alt="{{ $apartment -> name }}" class="lazy">
+                                        <h3>{{ $apartment -> name }}</h3>
+                                        <section class="layer">
+                                            <h4>Więcej szczegółów</h4>
+                                        </section>
+                                    </a>
+                                </section>
                             @endif
                         @endforeach
                     @endif
@@ -108,7 +109,7 @@
             </section>
         @else
             <section class="right-part svg">
-                <img src="{{ asset('resources/img/svg/dashboard.svg') }}" alt="">
+                <img src="{{ asset('resources/img/svg/dashboard.svg') }}" alt="illustration">
             </section>
         @endif
         <a class="button settings" href="{{ url('/panel/ustawienia') }}"><i class="fas fa-cog"></i> Ustawienia konta</a>

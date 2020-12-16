@@ -1,6 +1,7 @@
 <?php
     $active = 'dashboard';
     $title = 'Twoje mieszkania | Planus';
+    $lazy = True;
 ?>
 
 @extends('layouts.app')
@@ -13,7 +14,7 @@
                 @foreach($apartments as $apartment)
                     <section class="single-apartment smaller">
                         <a href="{{ url("panel/mieszkanie/".$apartment -> id_apartment) }}">
-                            <img src="{{ $apartment -> image }}" alt="">
+                            <img src="{{ $apartment -> image }}" alt="{{ $apartment -> name }}" class="lazy">
                             <h3>{{ $apartment -> name }}</h3>
                             <section class="layer">
                                 <h4>Więcej szczegółów</h4>

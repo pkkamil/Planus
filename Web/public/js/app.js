@@ -37594,7 +37594,10 @@ var render = function() {
                 "a",
                 { attrs: { href: "/mieszkanie/" + apartment.id_apartment } },
                 [
-                  _c("img", { attrs: { src: apartment.image, alt: "" } }),
+                  _c("img", {
+                    staticClass: "lazy",
+                    attrs: { src: apartment.image, alt: apartment.name }
+                  }),
                   _vm._v(" "),
                   _c("section", { staticClass: "layer" }, [
                     _c("h3", [_vm._v(_vm._s(apartment.price) + " zł")]),

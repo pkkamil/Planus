@@ -65,7 +65,7 @@ nav {
   padding: 8px;
   width: 100%;
   height: 80px;
-  z-index: 9999;
+  z-index: 999;
   transition: 1s color, 1s background-color;
 }
 
@@ -268,6 +268,7 @@ a.button {
   background-color: #ffa500;
   border: 1px solid #ff9500;
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
+  text-align: center;
   border-radius: 30px;
   font-size: 1em;
   outline: none;
@@ -304,6 +305,125 @@ button.danger:hover {
   background-color: #FF2E00;
   border-color: #FF0000;
   box-shadow: 0px 5px 7px red;
+}
+
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffa500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  -webkit-animation: loader 2s infinite ease;
+          animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  -webkit-animation: loader-inner 2s infinite ease-in;
+          animation: loader-inner 2s infinite ease-in;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
 }
 
 .welcome {
@@ -351,7 +471,8 @@ button.danger:hover {
   cursor: pointer;
 }
 
-.welcome button {
+.welcome .button {
+  display: table;
   transform: translateY(-100px);
 }
 
@@ -3089,14 +3210,14 @@ button.danger:hover {
     width: auto;
   }
 
-  .apartment-details .right-part .statistics .bottom-part {
+  .apartment-details .right-part .bottom-part {
     flex-wrap: wrap;
     justify-content: center;
     float: none;
     margin-top: 20px;
   }
 
-  .apartment-details .right-part .statistics .bottom-part a {
+  .apartment-details .right-part .bottom-part a {
     margin: 0;
     margin-top: 20px;
     margin-left: 30px;
@@ -3854,15 +3975,7 @@ button.danger:hover {
 }
 
 @media screen and (max-width: 500px) {
-  .welcome h1 {
-    display: none;
-  }
-
-  .welcome h4 {
-    display: none;
-  }
-
-  .welcome button {
+  .welcome .welcome-text {
     display: none;
   }
 
@@ -4050,12 +4163,12 @@ button.danger:hover {
     font-size: 0.7em;
   }
 
-  .apartment-details .right-part .statistics .bottom-part {
+  .apartment-details .right-part .bottom-part {
     flex-direction: column;
     align-items: center;
   }
 
-  .apartment-details .right-part .statistics .bottom-part a {
+  .apartment-details .right-part .bottom-part a {
     margin-left: 0;
   }
 
@@ -4415,7 +4528,7 @@ button.danger:hover {
     font-size: 1.5em;
   }
 
-  .apartment-details .right-part .statistics .bottom-part a {
+  .apartment-details .right-part .bottom-part a {
     padding: 16px 35px;
   }
 

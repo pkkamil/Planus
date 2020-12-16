@@ -590,15 +590,15 @@
                         width: calc(50%)
                         & div
                             width: auto
-                & .bottom-part
-                    flex-wrap: wrap
-                    justify-content: center
-                    float: none
+            & .bottom-part
+                flex-wrap: wrap
+                justify-content: center
+                float: none
+                margin-top: 20px
+                & a
+                    margin: 0
                     margin-top: 20px
-                    & a
-                        margin: 0
-                        margin-top: 20px
-                        margin-left: 30px
+                    margin-left: 30px
         & .dimmer
             & .add-members
                 & h2
@@ -1120,11 +1120,7 @@
 
 @media screen and (max-width: 500px)
     .welcome
-        & h1
-            display: none
-        & h4
-            display: none
-        & button
+        & .welcome-text
             display: none
     .apartments
         & .list-apartments
@@ -1250,12 +1246,11 @@
                     & p
                         font-size: .7em
         & .right-part
-            & .statistics
-                & .bottom-part
-                    flex-direction: column
-                    align-items: center
-                    & a
-                        margin-left: 0
+            & .bottom-part
+                flex-direction: column
+                align-items: center
+                & a
+                    margin-left: 0
 
         & .dimmer
             & .modal
@@ -1517,10 +1512,9 @@
             & .name
                 font-size: 1.5em
         & .right-part
-            & .statistics
-                & .bottom-part
-                    & a
-                        padding: 16px 35px
+            & .bottom-part
+                & a
+                    padding: 16px 35px
         & .back
             position: static
             margin-bottom: 20px
