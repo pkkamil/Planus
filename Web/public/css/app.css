@@ -602,7 +602,7 @@ button.danger:hover {
 .our-app .mockups .download-app button {
   position: absolute;
   font-size: 0.7em;
-  padding: 10px 31px;
+  padding: 10px 22px;
   top: 67%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -842,6 +842,80 @@ button.danger:hover {
 
 .dimmer .modal button:first-of-type {
   margin-right: 20px;
+}
+
+.dimmer .modal .bp h2 {
+  margin-bottom: 30px;
+}
+
+.dimmer .add-members {
+  color: #555;
+}
+
+.dimmer .add-members .top-part {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.dimmer .add-members .top-part section {
+  width: 50%;
+}
+
+.dimmer .add-members .top-part .lp .code {
+  margin-top: 10px;
+}
+
+.dimmer .add-members .top-part .rp {
+  transform: translateY(10px);
+}
+
+.dimmer .add-members .top-part .rp p {
+  margin-bottom: 20px;
+}
+
+.dimmer .add-members h2 {
+  text-align: left;
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.dimmer .add-members p {
+  font-size: 1em;
+}
+
+.dimmer .add-members .close {
+  float: left;
+}
+
+.dimmer .add-members .bp h2 {
+  margin-top: 30px;
+}
+
+.dimmer .add-members .bp .single-input {
+  display: inline-block;
+  text-align: left;
+}
+
+.dimmer .add-members .bp .single-input label {
+  font-size: 1.4em;
+}
+
+.dimmer .add-members .bp .single-input input {
+  width: 200px;
+  border: 0;
+  outline: none;
+  padding: 2px 10px;
+  margin-left: 10px;
+  color: #ffa500;
+  font-size: 1.2em;
+  border-bottom: 1px solid #999;
+}
+
+.dimmer .add-members .bp button {
+  margin-left: 10px;
+  margin-top: 0;
 }
 
 .add-apartment {
@@ -1349,6 +1423,20 @@ button.danger:hover {
   width: 80%;
 }
 
+.activity-center .right-part .statistics h5 {
+  margin-top: 30px;
+  color: #555;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+.activity-center .right-part .statistics h6 {
+  color: #999;
+  font-weight: 400;
+  font-size: 1em;
+  margin-bottom: 50px;
+}
+
 .activity-center .right-part .single-chart div {
   width: 250px;
   height: 200px;
@@ -1420,35 +1508,6 @@ button.danger:hover {
 
 .activity-center .add-members .close {
   float: left;
-}
-
-.activity-center .add-members .bp h2 {
-  margin-top: 30px;
-}
-
-.activity-center .add-members .bp .single-input {
-  display: inline-block;
-  text-align: left;
-}
-
-.activity-center .add-members .bp .single-input label {
-  font-size: 1.4em;
-}
-
-.activity-center .add-members .bp .single-input input {
-  width: 200px;
-  border: 0;
-  outline: none;
-  padding: 2px 10px;
-  margin-left: 10px;
-  color: #ffa500;
-  font-size: 1.2em;
-  border-bottom: 1px solid #999;
-}
-
-.activity-center .add-members .bp button {
-  margin-left: 10px;
-  margin-top: 0;
 }
 
 .activity-center .settings {
@@ -3223,21 +3282,21 @@ button.danger:hover {
     margin-left: 30px;
   }
 
-  .apartment-details .dimmer .add-members h2 {
+  .dimmer .add-members h2 {
     font-size: 1.6em;
     text-align: center;
   }
 
-  .apartment-details .dimmer .add-members .top-part {
+  .dimmer .add-members .top-part {
     flex-direction: column;
   }
 
-  .apartment-details .dimmer .add-members .top-part .lp,
-  .apartment-details .dimmer .add-members .top-part .rp {
+  .dimmer .add-members .top-part .lp,
+  .dimmer .add-members .top-part .rp {
     width: 100%;
   }
 
-  .apartment-details .back {
+  .dimmer .back {
     position: static;
     margin-bottom: 40px;
     width: 300px;
@@ -3285,7 +3344,7 @@ button.danger:hover {
     height: 405px;
   }
 
-  .rent-apartment .dimmer .modal button:first-of-type {
+  .dimmer .modal button:first-of-type {
     margin-right: auto;
   }
 
@@ -3652,33 +3711,37 @@ button.danger:hover {
     font-size: 1.6em;
   }
 
-  .apartment-details .dimmer .add-members {
+  .dimmer .add-members {
     padding: 40px 40px;
   }
 
-  .apartment-details .dimmer .add-members h2 {
+  .dimmer .add-members h2 {
     font-size: 1.4em;
   }
 
-  .apartment-details .dimmer .add-members .bp .single-input label {
+  .dimmer .add-members .bp .single-input label {
     font-size: 1.2em;
     display: block;
     text-align: center;
     margin-bottom: 5px;
   }
 
-  .apartment-details .dimmer .add-members .bp .single-input input {
+  .dimmer .add-members .bp .single-input input {
     margin: 0 auto;
     text-align: center;
   }
 
-  .apartment-details .dimmer .add-members button {
+  .dimmer .add-members button {
     display: block;
     margin: 0 auto;
     margin-top: 20px;
   }
 
-  .apartment-details .dimmer .add-members .close {
+  .dimmer .add-members button:first-of-type {
+    margin: 20px auto 0 auto;
+  }
+
+  .dimmer .add-members .close {
     float: none;
   }
 
@@ -4172,9 +4235,8 @@ button.danger:hover {
     margin-left: 0;
   }
 
-  .apartment-details .dimmer .modal {
-    overflow-y: scroll;
-    height: 400px;
+  .dimmer .modal {
+    min-height: 400px;
     border-radius: 0;
   }
 

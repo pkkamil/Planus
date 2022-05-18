@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function download() {
+        if (count(DB::select('select count from downloads')) == 0)
+            DB::insert('insert into downloads (count) values (0)');
         $counter = DB::select('select count from downloads')[0] -> count;
         $counter += 1;
         DB::update('update downloads set count = ?', [$counter]);

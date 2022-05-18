@@ -88,7 +88,7 @@ class DashboardController extends Controller
             $bills = Bill::where('id_apartment', $apartments -> first() -> id_apartment)->get();
             $bills = count($bills);
 
-            return view('dashboard', compact('apartments', 'bills', 'days', 'interval_to_end'));
+            return view('dashboard', compact('apartments', 'bills', 'days', 'interval_to_end', 'overdue'));
 
         } else {
                 foreach ($apartments as $apartment) {
@@ -107,6 +107,7 @@ class DashboardController extends Controller
         }
 
         $apartments = $apartments->take(3);
+
         return view('dashboard', compact('apartments', 'soon'));
     }
 

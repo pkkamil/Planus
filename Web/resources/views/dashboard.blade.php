@@ -14,7 +14,7 @@
                     @if (count($apartments) == 1)
                         <section class="single-apartment">
                             <a href="{{ url("panel/mieszkanie/".$apartments -> first() -> id_apartment) }}">
-                                <img src="{{ $apartments -> first() -> image }}" alt="{{ $apartment -> name }}">
+                                <img src="{{ $apartments -> first() -> image }}" alt="{{ $apartments -> first() -> name }}">
                                 <h3>{{ $apartments -> first() -> name }}</h3>
                                 <section class="layer">
                                     <h4>Więcej szczegółów</h4>
@@ -125,7 +125,7 @@
                     </section>
                     <section class="rp">
                         <p>Udostępnij swój <span class="orange-text">kod QR</span></p>
-                        <img style="width:128px;height:128px" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="">
+                        {!! QrCode::size(96)->generate($apartments -> first() -> invite_code); !!}
                     </section>
                 </section>
                 <form class="bp" method="POST" action="{{ url('/panel/mieszkanie/'.$apartments -> first() -> id_apartment.'/nowy_mieszkaniec') }}">

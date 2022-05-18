@@ -1,4 +1,4 @@
-<p align="center"><a href="http://planus.me" target="_blank"><img src="http://planus.me/Planus.png" width="300"></a></p>
+<!-- <p align="center"><a href="http://planus.me" target="_blank"><img src="http://planus.me/Planus.png" width="300"></a></p> -->
 
 ## About Planus
 The project consists of two parts. The first part is a mobile application created in flutter and second is a web application created in laravel. The main assumption of the application is to facilitate both private individuals and entrepreneurs renting and managing apartments, premises and private houses.

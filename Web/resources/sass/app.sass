@@ -385,7 +385,7 @@ button.danger
             & button
                 position: absolute
                 font-size: .7em
-                padding: 10px 31px
+                padding: 10px 22px
                 top: 67%
                 left: 50%
                 transform: translate(-50%, -50%)
@@ -544,6 +544,53 @@ button.danger
             margin-top: 30px
             &:first-of-type
                 margin-right: 20px
+        & .bp
+            & h2
+                margin-bottom: 30px
+    & .add-members
+        color: $secondary
+        & .top-part
+            display: flex
+            align-items: center
+            flex-direction: row
+            & section
+                width: 50%
+            & .lp
+                & .code
+                    margin-top: 10px
+            & .rp
+                transform: translateY(10px)
+                & p
+                    margin-bottom: 20px
+        & h2
+            text-align: left
+            font-size: 1.8em
+            margin-top: 0
+            margin-bottom: 20px
+        & p
+            font-size: 1em
+        & .close
+            float: left
+        & .bp
+            & h2
+                margin-top: 30px
+            & .single-input
+                display: inline-block
+                text-align: left
+                & label
+                    font-size: 1.4em
+                & input
+                    width: 200px
+                    border: 0
+                    outline: none
+                    padding: 2px 10px
+                    margin-left: 10px
+                    color: $primary
+                    font-size: 1.2em
+                    border-bottom: 1px solid #999
+            & button
+                margin-left: 10px
+                margin-top: 0
 
 .add-apartment
     width: 100%
@@ -904,17 +951,17 @@ button.danger
             margin-bottom: 50px
             margin-left: 50px
             width: 80%
-        // & .statistics
-        //     & h5
-        //         margin-top: 30px
-        //         color: $secondary
-        //         font-weight: 400
-        //         font-size: 1.1em
-        //     & h6
-        //         color: #999
-        //         font-weight: 400
-        //         font-size: 1em
-        //         margin-bottom: 50px
+        & .statistics
+            & h5
+                margin-top: 30px
+                color: $secondary
+                font-weight: 400
+                font-size: 1.1em
+            & h6
+                color: #999
+                font-weight: 400
+                font-size: 1em
+                margin-bottom: 50px
         & .single-chart
             & div
                 width: 250px
@@ -961,27 +1008,6 @@ button.danger
             font-size: 1em
         & .close
             float: left
-        & .bp
-            & h2
-                margin-top: 30px
-            & .single-input
-                display: inline-block
-                text-align: left
-                & label
-                    font-size: 1.4em
-                & input
-                    width: 200px
-                    border: 0
-                    outline: none
-                    padding: 2px 10px
-                    margin-left: 10px
-                    color: $primary
-                    font-size: 1.2em
-                    border-bottom: 1px solid #999
-            & button
-                margin-left: 10px
-                margin-top: 0
-
     .settings
         position: absolute
         font-size: 1em

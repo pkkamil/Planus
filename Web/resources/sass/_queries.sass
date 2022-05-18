@@ -599,15 +599,15 @@
                     margin: 0
                     margin-top: 20px
                     margin-left: 30px
-        & .dimmer
-            & .add-members
-                & h2
-                    font-size: 1.6em
-                    text-align: center
-                & .top-part
-                    flex-direction: column
-                    & .lp, .rp
-                        width: 100%
+    .dimmer
+        & .add-members
+            & h2
+                font-size: 1.6em
+                text-align: center
+            & .top-part
+                flex-direction: column
+                & .lp, .rp
+                    width: 100%
 
         & .back
             position: static
@@ -643,10 +643,10 @@
                 right: 50px
                 width: 520px
                 height: 405px
-        & .dimmer
-            & .modal
-                & button:first-of-type
-                    margin-right: auto
+    .dimmer
+        & .modal
+            & button:first-of-type
+                margin-right: auto
 
     .soon
         & img
@@ -899,28 +899,29 @@
         & h2
             font-size: 1.6em
 
-    .apartment-details
-        & .dimmer
-            & .add-members
-                padding: 40px 40px
-                & h2
-                    font-size: 1.4em
-                & .bp
-                    & .single-input
-                        & label
-                            font-size: 1.2em
-                            display: block
-                            text-align: center
-                            margin-bottom: 5px
-                        & input
-                            margin: 0 auto
-                            text-align: center
-                & button
-                    display: block
-                    margin: 0 auto
-                    margin-top: 20px
-                & .close
-                    float: none
+    .dimmer
+        & .add-members
+            padding: 40px 40px
+            & h2
+                font-size: 1.4em
+            & .bp
+                & .single-input
+                    & label
+                        font-size: 1.2em
+                        display: block
+                        text-align: center
+                        margin-bottom: 5px
+                    & input
+                        margin: 0 auto
+                        text-align: center
+            & button
+                display: block
+                margin: 0 auto
+                margin-top: 20px
+                &:first-of-type
+                    margin: 20px auto 0 auto
+            & .close
+                float: none
 
     .settings-account
         padding: 90px 50px 50px 50px
@@ -1252,11 +1253,10 @@
                 & a
                     margin-left: 0
 
-        & .dimmer
-            & .modal
-                overflow-y: scroll
-                height: 400px
-                border-radius: 0
+    .dimmer
+        & .modal
+            min-height: 400px
+            border-radius: 0
 
     .activity-center.single
         & .right-part
